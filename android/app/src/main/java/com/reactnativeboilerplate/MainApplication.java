@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import java.util.List;
+// import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -36,6 +37,9 @@ public class MainApplication extends Application implements ReactApplication {
           return "index";
         }
       };
+
+
+      
 
   @Override
   public ReactNativeHost getReactNativeHost() {
