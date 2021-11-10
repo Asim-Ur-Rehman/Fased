@@ -48,6 +48,7 @@ function AuthStackNavigator() {
 
 
 const MainNavigation = () => {
+
   return (
     <NavigationContainer theme={{ ...DefaultTheme, dark: true, }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
