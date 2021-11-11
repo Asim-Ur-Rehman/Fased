@@ -26,7 +26,7 @@ function AuthStackNavigator() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Languages">
+      initialRouteName="SignIn">
       <AuthStack.Screen name="Languages" component={Languages} />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
