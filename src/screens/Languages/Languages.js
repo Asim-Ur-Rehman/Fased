@@ -30,7 +30,7 @@ export const Languages = ({ navigation }) => {
             backgroundColor: theme.primaryColor
 
         }}>
-            <StatusBar backgroundColor={theme.backgrounds.whiteBG} translucent={false} />
+            <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
             {/* <AuthHeader guestUser={true} onPress={() => {
                 navigation.navigate('SignIn')
             }} /> */}

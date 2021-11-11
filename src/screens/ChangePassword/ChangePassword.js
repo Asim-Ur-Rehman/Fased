@@ -1,29 +1,147 @@
-import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  TextInput,
+  StatusBar
+} from 'react-native'
 import { Images } from '../../constants/images'
+import { Dimensions } from 'react-native'
+import CheckBox from 'react-native-check-box'
 import { theme } from '../../constants/theme'
+import Button from '../../components/Button'
+const { width, height } = Dimensions.get('window')
+import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { ScrollView } from 'react-native-gesture-handler'
 
+export const ChangePassword = ({ navigation }) => {
 
-export const ChangePassword = () => {
-    return (
-        <View style={{
-            flex: 1,
+  return (
+    <SafeAreaView style={styles.mainContainer}>
+      <AuthHeader
+        onPress={() => {
+          navigation.goBack()
+        }}
+      />
+      <StatusBar
+        backgroundColor={'transparent'}
+        translucent={true}
+        barStyle={'dark-content'}
+      />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        bounces={false}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={Images.Pictures.logo}
+            style={{ width: 105, height: 105 }}
+          />
+        </View>
+        <View style={styles.textView}>
+          <Text style={styles.ChangePasswordText}>Change Password</Text>
+          <View
+            style={{
+              backgroundColor: '#FE0000',
+              width: 21,
+              height: 1,
+              marginTop: 8
+            }}
+          />
+        </View>
+        <View style={styles.InputContainer}>
+          <View style={{ width: '76%', alignSelf: 'center',  }}>
+            <Text style={styles.inputLabel}>New Password</Text>
+          </View>
+
+          <TextInput
+            style={styles.input}
+            // onChangeText={onChangeNumber}
+            // value={'123456789012'}
+            placeholder="**** **** ****"
+            placeholderTextColor="#9CA3AF"
+            keyboardType="default"
+            secureTextEntry={true}
+          />
+
+        <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+            <Text style={styles.inputLabel}>Confirm Password</Text>
+          </View>
+
+          <TextInput
+            style={styles.input}
+            // onChangeText={onChangeNumber}
+            // value={'123456789012'}
+            placeholder="**** **** ****"
+            placeholderTextColor="#9CA3AF"
+            keyboardType="default"
+            secureTextEntry={true}
+          />
+        </View>
+
+        <View
+          style={{
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: theme.backgrounds.whiteBG
-
-        }}>
-            <Text> Forget Screen  </Text>
-
-            <TouchableOpacity onPress={() => {
-                // navigation.navigate('SignIn')
-            }}>
-                <Text>
-                    Next
-                </Text>
-            </TouchableOpacity>
+            paddingVertical: 20
+          }}>
+          <Button
+          onPress={() => {navigation.navigate('SignIn')}}
+            buttonStyle={{ width: 320, height: 48, marginTop: 10 }}
+            title="Submit"
+          />
         </View>
-    )
+      </ScrollView>
+    </SafeAreaView>
+  )
 }
 
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1
+  },
+  logoContainer: {
+    width: width,
+    height: height / 4.5,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  textView: {
+    width: width,
+    height: height / 8,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  ChangePasswordText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  InputContainer: {
+    alignItems: 'center'
+  },
+  inputLabel: {
+    color: '#374151',
+    fontSize: 14,
+    fontWeight: '600'
+  },
+  input: {
+    width: '80%',
+    alignSelf: 'center',
+    height: 48,
+    marginVertical: 8,
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: '#BEC5D1',
+    paddingHorizontal: 14,
+    color: '#374151',
+    fontSize: 12,
+    fontWeight: '400',
+    backgroundColor: '#fff'
+  }
+})
 
