@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     logoMainViewStyle: {
         // marginTop: 60,
-        height: height * 0.32,
+        height: height * 0.33,
         alignItems: 'center',
         // backgroundColor: 'green',
         justifyContent: 'flex-end'
