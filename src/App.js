@@ -7,6 +7,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { AuthHeader } from './components/AuthHeader/AuthHeader'
 import {Calendar} from 'react-native-calendars';
 
+import { Categories } from './screens/Categories/Categories'
 const App = () => {
   useEffect(() => {
     setTimeout(() => {
@@ -15,9 +16,10 @@ const App = () => {
   }, [])
   return (
     <>
-      <Provider store={store}>
+      {/* <Provider store={store}>
         <MainNavigation />
-      </Provider>
+      </Provider> */}
+      <Categories />
     </>
   )
 }

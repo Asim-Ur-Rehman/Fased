@@ -30,7 +30,7 @@ export const Languages = ({ navigation }) => {
             backgroundColor: theme.primaryColor
 
         }}>
-            <StatusBar backgroundColor={theme.backgrounds.whiteBG} translucent={false} />
+            <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
             {/* <AuthHeader guestUser={true} onPress={() => {
                 navigation.navigate('SignIn')
             }} /> */}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     logoMainViewStyle: {
         // marginTop: 60,
-        height: height * 0.32,
+        height: height * 0.33,
         alignItems: 'center',
         // backgroundColor: 'green',
         justifyContent: 'flex-end'
