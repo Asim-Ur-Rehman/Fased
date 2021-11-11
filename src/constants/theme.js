@@ -13,7 +13,8 @@ const theme = {
     },
 
     textColor: {
-        grayText: '#797979'
+        grayText: '#797979',
+        litGrayText: '#838C9B'
 
     },
 

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 export default function Button({
   title = 'Title',
-  onPress = () => {},
+  onPress = () => { },
   textStyle = {},
   buttonStyle = {},
   linearColor1 = '#9CA3AF',
