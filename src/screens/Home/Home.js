@@ -1,11 +1,13 @@
 
 import React, { Component, useState } from 'react';
-import { View, Text, TouchableOpacity,Image,StyleSheet,FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, StatusBar } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import MapView from "react-native-map-clustering";
 import { Marker } from "react-native-maps";
 import { VictoryPie, } from 'victory-native'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Button from '../../components/Button';
 export const Home = ({ navigation }) => {
 
 
@@ -98,194 +100,214 @@ export const Home = ({ navigation }) => {
         },
     ]
 
-    const [reason, setReason] = useState ([
-        {text:"Categories",},
-        {text:"Harassment"},
-        {text: "Killing"},
-        {text:"Snatching"}
+    const [reason, setReason] = useState([
+        { text: 'Robery', color: '#5819C1'},
+        { text: "Harassment", color: '#FFA724' },
+        { text: "Kidnapping", color: '#CF00BA' },
+        { text: "Killing", color: '#DF0707' },
+        { text: "Snatching", color: '#0A8A35' },
+        { text: "Assault", color: '##0CB9A2' },
     ])
     return (
         <View style={styles.container}>
+            {/* <StatusBar /> */}
             <View style={styles.header}>
-            <Image style={styles.img} source={Images.Pictures.logo}/>
-            <View style={styles.header2}>
-                <View style={styles.btn}>
-                    <Text style={{fontSize:10,fontWeight:"500",color:"#ffffff"}}>NEWS</Text>
-                </View>
-                <View style={{flexDirection:"column",}}>
-                <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
-                <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
-                
+                <Image style={styles.img} source={Images.Pictures.logo} />
+                <View style={styles.header2}>
+                    <View style={styles.btn}>
+                        <Text style={{ fontSize: 10, fontWeight: "500", color: "#ffffff" }}>NEWS</Text>
+                    </View>
+                    <View style={{ flexDirection: "column", }}>
+                        <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
+                        <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
+
+                    </View>
                 </View>
             </View>
-            </View>
-            <View>
-            <FlatList
-                    keyExtractor={(item, index) => index}
-                    horizontal={true}
-                    data={reason}
-                    showsHorizontalScrollIndicator={false}
-                    // pagingEnabled
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={{paddingHorizontal:4,marginLeft:6}}>
-                                <View style={styles.btn2}>
-                                    <Text style={styles.text}>{item.text}</Text>
+
+            <View style={{width: '90%', alignSelf: 'center', flexDirection: 'row',}}>
+                <View style={{width: '30%'}}>
+                    <Button onPress={() =>  navigation.navigate('Categories')} title="Categories" buttonStyle={{height: 67, borderRadius: 4, width: '100%'}} />
+                </View>
+                <View style={{height: 67, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)'}}>
+                    <FlatList 
+                        data={reason}
+                        numColumns={3}
+                        renderItem={({item, index}) => {
+                            return(
+                                <View style={{height: 33.5, width: '33.33%', alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style={{color: item.color}}>
+                                        {item.text}
+                                    </Text>
                                 </View>
-                            </View>
-                        )
-                    }}>
-                </FlatList>
-               <View style={styles.date}>
-                 {/* <Image style={styles.Logo1} source={Images.Pictures.dateLogo}/> */}
-                   <Text>From : Sep 23, 2021</Text>
-                   <Text>To : Sep 23, 2021</Text>
-               </View>
-      
-               <MapView
-               width={"100%"}
-               height={"50%"}
-            initialRegion={INITIAL_REGION}
-            // style={{ width:'100%', height:'60%' }}
-            // clusterColor='red'
-            // onClusterPress={() => alert('helo')}
-            renderCluster={cluster => {
-                const { id, geometry, onPress, properties, } = cluster;
-                // console.log('cluster data', cluster)
-                const points = properties.point_count;
-                return (
-                    <Marker
-                        key={`cluster-${id}`}
-                        coordinate={{
-                            longitude: geometry.coordinates[0],
-                            latitude: geometry.coordinates[1]
+                            )
                         }}
-                        onPress={onPress}
+                    />
+                </View>
+            </View>
 
-                    >
+            <View>
+                <View style={styles.date}>
+                    <View style={styles.dateContainer}>
+                        <Icon name="date-range"  size={17}/>
+                        <Text>From : Sep 23, 2021</Text>
+                    </View>
 
-                        <View style={{
-                            // width: 80,
-                            // height: 80,
-                        }}>
-                            <VictoryPie
-                                colorScale={['red', 'green', 'yellow']}
-                                padAngle={({ datum }) => datum.y}
-                                radius={20}
-                                innerRadius={30}
-                                data={[
-                                    { x: 1, y: 3 },
-                                    { x: 2, y: 3,  },
-                                    { x: 3, y: 3 }
-                                ]}
-                            />
-                            <View style={{position:"absolute",top:170,bottom:100,left:170,}}>
-                                <Text style={{color:"blue"}}>{points}</Text>
-                            </View>
-                        </View>
-                    </Marker>
+                    <View style={{flexDirection: 'row', width: '40%', justifyContent: 'space-around'}}>
+                        <Icon name="date-range"  size={17}/>
+                        <Text>To : Sep 23, 2021</Text>
+                    </View>
+                </View>
+
+                <MapView
+                    width={"100%"}
+                    height={"50%"}
+                    initialRegion={INITIAL_REGION}
+                    // style={{ width:'100%', height:'60%' }}
+                    // clusterColor='red'
+                    // onClusterPress={() => alert('helo')}
+                    renderCluster={cluster => {
+                        const { id, geometry, onPress, properties, } = cluster;
+                        // console.log('cluster data', cluster)
+                        const points = properties.point_count;
+                        return (
+                            <Marker
+                                key={`cluster-${id}`}
+                                coordinate={{
+                                    longitude: geometry.coordinates[0],
+                                    latitude: geometry.coordinates[1]
+                                }}
+                                onPress={onPress}
+
+                            >
+
+                                <View style={{
+                                    // width: 80,
+                                    // height: 80,
+                                }}>
+                                    <VictoryPie
+                                        colorScale={['red', 'green', 'yellow']}
+                                        padAngle={({ datum }) => datum.y}
+                                        radius={20}
+                                        innerRadius={30}
+                                        data={[
+                                            { x: 1, y: 3 },
+                                            { x: 2, y: 3, },
+                                            { x: 3, y: 3 }
+                                        ]}
+                                    />
+                                    <View style={{ position: "absolute", top: 170, bottom: 100, left: 170, }}>
+                                        <Text style={{ color: "blue" }}>{points}</Text>
+                                    </View>
+                                </View>
+                            </Marker>
 
 
 
 
-                );
-            }}
+                        );
+                    }}
 
-        >
-            {
-                allMarkers.map((item, i) => {
-                    return (
-                        <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                            <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
-                        </Marker>
-                    )
-                })
-            }
-        </MapView>
-           
-               <View >
-               <Image style={styles.demoPng} source={Images.Pictures.demo}/>
-               </View>
+                >
+                    {
+                        allMarkers.map((item, i) => {
+                            return (
+                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
+                                    <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
+                                </Marker>
+                            )
+                        })
+                    }
+                </MapView>
+
+                <View >
+                    <Image style={styles.demoPng} source={Images.Pictures.demo} />
+                </View>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor:theme.backgrounds.whiteBG,
+    container: {
+        flex: 1,
+        backgroundColor: theme.backgrounds.whiteBG,
     },
-    header:{
-        flexDirection:"row",
-        paddingVertical:20,
-        paddingHorizontal:10,
-        justifyContent:"space-between",
-        alignItems:"center",
+    header: {
+        flexDirection: "row",
+        paddingVertical: 30,
+        paddingHorizontal: 10,
+        justifyContent: "space-between",
+        alignItems: "center",
     },
-    header2:{
-        flexDirection:"row",paddingHorizontal:8,
-        backgroundColor:theme.backgrounds.whiteBG,
+    header2: {
+        flexDirection: "row", paddingHorizontal: 8,
+        backgroundColor: theme.backgrounds.whiteBG,
         shadowColor: '#eff2f7',
         shadowOffset: {
-          width: 0,
-          height: 3,
+            width: 0,
+            height: 3,
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-    
+
         elevation: 8,
-        marginHorizontal:10,
-        paddingVertical:10,
-        borderRadius:10,
+        marginHorizontal: 10,
+        paddingVertical: 10,
+        borderRadius: 10,
     },
-    btn:{
-        backgroundColor:"#4A4C50",
-        alignItems:"center",
-        justifyContent:"center",
-        borderRadius:10,
-        width:50,
-        height:35
+    btn: {
+        backgroundColor: "#4A4C50",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10,
+        width: 50,
+        height: 35
     },
-    headerText:{
-        color:"#000000",
-        fontWeight:"400",
-        fontSize:12,
-        paddingLeft:10,
+    headerText: {
+        color: "#000000",
+        fontWeight: "400",
+        fontSize: 12,
+        paddingLeft: 10,
     },
-    read:{
-        color:"#b7c6d5",
-        fontSize:12,
-        fontWeight:"400",
+    read: {
+        color: "#b7c6d5",
+        fontSize: 12,
+        fontWeight: "400",
         textDecorationLine: 'underline',
     },
-    img:{
-        width:51,
-        height:51
+    img: {
+        width: 51,
+        height: 51
     },
-    btn2:{
-        borderWidth:1,
-        borderColor:"#8E97A6",
-        paddingHorizontal:10,
-        paddingVertical:6,
-        borderRadius:20
+    btn2: {
+        borderWidth: 1,
+        borderColor: "#8E97A6",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 20
     },
-    text:{
-        color:"#8E97A6",
-        fontSize:12,
-        fontWeight:"400"
+    text: {
+        color: "#8E97A6",
+        fontSize: 12,
+        fontWeight: "400"
     },
-    date:{
-        flexDirection:"row",
-        justifyContent:"space-around",
-        paddingVertical:20
+    date: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        paddingVertical: 20
     },
-    logo1:{
-        width:20,
-        height:20
+    logo1: {
+        width: 20,
+        height: 20
     },
-    demoPng:{
-        width:"100%",height:"50%",
-        resizeMode:"contain"
+    demoPng: {
+        width: "100%", height: "50%",
+        resizeMode: "contain"
+    },
+    dateContainer: {
+        flexDirection: 'row', 
+        width: '40%',
+        justifyContent: 'space-around'
     }
 })
