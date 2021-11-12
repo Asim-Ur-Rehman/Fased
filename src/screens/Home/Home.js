@@ -1,5 +1,5 @@
 
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -11,6 +11,7 @@ import Button from '../../components/Button';
 export const Home = ({ navigation, route }) => {
 
 
+  
 
     const INITIAL_REGION = {
         latitude: 52.5,
@@ -102,14 +103,16 @@ export const Home = ({ navigation, route }) => {
 
     const [reason, setReason] = useState([
         { text: 'Robery', color: '#5819C1'},
-        { text: " Harassment ", color: '#FFA724' },
+        { text: "Harrasment", color: '#FFA724' },
         { text: "Kidnapping", color: '#CF00BA' },
         { text: "Killing", color: '#DF0707' },
         { text: "Snatching", color: '#0A8A35' },
         { text: "Assault", color: '#0CB9A2' },
     ])
     const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : []) 
-    console.log("route", route.params)
+    useEffect(() => {
+        setSelected(route.params?.selected ? route.params?.selected : [])
+    }, [route.params])
     return (
         <View style={styles.container}>
             {/* <StatusBar /> */}
@@ -137,6 +140,7 @@ export const Home = ({ navigation, route }) => {
                         data={reason}
                         numColumns={3}
                         renderItem={({item, index}) => {
+                            const isSelect = selected.findIndex(e => e.title == item.text)
                             return(
                                 <View style={[styles.categoryContainer, 
                                     {borderWidth: 1, 
@@ -147,7 +151,7 @@ export const Home = ({ navigation, route }) => {
 
                                 }]}
                                 >
-                                    <Text style={{color: item.color}}>
+                                    <Text style={{color: isSelect == -1 ? item.color : "#9CB2C6"}}>
                                         {item.text}
                                     </Text>
                                 </View>
@@ -192,17 +196,21 @@ export const Home = ({ navigation, route }) => {
                                 // height: 80,
                             }}>
                                 <VictoryPie
-                                    colorScale={['red', 'green', 'yellow']}
+                                    colorScale={['#5819C1', '#FFA724', '#CF00BA', '#DF0707', '#0A8A35', '#0CB9A2']}
                                     padAngle={({ datum }) => datum.y}
                                     radius={20}
                                     innerRadius={30}
+                                    labels={({ datum }) => ``}
                                     data={[
                                         { x: 1, y: 3 },
                                         { x: 2, y: 3, },
-                                        { x: 3, y: 3 }
+                                        { x: 3, y: 3 },
+                                        { x: 1, y: 3 },
+                                        { x: 2, y: 3, },
+                                        { x: 3, y: 3 },
                                     ]}
                                 />
-                                <View style={{ position: "absolute", top: 170, bottom: 100, left: 170, }}>
+                                <View style={{ position: "absolute", top: 185, bottom: 100, left: 187, }}>
                                     <Text style={{ color: "blue" }}>{points}</Text>
                                 </View>
                             </View>
