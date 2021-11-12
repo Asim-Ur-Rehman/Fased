@@ -16,7 +16,9 @@ export const SignIn = ({ navigation }) => {
             <Text> SignIn Screen  </Text>
 
             <TouchableOpacity onPress={() => {
-                navigation.navigate('SignUp')
+                navigation.navigate('AppStackNavigator',{
+                    screen:'Home'
+                })
             }}>
                 <Text>
                     Next
