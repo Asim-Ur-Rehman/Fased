@@ -16,10 +16,10 @@ const App = () => {
   }, [])
   return (
     <>
-      {/* <Provider store={store}>
+      <Provider store={store}>
         <MainNavigation />
-      </Provider> */}
-      <Categories />
+      </Provider>
+      {/* <Categories /> */}
     </>
   )
 }
