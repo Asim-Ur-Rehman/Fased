@@ -27,7 +27,7 @@ function AuthStackNavigator() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Languages">
+      initialRouteName="SignIn">
       <AuthStack.Screen name="Languages" component={Languages} />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
@@ -60,6 +60,7 @@ function AppStackNavigator () {
 }
 
 const MainNavigation = () => {
+
   return (
     <NavigationContainer theme={{ ...DefaultTheme, dark: true, }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>

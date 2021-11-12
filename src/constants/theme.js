@@ -1,6 +1,5 @@
 const theme = {
-    primaryColor: '#A1CCC4',
-    headerColor: '#FFFFFF',
+    primaryColor: '#FFFFFF',
 
     backgrounds: {
         whiteBG: '#FFFFFF',
@@ -14,7 +13,8 @@ const theme = {
     },
 
     textColor: {
-        darkText: '#515352',
+        grayText: '#797979',
+        litGrayText: '#838C9B'
 
     },
 

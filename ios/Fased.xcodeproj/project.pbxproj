@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* FasedAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FasedAppTests.m */; };
+		00E356F31AD99517003FC87E /* FasedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FasedTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		638C22C1E6C3468F2C3949FF /* libPods-FasedApp-FasedAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5F311048191ABD41F9B545 /* libPods-FasedApp-FasedAppTests.a */; };
+		638C22C1E6C3468F2C3949FF /* libPods-Fased-FasedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5F311048191ABD41F9B545 /* libPods-Fased-FasedTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C26A673D26DB05BD004B1D3B /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = C26A673C26DB05BD004B1D3B /* Fonts */; };
-		EE83587F37F5207A8EBAC856 /* libPods-FasedApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 071684C8A97236E7FFCBDFC4 /* libPods-FasedApp.a */; };
+		EE83587F37F5207A8EBAC856 /* libPods-Fased.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 071684C8A97236E7FFCBDFC4 /* libPods-Fased.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,28 +23,28 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = FasedApp;
+			remoteInfo = Fased;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* FasedAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FasedAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* FasedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FasedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* FasedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasedAppTests.m; sourceTree = "<group>"; };
-		071684C8A97236E7FFCBDFC4 /* libPods-FasedApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FasedApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A5F311048191ABD41F9B545 /* libPods-FasedApp-FasedAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FasedApp-FasedAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* FasedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FasedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FasedApp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = FasedApp/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FasedApp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FasedApp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FasedApp/main.m; sourceTree = "<group>"; };
-		1D4E41C233AE0D216FA945AD /* Pods-FasedApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasedApp.debug.xcconfig"; path = "Target Support Files/Pods-FasedApp/Pods-FasedApp.debug.xcconfig"; sourceTree = "<group>"; };
-		1FAF5648CF1755A3C9A6AD2D /* Pods-FasedApp-FasedAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasedApp-FasedAppTests.debug.xcconfig"; path = "Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81498C2C1A46124094B39B20 /* Pods-FasedApp-FasedAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasedApp-FasedAppTests.release.xcconfig"; path = "Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FasedApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* FasedTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasedTests.m; sourceTree = "<group>"; };
+		071684C8A97236E7FFCBDFC4 /* libPods-Fased.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fased.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A5F311048191ABD41F9B545 /* libPods-Fased-FasedTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fased-FasedTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Fased.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fased.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Fased/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Fased/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Fased/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Fased/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Fased/main.m; sourceTree = "<group>"; };
+		1D4E41C233AE0D216FA945AD /* Pods-Fased.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fased.debug.xcconfig"; path = "Target Support Files/Pods-Fased/Pods-Fased.debug.xcconfig"; sourceTree = "<group>"; };
+		1FAF5648CF1755A3C9A6AD2D /* Pods-Fased-FasedTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fased-FasedTests.debug.xcconfig"; path = "Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests.debug.xcconfig"; sourceTree = "<group>"; };
+		81498C2C1A46124094B39B20 /* Pods-Fased-FasedTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fased-FasedTests.release.xcconfig"; path = "Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Fased/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C26A673C26DB05BD004B1D3B /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
-		C323D3E5DBB5A8C978E1EF1A /* Pods-FasedApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasedApp.release.xcconfig"; path = "Target Support Files/Pods-FasedApp/Pods-FasedApp.release.xcconfig"; sourceTree = "<group>"; };
+		C323D3E5DBB5A8C978E1EF1A /* Pods-Fased.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fased.release.xcconfig"; path = "Target Support Files/Pods-Fased/Pods-Fased.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				638C22C1E6C3468F2C3949FF /* libPods-FasedApp-FasedAppTests.a in Frameworks */,
+				638C22C1E6C3468F2C3949FF /* libPods-Fased-FasedTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,20 +61,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE83587F37F5207A8EBAC856 /* libPods-FasedApp.a in Frameworks */,
+				EE83587F37F5207A8EBAC856 /* libPods-Fased.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* FasedAppTests */ = {
+		00E356EF1AD99517003FC87E /* FasedTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* FasedAppTests.m */,
+				00E356F21AD99517003FC87E /* FasedTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = FasedAppTests;
+			path = FasedTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -85,7 +85,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* FasedApp */ = {
+		13B07FAE1A68108700A75B9A /* Fased */ = {
 			isa = PBXGroup;
 			children = (
 				C26A673C26DB05BD004B1D3B /* Fonts */,
@@ -96,15 +96,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = FasedApp;
+			name = Fased;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				071684C8A97236E7FFCBDFC4 /* libPods-FasedApp.a */,
-				0A5F311048191ABD41F9B545 /* libPods-FasedApp-FasedAppTests.a */,
+				071684C8A97236E7FFCBDFC4 /* libPods-Fased.a */,
+				0A5F311048191ABD41F9B545 /* libPods-Fased-FasedTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,9 +119,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* FasedApp */,
+				13B07FAE1A68108700A75B9A /* Fased */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* FasedAppTests */,
+				00E356EF1AD99517003FC87E /* FasedTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				9D99EFB88CE967F01FA586FB /* Pods */,
@@ -134,8 +134,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* FasedApp.app */,
-				00E356EE1AD99517003FC87E /* FasedAppTests.xctest */,
+				13B07F961A680F5B00A75B9A /* Fased.app */,
+				00E356EE1AD99517003FC87E /* FasedTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,10 +143,10 @@
 		9D99EFB88CE967F01FA586FB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1D4E41C233AE0D216FA945AD /* Pods-FasedApp.debug.xcconfig */,
-				C323D3E5DBB5A8C978E1EF1A /* Pods-FasedApp.release.xcconfig */,
-				1FAF5648CF1755A3C9A6AD2D /* Pods-FasedApp-FasedAppTests.debug.xcconfig */,
-				81498C2C1A46124094B39B20 /* Pods-FasedApp-FasedAppTests.release.xcconfig */,
+				1D4E41C233AE0D216FA945AD /* Pods-Fased.debug.xcconfig */,
+				C323D3E5DBB5A8C978E1EF1A /* Pods-Fased.release.xcconfig */,
+				1FAF5648CF1755A3C9A6AD2D /* Pods-Fased-FasedTests.debug.xcconfig */,
+				81498C2C1A46124094B39B20 /* Pods-Fased-FasedTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -154,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* FasedAppTests */ = {
+		00E356ED1AD99517003FC87E /* FasedTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FasedAppTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FasedTests" */;
 			buildPhases = (
 				53A35BB95E081BF26630A8EF /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -170,14 +170,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = FasedAppTests;
-			productName = FasedAppTests;
-			productReference = 00E356EE1AD99517003FC87E /* FasedAppTests.xctest */;
+			name = FasedTests;
+			productName = FasedTests;
+			productReference = 00E356EE1AD99517003FC87E /* FasedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* FasedApp */ = {
+		13B07F861A680F5B00A75B9A /* Fased */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FasedApp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Fased" */;
 			buildPhases = (
 				AC038EDCCA41D4C138B8BD17 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -192,9 +192,9 @@
 			);
 			dependencies = (
 			);
-			name = FasedApp;
-			productName = FasedApp;
-			productReference = 13B07F961A680F5B00A75B9A /* FasedApp.app */;
+			name = Fased;
+			productName = Fased;
+			productReference = 13B07F961A680F5B00A75B9A /* Fased.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -214,7 +214,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FasedApp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Fased" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -227,8 +227,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* FasedApp */,
-				00E356ED1AD99517003FC87E /* FasedAppTests */,
+				13B07F861A680F5B00A75B9A /* Fased */,
+				00E356ED1AD99517003FC87E /* FasedTests */,
 			);
 		};
 /* End PBXProject section */
@@ -274,15 +274,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		53A35BB95E081BF26630A8EF /* [CP] Check Pods Manifest.lock */ = {
@@ -300,7 +300,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FasedApp-FasedAppTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Fased-FasedTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -313,15 +313,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AC038EDCCA41D4C138B8BD17 /* [CP] Check Pods Manifest.lock */ = {
@@ -339,7 +339,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FasedApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Fased-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -352,15 +352,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FasedApp/Pods-FasedApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fased/Pods-Fased-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F399E0078ED80D597A035A55 /* [CP] Copy Pods Resources */ = {
@@ -369,15 +369,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FasedApp-FasedAppTests/Pods-FasedApp-FasedAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fased-FasedTests/Pods-Fased-FasedTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -406,7 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* FasedAppTests.m in Sources */,
+				00E356F31AD99517003FC87E /* FasedTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +424,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* FasedApp */;
+			target = 13B07F861A680F5B00A75B9A /* Fased */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -432,14 +432,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FAF5648CF1755A3C9A6AD2D /* Pods-FasedApp-FasedAppTests.debug.xcconfig */;
+			baseConfigurationReference = 1FAF5648CF1755A3C9A6AD2D /* Pods-Fased-FasedTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = FasedAppTests/Info.plist;
+				INFOPLIST_FILE = FasedTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -453,17 +453,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FasedApp.app/FasedApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fased.app/Fased";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81498C2C1A46124094B39B20 /* Pods-FasedApp-FasedAppTests.release.xcconfig */;
+			baseConfigurationReference = 81498C2C1A46124094B39B20 /* Pods-Fased-FasedTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = FasedAppTests/Info.plist;
+				INFOPLIST_FILE = FasedTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -477,19 +477,19 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FasedApp.app/FasedApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fased.app/Fased";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D4E41C233AE0D216FA945AD /* Pods-FasedApp.debug.xcconfig */;
+			baseConfigurationReference = 1D4E41C233AE0D216FA945AD /* Pods-Fased.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = FasedApp/Info.plist;
+				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -500,7 +500,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = FasedApp;
+				PRODUCT_NAME = Fased;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -509,12 +509,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C323D3E5DBB5A8C978E1EF1A /* Pods-FasedApp.release.xcconfig */;
+			baseConfigurationReference = C323D3E5DBB5A8C978E1EF1A /* Pods-Fased.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = FasedApp/Info.plist;
+				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -525,7 +525,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = FasedApp;
+				PRODUCT_NAME = Fased;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -657,7 +657,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FasedAppTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FasedTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -666,7 +666,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FasedApp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Fased" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -675,7 +675,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FasedApp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Fased" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
