@@ -1,6 +1,6 @@
 
 import React, { Component, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, StatusBar } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import MapView from "react-native-map-clustering";
@@ -8,7 +8,7 @@ import { Marker } from "react-native-maps";
 import { VictoryPie, } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
-export const Home = ({ navigation }) => {
+export const Home = ({ navigation, route }) => {
 
 
 
@@ -102,15 +102,18 @@ export const Home = ({ navigation }) => {
 
     const [reason, setReason] = useState([
         { text: 'Robery', color: '#5819C1'},
-        { text: "Harassment", color: '#FFA724' },
+        { text: " Harassment ", color: '#FFA724' },
         { text: "Kidnapping", color: '#CF00BA' },
         { text: "Killing", color: '#DF0707' },
         { text: "Snatching", color: '#0A8A35' },
-        { text: "Assault", color: '##0CB9A2' },
+        { text: "Assault", color: '#0CB9A2' },
     ])
+    const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : []) 
+    console.log("route", route.params)
     return (
         <View style={styles.container}>
             {/* <StatusBar /> */}
+            <ScrollView contentContainerStyle={StyleSheet.absoluteFillObject}>
             <View style={styles.header}>
                 <Image style={styles.img} source={Images.Pictures.logo} />
                 <View style={styles.header2}>
@@ -125,17 +128,25 @@ export const Home = ({ navigation }) => {
                 </View>
             </View>
 
-            <View style={{width: '90%', alignSelf: 'center', flexDirection: 'row',}}>
+            <View style={{width: '95%', alignSelf: 'center', flexDirection: 'row'}}>
                 <View style={{width: '30%'}}>
-                    <Button onPress={() =>  navigation.navigate('Categories')} title="Categories" buttonStyle={{height: 67, borderRadius: 4, width: '100%'}} />
+                    <Button onPress={() =>  navigation.navigate('Categories')} title="Categories" buttonStyle={{height: 85, borderRadius: 4, width: '100%'}} />
                 </View>
-                <View style={{height: 67, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)'}}>
+                <View style={{height: 85, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)', padding: 5}}>
                     <FlatList 
                         data={reason}
                         numColumns={3}
                         renderItem={({item, index}) => {
                             return(
-                                <View style={{height: 33.5, width: '33.33%', alignItems: 'center', justifyContent: 'center'}}>
+                                <View style={[styles.categoryContainer, 
+                                    {borderWidth: 1, 
+                                    borderColor: '#BBBBBB1A', 
+                                    borderTopWidth: (index == 0 || index == 1 || index == 2) ? 0 : 1,
+                                    borderRightWidth: (index == 2 || index == 5) ? 0 : 1,
+                                    borderLeftWidth: (index == 0 || index == 3) ? 0 : 1,
+
+                                }]}
+                                >
                                     <Text style={{color: item.color}}>
                                         {item.text}
                                     </Text>
@@ -146,83 +157,73 @@ export const Home = ({ navigation }) => {
                 </View>
             </View>
 
-            <View>
-                <View style={styles.date}>
-                    <View style={styles.dateContainer}>
-                        <Icon name="date-range"  size={17}/>
-                        <Text>From : Sep 23, 2021</Text>
-                    </View>
-
-                    <View style={{flexDirection: 'row', width: '40%', justifyContent: 'space-around'}}>
-                        <Icon name="date-range"  size={17}/>
-                        <Text>To : Sep 23, 2021</Text>
-                    </View>
+            <View style={styles.date}>
+                <View style={styles.dateContainer}>
+                    <Icon name="date-range"  size={17} color="#8E97A6"/>
+                    <Text style={{color: "#8E97A6"}}>From : Sep 23, 2021</Text>
                 </View>
 
-                <MapView
-                    width={"100%"}
-                    height={"50%"}
-                    initialRegion={INITIAL_REGION}
-                    // style={{ width:'100%', height:'60%' }}
-                    // clusterColor='red'
-                    // onClusterPress={() => alert('helo')}
-                    renderCluster={cluster => {
-                        const { id, geometry, onPress, properties, } = cluster;
-                        // console.log('cluster data', cluster)
-                        const points = properties.point_count;
-                        return (
-                            <Marker
-                                key={`cluster-${id}`}
-                                coordinate={{
-                                    longitude: geometry.coordinates[0],
-                                    latitude: geometry.coordinates[1]
-                                }}
-                                onPress={onPress}
+                <View style={{flexDirection: 'row', width: '40%', justifyContent: 'space-around'}}>
+                    <Icon name="date-range"  size={17} color="#8E97A6"/>
+                    <Text style={{color: "#8E97A6"}}>To : Sep 23, 2021</Text>
+                </View>
+            </View>
 
-                            >
-
-                                <View style={{
-                                    // width: 80,
-                                    // height: 80,
-                                }}>
-                                    <VictoryPie
-                                        colorScale={['red', 'green', 'yellow']}
-                                        padAngle={({ datum }) => datum.y}
-                                        radius={20}
-                                        innerRadius={30}
-                                        data={[
-                                            { x: 1, y: 3 },
-                                            { x: 2, y: 3, },
-                                            { x: 3, y: 3 }
-                                        ]}
-                                    />
-                                    <View style={{ position: "absolute", top: 170, bottom: 100, left: 170, }}>
-                                        <Text style={{ color: "blue" }}>{points}</Text>
-                                    </View>
+            <MapView
+                initialRegion={INITIAL_REGION}
+                style={{height: '68%'}}
+                // clusterColor='red'
+                // onClusterPress={() => alert('helo')}
+                renderCluster={cluster => {
+                    const { id, geometry, onPress, properties, } = cluster;
+                    // console.log('cluster data', cluster)
+                    const points = properties.point_count;
+                    return (
+                        <Marker
+                            key={`cluster-${id}`}
+                            coordinate={{
+                                longitude: geometry.coordinates[0],
+                                latitude: geometry.coordinates[1]
+                            }}
+                            onPress={onPress}
+                        >
+                            <View style={{
+                                // width: 80,
+                                // height: 80,
+                            }}>
+                                <VictoryPie
+                                    colorScale={['red', 'green', 'yellow']}
+                                    padAngle={({ datum }) => datum.y}
+                                    radius={20}
+                                    innerRadius={30}
+                                    data={[
+                                        { x: 1, y: 3 },
+                                        { x: 2, y: 3, },
+                                        { x: 3, y: 3 }
+                                    ]}
+                                />
+                                <View style={{ position: "absolute", top: 170, bottom: 100, left: 170, }}>
+                                    <Text style={{ color: "blue" }}>{points}</Text>
                                 </View>
+                            </View>
+                        </Marker>
+                    );
+                }}
+            >
+                {
+                    allMarkers.map((item, i) => {
+                        return (
+                            <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
+                                <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
                             </Marker>
-
-
-
-
-                        );
-                    }}
-
-                >
-                    {
-                        allMarkers.map((item, i) => {
-                            return (
-                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                                    <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
-                                </Marker>
-                            )
-                        })
-                    }
-                </MapView>
-
-                <View >
-                    <Image style={styles.demoPng} source={Images.Pictures.demo} />
-                </View>
+                        )
+                    })
+                }
+            </MapView>
+            </ScrollView>
+            
+            <View>
+                <Image style={{height: 60, width: '100%'}} source={Images.Pictures.demo} />
             </View>
         </View>
     )
@@ -235,10 +236,12 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: "row",
-        paddingVertical: 30,
+        paddingVertical: 15,
+        marginTop: 10,
         paddingHorizontal: 10,
         justifyContent: "space-between",
         alignItems: "center",
+        // height:  '10%'
     },
     header2: {
         flexDirection: "row", paddingHorizontal: 8,
@@ -295,7 +298,8 @@ const styles = StyleSheet.create({
     date: {
         flexDirection: "row",
         justifyContent: "space-around",
-        paddingVertical: 20
+        paddingVertical: 20,
+        // height: '8%'
     },
     logo1: {
         width: 20,
@@ -303,11 +307,18 @@ const styles = StyleSheet.create({
     },
     demoPng: {
         width: "100%", height: "50%",
-        resizeMode: "contain"
+        resizeMode: "contain",
+        // backgroundColor: 'red'
     },
     dateContainer: {
         flexDirection: 'row', 
         width: '40%',
         justifyContent: 'space-around'
+    },
+    categoryContainer: {
+        height: 40.5,
+        width: '33.33%', 
+        alignItems: 'center', 
+        justifyContent: 'center',
     }
 })
