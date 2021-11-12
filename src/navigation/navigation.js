@@ -64,7 +64,7 @@ function AppStackNavigator () {
 const MainNavigation = () => {
 
   return (
-    <NavigationContainer theme={{ ...DefaultTheme, dark: true, }}>
+    <NavigationContainer theme={{ ...DefaultTheme, colors: {background: "#fff"} }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="AuthStackNavigator"

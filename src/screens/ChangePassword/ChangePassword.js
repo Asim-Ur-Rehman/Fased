@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   input: {
-    width: '80%',
+    width: '88%',
     alignSelf: 'center',
     height: 48,
     marginVertical: 8,

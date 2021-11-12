@@ -19,7 +19,7 @@ export const AuthHeader = ({
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <AntDesign name='arrowleft' color='#000000' size={24} onPress={onPress} />
+            <AntDesign name='arrowleft' color='#000000' size={24} />
 
 
             {
