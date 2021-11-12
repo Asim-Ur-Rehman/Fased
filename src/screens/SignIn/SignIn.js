@@ -100,7 +100,12 @@ export const SignIn = ({ navigation }) => {
       </View>
       <View style={{alignItems:"center", justifyContent:"center", paddingVertical:20}}>
           <Button 
-          // buttonStyle={{width:"90%", height:48}}
+          onPress={() => {
+            navigation.navigate('AppStackNavigator',{
+                screen:'Home'
+            })
+        }}
+          buttonStyle={{width:320, height:48}}
           title='Sign In'
                     />
       </View>
