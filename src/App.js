@@ -9,7 +9,7 @@ import { ReportIncident } from './screens/ReportIncident/ReportIncident'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
 
-import { Categories } from './screens/Categories/Categories'
+import { ReportIncidentB } from './screens/ReportIncident/ReportIncidentB'
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -26,7 +26,7 @@ const App = () => {
       <Provider store={store}>
         <MainNavigation />
       </Provider>
-      {/* <Categories /> */}
+      {/* <ReportIncidentB /> */}
     </>
   )
 }
