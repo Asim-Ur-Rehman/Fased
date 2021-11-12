@@ -19,6 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
+import LinearGradient from 'react-native-linear-gradient'
 
 
 
@@ -44,7 +45,7 @@ export const SignIn = ({ navigation }) => {
         <Text style={styles.signInText}>Sign In</Text>
         <View
           style={{
-            backgroundColor: '#BE0000',
+            backgroundColor: '#FE0000',
             width: 21,
             height: 1,
             marginTop: 8
@@ -83,9 +84,9 @@ export const SignIn = ({ navigation }) => {
       <View style={styles.checkboxContainer}>
         <View style={{ flexDirection: 'row',  alignItems:"center", }}>
           <CheckBox
-            checkedCheckBoxColor="#FE0000"
+            checkedCheckBoxColor="#BE0000"
             uncheckedCheckBoxColor="#9CA3AF"
-            style={{ alignSelf: 'center', borderColor: '#000',}}
+            style={{ alignSelf: 'center',}}
             onClick={() => setChecked(!checked)}
             isChecked={checked}
           />
@@ -99,7 +100,7 @@ export const SignIn = ({ navigation }) => {
       </View>
       <View style={{alignItems:"center", justifyContent:"center", paddingVertical:20}}>
           <Button 
-          buttonStyle={{width:320, height:48}}
+          // buttonStyle={{width:"90%", height:48}}
           title='Sign In'
                     />
       </View>
@@ -112,7 +113,7 @@ export const SignIn = ({ navigation }) => {
       <View style={styles.socialIconContainer}>
         <TouchableOpacity activeOpacity={0.7} 
         style={styles.fbImg}>
-        <MaterialIcon name="facebook" size={30} color="#fff" />
+        <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} 
         style={styles.TwitterImg}>
@@ -129,13 +130,12 @@ export const SignIn = ({ navigation }) => {
         Don’t have an account?
         </Text>
         <TouchableOpacity 
-        onPress={() => {navigation.navigate('SignUp')}}
-        activeOpacity={0.7}>
-        <Text style={{color:"#BE0000", fontSize:13,fontWeight:"500", marginLeft:3}}>
-         Sign Up Here
-        </Text>
-      
-          </TouchableOpacity>
+          onPress={() => {navigation.navigate('SignUp')}}
+          activeOpacity={0.7}>
+          <Text style={{color:"#BE0000", fontSize:13,fontWeight:"500", marginLeft:3}}>
+          Sign Up Here
+          </Text>      
+        </TouchableOpacity>
 
       </View>
       </ScrollView>
@@ -145,7 +145,8 @@ export const SignIn = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1
+    flex: 1,
+    // backgroundColor:"#fff"
   },
   logoContainer: {
     width: width,
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   input: {
-    width: '80%',
+    width: '88%',
     alignSelf: 'center',
     height: 48,
     marginVertical: 8,
@@ -190,17 +191,11 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginHorizontal: 40,
+    marginHorizontal: 32,
     justifyContent: 'space-between',
     alignItems:"center"
-  
-
-  },
-  checkbox: {
-    // alignSelf: 'center'
   },
   label: {
-    // margin: 8,
     fontSize: 11.7,
     fontWeight: '600',
     color: '#9CA3AF',
