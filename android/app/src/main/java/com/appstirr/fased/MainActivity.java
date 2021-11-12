@@ -1,4 +1,4 @@
-package com.reactnativeboilerplate;
+package com.appstirr.fased;
 import android.os.Bundle;
 import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivity;
@@ -18,6 +18,6 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected String getMainComponentName() {
-    return "FasedApp";
+    return "Fased";
   }
 }
