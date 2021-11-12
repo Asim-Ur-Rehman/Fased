@@ -56,7 +56,7 @@ export const Categories = ({ navigation }) => {
     const selectedCard = (i) => {
 
         var arr = [...select]
-        var isFind = arr.findIndex(e => e == i)
+        var isFind = arr.findIndex(e => e.i == i.i)
         if (isFind == -1) {
             arr.push(i)
             setSelect(arr)
@@ -65,10 +65,6 @@ export const Categories = ({ navigation }) => {
             arr.splice(isFind, 1)
             setSelect(arr)
         }
-
-
-
-
 
     }
 
@@ -119,9 +115,9 @@ export const Categories = ({ navigation }) => {
                     {
                         select.length > 0 &&
                         <TouchableOpacity
-                            // onPress={()=>{
-                            //     navigation.navigate('')
-                            // }}
+                            onPress={()=>{
+                                navigation.navigate('Home', {selected: select})
+                            }}
                             activeOpacity={0.7}>
                             <Text style={{
                                 fontSize: 19,
@@ -187,7 +183,7 @@ export const Categories = ({ navigation }) => {
                                 <TouchableOpacity
 
                                     onPress={() => {
-                                        selectedCard(i)
+                                        selectedCard({i: i, title: item.title})
                                     }}
                                     activeOpacity={0.7}
                                     key={i}
@@ -196,26 +192,26 @@ export const Categories = ({ navigation }) => {
                                         alignSelf: 'center',
                                         height: 96.26,
                                         borderRadius: 10,
-                                        backgroundColor: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFA724' : '#FFA724')
-                                            : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#fae5f8' : '#CF00BA') :
-                                                i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#5819C1' : '#5819C1') :
-                                                    i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#e9e8fd' : '#211DE8') :
-                                                        i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#0CB9A2' : '#0CB9A2') :
-                                                            ((select.findIndex(e => e == i) != -1) ? '#DF0707' : '#DF0707'),
+                                        backgroundColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFA724')
+                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#fae5f8' : '#CF00BA') :
+                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#5819C1') :
+                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9e8fd' : '#211DE8') :
+                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#0CB9A2') :
+                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#DF0707'),
                                         flexDirection: 'row',
                                         marginBottom: 12,
-                                        borderWidth: i == 1 ? ((select.findIndex(e => e == i) != -1) ? 1 : 0)
-                                            : i == 2 ? ((select.findIndex(e => e == i) != -1) ? 1 : 0) :
-                                                i == 3 ? ((select.findIndex(e => e == i) != -1) ? 1 : 0) :
-                                                    i == 4 ? ((select.findIndex(e => e == i) != -1) ? 1 : 0) :
-                                                        i == 5 ? ((select.findIndex(e => e == i) != -1) ? 1 : 0) :
-                                                            ((select.findIndex(e => e == i) != -1) ? 1 : 0),
-                                        borderColor: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFA724' : 'transparent')
-                                            : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : 'transparent') :
-                                                i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#5819C1' : 'transparent') :
-                                                    i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#211DE8' : 'transparent') :
-                                                        i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#0CB9A2' : 'transparent') :
-                                                            ((select.findIndex(e => e == i) != -1) ? '#DF0707' : 'transparent'),
+                                        borderWidth: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0)
+                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
+                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
+                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
+                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
+                                                            ((select.findIndex(e => e.i == i) != -1) ? 1 : 0),
+                                        borderColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : 'transparent')
+                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : 'transparent') :
+                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : 'transparent') :
+                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : 'transparent') :
+                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : 'transparent') :
+                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : 'transparent'),
                                         // alignItems: 'center',
                                     }}>
 
