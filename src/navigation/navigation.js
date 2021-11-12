@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Languages } from '../screens/Languages/Languages'
 import { SignIn } from '../screens/SignIn/SignIn'
 import { SignUp } from '../screens/SignUp/SignUp'
+import { Home } from '../screens/Home/Home'
 import { ForgetPassword } from '../screens/ForgetPassword/ForgetPassword'
 import { ChangePassword } from '../screens/ChangePassword/ChangePassword'
 
@@ -46,24 +47,33 @@ function AuthStackNavigator() {
   );
 }
 
+function AppStackNavigator () {
+  return(
+    <AppStack.Navigator
+    screenOptions={{
+      headerShown: false,
+    }}
+    initialRouteName="Home">
+    <AppStack.Screen name="Home" component={Home} />
+  </AppStack.Navigator>
+  )
+}
 
 const MainNavigation = () => {
 
   return (
-    <NavigationContainer theme={{ ...DefaultTheme, dark: true, }}>
+    <NavigationContainer theme={{ ...DefaultTheme, colors: {background: "#fff"} }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="AuthStackNavigator"
           options={{ headerShown: false }}
           component={AuthStackNavigator}
         />
-
-        {/* <Stack.Screen
-          name="HomeBase"
-          options={{ headerShown: false }}
-          component={MyTabs}
-        /> */}
-        {/* add your another screen here using -> Stack.Screen */}
+            <Stack.Screen
+            name="AppStackNavigator"
+            options={{ headerShown: false }}
+            component={AppStackNavigator}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   )
