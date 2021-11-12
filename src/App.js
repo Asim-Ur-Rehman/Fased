@@ -7,7 +7,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { AuthHeader } from './components/AuthHeader/AuthHeader'
 import { ReportIncident } from './screens/ReportIncident/ReportIncident'
 import { View } from 'react-native'
-import {Calendar} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 
 import { Categories } from './screens/Categories/Categories'
 const App = () => {
@@ -23,7 +23,6 @@ const App = () => {
 
   return (
     <>
-            {/* <ReportIncident /> */}
       <Provider store={store}>
         <MainNavigation />
       </Provider>

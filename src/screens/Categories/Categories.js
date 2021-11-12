@@ -89,21 +89,19 @@ export const Categories = ({ navigation }) => {
 
                 colors={['#9CA3AF', '#4A4C50']}
                 start={{ x: 1, y: 0 }} end={{ x: 0, y: 0 }}
-                style={{
-                    height: 150,
-                    alignItems: 'center',
-                    justifyContent: 'center'
+                style={styles.linearMainViewStyle}
 
-                }}
             >
-                <View style={{
-                    width: '85%',
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexDirection: 'row',
-                    marginTop: 10
-                }}>
+                <View
+
+                    style={{
+                        width: '85%',
+                        alignSelf: 'center',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        flexDirection: 'row',
+                        marginTop: 20
+                    }}>
                     <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -118,18 +116,20 @@ export const Categories = ({ navigation }) => {
                         }}>Categories</Text>
 
                     </View>
-
-                    <TouchableOpacity
-                        // onPress={()=>{
-                        //     navigation.navigate('')
-                        // }}
-                        activeOpacity={0.7}>
-                        <Text style={{
-                            fontSize: 19,
-                            fontWeight: '500',
-                            color: theme.textColor.whiteText
-                        }}>Done</Text>
-                    </TouchableOpacity>
+                    {
+                        select.length > 0 &&
+                        <TouchableOpacity
+                            // onPress={()=>{
+                            //     navigation.navigate('')
+                            // }}
+                            activeOpacity={0.7}>
+                            <Text style={{
+                                fontSize: 19,
+                                fontWeight: '500',
+                                color: theme.textColor.whiteText
+                            }}>Done</Text>
+                        </TouchableOpacity>
+                    }
                 </View>
 
 
@@ -163,9 +163,9 @@ export const Categories = ({ navigation }) => {
 
                         <Text style={{
                             fontSize: 17,
-                            fontWeight: '500',
+                            fontWeight: 'bold',
                             color: theme.textColor.blackText
-                        }}>Select Categories</Text>
+                        }}>Selected Categories</Text>
 
                         <Text style={{
                             fontSize: 17,
@@ -222,25 +222,41 @@ export const Categories = ({ navigation }) => {
                                     <View style={{
                                         width: '30%',
                                         alignItems: 'center',
-                                        justifyContent: 'center'
+                                        justifyContent: 'center',
+                                        // backgroundColor: 'transparent',
+                                        // shadowColor: "#000",
+                                        // shadowOffset: {
+                                        //     width: 0,
+                                        //     height: 5,
+                                        // },
+                                        // shadowOpacity: 0.34,
+                                        // shadowRadius: 6.27,
+
+                                        // elevation: 10,
+
 
                                     }}>
                                         <Image source={item.img} style={{
                                             width: 79.89,
-                                            height: 79.89
+                                            height: 79.89,
+
                                         }} />
 
                                     </View>
                                     <View style={{
                                         width: '70%',
-                                        // backgroundColor: 'green'
+                                        height: 79.89,
+                                        // backgroundColor: 'green',
+                                        // alignItems: 'center',
+                                        justifyContent: 'center',
+                                        marginTop: 6
                                     }}>
 
                                         <View style={{
                                             width: '92%',
                                             // backgroundColor: 'green',
                                             alignItems: 'flex-end',
-                                            marginTop: 4
+                                            // marginTop: 4
                                         }}>
 
                                             <MaterialCommunityIcons name='circle-slice-8' color={i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
@@ -276,8 +292,13 @@ export const Categories = ({ navigation }) => {
                                             <Text style={{
                                                 fontSize: 11,
                                                 fontWeight: '500',
-                                                color: theme.textColor.whiteText,
-                                                lineHeight: 15
+                                                color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
+                                                    : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                        i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
+                                                            i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                                i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
+                                                                    ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF'),
+                                                lineHeight: 12
                                                 // marginBottom: 10
                                             }}>
                                                 {item.description}
@@ -326,21 +347,10 @@ export const Categories = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 
-    logoMainViewStyle: {
-        // marginTop: 60,
-        height: height * 0.33,
+    linearMainViewStyle: {
+        height: height * 0.13,
         alignItems: 'center',
-        // backgroundColor: 'green',
-        justifyContent: 'flex-end'
-    },
-    textViewStyle: {
-        width: '80%',
-        alignSelf: 'center',
-        marginTop: 10
-    },
-    textStyle: {
-        textAlign: 'center',
-        color: theme.textColor.grayText
+        justifyContent: 'center'
     }
 
 
