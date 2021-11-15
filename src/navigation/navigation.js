@@ -14,11 +14,34 @@ import { Categories } from '../screens/Categories/Categories'
 import { Report } from '../screens/Reports'
 
 import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { ReportingDone } from '../screens/ReportIncident/reportingDone'
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const AppStack = createStackNavigator()
+const Drawer = createDrawerNavigator();
 
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      // drawerContent={props => <CustomDrawer {...props} />}
+      drawerContentOptions={{
+        itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+      }}
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {
+          width: "100%",
+        },
+      }}
+      initialRouteName="Home"
+      overlayColor="transparent"
+      drawerType="front">
+      <Drawer.Screen name="Home" component={Home} />
+    </Drawer.Navigator>
+  );
+}
 
 function AuthStackNavigator() {
   return (
@@ -43,9 +66,10 @@ function AppStackNavigator () {
       headerShown: false,
     }}
     initialRouteName="Home">
-    <AppStack.Screen name="Home" component={Home} />
+    <AppStack.Screen name="Home" component={MyDrawer} />
     <AppStack.Screen name="Categories" component={Categories} />
     <AppStack.Screen name="Report" component={Report} />
+    <AppStack.Screen name="ReportingDone" component={ReportingDone} />
   </AppStack.Navigator>
   )
 }

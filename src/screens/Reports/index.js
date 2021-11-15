@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../constants/images'
 
 
-export const Report = () => {
+export const Report = ({navigation}) => {
     const data = {
         killing: [
             { initials: 'AK', Floor: '3rd Floor', category: 'Killing', value: '$11,795.70' },
@@ -121,6 +121,11 @@ export const Report = () => {
                     </View>  
                 </View>
             </ScrollView>
+            <TouchableOpacity style={styles.showMoreBtn} activeOpacity={1} onPress={() => navigation.navigate('ReportingDone')} >
+                <Text>
+                    Show More
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -141,5 +146,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 15,
         fontSize: 16
-    }
+    },
+    showMoreBtn: {position: 'absolute', width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#CCFF04', bottom: 0, padding: 15}
 })

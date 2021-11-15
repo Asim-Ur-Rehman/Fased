@@ -123,7 +123,9 @@ export const Home = ({ navigation, route }) => {
             {/* <StatusBar /> */}
             <ScrollView contentContainerStyle={StyleSheet.absoluteFillObject}>
             <View style={styles.header}>
-                <Image style={styles.img} source={Images.Pictures.logo} />
+                <TouchableOpacity activeOpacity={.8} onPress={() => navigation.toggleDrawer()}>
+                    <Image style={styles.img} source={Images.Pictures.logo} />
+                </TouchableOpacity>
                 <View style={styles.header2}>
                     <View style={styles.btn}>
                         <Text style={{ fontSize: 10, fontWeight: "500", color: "#ffffff" }}>NEWS</Text>
