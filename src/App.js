@@ -8,6 +8,7 @@ import { AuthHeader } from './components/AuthHeader/AuthHeader'
 import { ReportIncidentC } from './screens/ReportIncident/ReportIncidentC'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
+import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
 
 import { Categories } from './screens/Categories/Categories'
 import { FlagReport } from './screens/flagReport/flagReport'
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
     <>
+    {/* <CustomScrollBarComponent/> */}
             <FlagReport />
       {/* <Provider store={store}>
         <MainNavigation />
