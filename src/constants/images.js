@@ -23,6 +23,9 @@ const Images = {
                 bagIcon: require('../assets/images/bagIcon.png'),
                 swapIcon: require('../assets/images/Swap.png'),
                 checkIcon: require('../assets/images/checkLogo.png')
+                green: require('../assets/images/green.png'),
+                red: require('../assets/images/red.png')
+
         },
 
 };

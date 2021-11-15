@@ -8,7 +8,8 @@ const theme = {
     },
 
     bordersColor: {
-        InputBorder: '#e2e2e2',
+        InputBorder: '#dcdcdc',
+
 
     },
 
@@ -16,12 +17,15 @@ const theme = {
         grayText: '#797979',
         litGrayText: '#838C9B',
         whiteText: '#FFFFFF',
-        blackText: '#000000'
+        blackText: '#000000',
+        grayText2: '#909090',
+        placeholderColor: '#dcdcdc'
+
 
     },
 
     iconsColor: {
-        StarColor: '#fec107',
+        SearchIcon: '#dcdcdc',
 
     },
 
