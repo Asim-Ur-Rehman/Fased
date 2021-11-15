@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 export const Home = ({ navigation, route }) => {
 
     const mapRef = useRef(null)
-  
+
 
     const INITIAL_REGION = {
         latitude: 52.5,
@@ -102,14 +102,14 @@ export const Home = ({ navigation, route }) => {
     ]
 
     const [reason, setReason] = useState([
-        { text: 'Robery', color: '#5819C1'},
+        { text: 'Robery', color: '#5819C1' },
         { text: "Harrasment", color: '#FFA724' },
         { text: "Kidnapping", color: '#CF00BA' },
         { text: "Killing", color: '#DF0707' },
         { text: "Snatching", color: '#0A8A35' },
         { text: "Assault", color: '#0CB9A2' },
     ])
-    const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : []) 
+    const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : [])
 
     useEffect(() => {
         setSelected(route.params?.selected ? route.params?.selected : [])
@@ -122,121 +122,124 @@ export const Home = ({ navigation, route }) => {
         <View style={styles.container}>
             {/* <StatusBar /> */}
             <ScrollView contentContainerStyle={StyleSheet.absoluteFillObject}>
-            <View style={styles.header}>
-                <TouchableOpacity activeOpacity={.8} onPress={() => navigation.toggleDrawer()}>
-                    <Image style={styles.img} source={Images.Pictures.logo} />
-                </TouchableOpacity>
-                <View style={styles.header2}>
-                    <View style={styles.btn}>
-                        <Text style={{ fontSize: 10, fontWeight: "500", color: "#ffffff" }}>NEWS</Text>
+                <View style={styles.header}>
+                    <TouchableOpacity activeOpacity={.8} onPress={() => navigation.toggleDrawer()}>
+                        <Image style={styles.img} source={Images.Pictures.logo} />
+                    </TouchableOpacity>
+                    <View style={styles.header2}>
+                        <View style={styles.btn}>
+                            <Text style={{ fontSize: 10, fontWeight: "500", color: "#ffffff" }}>NEWS</Text>
+                        </View>
+                        <View style={{ flexDirection: "column", }}>
+                            <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
+                            <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
+
+                        </View>
                     </View>
-                    <View style={{ flexDirection: "column", }}>
-                        <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
-                        <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
+                </View>
 
+                <View style={{ width: '95%', alignSelf: 'center', flexDirection: 'row' }}>
+                    <View style={{ width: '30%' }}>
+                        <Button onPress={() => navigation.navigate('Categories')} title="Categories" buttonStyle={{ height: 85, borderRadius: 4, width: '100%' }} />
                     </View>
-                </View>
-            </View>
+                    <View style={{ height: 85, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)', padding: 5 }}>
+                        <FlatList
+                            data={reason}
+                            numColumns={3}
+                            renderItem={({ item, index }) => {
+                                const isSelect = selected.findIndex(e => e.title == item.text)
+                                return (
+                                    <View style={[styles.categoryContainer,
+                                    {
+                                        borderWidth: 1,
+                                        borderColor: '#BBBBBB1A',
+                                        borderTopWidth: (index == 0 || index == 1 || index == 2) ? 0 : 1,
+                                        borderRightWidth: (index == 2 || index == 5) ? 0 : 1,
+                                        borderLeftWidth: (index == 0 || index == 3) ? 0 : 1,
 
-            <View style={{width: '95%', alignSelf: 'center', flexDirection: 'row'}}>
-                <View style={{width: '30%'}}>
-                    <Button onPress={() =>  navigation.navigate('Categories')} title="Categories" buttonStyle={{height: 85, borderRadius: 4, width: '100%'}} />
-                </View>
-                <View style={{height: 85, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)', padding: 5}}>
-                    <FlatList 
-                        data={reason}
-                        numColumns={3}
-                        renderItem={({item, index}) => {
-                            const isSelect = selected.findIndex(e => e.title == item.text)
-                            return(
-                                <View style={[styles.categoryContainer, 
-                                    {borderWidth: 1, 
-                                    borderColor: '#BBBBBB1A', 
-                                    borderTopWidth: (index == 0 || index == 1 || index == 2) ? 0 : 1,
-                                    borderRightWidth: (index == 2 || index == 5) ? 0 : 1,
-                                    borderLeftWidth: (index == 0 || index == 3) ? 0 : 1,
-
-                                }]}
-                                >
-                                    <Text style={{color: isSelect == -1 ? item.color : "#9CB2C6"}}>
-                                        {item.text}
-                                    </Text>
-                                </View>
-                            )
-                        }}
-                    />
-                </View>
-            </View>
-
-            <View style={styles.date}>
-                <View style={styles.dateContainer}>
-                    <Icon name="date-range"  size={17} color="#8E97A6"/>
-                    <Text style={{color: "#8E97A6"}}>From : Sep 23, 2021</Text>
-                </View>
-
-                <View style={{flexDirection: 'row', width: '40%', justifyContent: 'space-around'}}>
-                    <Icon name="date-range"  size={17} color="#8E97A6"/>
-                    <Text style={{color: "#8E97A6"}}>To : Sep 23, 2021</Text>
-                </View>
-            </View>
-
-            <MapView
-                initialRegion={INITIAL_REGION}
-                style={{height: '68%'}}
-                showsCompass
-                compassOffset={{ x: 50, y: 100 }}
-                ref={mapRef}
-                renderCluster={cluster => {
-                    const { id, geometry, onPress, properties, } = cluster;
-                    // console.log('cluster data', cluster)
-                    const points = properties.point_count;
-                    return (
-                        <Marker
-                            key={`cluster-${id}`}
-                            coordinate={{
-                                longitude: geometry.coordinates[0],
-                                latitude: geometry.coordinates[1]
+                                    }]}
+                                    >
+                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6" }}>
+                                            {item.text}
+                                        </Text>
+                                    </View>
+                                )
                             }}
-                            onPress={onPress}
-                        >
-                            <View style={{
-                                // width: 80,
-                                // height: 80,
-                            }}>
-                                <VictoryPie
-                                    colorScale={['#5819C1', '#FFA724', '#CF00BA', '#DF0707', '#0A8A35', '#0CB9A2']}
-                                    padAngle={({ datum }) => datum.y}
-                                    radius={20}
-                                    innerRadius={30}
-                                    labels={({ datum }) => ``}
-                                    data={[
-                                        { x: 1, y: 3 },
-                                        { x: 2, y: 3, },
-                                        { x: 3, y: 3 },
-                                        { x: 1, y: 3 },
-                                        { x: 2, y: 3, },
-                                        { x: 3, y: 3 },
-                                    ]}
-                                />
-                                <View style={{ position: "absolute", top: 185, bottom: 100, left: 187, }}>
-                                    <Text style={{ color: "blue" }}>{points}</Text>
-                                </View>
-                            </View>
-                        </Marker>
-                    );
-                }}
-            >
-                {
-                    allMarkers.map((item, i) => {
-                        return (
-                            <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                                <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
-                            </Marker>
-                        )
-                    })
-                }
+                        />
+                    </View>
+                </View>
 
-            </MapView>
+                <View style={styles.date}>
+                    <View style={styles.dateContainer}>
+                        <Icon name="date-range" size={17} color="#8E97A6" />
+                        <Text style={{ color: "#8E97A6" }}>From : Sep 23, 2021</Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
+                        <Icon name="date-range" size={17} color="#8E97A6" />
+                        <Text style={{ color: "#8E97A6" }}>To : Sep 23, 2021</Text>
+                    </View>
+                </View>
+
+                <MapView
+                    initialRegion={INITIAL_REGION}
+                    style={{ height: '68%' }}
+                    showsCompass
+                    compassOffset={{ x: 50, y: 100 }}
+                    ref={mapRef}
+                    renderCluster={cluster => {
+                        const { id, geometry, onPress, properties, } = cluster;
+                        // console.log('cluster data', cluster)
+                        const points = properties.point_count;
+                        return (
+                            <Marker
+                                key={`cluster-${id}`}
+                                coordinate={{
+                                    longitude: geometry.coordinates[0],
+                                    latitude: geometry.coordinates[1]
+                                }}
+                                onPress={() => navigation.navigate('Reports')}
+                            >
+                                <View style={{
+                                    // width: 80,
+                                    // height: 80,
+                                }}>
+                                    <VictoryPie
+                                        colorScale={['#5819C1', '#FFA724', '#CF00BA', '#DF0707', '#0A8A35', '#0CB9A2']}
+                                        padAngle={({ datum }) => datum.y}
+                                        radius={20}
+                                        innerRadius={30}
+                                        labels={({ datum }) => ``}
+                                        data={[
+                                            { x: 1, y: 3 },
+                                            { x: 2, y: 3, },
+                                            { x: 3, y: 3 },
+                                            { x: 1, y: 3 },
+                                            { x: 2, y: 3, },
+                                            { x: 3, y: 3 },
+                                        ]}
+                                    />
+                                    <TouchableOpacity
+                                        onPress={onPress}
+                                        style={{ position: "absolute", top: 170, bottom: 100, left: 175, }}>
+                                        <Text style={{ color: "blue" }}>{points}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </Marker>
+                        );
+                    }}
+                >
+                    {
+                        allMarkers.map((item, i) => {
+                            return (
+                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
+                                    <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
+                                </Marker>
+                            )
+                        })
+                    }
+
+                </MapView>
             </ScrollView>
             <View style={styles.mapActionsContainer}>
                 <View style={styles.verticalBtnContainer}>
@@ -244,16 +247,16 @@ export const Home = ({ navigation, route }) => {
                         <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} />
                     </View>
                     <View>
-                        <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()}/>
+                        <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()} />
                     </View>
                 </View>
                 <View style={styles.reportBtn}>
-                    <Button title="Report" onPress={() => navigation.navigate('Report')} />
+                    <Button title="Report" onPress={() => navigation.navigate('ReportIncident')} />
                 </View>
             </View>
-            
+
             <View>
-                <Image style={{height: 60, width: '100%'}} source={Images.Pictures.demo} />
+                <Image style={{ height: 60, width: '100%' }} source={Images.Pictures.demo} />
             </View>
         </View>
     )
@@ -341,19 +344,19 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red'
     },
     dateContainer: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         width: '40%',
         justifyContent: 'space-around'
     },
     categoryContainer: {
         height: 40.5,
-        width: '33.33%', 
-        alignItems: 'center', 
+        width: '33.33%',
+        alignItems: 'center',
         justifyContent: 'center',
     },
-    
-    mapActionsContainer: {position: 'absolute', bottom: 100, width: '100%', paddingHorizontal: 20},
-    verticalBtnContainer: {justifyContent: 'space-between', alignSelf: 'flex-end', height: 120},
-    squareBtn: {height:  50, width: 50, borderRadius: 10},
-    reportBtn: {alignSelf: 'center', top: 20}
+
+    mapActionsContainer: { position: 'absolute', bottom: 100, width: '100%', paddingHorizontal: 20 },
+    verticalBtnContainer: { justifyContent: 'space-between', alignSelf: 'flex-end', height: 120 },
+    squareBtn: { height: 50, width: 50, borderRadius: 10 },
+    reportBtn: { alignSelf: 'center', top: 20 }
 })

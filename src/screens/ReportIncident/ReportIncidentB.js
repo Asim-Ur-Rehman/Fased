@@ -279,7 +279,7 @@ export const ReportIncidentB = ({ navigation }) => {
                         }}>
                         <Button
                             onPress={() => {
-                                navigation.navigate('SignIn')
+                                navigation.navigate('ReportIncidentC')
                             }}
                             linearColor1={'#9CA3AF'}
                             linearColor2={'#4A4C50'}

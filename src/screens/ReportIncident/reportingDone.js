@@ -7,7 +7,7 @@ import Button from '../../components/Button'
 import { Images } from '../../constants/images'
 
 
-export const ReportingDone = ({navigation}) => {
+export const ReportingDone = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
@@ -21,19 +21,19 @@ export const ReportingDone = ({navigation}) => {
             </View>
 
             <View style={styles.btnStyle}>
-                <Button 
-                    title="Home"
+                <Button
+                    title="Done"
                     onPress={() => navigation.navigate('Home')}
                 />
             </View>
-           
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-   container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-    imageStyle : {height: 100, width: 100},
-    textStyle: {fontSize: 25, fontWeight: '500', color: '#181725', textAlign:'center', paddingVertical: 20},
-    btnStyle: {position: 'absolute', bottom: 50}
+    container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+    imageStyle: { height: 100, width: 100 },
+    textStyle: { fontSize: 25, fontWeight: '500', color: '#181725', textAlign: 'center', paddingVertical: 20 },
+    btnStyle: { position: 'absolute', bottom: 50 }
 })

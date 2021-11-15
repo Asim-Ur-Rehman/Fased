@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../constants/images'
 
 
-export const Report = ({navigation}) => {
+export const Reports = ({ navigation }) => {
     const data = {
         killing: [
             { initials: 'AK', Floor: '3rd Floor', category: 'Killing', value: '$11,795.70' },
@@ -70,7 +70,7 @@ export const Report = ({navigation}) => {
         )
     }
     return (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
             <LinearGradient
                 colors={['#9CA3AF', '#4A4C50']}
                 start={{ x: 0.95, y: 0 }}
@@ -118,7 +118,7 @@ export const Report = ({navigation}) => {
                         {renderData(data.killing, '#DF070714', '#DF0707', '#FEDFE3')}
                         {renderData(data.snatching, '#211DE814', '#211DE8', '#CCCAF3')}
                         {renderData(data.kidnapping, '#CF00BA14', '#CF00BA', '#FAC4F3')}
-                    </View>  
+                    </View>
                 </View>
             </ScrollView>
             <TouchableOpacity style={styles.showMoreBtn} activeOpacity={1} onPress={() => navigation.navigate('ReportingDone')} >
@@ -147,5 +147,5 @@ const styles = StyleSheet.create({
         padding: 15,
         fontSize: 16
     },
-    showMoreBtn: {position: 'absolute', width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#CCFF04', bottom: 0, padding: 15}
+    showMoreBtn: { position: 'absolute', width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#CCFF04', bottom: 0, padding: 15 }
 })

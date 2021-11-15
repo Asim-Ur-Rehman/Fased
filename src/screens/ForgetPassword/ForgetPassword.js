@@ -54,7 +54,7 @@ export const ForgetPassword = ({ navigation }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-          
+
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Email address</Text>
@@ -67,23 +67,23 @@ export const ForgetPassword = ({ navigation }) => {
             placeholder="Eg namaemail@emailkamu.com"
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
-          />         
+          />
         </View>
 
-        <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 , paddingVertical:10}}>
-            <Text style={{color:"#A8AEB9",fontSize:14,fontWeight:"400", lineHeight:16, textAlign:"center" }}>A message will be sent to your email address
-with further instructions</Text>
-          </View>
+        <View style={{ width: '76%', alignSelf: 'center', marginTop: 8, paddingVertical: 10 }}>
+          <Text style={{ color: "#A8AEB9", fontSize: 14, fontWeight: "400", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
+            with further instructions</Text>
+        </View>
 
         <View
           style={{
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             paddingVertical: 20
           }}>
           <Button
-            onPress={() => {navigation.navigate('ChangePassword')}}
-            buttonStyle={{ width: 350, height: 48, marginTop: 10 }}
+            onPress={() => { navigation.navigate('ChangePassword') }}
+            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
             title="Recover Password"
           />
         </View>
