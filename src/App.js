@@ -26,7 +26,7 @@ const App = () => {
       {/* <Provider store={store}>
         <MainNavigation />
       </Provider> */}
-      <ReportIncidents />
+      <FlagReport />
     </>
   )
 }
