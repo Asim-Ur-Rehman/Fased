@@ -34,23 +34,27 @@ export const SignIn = ({ navigation }) => {
           navigation.navigate('Languages')
         }} />
       <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false} showsVerticalScrollIndicator={false} >
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.signInText}>Sign In</Text>
-          <View
-            style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
+      <ScrollView contentContainerStyle={{flexGrow:1}} bounces={false} showsVerticalScrollIndicator={false} >
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.signInText}>Sign In</Text>
+        <View
+          style={{
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
+      <View style={styles.InputContainer}>
+        <View style={{ width: '83%', alignSelf: 'center' }}>
+          <Text style={styles.inputLabel}>Email address</Text>
         </View>
         <View style={styles.InputContainer}>
           <View style={{ width: '76%', alignSelf: 'center' }}>
@@ -66,9 +70,9 @@ export const SignIn = ({ navigation }) => {
             keyboardType="email-address"
           />
 
-          <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Password</Text>
-          </View>
+        <View style={{ width: '83%', alignSelf: 'center', marginTop:8 }}>
+          <Text style={styles.inputLabel}>Password</Text>
+        </View>
 
           <TextInput
             style={styles.input}
@@ -109,11 +113,28 @@ export const SignIn = ({ navigation }) => {
             title='Sign In'
           />
         </View>
-        <View style={{ alignItems: "center", justifyContent: "center", }}>
-          <Text style={{ color: "#252529", fontSize: 13, fontWeight: "400", }}>
-            Or sign in with social account
-          </Text>
-        </View>
+        <TouchableOpacity 
+        onPress={() => {navigation.navigate('ForgetPassword')}}
+        activeOpacity={0.7} style={{ }}>
+          <Text style={styles.label}>Forget Password?</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{alignItems:"center", justifyContent:"center", paddingVertical:20}}>
+          <Button 
+          onPress={() => {
+            navigation.navigate('AppStackNavigator',{
+                screen:'Home'
+            })
+        }}
+          buttonStyle={{width:350, height:48}}
+          title='Sign In'
+                    />
+      </View>
+      <View style={{alignItems:"center", justifyContent:"center",}}>
+        <Text style={{color:"#252529", fontSize:13,fontWeight:"400",}}>
+        Or sign in with social account
+        </Text>
+      </View>
 
         <View style={styles.socialIconContainer}>
           <TouchableOpacity activeOpacity={0.7}
@@ -196,7 +217,7 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginHorizontal: 32,
+    marginHorizontal: 22,
     justifyContent: 'space-between',
     alignItems: "center"
   },

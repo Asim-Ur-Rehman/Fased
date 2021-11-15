@@ -56,7 +56,7 @@ export const ForgetPassword = ({ navigation }) => {
         <View style={styles.InputContainer}>
           
 
-          <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Email address</Text>
           </View>
 
@@ -83,7 +83,7 @@ with further instructions</Text>
           }}>
           <Button
             onPress={() => {navigation.navigate('ChangePassword')}}
-            buttonStyle={{ width: 320, height: 48, marginTop: 10 }}
+            buttonStyle={{ width: 350, height: 48, marginTop: 10 }}
             title="Recover Password"
           />
         </View>
