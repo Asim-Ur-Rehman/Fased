@@ -10,6 +10,7 @@ import { ReportIncidents } from './screens/ReportIncident/ReportIncidents'
 
 import { Categories } from './screens/Categories/Categories'
 import { FlagReport } from './screens/flagReport/flagReport'
+import 'react-native-gesture-handler';
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -23,10 +24,10 @@ const App = () => {
 
   return (
     <>
-      {/* <Provider store={store}>
+      <Provider store={store}>
         <MainNavigation />
-      </Provider> */}
-      <FlagReport />
+      </Provider>
+      {/* <FlagReport /> */}
     </>
   )
 }

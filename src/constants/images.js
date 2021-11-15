@@ -21,7 +21,7 @@ const Images = {
                 floorIcon: require('../assets/images/floorIcon.png'),
                 timeIcon: require('../assets/images/timeIcon.png'),
                 bagIcon: require('../assets/images/bagIcon.png'),
-
+                swapIcon: require('../assets/images/Swap.png')
         },
 
 };

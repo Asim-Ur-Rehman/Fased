@@ -13,14 +13,11 @@ import { ChangePassword } from '../screens/ChangePassword/ChangePassword'
 import { Categories } from '../screens/Categories/Categories'
 import { Report } from '../screens/Reports'
 
+import 'react-native-gesture-handler';
+
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const AppStack = createStackNavigator()
-
-
-
-
-
 
 
 function AuthStackNavigator() {
@@ -35,16 +32,6 @@ function AuthStackNavigator() {
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
       <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
-
-
-
-
-
-
-
-
-
-
     </AuthStack.Navigator>
   );
 }
