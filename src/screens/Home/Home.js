@@ -246,7 +246,7 @@ export const Home = ({ navigation, route }) => {
                     </View>
                 </View>
                 <View style={styles.reportBtn}>
-                    <Button title="Report" />
+                    <Button title="Report" onPress={() => navigation.navigate('Report')} />
                 </View>
             </View>
             

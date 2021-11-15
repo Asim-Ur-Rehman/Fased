@@ -11,6 +11,7 @@ import { Home } from '../screens/Home/Home'
 import { ForgetPassword } from '../screens/ForgetPassword/ForgetPassword'
 import { ChangePassword } from '../screens/ChangePassword/ChangePassword'
 import { Categories } from '../screens/Categories/Categories'
+import { Report } from '../screens/Reports'
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -57,6 +58,7 @@ function AppStackNavigator () {
     initialRouteName="Home">
     <AppStack.Screen name="Home" component={Home} />
     <AppStack.Screen name="Categories" component={Categories} />
+    <AppStack.Screen name="Report" component={Report} />
   </AppStack.Navigator>
   )
 }
