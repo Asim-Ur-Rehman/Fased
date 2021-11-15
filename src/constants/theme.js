@@ -14,7 +14,9 @@ const theme = {
 
     textColor: {
         grayText: '#797979',
-        litGrayText: '#838C9B'
+        litGrayText: '#838C9B',
+        whiteText: '#FFFFFF',
+        blackText: '#000000'
 
     },
 

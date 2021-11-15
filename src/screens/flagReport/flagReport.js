@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     alignItems: 'center'
-    //   backgroundColor:"pink",
   },
   headerLabel: {
     color: '#fff',

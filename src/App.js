@@ -7,7 +7,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { AuthHeader } from './components/AuthHeader/AuthHeader'
 import { ReportIncidentC } from './screens/ReportIncident/ReportIncidentC'
 import { View } from 'react-native'
-import {Calendar} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 
 import { Categories } from './screens/Categories/Categories'
 import { FlagReport } from './screens/flagReport/flagReport'
