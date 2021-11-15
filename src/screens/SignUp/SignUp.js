@@ -54,7 +54,7 @@ export const SignUp = ({ navigation }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-          <View style={{ width: '76%', alignSelf: 'center' }}>
+          <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>Full Name</Text>
           </View>
 
@@ -67,7 +67,7 @@ export const SignUp = ({ navigation }) => {
             keyboardType="default"
           />
 
-          <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Email address</Text>
           </View>
 
@@ -80,7 +80,7 @@ export const SignUp = ({ navigation }) => {
             keyboardType="email-address"
           />
 
-          <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Password</Text>
           </View>
 
@@ -102,7 +102,7 @@ export const SignUp = ({ navigation }) => {
             paddingVertical: 20
           }}>
           <Button
-            buttonStyle={{ width: 320, height: 48, marginTop: 10 }}
+            buttonStyle={{ width: 350, height: 48, marginTop: 10 }}
             title="Sign Up"
           />
         </View>

@@ -53,7 +53,7 @@ export const SignIn = ({ navigation }) => {
         />
       </View>
       <View style={styles.InputContainer}>
-        <View style={{ width: '76%', alignSelf: 'center' }}>
+        <View style={{ width: '83%', alignSelf: 'center' }}>
           <Text style={styles.inputLabel}>Email address</Text>
         </View>
 
@@ -66,7 +66,7 @@ export const SignIn = ({ navigation }) => {
           keyboardType="email-address"
         />
 
-        <View style={{ width: '76%', alignSelf: 'center', marginTop:8 }}>
+        <View style={{ width: '83%', alignSelf: 'center', marginTop:8 }}>
           <Text style={styles.inputLabel}>Password</Text>
         </View>
 
@@ -105,7 +105,7 @@ export const SignIn = ({ navigation }) => {
                 screen:'Home'
             })
         }}
-          buttonStyle={{width:320, height:48}}
+          buttonStyle={{width:350, height:48}}
           title='Sign In'
                     />
       </View>
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginHorizontal: 32,
+    marginHorizontal: 22,
     justifyContent: 'space-between',
     alignItems:"center"
   },
