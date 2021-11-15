@@ -4,10 +4,9 @@ import MainNavigation from './navigation/navigation'
 import { Provider } from 'react-redux'
 import { store } from './stores'
 import SplashScreen from 'react-native-splash-screen'
-import { AuthHeader } from './components/AuthHeader/AuthHeader'
-import { ReportIncident } from './screens/ReportIncident/ReportIncident'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
+import { ReportIncidents } from './screens/ReportIncident/ReportIncidents'
 
 import { ReportIncidentB } from './screens/ReportIncident/ReportIncidentB'
 const App = () => {
@@ -23,10 +22,10 @@ const App = () => {
 
   return (
     <>
-      <Provider store={store}>
+      {/* <Provider store={store}>
         <MainNavigation />
-      </Provider>
-      {/* <ReportIncidentB /> */}
+      </Provider> */}
+      <ReportIncidents />
     </>
   )
 }
