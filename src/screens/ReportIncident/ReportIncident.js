@@ -12,7 +12,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import ToggleButton from '../../components/ToggleButton/index'
 
 
-export const ReportIncidents = () => {
+export const ReportIncident = ({ navigation }) => {
     const mapRef = useRef(null)
     const [enabled, setEnabled] = useState(false)
     const onSelectSwitch = (index) => {
@@ -280,6 +280,10 @@ export const ReportIncidents = () => {
                     </View>
                     <View style={{ marginVertical: 10 }}>
                         <Button
+
+                            onPress={() => {
+                                navigation.navigate('ReportIncidentA')
+                            }}
                             buttonStyle={{ width: '85%', alignSelf: 'center' }}
                             title="Next"
                         />

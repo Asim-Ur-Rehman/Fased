@@ -114,9 +114,11 @@ export const SignIn = ({ navigation }) => {
           }}></View>
         <View
           style={{
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             paddingVertical: 20
+            // width: '80%',
+            // alignSelf: 'center'
           }}>
           <Button
             onPress={() => {
@@ -124,7 +126,7 @@ export const SignIn = ({ navigation }) => {
                 screen: 'Home'
               })
             }}
-            buttonStyle={{ width: 350, height: 48 }}
+            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
             title="Sign In"
           />
         </View>

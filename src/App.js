@@ -7,12 +7,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
 import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
-import { ReportIncidents } from './screens/ReportIncident/ReportIncidents'
-
-import { Categories } from './screens/Categories/Categories'
-import { FlagReport } from './screens/flagReport/flagReport'
 import 'react-native-gesture-handler';
-import { ReportingDone } from './screens/ReportIncident/reportingDone'
 const App = () => {
   useEffect(() => {
     setTimeout(

@@ -46,7 +46,7 @@ export const ReportIncidentA = ({ navigation }) => {
               name="arrowleft"
               color="#000000"
               size={22}
-              // onPress={() => {navigation.goBack()}}
+            // onPress={() => {navigation.goBack()}}
             />
             <Text style={styles.headerLabel}>Report Incident</Text>
           </View>
@@ -256,6 +256,9 @@ export const ReportIncidentA = ({ navigation }) => {
 
         <View style={{ marginTop: 15, paddingBottom: 50 }}>
           <Button
+            onPress={() => {
+              navigation.navigate('ReportIncidentB')
+            }}
             buttonStyle={{ width: '90%', alignSelf: 'center' }}
             title="Next"
           />
