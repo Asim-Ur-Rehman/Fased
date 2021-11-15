@@ -1,5 +1,5 @@
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, StatusBar, SafeAreaView, ScrollView } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
 export const Home = ({ navigation, route }) => {
 
-
+    const mapRef = useRef(null)
   
 
     const INITIAL_REGION = {
@@ -110,9 +110,14 @@ export const Home = ({ navigation, route }) => {
         { text: "Assault", color: '#0CB9A2' },
     ])
     const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : []) 
+
     useEffect(() => {
         setSelected(route.params?.selected ? route.params?.selected : [])
     }, [route.params])
+
+    const animateToCurrentLocation = () => {
+        mapRef.current.animateToRegion(INITIAL_REGION, 2000)
+    }
     return (
         <View style={styles.container}>
             {/* <StatusBar /> */}
@@ -176,8 +181,9 @@ export const Home = ({ navigation, route }) => {
             <MapView
                 initialRegion={INITIAL_REGION}
                 style={{height: '68%'}}
-                // clusterColor='red'
-                // onClusterPress={() => alert('helo')}
+                showsCompass
+                compassOffset={{ x: 50, y: 100 }}
+                ref={mapRef}
                 renderCluster={cluster => {
                     const { id, geometry, onPress, properties, } = cluster;
                     // console.log('cluster data', cluster)
@@ -227,8 +233,22 @@ export const Home = ({ navigation, route }) => {
                         )
                     })
                 }
+
             </MapView>
             </ScrollView>
+            <View style={styles.mapActionsContainer}>
+                <View style={styles.verticalBtnContainer}>
+                    <View>
+                        <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} />
+                    </View>
+                    <View>
+                        <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()}/>
+                    </View>
+                </View>
+                <View style={styles.reportBtn}>
+                    <Button title="Report" />
+                </View>
+            </View>
             
             <View>
                 <Image style={{height: 60, width: '100%'}} source={Images.Pictures.demo} />
@@ -328,5 +348,10 @@ const styles = StyleSheet.create({
         width: '33.33%', 
         alignItems: 'center', 
         justifyContent: 'center',
-    }
+    },
+    
+    mapActionsContainer: {position: 'absolute', bottom: 100, width: '100%', paddingHorizontal: 20},
+    verticalBtnContainer: {justifyContent: 'space-between', alignSelf: 'flex-end', height: 120},
+    squareBtn: {height:  50, width: 50, borderRadius: 10},
+    reportBtn: {alignSelf: 'center', top: 20}
 })

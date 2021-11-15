@@ -14,12 +14,12 @@ import Button from '../../components/Button'
 const { width, height } = Dimensions.get('window')
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
 
-export const ReportIncident = ({ navigation }) => {
+export const ReportIncidentA = ({ navigation }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
   }
@@ -61,53 +61,25 @@ export const ReportIncident = ({ navigation }) => {
           <Text style={{ fontSize: 11, fontWeight: '500' }}>
             Choose Category
           </Text>
-          <View style={styles.modalView}>
-            <ModalDropdown
-              showsVerticalScrollIndicator={false}
-              defaultValue="Select category"
-              textStyle={{
+          <View style={styles.fieldView}>
+            <Text
+              style={{
+                width: '90%',
                 fontSize: 14,
                 fontWeight: '400',
                 color: '#33333370',
-                margin: 10,
-                paddingLeft: 10
-              }}
-              dropdownStyle={{
-                width: '89%',
-                borderWidth: 1,
-                borderRadius: 5,
-                borderColor: '#33333330',
-                height: 145
-              }}
-              dropdownTextStyle={{
-                fontSize: 12,
-                fontWeight: '400',
-                paddingLeft: 20
-              }}
-              options={[
-                'Killing',
-                'Harrasment',
-                'Kidnapping',
-                'Robery',
-                'Snatching',
-                'Assault'
-              ]}
-              // renderRightComponent={() => (
-              //   <Icon
-              //     // name={ismyState.picker2 ? 'up' : 'down'}
-              //     name={'up'}
-              //     type={'AntDesign'}
-              //     style={{fontSize: 13}}
-              //   />
-              // )}
-              renderRightComponent={() => (
-                <Icon
-                  name="md-chevron-down"
-                  color="#33333330"
-                  size={20}
-                  style={{ position: 'absolute', right: 0, paddingRight: 15 }}
-                />
-              )}></ModalDropdown>
+                paddingHorizontal: 20
+              }}>
+              Select category
+            </Text>
+            <View>
+              <Icon
+                name="chevron-right"
+                color="#33333330"
+                size={22}
+                style={{ paddingRight: 15 }}
+              />
+            </View>
           </View>
         </View>
 
@@ -115,54 +87,25 @@ export const ReportIncident = ({ navigation }) => {
           <Text style={{ fontSize: 11, fontWeight: '500' }}>
             Choose Sub Category
           </Text>
-          <View style={styles.modalView}>
-            <ModalDropdown
-              showsVerticalScrollIndicator={false}
-              defaultValue="Select category"
-              textStyle={{
+          <View style={styles.fieldView}>
+            <Text
+              style={{
+                width: '90%',
                 fontSize: 14,
                 fontWeight: '400',
                 color: '#33333370',
-                margin: 10,
-                paddingLeft: 10
-              }}
-              dropdownStyle={{
-                width: '89%',
-                borderWidth: 1,
-                borderRadius: 5,
-                borderColor: '#33333370',
-                marginTop: 10,
-                height: 145
-              }}
-              dropdownTextStyle={{
-                fontSize: 12,
-                fontWeight: '400',
-                paddingLeft: 20
-              }}
-              options={[
-                'Killing',
-                'Harrasment',
-                'Kidnapping',
-                'Robery',
-                'Snatching',
-                'Assault'
-              ]}
-              // renderRightComponent={() => (
-              //   <Icon
-              //     // name={ismyState.picker2 ? 'up' : 'down'}
-              //     name={'up'}
-              //     type={'AntDesign'}
-              //     style={{fontSize: 13}}
-              //   />
-              // )}
-              renderRightComponent={() => (
-                <Icon
-                  name="md-chevron-down"
-                  color="#33333330"
-                  size={20}
-                  style={{ position: 'absolute', right: 0, paddingRight: 15 }}
-                />
-              )}></ModalDropdown>
+                paddingHorizontal: 20
+              }}>
+              Select category
+            </Text>
+            <View>
+              <Icon
+                name="chevron-right"
+                color="#33333330"
+                size={22}
+                style={{ paddingRight: 15 }}
+              />
+            </View>
           </View>
         </View>
 
@@ -178,7 +121,7 @@ export const ReportIncident = ({ navigation }) => {
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <View style={styles.fieldView}>
+          <View style={styles.fieldView2}>
             <Text
               style={{
                 fontSize: 14,
@@ -254,13 +197,13 @@ export const ReportIncident = ({ navigation }) => {
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <View style={styles.fieldView}>
+          <View style={styles.fieldView2}>
             <TextInput
               style={{
                 fontSize: 14,
                 fontWeight: '400',
                 color: '#000',
-                paddingLeft: 20
+                paddingHorizontal: 20
               }}
               // onChangeText={onChangeNumber}
               // value={'123456789012'}
@@ -288,10 +231,11 @@ export const ReportIncident = ({ navigation }) => {
           <View style={styles.fieldView}>
             <TextInput
               style={{
+                width: '85%',
                 fontSize: 14,
                 fontWeight: '400',
                 color: '#000',
-                paddingLeft: 20
+                paddingHorizontal: 20
               }}
               // onChangeText={onChangeNumber}
               // value={'123456789012'}
@@ -340,7 +284,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     marginLeft: 20
   },
-  modalView: {
+  fieldView2: {
+    flexDirection: 'row',
     width: '100%',
     height: 50,
     alignSelf: 'center',
@@ -348,14 +293,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 7,
     borderColor: '#33333330',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#fff'
-    // zIndex: 1,
-    // shadowColor: '#606470',
-    // shadowOffset: { width: 3, height: 0 },
-    // shadowOpacity: 0.27,
-    // shadowRadius: 4.65,
-    // elevation: 50
   },
   fieldView: {
     flexDirection: 'row',
@@ -368,12 +308,14 @@ const styles = StyleSheet.create({
     borderColor: '#33333330',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff'
-    // zIndex: 1,
-    // shadowColor: '#606470',
-    // shadowOffset: { width: 3, height: 0 },
-    // shadowOpacity: 0.27,
-    // shadowRadius: 4.65,
-    // elevation: 50
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3
   }
 })
