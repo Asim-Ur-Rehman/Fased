@@ -72,7 +72,7 @@ export const FlagReport = ({ navigation }) => {
         </Text>
           </View>
       </View>
-{/* <ScrollView contentContainerStyle={{flexGrow:1, height:550}} bounces={false} showsVerticalScrollIndicator={false} > */}
+<ScrollView contentContainerStyle={{flexGrow:1, height:550}} bounces={false} showsVerticalScrollIndicator={false} >
 
 <View style={{marginTop:20,width:"90%", alignSelf:"center", backgroundColor:"#FDEBEB", borderWidth:.8, borderColor:"#DF0707", borderRadius:10,}}>
 
@@ -88,7 +88,7 @@ export const FlagReport = ({ navigation }) => {
 
 
 
-<ScrollView  contentContainerStyle={{flexGrow:1, }} bounces={false} showsVerticalScrollIndicator={true} 
+<ScrollView  nestedScrollEnabled={true} contentContainerStyle={{flexGrow:1, }} bounces={false} showsVerticalScrollIndicator={true} 
 indicatorStyle={{color:"red" }}
 bounces={false} showsVerticalScrollIndicator={true}
 style={{width:"100%", alignSelf:"center", height:380, backgroundColor:"#FDEBEB", borderRadius:9,}}>
@@ -145,7 +145,7 @@ Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
       </View>
 
 
-    {/* </ScrollView> */}
+    </ScrollView>
 </SafeAreaView>
   )
 }
