@@ -6,6 +6,7 @@ import { store } from './stores'
 import SplashScreen from 'react-native-splash-screen'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
+import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
 import { ReportIncidents } from './screens/ReportIncident/ReportIncidents'
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <>
+    {/* <CustomScrollBarComponent/> */}
       {/* <Provider store={store}>
         <MainNavigation />
       </Provider> */}
