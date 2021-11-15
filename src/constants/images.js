@@ -14,7 +14,11 @@ const Images = {
                 calendar: require('../assets/images/calendar.png'),
                 timeCircle: require('../assets/images/timeCircle.png'),
                 dateLogo: require('../assets/images/dateLogo.png'),
-                demo: require('../assets/images/demo.png')
+                demo: require('../assets/images/demo.png'),
+
+                compass: require('../assets/images/compass.png'),
+                currentLocIcon: require('../assets/images/currentLocIcon.png')
+
         },
 
 };

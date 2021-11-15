@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import { Icon } from 'react-native-vector-icons/Ionicons'
 export default function Button({
   title = 'Title',
   onPress = () => { },
@@ -9,7 +10,12 @@ export default function Button({
   linearColor1 = '#9CA3AF',
   linearColor2 = '#4A4C50',
   startColor = { x: 1, y: 0 },
-  endColor = { x: 0, y: 1 }
+  endColor = { x: 0, y: 1 },
+  isIcon = false,
+  image = false,
+  iconName = "menu",
+  imageStyle= {},
+  iconStyle = {}
 }) {
   return (
     <>
@@ -21,7 +27,13 @@ export default function Button({
 
           start={startColor}
           end={endColor}>
-          <Text style={[styles.text, textStyle]}>{title}</Text>
+          {!isIcon && !image ? 
+            <Text style={[styles.text, textStyle]}>{title}</Text> 
+            :
+            <>
+              {isIcon ? <Icon name={iconName} style={[iconStyle]} /> : <Image source={image} style={[imageStyle]} />}
+            </>
+            }
         </LinearGradient>
       </TouchableOpacity>
     </>
