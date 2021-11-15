@@ -9,8 +9,6 @@ import { Calendar } from 'react-native-calendars';
 import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
 import { ReportIncidents } from './screens/ReportIncident/ReportIncidents'
 
-import { Categories } from './screens/Categories/Categories'
-import { FlagReport } from './screens/flagReport/flagReport'
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -28,7 +26,7 @@ const App = () => {
       {/* <Provider store={store}>
         <MainNavigation />
       </Provider> */}
-      <FlagReport />
+      <ReportIncidents />
     </>
   )
 }
