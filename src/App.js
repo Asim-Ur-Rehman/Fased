@@ -5,11 +5,12 @@ import { Provider } from 'react-redux'
 import { store } from './stores'
 import SplashScreen from 'react-native-splash-screen'
 import { AuthHeader } from './components/AuthHeader/AuthHeader'
-import { ReportIncident } from './screens/ReportIncident/ReportIncident'
+import { ReportIncidentC } from './screens/ReportIncident/ReportIncidentC'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
 
-import { ReportIncidentB } from './screens/ReportIncident/ReportIncidentB'
+import { Categories } from './screens/Categories/Categories'
+import { FlagReport } from './screens/flagReport/flagReport'
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -23,10 +24,11 @@ const App = () => {
 
   return (
     <>
-      <Provider store={store}>
+            <FlagReport />
+      {/* <Provider store={store}>
         <MainNavigation />
-      </Provider>
-      {/* <ReportIncidentB /> */}
+      </Provider> */}
+      {/* <Categories /> */}
     </>
   )
 }
