@@ -110,7 +110,7 @@ export const Home = ({ navigation, route }) => {
         { text: "Assault", color: '#0CB9A2' },
     ])
     const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : [])
-
+    
     useEffect(() => {
         setSelected(route.params?.selected ? route.params?.selected : [])
     }, [route.params])
@@ -118,10 +118,11 @@ export const Home = ({ navigation, route }) => {
     const animateToCurrentLocation = () => {
         mapRef.current.animateToRegion(INITIAL_REGION, 2000)
     }
+
     return (
         <View style={styles.container}>
             {/* <StatusBar /> */}
-            <ScrollView contentContainerStyle={StyleSheet.absoluteFillObject}>
+            <SafeAreaView style={{flex: 1}}>
                 <View style={styles.header}>
                     <TouchableOpacity activeOpacity={.8} onPress={() => navigation.toggleDrawer()}>
                         <Image style={styles.img} source={Images.Pictures.logo} />
@@ -221,7 +222,7 @@ export const Home = ({ navigation, route }) => {
                                     />
                                     <TouchableOpacity
                                         onPress={onPress}
-                                        style={{ position: "absolute", top: 170, bottom: 100, left: 175, }}>
+                                        style={{ position: "absolute",justifyContent: 'center', alignItems: 'center', top: 105, bottom: 100, left: 188, }}>
                                         <Text style={{ color: "blue" }}>{points}</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -240,7 +241,7 @@ export const Home = ({ navigation, route }) => {
                     }
 
                 </MapView>
-            </ScrollView>
+            </SafeAreaView>
             <View style={styles.mapActionsContainer}>
                 <View style={styles.verticalBtnContainer}>
                     <View>

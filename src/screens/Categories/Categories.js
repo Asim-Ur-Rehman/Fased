@@ -116,6 +116,7 @@ export const Categories = ({ navigation }) => {
                         select.length > 0 &&
                         <TouchableOpacity
                             onPress={()=>{
+                                console.log("select", select)
                                 navigation.navigate('Home', {selected: select})
                             }}
                             activeOpacity={0.7}>

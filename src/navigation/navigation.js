@@ -47,6 +47,8 @@ function MyDrawer() {
       overlayColor="transparent"
       drawerType="front">
       <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Categories" component={Categories} />
+
     </Drawer.Navigator>
   );
 }
@@ -75,7 +77,6 @@ function AppStackNavigator() {
       }}
       initialRouteName="Home">
       <AppStack.Screen name="Home" component={MyDrawer} />
-      <AppStack.Screen name="Categories" component={Categories} />
       <AppStack.Screen name="Reports" component={Reports} />
       <AppStack.Screen name="ReportingDone" component={ReportingDone} />
       <AppStack.Screen name="ReportIncident" component={ReportIncident} />
