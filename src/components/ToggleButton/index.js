@@ -34,7 +34,7 @@ const ToggleButton = ({
             ? ['#E0E5F2', '#E0E5F2']
             : ['#FE0000', '#680000']
         }
-        start={{ x: 1, y: 0 }}
+        start={{ x: .55, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={{
           width: 36,
