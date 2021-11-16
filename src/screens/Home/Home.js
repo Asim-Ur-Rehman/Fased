@@ -138,8 +138,15 @@ export const Home = ({ navigation }) => {
                 </FlatList>
                <View style={styles.date}>
                  {/* <Image style={styles.Logo1} source={Images.Pictures.dateLogo}/> */}
+                 <TouchableOpacity 
+                 activeOpacity={0.8}
+                 onPress={()=> navigation.navigate('AppStackNavigator', {
+                     screen: 'Calender'
+                 })}
+                 >
                    <Text>From : Sep 23, 2021</Text>
                    <Text>To : Sep 23, 2021</Text>
+                   </TouchableOpacity>
                </View>
       
                <MapView
