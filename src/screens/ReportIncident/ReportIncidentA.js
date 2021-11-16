@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
+  Platform
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -18,11 +19,32 @@ import Icon from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
-
+import DateTimePicker from '@react-native-community/datetimepicker';
 export const ReportIncidentA = ({ navigation }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
   }
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+  const [mode, setMode] = useState('time');
+  const [currentTime, setCurrentTime]=useState('')
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    let time = currentDate.toString().substring(16, 21)
+    setDate(time);
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const showTimepicker = () => {
+    showMode('time');
+  };
+  const showDatepicker = () => {
+    showMode('date');
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -149,7 +171,11 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontWeight: '500' }}>Time</Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+            >
+              <Text style={{ fontSize: 11, fontWeight: '500' }}>Time</Text>
+            </TouchableOpacity>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
                 style={{ fontSize: 11, fontWeight: '500', marginRight: 12 }}>
@@ -158,7 +184,10 @@ export const ReportIncidentA = ({ navigation }) => {
               <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <View style={styles.fieldView}>
+          <TouchableOpacity 
+          activeOpacity={0.8}
+          onPress={showTimepicker}
+          style={styles.fieldView}>
             <Text
               style={{
                 fontSize: 14,
@@ -167,7 +196,7 @@ export const ReportIncidentA = ({ navigation }) => {
                 margin: 10,
                 paddingLeft: 10
               }}>
-              Choose time
+                {    currentTime ? currentTime :'Choose time'}
             </Text>
             <View>
               <Image
@@ -180,7 +209,18 @@ export const ReportIncidentA = ({ navigation }) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
+          {show && (
+              <DateTimePicker
+                timeZoneOffsetInMinutes={0}
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={true}
+                display="default"
+                onChange={onChange}
+              />
+            )}
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
