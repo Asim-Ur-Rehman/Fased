@@ -24,7 +24,10 @@ const ToggleButton = ({
   }
 
   return (
-    <View>
+    <TouchableOpacity
+      onPress={() => updatedSwitchData(getSelectionMode == 1 ? 2 : 1)}
+      activeOpacity={.9}
+    >
       <LinearGradient
         colors={
           getSelectionMode == 1
@@ -42,27 +45,27 @@ const ToggleButton = ({
           justifyContent: 'space-between',
           padding: 2
         }}>
-        <TouchableOpacity
+        <View
           style={{
             height: 14,
             width: 14,
             borderRadius: 7,
             backgroundColor: getSelectionMode == 1 ? '#fff' : 'transparent'
           }}
-          onPress={() => updatedSwitchData(1)}
-          activeOpacity={0.9}></TouchableOpacity>
+          // onPress={() => updatedSwitchData(1)}
+          ></View>
 
-        <TouchableOpacity
+        <View
           style={{
             height: 14,
             width: 14,
             borderRadius: 7,
             backgroundColor: getSelectionMode == 2 ? '#fff' : 'transparent'
           }}
-          onPress={() => updatedSwitchData(2)}
-          activeOpacity={0.9}></TouchableOpacity>
+          // onPress={() => updatedSwitchData(2)}
+        ></View>
       </LinearGradient>
-    </View>
+    </TouchableOpacity>
   )
 }
 export default ToggleButton

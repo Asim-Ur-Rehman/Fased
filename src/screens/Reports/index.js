@@ -42,7 +42,7 @@ export const Reports = ({ navigation }) => {
 
                 {data.map((value, index) => {
                     return (
-                        <View style={[styles.tableHeader, [{ borderBottomWidth: 1, borderColor: borderColor, padding: 10 }]]}>
+                        <View key={index} style={[styles.tableHeader, [{ borderBottomWidth: 1, borderColor: borderColor, padding: 10 }]]}>
                             <View>
                                 <Text>
                                     {value.initials}
@@ -106,7 +106,7 @@ export const Reports = ({ navigation }) => {
                         {['Initials', "Floor", "Category", "Value"].map((value, index) => {
                             return (
                                 <>
-                                    <View style={{ width: '27%' }}>
+                                    <View key={index} style={{ width: '27%' }}>
                                         <Text style={styles.th}>{value}</Text>
                                     </View>
                                     <View style={{ height: 20, width: 1, backgroundColor: '#CFD4DB', alignSelf: 'center' }} />
