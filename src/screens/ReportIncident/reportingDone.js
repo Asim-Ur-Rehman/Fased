@@ -34,6 +34,6 @@ export const ReportingDone = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     imageStyle: { height: 100, width: 100 },
-    textStyle: { fontSize: 25, fontWeight: '500', color: '#181725', textAlign: 'center', paddingVertical: 20 },
+    textStyle: { fontSize: 25,fontFamily:"Rubik-Medium", color: '#181725', textAlign: 'center', paddingVertical: 20 },
     btnStyle: { position: 'absolute', bottom: 50 }
 })

@@ -77,7 +77,7 @@ export const FlagReport = ({ navigation }) => {
 
           <View>
             <Text style={styles.headerLabel}>Pedro Pascal</Text>
-            <Text style={{ fontSize: 13, fontWeight: '400', color: '#fff' }}>
+            <Text style={{ fontSize: 13,  fontFamily:"Rubik-Regular", color: '#fff' }}>
               15,aug,2021
             </Text>
           </View>
@@ -89,7 +89,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontWeight: '500',
+              fontFamily:"Rubik-Medium",
               color: '#fff',
               marginTop: 6
             }}>
@@ -101,7 +101,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontWeight: '500',
+              fontFamily:"Rubik-Medium",
               color: '#fff',
               marginTop: 6
             }}>
@@ -113,7 +113,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontWeight: '500',
+              fontFamily:"Rubik-Medium",
               color: '#fff',
               marginTop: 6
             }}>
@@ -146,13 +146,13 @@ export const FlagReport = ({ navigation }) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Text style={{ fontSize: 17, fontWeight: '500', color: '#fff' }}>
+            <Text style={{ fontSize: 17, fontFamily:"Rubik-Medium", color: '#fff' }}>
               Killing
             </Text>
             <Text
               style={{
                 fontSize: 12,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#fff',
                 marginTop: 6,
                 textAlign: 'center',
@@ -211,7 +211,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 17,
-                      fontWeight: '500',
+                      fontFamily:"Rubik-Medium",
                       color: '#DF0707',
                       marginTop: 10
                     }}>
@@ -220,7 +220,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 12,
-                      fontWeight: '400',
+                      fontFamily:"Rubik-Regular",
                       marginTop: 6,
                       textAlign: 'center',
                       paddingHorizontal: 30
@@ -247,9 +247,9 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       marginLeft: 20,
-                      fontSize: 12,
+                      fontSize: 11,
                       color: '#8e8e93',
-                      fontWeight: '700'
+                      fontFamily:"Rubik-Medium",
                     }}>
                     Others
                   </Text>
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
   headerLabel: {
     color: '#fff',
     fontSize: 17,
-    fontWeight: '700'
+    fontFamily:"Rubik-Bold"
   },
   headerDownView: {
     flexDirection: 'row',

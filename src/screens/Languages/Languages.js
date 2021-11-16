@@ -76,7 +76,8 @@ export const Languages = ({ navigation }) => {
                                 buttonStyle={{
                                     width: '90%',
                                     alignSelf: 'center'
-                                }} />
+                                }}
+                                />
                         </View>
                     )
                 })
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         textAlign: 'center',
+        fontFamily:"Rubik-Regular",
         color: theme.textColor.grayText
     }
 

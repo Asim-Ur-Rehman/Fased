@@ -19,7 +19,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
-import LinearGradient from 'react-native-linear-gradient'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
@@ -89,9 +88,9 @@ export const SignIn = ({ navigation }) => {
         <View style={styles.checkboxContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CheckBox
+              checkBoxColor="#9CA3AF"              
               checkedCheckBoxColor="#BE0000"
-              uncheckedCheckBoxColor="#9CA3AF"
-              style={{ alignSelf: 'center' }}
+              style={{ alignSelf: 'center', }}
               onClick={() => setChecked(!checked)}
               isChecked={checked}
             />
@@ -120,7 +119,7 @@ export const SignIn = ({ navigation }) => {
           />
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontWeight: '400' }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontFamily:"Inter-Regular", }}>
             Or sign in with social account
           </Text>
         </View>
@@ -144,7 +143,7 @@ export const SignIn = ({ navigation }) => {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontWeight: '400' }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontFamily:"Inter-Regular" }}>
             Don’t have an account?
           </Text>
           <TouchableOpacity
@@ -156,7 +155,7 @@ export const SignIn = ({ navigation }) => {
               style={{
                 color: '#BE0000',
                 fontSize: 13,
-                fontWeight: '500',
+                fontFamily:"Inter-Medium",
                 marginLeft: 3
               }}>
               Sign Up Here
@@ -188,8 +187,8 @@ const styles = StyleSheet.create({
   },
   signInText: {
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center'
+    fontFamily:"Inter-Medium",
+    textAlign: 'center',
   },
   InputContainer: {
     alignItems: 'center'
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontWeight: '600'
+    fontFamily:"Inter-Medium",
   },
   input: {
     width: '88%',
@@ -210,7 +209,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily:"Inter-Regular",
     backgroundColor: '#fff'
   },
   checkboxContainer: {
@@ -221,7 +220,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 11.7,
-    fontWeight: '600',
+    fontFamily:"Inter-SemiBold",
     color: '#9CA3AF',
     marginLeft: 5
   },

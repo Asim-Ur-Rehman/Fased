@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   ContentTextStyle: {
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily:"Rubik-Regular",
     color: '#383838',
     textAlign: 'left',
     paddingHorizontal: 12,

@@ -82,7 +82,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <Text
                   style={{
                     fontSize: 18,
-                    fontWeight: '700',
+                    fontFamily:"OpenSans-Bold",
                     color: i == active ? '#000' : '#ACB8BE'
                   }}>
                   {item.title}
@@ -109,17 +109,4 @@ const styles = StyleSheet.create({
   mainView: {
     width: '100%'
   },
-  dataMapView: {
-    height: 65,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginVertical: 8
-  },
-
-  textTitleStyle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: 'gray'
-  }
 })
