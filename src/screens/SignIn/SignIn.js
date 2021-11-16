@@ -106,19 +106,8 @@ export const SignIn = ({ navigation }) => {
             <Text style={styles.label}>Forget Password?</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingVertical: 20
-          }}></View>
-        <View
-          style={{
-            // alignItems: 'center',
-            // justifyContent: 'center',
-            paddingVertical: 20
-            // width: '80%',
-            // alignSelf: 'center'
+          <View
+          style={{ paddingVertical: 20
           }}>
           <Button
             onPress={() => {
@@ -151,7 +140,7 @@ export const SignIn = ({ navigation }) => {
         <View
           style={{
             flexDirection: 'row',
-            padding: 30,
+            padding: 20,
             alignItems: 'center',
             justifyContent: 'center'
           }}>
