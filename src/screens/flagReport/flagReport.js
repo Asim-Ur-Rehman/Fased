@@ -123,7 +123,7 @@ export const FlagReport = ({ navigation }) => {
       </View>
 
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, height: height / 1.5 }}
+        contentContainerStyle={{ flexGrow: 1, height: height /1.3 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
         <View

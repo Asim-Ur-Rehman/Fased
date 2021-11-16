@@ -193,15 +193,21 @@ export const Home = ({ navigation, route }) => {
                 </View>
 
                 <View style={styles.date}>
-                    <View style={styles.dateContainer}>
+                    <TouchableOpacity 
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('Calender')}
+                    style={styles.dateContainer}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
                         <Text style={{ color: "#8E97A6" }}>From : Sep 23, 2021</Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
+                    <TouchableOpacity 
+                            activeOpacity={0.8}
+                            onPress={() => navigation.navigate('Calender')}
+                    style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
                         <Text style={{ color: "#8E97A6" }}>To : Sep 23, 2021</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
 
                 <MapView
