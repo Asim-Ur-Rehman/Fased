@@ -54,7 +54,7 @@ export const ChangePassword = ({ navigation }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-          <View style={{ width: '76%', alignSelf: 'center',  }}>
+          <View style={{ width: '83%', alignSelf: 'center', }}>
             <Text style={styles.inputLabel}>New Password</Text>
           </View>
 
@@ -68,7 +68,7 @@ export const ChangePassword = ({ navigation }) => {
             secureTextEntry={true}
           />
 
-        <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Confirm Password</Text>
           </View>
 
@@ -85,13 +85,13 @@ export const ChangePassword = ({ navigation }) => {
 
         <View
           style={{
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             paddingVertical: 20
           }}>
           <Button
-          onPress={() => {navigation.navigate('SignIn')}}
-            buttonStyle={{ width: 320, height: 48, marginTop: 10 }}
+            onPress={() => { navigation.navigate('SignIn') }}
+            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
             title="Submit"
           />
         </View>

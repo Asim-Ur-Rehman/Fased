@@ -21,20 +21,26 @@ import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 
-
-
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
 
   return (
-
     <SafeAreaView style={styles.mainContainer}>
-      <AuthHeader guestUser={true}
+      <AuthHeader
+        guestUser={true}
         onPress={() => {
           navigation.navigate('Languages')
-        }} />
-      <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false} showsVerticalScrollIndicator={false} >
+        }}
+      />
+      <StatusBar
+        backgroundColor={'transparent'}
+        translucent={true}
+        barStyle={'dark-content'}
+      />
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        bounces={false}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.logoContainer}>
           <Image
             source={Images.Pictures.logo}
@@ -53,10 +59,9 @@ export const SignIn = ({ navigation }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-          <View style={{ width: '76%', alignSelf: 'center' }}>
+          <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>Email address</Text>
           </View>
-
           <TextInput
             style={styles.input}
             // onChangeText={onChangeNumber}
@@ -66,7 +71,7 @@ export const SignIn = ({ navigation }) => {
             keyboardType="email-address"
           />
 
-          <View style={{ width: '76%', alignSelf: 'center', marginTop: 8 }}>
+          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Password</Text>
           </View>
 
@@ -82,66 +87,92 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles.checkboxContainer}>
-          <View style={{ flexDirection: 'row', alignItems: "center", }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CheckBox
               checkedCheckBoxColor="#BE0000"
               uncheckedCheckBoxColor="#9CA3AF"
-              style={{ alignSelf: 'center', }}
+              style={{ alignSelf: 'center' }}
               onClick={() => setChecked(!checked)}
               isChecked={checked}
             />
             <Text style={styles.label}>Remember me</Text>
           </View>
           <TouchableOpacity
-            onPress={() => { navigation.navigate('ForgetPassword') }}
-            activeOpacity={0.7} style={{}}>
+            onPress={() => {
+              navigation.navigate('ForgetPassword')
+            }}
+            activeOpacity={0.7}
+            style={{}}>
             <Text style={styles.label}>Forget Password?</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ alignItems: "center", justifyContent: "center", paddingVertical: 20 }}>
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingVertical: 20
+          }}></View>
+        <View
+          style={{
+            // alignItems: 'center',
+            // justifyContent: 'center',
+            paddingVertical: 20
+            // width: '80%',
+            // alignSelf: 'center'
+          }}>
           <Button
             onPress={() => {
               navigation.navigate('AppStackNavigator', {
                 screen: 'Home'
               })
             }}
-            buttonStyle={{ width: 320, height: 48 }}
-            title='Sign In'
+            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+            title="Sign In"
           />
         </View>
-        <View style={{ alignItems: "center", justifyContent: "center", }}>
-          <Text style={{ color: "#252529", fontSize: 13, fontWeight: "400", }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontWeight: '400' }}>
             Or sign in with social account
           </Text>
         </View>
 
         <View style={styles.socialIconContainer}>
-          <TouchableOpacity activeOpacity={0.7}
-            style={styles.fbImg}>
+          <TouchableOpacity activeOpacity={0.7} style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7}
-            style={styles.TwitterImg}>
+          <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
             <MaterialIcon name="twitter" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7}
-            style={styles.InImg}>
+          <TouchableOpacity activeOpacity={0.7} style={styles.InImg}>
             <Icon name="linkedin" size={25} color="#fff" />
           </TouchableOpacity>
         </View>
 
-        <View style={{ flexDirection: "row", padding: 30, alignItems: "center", justifyContent: "center" }}>
-          <Text style={{ color: "#252529", fontSize: 13, fontWeight: "400", }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 30,
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontWeight: '400' }}>
             Don’t have an account?
           </Text>
           <TouchableOpacity
-            onPress={() => { navigation.navigate('SignUp') }}
+            onPress={() => {
+              navigation.navigate('SignUp')
+            }}
             activeOpacity={0.7}>
-            <Text style={{ color: "#BE0000", fontSize: 13, fontWeight: "500", marginLeft: 3 }}>
+            <Text
+              style={{
+                color: '#BE0000',
+                fontSize: 13,
+                fontWeight: '500',
+                marginLeft: 3
+              }}>
               Sign Up Here
             </Text>
           </TouchableOpacity>
-
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -150,7 +181,7 @@ export const SignIn = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 1
     // backgroundColor:"#fff"
   },
   logoContainer: {
@@ -191,65 +222,64 @@ const styles = StyleSheet.create({
     color: '#374151',
     fontSize: 12,
     fontWeight: '400',
-    backgroundColor: '#fff',
-
+    backgroundColor: '#fff'
   },
   checkboxContainer: {
     flexDirection: 'row',
-    marginHorizontal: 32,
+    marginHorizontal: 22,
     justifyContent: 'space-between',
-    alignItems: "center"
+    alignItems: 'center'
   },
   label: {
     fontSize: 11.7,
     fontWeight: '600',
     color: '#9CA3AF',
-    marginLeft: 5,
+    marginLeft: 5
   },
   socialIconContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     paddingTop: 20,
-    marginHorizontal: 90,
+    marginHorizontal: 90
   },
   fbImg: {
     width: 50,
     height: 50,
-    backgroundColor: "#1877F2",
+    backgroundColor: '#1877F2',
     borderRadius: 7.8,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.27,
     shadowRadius: 8.65,
-    elevation: 5,
+    elevation: 5
   },
   TwitterImg: {
     width: 50,
     height: 50,
-    backgroundColor: "#1DA1F2",
+    backgroundColor: '#1DA1F2',
     borderRadius: 7.8,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.27,
     shadowRadius: 8.65,
-    elevation: 5,
+    elevation: 5
   },
   InImg: {
     width: 50,
     height: 50,
-    backgroundColor: "#2867B2",
+    backgroundColor: '#2867B2',
     borderRadius: 7.8,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.27,
     shadowRadius: 8.65,
-    elevation: 5,
-  },
+    elevation: 5
+  }
 })

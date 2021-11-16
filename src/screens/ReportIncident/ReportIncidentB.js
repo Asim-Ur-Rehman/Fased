@@ -7,10 +7,11 @@ const { width, height } = Dimensions.get('screen')
 import LinearGradient from 'react-native-linear-gradient'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
 
 
-export const Categories = ({ navigation }) => {
+export const ReportIncidentB = ({ navigation }) => {
     const [select, setSelect] = useState([])
 
     const CardsData = [
@@ -53,18 +54,24 @@ export const Categories = ({ navigation }) => {
     ]
 
     // console.log('select', select)
-    const selectedCard = (i) => {
+    const selectedCard = (title) => {
 
-        var arr = [...select]
-        var isFind = arr.findIndex(e => e.i == i.i)
-        if (isFind == -1) {
-            arr.push(i)
-            setSelect(arr)
-        }
-        else {
-            arr.splice(isFind, 1)
-            setSelect(arr)
-        }
+        setSelect(title)
+
+        // var arr = [...select]
+        // var isFind = arr.findIndex(e => e == i)
+        // if (isFind == -1) {
+        //     arr.push(i)
+        //     setSelect(arr)
+        // }
+        // else {
+        //     arr.splice(isFind, 1)
+        //     setSelect(arr)
+        // }
+
+
+
+
 
     }
 
@@ -112,20 +119,8 @@ export const Categories = ({ navigation }) => {
                         }}>Categories</Text>
 
                     </View>
-                    {
-                        select.length > 0 &&
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.navigate('Home', { selected: select })
-                            }}
-                            activeOpacity={0.7}>
-                            <Text style={{
-                                fontSize: 19,
-                                fontWeight: '500',
-                                color: theme.textColor.whiteText
-                            }}>Done</Text>
-                        </TouchableOpacity>
-                    }
+                    <SimpleLineIcons name='options-vertical' color='#FFFFFF' size={18} />
+
                 </View>
 
 
@@ -161,14 +156,9 @@ export const Categories = ({ navigation }) => {
                             fontSize: 17,
                             fontWeight: 'bold',
                             color: theme.textColor.blackText
-                        }}>Selected Categories</Text>
+                        }}>Select Categories</Text>
 
-                        <Text style={{
-                            fontSize: 17,
-                            fontWeight: '500',
-                            color: theme.textColor.blackText,
-                            paddingLeft: 10
-                        }}>{select.length ? select.length : ''}</Text>
+
 
 
 
@@ -183,7 +173,7 @@ export const Categories = ({ navigation }) => {
                                 <TouchableOpacity
 
                                     onPress={() => {
-                                        selectedCard({ i: i, title: item.title })
+                                        selectedCard(item.title)
                                     }}
                                     activeOpacity={0.7}
                                     key={i}
@@ -192,26 +182,10 @@ export const Categories = ({ navigation }) => {
                                         alignSelf: 'center',
                                         height: 96.26,
                                         borderRadius: 10,
-                                        backgroundColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFA724')
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#fae5f8' : '#CF00BA') :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#5819C1') :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9e8fd' : '#211DE8') :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#0CB9A2') :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#DF0707'),
+                                        backgroundColor: i == 1 ? '#FFA724' : i == 2 ? '#CF00BA' : i == 3 ? '#5819C1' : i == 4 ? '#211DE8' : i == 5 ? '#0CB9A2' : '#DF0707',
                                         flexDirection: 'row',
                                         marginBottom: 12,
-                                        borderWidth: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0)
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? 1 : 0),
-                                        borderColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : 'transparent')
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : 'transparent') :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : 'transparent') :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : 'transparent') :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : 'transparent') :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : 'transparent'),
+
                                         // alignItems: 'center',
                                     }}>
 
@@ -255,12 +229,7 @@ export const Categories = ({ navigation }) => {
                                             // marginTop: 4
                                         }}>
 
-                                            <MaterialCommunityIcons name='circle-slice-8' color={i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                    i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                        i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                            i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')} size={12} />
+                                            <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
 
                                         </View>
 
@@ -275,12 +244,7 @@ export const Categories = ({ navigation }) => {
                                             <Text style={{
                                                 fontSize: 14,
                                                 fontWeight: '500',
-                                                color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                    ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF'),
+                                                color: '#ffff',
                                                 paddingBottom: 5
                                             }}>
                                                 {item.title}
@@ -288,12 +252,7 @@ export const Categories = ({ navigation }) => {
                                             <Text style={{
                                                 fontSize: 11,
                                                 fontWeight: '500',
-                                                color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                    ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF'),
+                                                color: '#fff',
                                                 lineHeight: 12
                                                 // marginBottom: 10
                                             }}>
@@ -312,6 +271,25 @@ export const Categories = ({ navigation }) => {
                         })
                     }
 
+
+                    <View
+
+                        style={{
+                            marginTop: 10
+                        }}>
+                        <Button
+                            onPress={() => {
+                                navigation.navigate('ReportIncidentC')
+                            }}
+                            linearColor1={'#9CA3AF'}
+                            linearColor2={'#4A4C50'}
+
+                            title={'Done'}
+                            buttonStyle={{
+                                width: '90%',
+                                alignSelf: 'center'
+                            }} />
+                    </View>
 
 
                 </View>

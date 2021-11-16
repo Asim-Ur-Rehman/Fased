@@ -4,12 +4,10 @@ import MainNavigation from './navigation/navigation'
 import { Provider } from 'react-redux'
 import { store } from './stores'
 import SplashScreen from 'react-native-splash-screen'
-import { AuthHeader } from './components/AuthHeader/AuthHeader'
-import { ReportIncident } from './screens/ReportIncident/ReportIncident'
 import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
-
-import { Categories } from './screens/Categories/Categories'
+import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
+import 'react-native-gesture-handler';
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -26,7 +24,6 @@ const App = () => {
       <Provider store={store}>
         <MainNavigation />
       </Provider>
-      {/* <Categories /> */}
     </>
   )
 }

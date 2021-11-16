@@ -12,16 +12,48 @@ import { Calender } from '../screens/Calender/Calender'
 import { ForgetPassword } from '../screens/ForgetPassword/ForgetPassword'
 import { ChangePassword } from '../screens/ChangePassword/ChangePassword'
 import { Calendar } from 'react-native-calendars'
+import { Categories } from '../screens/Categories/Categories'
+import { Reports } from '../screens/Reports'
+
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { ReportingDone } from '../screens/ReportIncident/reportingDone'
+import { ReportIncident } from '../screens/ReportIncident/ReportIncident'
+import { ReportIncidentA } from '../screens/ReportIncident/ReportIncidentA'
+import { ReportIncidentB } from '../screens/ReportIncident/ReportIncidentB'
+import { ReportIncidentC } from '../screens/ReportIncident/ReportIncidentC'
+
+
+
+
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const AppStack = createStackNavigator()
+const Drawer = createDrawerNavigator();
 
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      // drawerContent={props => <CustomDrawer {...props} />}
+      drawerContentOptions={{
+        itemStyle: { marginVertical: 8, marginHorizontal: 8 },
+      }}
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {
+          width: "100%",
+        },
+      }}
+      initialRouteName="Home"
+      overlayColor="transparent"
+      drawerType="front">
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Categories" component={Categories} />
 
-
-
-
-
+    </Drawer.Navigator>
+  );
+}
 
 function AuthStackNavigator() {
   return (
@@ -29,54 +61,52 @@ function AuthStackNavigator() {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="SignIn">
+      initialRouteName="Languages">
       <AuthStack.Screen name="Languages" component={Languages} />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
       <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
-
-
-
-
-
-
-
-
-
-
     </AuthStack.Navigator>
   );
 }
 
-function AppStackNavigator () {
-  return(
+function AppStackNavigator() {
+  return (
     <AppStack.Navigator
-    screenOptions={{
-      headerShown: false,
-    }}
-    initialRouteName="Home">
-    <AppStack.Screen name="Home" component={Home} />
-    <AppStack.Screen name="Calender" component={Calender} />
-  </AppStack.Navigator>
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="Home">
+      <AppStack.Screen name="Home" component={MyDrawer} />
+      <AppStack.Screen name="Reports" component={Reports} />
+      <AppStack.Screen name="Calender" component={Calender} />
+      <AppStack.Screen name="ReportingDone" component={ReportingDone} />
+      <AppStack.Screen name="ReportIncident" component={ReportIncident} />
+      <AppStack.Screen name="ReportIncidentA" component={ReportIncidentA} />
+      <AppStack.Screen name="ReportIncidentB" component={ReportIncidentB} />
+      <AppStack.Screen name="ReportIncidentC" component={ReportIncidentC} />
+
+
+    </AppStack.Navigator>
   )
 }
 
 const MainNavigation = () => {
 
   return (
-    <NavigationContainer theme={{ ...DefaultTheme, colors: {background: "#fff"} }}>
+    <NavigationContainer theme={{ ...DefaultTheme, colors: { background: "#fff" } }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="AuthStackNavigator"
           options={{ headerShown: false }}
           component={AuthStackNavigator}
         />
-            <Stack.Screen
-            name="AppStackNavigator"
-            options={{ headerShown: false }}
-            component={AppStackNavigator}
-          />
+        <Stack.Screen
+          name="AppStackNavigator"
+          options={{ headerShown: false }}
+          component={AppStackNavigator}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
