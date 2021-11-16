@@ -26,7 +26,7 @@ const ToggleButton = ({
   return (
     <TouchableOpacity
       onPress={() => updatedSwitchData(getSelectionMode == 1 ? 2 : 1)}
-      // activeOpacity={.9}
+      activeOpacity={.9}
     >
       <LinearGradient
         colors={

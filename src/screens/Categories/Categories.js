@@ -103,7 +103,7 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
 
                     }}>
-                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} />
+                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} onPress={() => { navigation.goBack() }} />
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
@@ -115,9 +115,8 @@ export const Categories = ({ navigation }) => {
                     {
                         select.length > 0 &&
                         <TouchableOpacity
-                            onPress={()=>{
-                                console.log("select", select)
-                                navigation.navigate('Home', {selected: select})
+                            onPress={() => {
+                                navigation.navigate('Home', { selected: select })
                             }}
                             activeOpacity={0.7}>
                             <Text style={{
@@ -184,7 +183,7 @@ export const Categories = ({ navigation }) => {
                                 <TouchableOpacity
 
                                     onPress={() => {
-                                        selectedCard({i: i, title: item.title})
+                                        selectedCard({ i: i, title: item.title })
                                     }}
                                     activeOpacity={0.7}
                                     key={i}

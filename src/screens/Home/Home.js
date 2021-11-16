@@ -116,8 +116,30 @@ export const Home = ({ navigation, route }) => {
     }, [route.params])
 
     const animateToCurrentLocation = () => {
-        mapRef.current.animateToRegion(INITIAL_REGION, 2000)
+        mapRef.current.animateToRegion(INITIAL_REGION, 800)
     }
+
+    // const animateAngle = async () => {
+    //     mapRef.current.animateCamera(
+    //         {
+    //           center: INITIAL_REGION,
+    //         //   zoom: 15,
+    //         },
+    //         {duration: 5000},
+    //       );
+    // }
+
+    const getRotationAngle = () => {
+        const x1 = INITIAL_REGION.latitude;
+        const y1 = INITIAL_REGION.longitude;
+        const x2 = 0;
+        const y2 = 1;
+      
+        const xDiff = x2 - x1;
+        const yDiff = y2 - y1;
+      
+        return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI;
+      };
 
     return (
         <View style={styles.container}>
@@ -185,8 +207,8 @@ export const Home = ({ navigation, route }) => {
                 <MapView
                     initialRegion={INITIAL_REGION}
                     style={{ height: '68%' }}
-                    showsCompass
-                    compassOffset={{ x: 50, y: 100 }}
+                    // showsCompass
+                    // compassOffset={{ x: 50, y: 100 }}
                     ref={mapRef}
                     renderCluster={cluster => {
                         const { id, geometry, onPress, properties, } = cluster;
@@ -245,7 +267,7 @@ export const Home = ({ navigation, route }) => {
             <View style={styles.mapActionsContainer}>
                 <View style={styles.verticalBtnContainer}>
                     <View>
-                        <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} />
+                        <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()} />
                     </View>
                     <View>
                         <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()} />

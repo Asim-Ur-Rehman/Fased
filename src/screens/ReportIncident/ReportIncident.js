@@ -89,7 +89,7 @@ export const ReportIncident = ({ navigation }) => {
                             name="arrowleft"
                             color="#000000"
                             size={22}
-                        // onPress={() => {navigation.goBack()}}
+                            onPress={() => { navigation.goBack() }}
                         />
                         <Text
                             style={styles.reportTextStyle}
@@ -115,7 +115,7 @@ export const ReportIncident = ({ navigation }) => {
                     placeholder='Where did it happen?'
 
 
-
+                    predefinedPlacesAlwaysVisible={true}
                     onPress={(data, details = null) => {
                         // 'details' is provided when fetchDetails = true
                         console.log(data, details);
@@ -124,6 +124,7 @@ export const ReportIncident = ({ navigation }) => {
                         key: 'AIzaSyBTNtoDj9Z6V8d3zDdCVFz4LvEemFwG4Zw',
                         language: 'en',
                     }}
+                    onFail={(e) => console.log("onFail", e)}
                     getAddressText={(e) => {
                         console.log('eeeeeee', e)
                     }}
