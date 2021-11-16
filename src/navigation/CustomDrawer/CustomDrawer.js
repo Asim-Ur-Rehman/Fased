@@ -10,8 +10,6 @@ import {
   StatusBar
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Entypo from 'react-native-vector-icons/Entypo'
-const { width, height } = Dimensions.get('screen')
 import { Images } from '../../constants/images'
 
 export const CustomDrawer = ({ navigation }) => {
@@ -26,7 +24,7 @@ export const CustomDrawer = ({ navigation }) => {
       //   navigateTo: 'AboutUs'
     },
     {
-      title: 'Setting'
+      title: 'Settings'
       // navigateTo: 'Setting'
     },
     {
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
   mainView: {
-    width: '90%'
+    width: '100%'
   },
   dataMapView: {
     height: 65,
