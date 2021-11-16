@@ -97,12 +97,12 @@ export const SignUp = ({ navigation }) => {
 
         <View
           style={{
-            alignItems: 'center',
-            justifyContent: 'center',
+            // alignItems: 'center',
+            // justifyContent: 'center',
             paddingVertical: 20
           }}>
           <Button
-            buttonStyle={{ width: 350, height: 48, marginTop: 10 }}
+            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
             title="Sign Up"
           />
         </View>

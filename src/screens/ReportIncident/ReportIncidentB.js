@@ -110,7 +110,7 @@ export const ReportIncidentB = ({ navigation }) => {
                         alignItems: 'center',
 
                     }}>
-                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} />
+                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} onPress={() => { navigation.goBack() }} />
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
@@ -279,7 +279,7 @@ export const ReportIncidentB = ({ navigation }) => {
                         }}>
                         <Button
                             onPress={() => {
-                                navigation.navigate('SignIn')
+                                navigation.navigate('ReportIncidentC')
                             }}
                             linearColor1={'#9CA3AF'}
                             linearColor2={'#4A4C50'}
