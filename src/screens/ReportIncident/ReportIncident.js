@@ -72,49 +72,36 @@ export const ReportIncident = ({ navigation }) => {
 
         }}>
             <StatusBar backgroundColor={'transparent'} translucent={true} barStyle='dark-content' />
+            <View
+                style={styles.headerContainer}
+            >
+                <View
+                    style={styles.rowViewStyle}
+                >
+                    <AntDesign
+                        name="arrowleft"
+                        color="#000000"
+                        size={22}
+                        onPress={() => { navigation.goBack() }}
+                    />
+                    <Text
+                        style={styles.reportTextStyle}
+                    >Report Incident</Text>
+                </View>
+                <Text
+                    style={styles.dateTextStyle}
+                >
+                    01 - 03
+                </Text>
+            </View>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}
                 showsVerticalScrollIndicator={false}
             >
-                <View
-                    style={styles.headerContainer}
-
-                >
-
-                    <View
-
-                        style={styles.rowViewStyle}
-
-                    >
-                        <AntDesign
-                            name="arrowleft"
-                            color="#000000"
-                            size={22}
-                            onPress={() => { navigation.goBack() }}
-                        />
-                        <Text
-                            style={styles.reportTextStyle}
-
-                        >Report Incident</Text>
-                    </View>
-
-                    <Text
-                        style={styles.dateTextStyle}
-
-                    >
-                        01 - 03
-                    </Text>
-
-
-
-
-                </View>
+                
 
 
                 <GooglePlacesAutocomplete
-
                     placeholder='Where did it happen?'
-
-
                     predefinedPlacesAlwaysVisible={true}
                     onPress={(data, details = null) => {
                         // 'details' is provided when fetchDetails = true
@@ -130,7 +117,6 @@ export const ReportIncident = ({ navigation }) => {
                     }}
                     fetchDetails={true}
                     textInputProps={{ placeholderTextColor: theme.textColor.placeholderColor }}
-
                     styles={{
                         textInputContainer: {
                             backgroundColor: theme.backgrounds.whiteBG,
@@ -141,13 +127,9 @@ export const ReportIncident = ({ navigation }) => {
                             borderColor: theme.bordersColor.InputBorder,
                             borderRadius: 5,
                             alignItems: 'center',
-                            justifyContent: 'center'
-
-
-                            // elevation: 5
-
-
-
+                            justifyContent: 'center',
+                            marginBottom: 20
+                            // elevation: 5,
                         },
                         textInput: {
                             height: 45,
@@ -181,7 +163,7 @@ export const ReportIncident = ({ navigation }) => {
 
                 <MapView
                     initialRegion={INITIAL_REGION}
-                    style={{ height: '77%' }}
+                    style={{ height: '95%' }}
 
                     ref={mapRef}
 
@@ -339,7 +321,7 @@ const styles = StyleSheet.create({
 
 
     mapActionsContainer: { position: 'absolute', bottom: 220, width: '100%', paddingHorizontal: 20 },
-    verticalBtnContainer: { justifyContent: 'space-between', alignSelf: 'flex-end', height: height * 0.15 },
+    verticalBtnContainer: { justifyContent: 'space-between', alignSelf: 'flex-end', height: height * 0.13 },
     squareBtn: { height: 50, width: 50, borderRadius: 10 },
     reportBtn: { alignSelf: 'center', top: 20 },
 
