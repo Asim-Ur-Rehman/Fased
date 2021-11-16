@@ -38,7 +38,7 @@ export const Reports = ({ navigation }) => {
 
     const renderData = (data = [], backgroundColor, color, borderColor, itemBorderColor) => {
         return (
-            <View style={{ backgroundColor: backgroundColor, borderTopWidth: 1, borderBottomWidth: 1, borderTopColor: color, borderBottomColor: color }}>
+            <TouchableOpacity activeOpacity={.9} onPress={() => navigation.navigate('FlagReport')} style={{ backgroundColor: backgroundColor, borderTopWidth: 1, borderBottomWidth: 1, borderTopColor: color, borderBottomColor: color }}>
 
                 {data.map((value, index) => {
                     return (
@@ -66,7 +66,7 @@ export const Reports = ({ navigation }) => {
                         </View>
                     )
                 })}
-            </View>
+            </TouchableOpacity>
         )
     }
     return (

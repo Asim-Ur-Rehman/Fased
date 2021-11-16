@@ -20,7 +20,11 @@ import { ReportIncident } from '../screens/ReportIncident/ReportIncident'
 import { ReportIncidentA } from '../screens/ReportIncident/ReportIncidentA'
 import { ReportIncidentB } from '../screens/ReportIncident/ReportIncidentB'
 import { ReportIncidentC } from '../screens/ReportIncident/ReportIncidentC'
+<<<<<<< HEAD
 import { CustomDrawer } from './CustomDrawer/CustomDrawer'
+=======
+import { FlagReport } from '../screens/flagReport/flagReport'
+>>>>>>> 6355c3af00ae0fa9b6ab01b77a3c21729da806aa
 
 
 
@@ -84,8 +88,7 @@ function AppStackNavigator() {
       <AppStack.Screen name="ReportIncidentA" component={ReportIncidentA} />
       <AppStack.Screen name="ReportIncidentB" component={ReportIncidentB} />
       <AppStack.Screen name="ReportIncidentC" component={ReportIncidentC} />
-
-
+      <AppStack.Screen name="FlagReport" component={FlagReport} />
     </AppStack.Navigator>
   )
 }

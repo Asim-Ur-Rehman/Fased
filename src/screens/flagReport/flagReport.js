@@ -23,7 +23,7 @@ import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/Sc
 import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
 
-export const FlagReport = ({ Navigation }) => {
+export const FlagReport = ({ navigation }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -265,7 +265,10 @@ export const FlagReport = ({ Navigation }) => {
 
                 <View>
                   <Button
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => {
+                      setModalVisible(!modalVisible)
+                      navigation.navigate('Home')
+                    }}
                     buttonStyle={{
                       alignSelf: 'center',
                       width: 275,
