@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   topCutButton: {
     alignItems: 'flex-end',
-    marginTop: 45,
+    marginTop: 50,
     paddingRight: 20
   },
   mainView: {
