@@ -123,7 +123,7 @@ export const SignIn = ({ navigation }) => {
           <Button
             onPress={() => {
               navigation.navigate('AppStackNavigator', {
-                screen: 'Home'
+                screen: 'Home',
               })
             }}
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}

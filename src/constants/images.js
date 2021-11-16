@@ -24,7 +24,8 @@ const Images = {
                 swapIcon: require('../assets/images/Swap.png'),
                 checkIcon: require('../assets/images/checkLogo.png'),
                 green: require('../assets/images/green.png'),
-                red: require('../assets/images/red.png')
+                red: require('../assets/images/red.png'),
+                closeIcon: require('../assets/images/closeIcon.png')
 
         },
 
