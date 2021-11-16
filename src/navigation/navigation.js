@@ -20,7 +20,11 @@ import { ReportIncident } from '../screens/ReportIncident/ReportIncident'
 import { ReportIncidentA } from '../screens/ReportIncident/ReportIncidentA'
 import { ReportIncidentB } from '../screens/ReportIncident/ReportIncidentB'
 import { ReportIncidentC } from '../screens/ReportIncident/ReportIncidentC'
+<<<<<<< HEAD
+import { CustomDrawer } from './CustomDrawer/CustomDrawer'
+=======
 import { FlagReport } from '../screens/flagReport/flagReport'
+>>>>>>> 6355c3af00ae0fa9b6ab01b77a3c21729da806aa
 
 
 
@@ -34,7 +38,7 @@ const Drawer = createDrawerNavigator();
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      // drawerContent={props => <CustomDrawer {...props} />}
+      drawerContent={props => <CustomDrawer {...props} />}
       drawerContentOptions={{
         itemStyle: { marginVertical: 8, marginHorizontal: 8 },
       }}
