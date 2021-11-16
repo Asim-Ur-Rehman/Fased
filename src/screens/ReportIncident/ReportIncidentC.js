@@ -40,7 +40,7 @@ export const ReportIncidentC = ({ navigation }) => {
             name="arrowleft"
             color="#000000"
             size={22}
-          // onPress={() => {navigation.goBack()}}
+            onPress={() => { navigation.goBack() }}
           />
           <Text style={styles.headerLabel}>Report Incident</Text>
         </View>
