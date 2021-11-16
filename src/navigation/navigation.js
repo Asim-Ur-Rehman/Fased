@@ -22,6 +22,7 @@ import { ReportIncident } from '../screens/ReportIncident/ReportIncident'
 import { ReportIncidentA } from '../screens/ReportIncident/ReportIncidentA'
 import { ReportIncidentB } from '../screens/ReportIncident/ReportIncidentB'
 import { ReportIncidentC } from '../screens/ReportIncident/ReportIncidentC'
+import { FlagReport } from '../screens/flagReport/flagReport'
 
 
 
@@ -86,8 +87,7 @@ function AppStackNavigator() {
       <AppStack.Screen name="ReportIncidentA" component={ReportIncidentA} />
       <AppStack.Screen name="ReportIncidentB" component={ReportIncidentB} />
       <AppStack.Screen name="ReportIncidentC" component={ReportIncidentC} />
-
-
+      <AppStack.Screen name="FlagReport" component={FlagReport} />
     </AppStack.Navigator>
   )
 }
