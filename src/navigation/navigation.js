@@ -8,8 +8,10 @@ import { Languages } from '../screens/Languages/Languages'
 import { SignIn } from '../screens/SignIn/SignIn'
 import { SignUp } from '../screens/SignUp/SignUp'
 import { Home } from '../screens/Home/Home'
+import { Calender } from '../screens/Calender/Calender'
 import { ForgetPassword } from '../screens/ForgetPassword/ForgetPassword'
 import { ChangePassword } from '../screens/ChangePassword/ChangePassword'
+import { Calendar } from 'react-native-calendars'
 import { Categories } from '../screens/Categories/Categories'
 import { Reports } from '../screens/Reports'
 
@@ -80,6 +82,7 @@ function AppStackNavigator() {
       initialRouteName="Home">
       <AppStack.Screen name="Home" component={MyDrawer} />
       <AppStack.Screen name="Reports" component={Reports} />
+      <AppStack.Screen name="Calender" component={Calender} />
       <AppStack.Screen name="ReportingDone" component={ReportingDone} />
       <AppStack.Screen name="ReportIncident" component={ReportIncident} />
       <AppStack.Screen name="ReportIncidentA" component={ReportIncidentA} />
