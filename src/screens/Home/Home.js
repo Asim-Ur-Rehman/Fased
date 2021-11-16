@@ -206,7 +206,7 @@ export const Home = ({ navigation, route }) => {
 
                 <MapView
                     initialRegion={INITIAL_REGION}
-                    style={{ height: '68%' }}
+                    style={{ height: '72%' }}
                     // showsCompass
                     // compassOffset={{ x: 50, y: 100 }}
                     ref={mapRef}
@@ -244,7 +244,7 @@ export const Home = ({ navigation, route }) => {
                                     />
                                     <TouchableOpacity
                                         onPress={onPress}
-                                        style={{ position: "absolute",justifyContent: 'center', alignItems: 'center', top: 105, bottom: 100, left: 188, }}>
+                                        style={{ position: 'absolute', bottom: "45%", left: "49%", top: "48%"}}>
                                         <Text style={{ color: "blue" }}>{points}</Text>
                                     </TouchableOpacity>
                                 </View>
