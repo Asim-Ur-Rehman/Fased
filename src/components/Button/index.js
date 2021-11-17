@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 15,
-    fontWeight: 'bold',
+    fontFamily:"OpenSans-Bold",
     textAlign: 'center'
   }
 })

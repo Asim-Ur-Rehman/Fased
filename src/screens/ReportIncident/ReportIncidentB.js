@@ -114,7 +114,7 @@ export const ReportIncidentB = ({ navigation }) => {
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
-                            fontWeight: '500',
+                            fontFamily:"Rubik-Medium",
                             color: theme.textColor.whiteText
                         }}>Categories</Text>
 
@@ -154,7 +154,7 @@ export const ReportIncidentB = ({ navigation }) => {
 
                         <Text style={{
                             fontSize: 17,
-                            fontWeight: 'bold',
+                            fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText
                         }}>Select Categories</Text>
 
@@ -243,7 +243,7 @@ export const ReportIncidentB = ({ navigation }) => {
                                         }}>
                                             <Text style={{
                                                 fontSize: 14,
-                                                fontWeight: '500',
+                                                fontFamily:"Rubik-Medium",
                                                 color: '#ffff',
                                                 paddingBottom: 5
                                             }}>
@@ -251,7 +251,7 @@ export const ReportIncidentB = ({ navigation }) => {
                                             </Text>
                                             <Text style={{
                                                 fontSize: 11,
-                                                fontWeight: '500',
+                                                fontFamily:"Rubik-Regular",
                                                 color: '#fff',
                                                 lineHeight: 12
                                                 // marginBottom: 10

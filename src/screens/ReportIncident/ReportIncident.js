@@ -135,7 +135,7 @@ export const ReportIncident = ({ navigation }) => {
                             height: 45,
                             color: '#5d5d5d',
                             fontSize: 14,
-                            fontWeight: '600'
+                            fontFamily:"Rubik-Medium",
                             // backgroundColor: 'red'
                         },
                         // predefinedPlacesDescription: {
@@ -246,7 +246,8 @@ export const ReportIncident = ({ navigation }) => {
                                     borderColor: theme.bordersColor.InputBorder,
                                     borderRadius: 5,
                                     paddingHorizontal: 15,
-                                    fontSize: 12
+                                    fontSize: 12,
+                                    fontFamily:"Rubik-Regular",
                                     // paddingLeft: 15
                                     // alignItems: 'center'
 
@@ -306,10 +307,10 @@ const styles = StyleSheet.create({
     reportTextStyle: {
         paddingLeft: 20,
         fontSize: 20.28,
-        fontWeight: '500'
+        fontFamily:"Rubik-Medium",
     },
     dateTextStyle: {
-        color: theme.textColor.grayText2, fontSize: 15, fontWeight: '500'
+        color: theme.textColor.grayText2, fontSize: 15, fontFamily:"Rubik-Regular",
     },
     searchIconStyle: {
         width: 30,
@@ -355,7 +356,7 @@ const styles = StyleSheet.create({
     },
     footerRowTextStyle: {
         color: theme.textColor.blackText,
-        fontWeight: '500',
+        fontFamily:"Rubik-Medium",
         fontSize: 13
     }
 })

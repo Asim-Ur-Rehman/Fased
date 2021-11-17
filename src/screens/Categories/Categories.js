@@ -107,7 +107,7 @@ export const Categories = ({ navigation }) => {
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
-                            fontWeight: '500',
+                            fontFamily:"Rubik-Medium",
                             color: theme.textColor.whiteText
                         }}>Categories</Text>
 
@@ -121,7 +121,7 @@ export const Categories = ({ navigation }) => {
                             activeOpacity={0.7}>
                             <Text style={{
                                 fontSize: 19,
-                                fontWeight: '500',
+                                fontFamily:"Rubik-Medium",
                                 color: theme.textColor.whiteText
                             }}>Done</Text>
                         </TouchableOpacity>
@@ -150,7 +150,7 @@ export const Categories = ({ navigation }) => {
                     <View style={{
                         width: '82%',
                         alignSelf: 'center',
-                        marginVertical: 15,
+                        marginVertical: 20,
                         flexDirection: 'row'
 
 
@@ -159,13 +159,13 @@ export const Categories = ({ navigation }) => {
 
                         <Text style={{
                             fontSize: 17,
-                            fontWeight: 'bold',
+                            fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText
                         }}>Selected Categories</Text>
 
                         <Text style={{
                             fontSize: 17,
-                            fontWeight: '500',
+                            fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText,
                             paddingLeft: 10
                         }}>{select.length ? select.length : ''}</Text>
@@ -274,7 +274,7 @@ export const Categories = ({ navigation }) => {
                                         }}>
                                             <Text style={{
                                                 fontSize: 14,
-                                                fontWeight: '500',
+                                                fontFamily:"Rubik-Medium",
                                                 color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
                                                     : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : '#FFFF') :
                                                         i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
@@ -287,7 +287,7 @@ export const Categories = ({ navigation }) => {
                                             </Text>
                                             <Text style={{
                                                 fontSize: 11,
-                                                fontWeight: '500',
+                                                fontFamily:"Rubik-Regular",
                                                 color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
                                                     : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
                                                         i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :

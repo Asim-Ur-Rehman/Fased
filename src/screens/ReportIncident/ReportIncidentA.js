@@ -73,14 +73,14 @@ export const ReportIncidentA = ({ navigation }) => {
             <Text style={styles.headerLabel}>Report Incident</Text>
           </View>
           <View style={{ width: '20%', alignItems: 'flex-end' }}>
-            <Text style={{ color: '#909090', fontSize: 15, fontWeight: '500' }}>
+            <Text style={{ color: '#909090', fontSize: 15, fontFamily:"Rubik-Regular", }}>
               02 - 03
             </Text>
           </View>
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
-          <Text style={{ fontSize: 11, fontWeight: '500' }}>
+          <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
             Choose Category
           </Text>
           <View style={styles.fieldView}>
@@ -88,7 +88,7 @@ export const ReportIncidentA = ({ navigation }) => {
               style={{
                 width: '90%',
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#33333370',
                 paddingHorizontal: 20
               }}>
@@ -106,7 +106,7 @@ export const ReportIncidentA = ({ navigation }) => {
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <Text style={{ fontSize: 11, fontWeight: '500' }}>
+          <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold" }}>
             Choose Sub Category
           </Text>
           <View style={styles.fieldView}>
@@ -114,7 +114,7 @@ export const ReportIncidentA = ({ navigation }) => {
               style={{
                 width: '90%',
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#33333370',
                 paddingHorizontal: 20
               }}>
@@ -134,10 +134,10 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontWeight: '500' }}>Date</Text>
+            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>Date</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontWeight: '500', marginRight: 12 }}>
+                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
                 Today
               </Text>
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
@@ -147,7 +147,7 @@ export const ReportIncidentA = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#33333370',
                 margin: 10,
                 paddingLeft: 10
@@ -171,14 +171,10 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-            >
-              <Text style={{ fontSize: 11, fontWeight: '500' }}>Time</Text>
-            </TouchableOpacity>
+            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>Time</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontWeight: '500', marginRight: 12 }}>
+                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
                 Now
               </Text>
               <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
@@ -191,7 +187,7 @@ export const ReportIncidentA = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#33333370',
                 margin: 10,
                 paddingLeft: 10
@@ -226,12 +222,12 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontWeight: '500' }}>
+            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
               Suspect Name
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontWeight: '500', marginRight: 12 }}>
+                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
                 Don’t Know
               </Text>
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
@@ -240,8 +236,9 @@ export const ReportIncidentA = ({ navigation }) => {
           <View style={styles.fieldView2}>
             <TextInput
               style={{
+                width:"90%",
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#000',
                 paddingHorizontal: 20
               }}
@@ -257,12 +254,12 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontWeight: '500' }}>
+            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
               Did This Cost You Money?
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontWeight: '500', marginRight: 12 }}>
+                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
                 No
               </Text>
               <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
@@ -271,9 +268,9 @@ export const ReportIncidentA = ({ navigation }) => {
           <View style={styles.fieldView}>
             <TextInput
               style={{
-                width: '85%',
+                width:"85%",
                 fontSize: 14,
-                fontWeight: '400',
+                fontFamily:"Rubik-Regular",
                 color: '#000',
                 paddingHorizontal: 20
               }}
@@ -286,7 +283,7 @@ export const ReportIncidentA = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                fontWeight: '500',
+                fontFamily:"Rubik-SemiBold",
                 paddingRight: 15
               }}>
               USD
@@ -325,7 +322,8 @@ const styles = StyleSheet.create({
   headerLabel: {
     fontSize: 20,
     fontWeight: '500',
-    marginLeft: 20
+    marginLeft: 20,
+    fontFamily:"Rubik-Medium",
   },
   fieldView2: {
     flexDirection: 'row',

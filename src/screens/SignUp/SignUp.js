@@ -104,6 +104,7 @@ export const SignUp = ({ navigation }) => {
           <Button
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
             title="Sign Up"
+            // textStyle={{fontFamily:"Inter-Bold",}}
           />
         </View>
       </ScrollView>
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:"Inter-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontWeight: '600'
+    fontFamily:"Inter-Medium",
   },
   input: {
     width: '88%',
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily:"Inter-Regular",
     backgroundColor: '#fff'
   }
 })

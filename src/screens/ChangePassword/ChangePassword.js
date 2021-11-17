@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   ChangePasswordText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:"Rubik-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontWeight: '600'
+    fontFamily:"Rubik-Medium",
   },
   input: {
     width: '88%',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily:"Rubik-Regular",
     backgroundColor: '#fff'
   }
 })

@@ -151,7 +151,7 @@ export const Home = ({ navigation, route }) => {
                     </TouchableOpacity>
                     <View style={styles.header2}>
                         <View style={styles.btn}>
-                            <Text style={{ fontSize: 10, fontWeight: "500", color: "#ffffff" }}>NEWS</Text>
+                            <Text style={{ fontSize: 10, fontFamily:"Rubik-Medium", color: "#ffffff" }}>NEWS</Text>
                         </View>
                         <View style={{ flexDirection: "column", }}>
                             <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
@@ -182,7 +182,7 @@ export const Home = ({ navigation, route }) => {
 
                                     }]}
                                     >
-                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6" }}>
+                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6", fontFamily:"Rubik-Regular", fontSize:11 }}>
                                             {item.text}
                                         </Text>
                                     </View>
@@ -198,7 +198,7 @@ export const Home = ({ navigation, route }) => {
                     onPress={() => navigation.navigate('Calender')}
                     style={styles.dateContainer}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
-                        <Text style={{ color: "#8E97A6" }}>From : Sep 23, 2021</Text>
+                        <Text style={{ color: "#8E97A6", fontFamily:"Lexend-Regular", fontSize:11 }}>From : Sep 23, 2021</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
@@ -206,7 +206,7 @@ export const Home = ({ navigation, route }) => {
                             onPress={() => navigation.navigate('Calender')}
                     style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
-                        <Text style={{ color: "#8E97A6" }}>To : Sep 23, 2021</Text>
+                        <Text style={{ color: "#8E97A6",fontFamily:"Lexend-Regular", fontSize:11 }}>To : Sep 23, 2021</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -334,11 +334,12 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         fontSize: 12,
         paddingLeft: 10,
+        fontFamily:"Rubik-Regular",
     },
     read: {
         color: "#b7c6d5",
         fontSize: 12,
-        fontWeight: "400",
+        fontFamily:"Rubik-Regular",
         textDecorationLine: 'underline',
     },
     img: {

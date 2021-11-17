@@ -11,7 +11,7 @@ export const AuthHeader = ({
 }) => {
     return (
         <View style={{
-            width: '85%',
+            width: '88%',
             alignSelf: 'center',
             height: 50,
             // backgroundColor: 'red',
@@ -26,16 +26,16 @@ export const AuthHeader = ({
                 guestUser && <TouchableOpacity
                     activeOpacity={0.7}
                     style={{
-                        width: 163,
+                        width: 180,
                         height: 36,
                         borderRadius: 10,
                         backgroundColor: '#f9f9fb',
                         alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
+                        justifyContent: 'center',
+                             }}>
                     <Text style={{
                         fontSize: 14,
-                        fontWeight: '600',
+                        fontFamily:"Inter-Medium",
                         color: theme.textColor.litGrayText
                     }}>Continue As Guest User</Text>
                 </TouchableOpacity>

@@ -71,7 +71,7 @@ export const ForgetPassword = ({ navigation }) => {
         </View>
 
         <View style={{ width: '76%', alignSelf: 'center', marginTop: 8, paddingVertical: 10 }}>
-          <Text style={{ color: "#A8AEB9", fontSize: 14, fontWeight: "400", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
+          <Text style={{ color: "#A8AEB9", fontSize: 14, fontFamily:"Rubik-Regular", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
             with further instructions</Text>
         </View>
 
@@ -84,7 +84,7 @@ export const ForgetPassword = ({ navigation }) => {
           <Button
             onPress={() => { navigation.navigate('ChangePassword') }}
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-            title="Recover Password"
+            title="Recover Password"        
           />
         </View>
       </ScrollView>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   ForgetPasswordText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily:"Rubik-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontWeight: '600'
+    fontFamily:"Rubik-Medium",
   },
   input: {
     width: '88%',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily:"Rubik-Regular",
     backgroundColor: '#fff'
   }
 })

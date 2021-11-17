@@ -10,8 +10,6 @@ import {
   StatusBar
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import Entypo from 'react-native-vector-icons/Entypo'
-const { width, height } = Dimensions.get('screen')
 import { Images } from '../../constants/images'
 
 export const CustomDrawer = ({ navigation }) => {
@@ -26,7 +24,7 @@ export const CustomDrawer = ({ navigation }) => {
       //   navigateTo: 'AboutUs'
     },
     {
-      title: 'Setting'
+      title: 'Settings'
       // navigateTo: 'Setting'
     },
     {
@@ -84,7 +82,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <Text
                   style={{
                     fontSize: 18,
-                    fontWeight: '700',
+                    fontFamily:"OpenSans-Bold",
                     color: i == active ? '#000' : '#ACB8BE'
                   }}>
                   {item.title}
@@ -105,23 +103,10 @@ const styles = StyleSheet.create({
   },
   topCutButton: {
     alignItems: 'flex-end',
-    marginTop: 45,
+    marginTop: 50,
     paddingRight: 20
   },
   mainView: {
-    width: '90%'
+    width: '100%'
   },
-  dataMapView: {
-    height: 65,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginVertical: 8
-  },
-
-  textTitleStyle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: 'gray'
-  }
 })

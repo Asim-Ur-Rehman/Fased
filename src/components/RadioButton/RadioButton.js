@@ -77,9 +77,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     marginLeft: 15,
-    fontSize: 12,
+    fontSize: 11,
     color: '#8e8e93',
-    fontWeight: '700'
+    fontFamily:"Rubik-Medium",
   },
   rbStyle: {
     height: 18,

@@ -45,7 +45,7 @@ export const ReportIncidentC = ({ navigation }) => {
           <Text style={styles.headerLabel}>Report Incident</Text>
         </View>
         <View style={{ width: '20%', alignItems: 'flex-end' }}>
-          <Text style={{ color: '#909090', fontSize: 15, fontWeight: '500' }}>
+          <Text style={{ color: '#909090', fontSize: 15,  fontFamily:"Rubik-Regular", }}>
             02 - 03
           </Text>
         </View>
@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
   headerLabel: {
     fontSize: 20,
     fontWeight: '500',
-    marginLeft: 20
+    marginLeft: 20,
+    fontFamily:"Rubik-Medium",
   },
   textAreaContainer: {
     width: '90%',
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 30,
     textAlign: 'justify',
-    fontWeight: '400',
+    fontFamily:"Rubik-Regular",
     borderRadius: 12,
     backgroundColor: '#F4F7FC',
     padding: 15
@@ -142,6 +143,6 @@ const styles = StyleSheet.create({
   countText: {
     color: '#8F9BBA',
     fontSize: 13,
-    fontWeight: '400'
+    fontFamily:"Rubik-Regular",
   }
 })
