@@ -53,6 +53,20 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
+    <string>Inter-Bold.ttf</string>
+    <string>Inter-Medium.ttf</string>
+    <string>Inter-Regular.ttf</string>
+    <string>Inter-SemiBold.ttf</string>
+    <string>Lexend-Regular.ttf</string>
+    <string>Lexend-Bold.ttf</string>
+    <string>Lexend-Medium.ttf</string>
+    <string>OpenSans-Bold.ttf</string>
+    <string>OpenSans-Medium.ttf</string>
+    <string>OpenSans-Regular.ttf</string>
+    <string>Rubik-Medium.ttf</string>
+    <string>Rubik-Regular.ttf</string>
+    <string>Rubik-SemiBold.ttf</string>
+    <string>Rubik-Bold.ttf</string>	
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>

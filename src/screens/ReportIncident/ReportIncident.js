@@ -163,7 +163,7 @@ export const ReportIncident = ({ navigation }) => {
 
                 <MapView
                     initialRegion={INITIAL_REGION}
-                    style={{ height: '95%' }}
+                    style={{ height: '88%' }}
 
                     ref={mapRef}
 
