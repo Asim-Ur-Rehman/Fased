@@ -44,22 +44,31 @@ export const Reports = ({ navigation }) => {
                     return (
                         <View key={index} style={[styles.tableHeader, [{ borderBottomWidth: 1, borderColor: borderColor, padding: 10 }]]}>
                             <View>
-                                <Text>
+                                <Text style={{
+                                    fontFamily: "Rubik-Medium",
+                                    fontSize: 13
+                                }}>
                                     {value.initials}
                                 </Text>
                             </View>
                             <View>
-                                <Text>
+                                <Text style={{
+                                    fontFamily: "Rubik-Regular",
+                                    fontSize: 13
+                                }}>
                                     {value.Floor}
                                 </Text>
                             </View>
                             <View>
-                                <Text style={{ color: color }}>
+                                <Text style={{ color: color, fontFamily: "Rubik-Regular", fontSize: 13 }}>
                                     {value.category}
                                 </Text>
                             </View>
                             <View>
-                                <Text>
+                                <Text style={{
+                                    fontFamily: "Rubik-Regular",
+                                    fontSize: 13
+                                }}>
                                     {value.value}
                                 </Text>
                             </View>
@@ -79,11 +88,13 @@ export const Reports = ({ navigation }) => {
                 <View style={styles.headerCol1}>
                     <View style={styles.headerCol1Row1}>
                         <View>
-                            <Icon name="arrow-back" size={21} color="#fff" />
+                            <Icon name="arrow-back" size={21} color="#fff" onPress={() => {
+                                navigation.goBack()
+                            }} />
                         </View>
 
                         <View>
-                            <Text style={{ fontSize: 20, color: '#FFFFFF' }}>Reports</Text>
+                            <Text style={{ fontSize: 20, color: '#FFFFFF', fontFamily: "Rubik-Medium" }}>Reports</Text>
                         </View>
                     </View>
 
@@ -121,8 +132,13 @@ export const Reports = ({ navigation }) => {
                     </View>
                 </View>
             </ScrollView>
-            <TouchableOpacity style={styles.showMoreBtn} activeOpacity={1} onPress={() => navigation.navigate('ReportingDone')} >
-                <Text>
+            <TouchableOpacity style={styles.showMoreBtn} activeOpacity={1}
+            // onPress={() => navigation.navigate('ReportingDone')}
+            >
+                <Text style={{
+                    fontFamily: "Rubik-Regular",
+                    fontSize: 13
+                }}>
                     Show More
                 </Text>
             </TouchableOpacity>
@@ -139,13 +155,14 @@ const styles = StyleSheet.create({
     headerCol1: { flexDirection: 'row', justifyContent: 'space-between', top: 10, width: '100%', padding: 20 },
     headerCol1Row1: { flexDirection: 'row', justifyContent: 'space-around', width: '35%', alignSelf: 'flex-start' },
     swapIcon: { padding: 10, borderRadius: 8, backgroundColor: '#4A4D5080' },
-    headerRow2Text1: { fontSize: 20, color: '#FFFFFF', left: 10, fontWeight: '500' },
-    headerRow2Text2: { color: '#AFBCC9', left: 10, fontWeight: '500' },
+    headerRow2Text1: { fontSize: 20, color: '#FFFFFF', left: 10, fontFamily: "Rubik-Medium" },
+    headerRow2Text2: { color: '#AFBCC9', left: 10, fontFamily: "Rubik-Regular" },
     th: {
         color: '#525A67',
         justifyContent: 'center',
         padding: 15,
-        fontSize: 16
+        fontSize: 14,
+        fontFamily: "Rubik-Regular"
     },
     showMoreBtn: { position: 'absolute', width: '100%', alignItems: 'center', justifyContent: 'center', backgroundColor: '#CCFF04', bottom: 0, padding: 15 }
 })
