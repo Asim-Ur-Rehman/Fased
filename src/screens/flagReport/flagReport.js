@@ -289,7 +289,6 @@ export const FlagReport = ({ navigation }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#fff'
   },
   LinearheaderContainer: {
     width: '100%',
