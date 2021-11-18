@@ -8,19 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* FasedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FasedTests.m */; };
-		12B409C32744EB8700592F21 /* Lexend-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B62744EB8600592F21 /* Lexend-Medium.ttf */; };
-		12B409C42744EB8700592F21 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B72744EB8600592F21 /* Inter-Regular.ttf */; };
-		12B409C52744EB8700592F21 /* Lexend-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B82744EB8600592F21 /* Lexend-Regular.ttf */; };
-		12B409C62744EB8700592F21 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B92744EB8600592F21 /* OpenSans-Regular.ttf */; };
-		12B409C72744EB8700592F21 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BA2744EB8600592F21 /* Inter-Medium.ttf */; };
-		12B409C82744EB8700592F21 /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BB2744EB8600592F21 /* OpenSans-Medium.ttf */; };
-		12B409C92744EB8700592F21 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BC2744EB8600592F21 /* Inter-SemiBold.ttf */; };
-		12B409CA2744EB8700592F21 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BD2744EB8600592F21 /* Inter-Bold.ttf */; };
-		12B409CB2744EB8700592F21 /* Lexend-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BE2744EB8700592F21 /* Lexend-Bold.ttf */; };
-		12B409CC2744EB8700592F21 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BF2744EB8700592F21 /* Rubik-Regular.ttf */; };
-		12B409CD2744EB8700592F21 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C02744EB8700592F21 /* Rubik-Medium.ttf */; };
-		12B409CE2744EB8700592F21 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C12744EB8700592F21 /* Rubik-SemiBold.ttf */; };
-		12B409CF2744EB8700592F21 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C22744EB8700592F21 /* OpenSans-Bold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -325,21 +312,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12B409C32744EB8700592F21 /* Lexend-Medium.ttf in Resources */,
-				12B409CC2744EB8700592F21 /* Rubik-Regular.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				12B409C52744EB8700592F21 /* Lexend-Regular.ttf in Resources */,
-				12B409C92744EB8700592F21 /* Inter-SemiBold.ttf in Resources */,
-				12B409C42744EB8700592F21 /* Inter-Regular.ttf in Resources */,
-				12B409C82744EB8700592F21 /* OpenSans-Medium.ttf in Resources */,
-				12B409CB2744EB8700592F21 /* Lexend-Bold.ttf in Resources */,
-				12B409CF2744EB8700592F21 /* OpenSans-Bold.ttf in Resources */,
-				12B409CA2744EB8700592F21 /* Inter-Bold.ttf in Resources */,
-				12B409CD2744EB8700592F21 /* Rubik-Medium.ttf in Resources */,
-				12B409C72744EB8700592F21 /* Inter-Medium.ttf in Resources */,
-				12B409C62744EB8700592F21 /* OpenSans-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				12B409CE2744EB8700592F21 /* Rubik-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +554,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B5387AGUHB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -591,7 +566,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appstirr.Fased;
 				PRODUCT_NAME = Fased;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -606,6 +581,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B5387AGUHB;
 				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -616,7 +592,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.appstirr.Fased;
 				PRODUCT_NAME = Fased;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
