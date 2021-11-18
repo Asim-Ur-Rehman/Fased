@@ -181,7 +181,7 @@ export const FlagReport = ({ navigation }) => {
 
         <Modal
           animationType="slide"
-          onDismiss={() => setModalVisible(!modalVisible)}
+          // onDismiss={() => setModalVisible(!modalVisible)}
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -203,7 +203,7 @@ export const FlagReport = ({ navigation }) => {
                   style={{
                     alignSelf: 'center',
                     height: 120,
-                    width: '90%',
+                    width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: '#ffffff'
@@ -263,7 +263,9 @@ export const FlagReport = ({ navigation }) => {
                   </View>
                 </TouchableOpacity>
 
-                <View>
+                
+              </LinearGradient>
+              <View>
                   <Button
                     onPress={() => {
                       setModalVisible(!modalVisible)
@@ -277,7 +279,6 @@ export const FlagReport = ({ navigation }) => {
                     title="Done"
                   />
                 </View>
-              </LinearGradient>
             </View>
           </View>
         </Modal>

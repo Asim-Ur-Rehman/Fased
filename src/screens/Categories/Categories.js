@@ -168,7 +168,7 @@ export const Categories = ({ navigation }) => {
                             fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText,
                             paddingLeft: 10
-                        }}>{select.length ? 6 - select.length : ''}</Text>
+                        }}>{select.length ? select.length : ''}</Text>
 
 
 
