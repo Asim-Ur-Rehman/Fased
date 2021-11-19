@@ -19,32 +19,29 @@ import Icon from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 export const ReportIncidentA = ({ navigation }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
   }
-  const [date, setDate] = useState(new Date(1598051730000));
   const [show, setShow] = useState(false);
   const [mode, setMode] = useState('time');
+  const [date, setDate] = useState('');
   const [currentTime, setCurrentTime]=useState('')
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    let time = currentDate.toString().substring(16, 21)
-    setDate(time);
+  const onChange = (date) => {
+    // const currentDate = selectedDate || date;
+    let time = date.toString().substring(16, 21)
+    // setDate(time);
+    if(mode == 'time') {
+      setCurrentTime(time)
+    }else {
+      setDate(date.toDateString(),)
+      // console.log("date", date.toDateString(), "time", time)
+    }
+    setShow(!show);
   };
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
-  const showTimepicker = () => {
-    showMode('time');
-  };
-  const showDatepicker = () => {
-    showMode('date');
-  };
+
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -143,7 +140,13 @@ export const ReportIncidentA = ({ navigation }) => {
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <View style={styles.fieldView2}>
+          <TouchableOpacity 
+          activeOpacity={0.8}
+          onPress={() => {
+            setMode('date')
+            setShow(true)
+          }}
+          style={styles.fieldView2}>
             <Text
               style={{
                 fontSize: 14,
@@ -152,7 +155,7 @@ export const ReportIncidentA = ({ navigation }) => {
                 margin: 10,
                 paddingLeft: 10
               }}>
-              Choose date
+              {date ? date : 'Choose date'}
             </Text>
             <View>
               <Image
@@ -165,7 +168,7 @@ export const ReportIncidentA = ({ navigation }) => {
                 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
@@ -182,7 +185,10 @@ export const ReportIncidentA = ({ navigation }) => {
           </View>
           <TouchableOpacity 
           activeOpacity={0.8}
-          onPress={showTimepicker}
+          onPress={() => {
+            setMode('time')
+            setShow(true)
+          }}
           style={styles.fieldView}>
             <Text
               style={{
@@ -192,7 +198,7 @@ export const ReportIncidentA = ({ navigation }) => {
                 margin: 10,
                 paddingLeft: 10
               }}>
-                {    currentTime ? currentTime :'Choose time'}
+                {currentTime ? currentTime :'Choose time'}
             </Text>
             <View>
               <Image
@@ -206,17 +212,27 @@ export const ReportIncidentA = ({ navigation }) => {
               />
             </View>
           </TouchableOpacity>
-          {show && (
-              <DateTimePicker
-                timeZoneOffsetInMinutes={0}
-                testID="dateTimePicker"
+             <DateTimePickerModal
+                isVisible={show}  
+                // testID="dateTimePicker"
+                onCancel={() => {
+                  setShow(!show)
+                }}
+                display={(mode == "time" || Platform.OS == "android") ? (Platform.OS == "android" ? "default" : "spinner") : "inline"}
                 value={date}
                 mode={mode}
                 is24Hour={true}
-                display="default"
-                onChange={onChange}
-              />
-            )}
+                onConfirm={onChange}
+                // customConfirmButtonIOS={(value,e) => {
+                //   console.log("value", value, "e", e.target)
+                //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
+                // }}
+                // customCancelButtonIOS={(value,e) => {
+                //   return <View style={{backgroundColor: '#fff', padding: 5, borderRadius: 20}}>
+                //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
+                //         </View>
+                // }}
+            />
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
