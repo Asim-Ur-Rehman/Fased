@@ -22,6 +22,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/ScollBarComp'
 import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
 export const FlagReport = ({ navigation }) => {
   const [text, setText] = useState('')
@@ -59,27 +60,63 @@ export const FlagReport = ({ navigation }) => {
         end={{ x: 0, y: 1 }}
         style={styles.LinearheaderContainer}>
         <View style={styles.headerView}>
-          <AntDesign
-            name="arrowleft"
-            color="#fff"
-            size={22}
-            // onPress={() => {navigation.goBack()}}
-          />
-          <Image
+          <View
             style={{
-              marginHorizontal: 15,
-              height: 50,
-              width: 50,
-              resizeMode: 'contain'
-            }}
-            source={Images.Pictures.profileIcon}
-          />
+              width: '10%',
+              justifyContent: 'center',
+              alignItems: 'flex-start'
+            }}>
+            <AntDesign
+              name="arrowleft"
+              color="#fff"
+              size={22}
+              onPress={() => {navigation.goBack('')}}
+            />
+          </View>
+          <View
+            style={{
+              width: '80%',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'flex-start'
+            }}>
+            <Image
+              style={{
+                marginRight: 15,
+                height: 50,
+                width: 50,
+                resizeMode: 'contain'
+              }}
+              source={Images.Pictures.profileIcon}
+            />
 
-          <View>
-            <Text style={styles.headerLabel}>Pedro Pascal</Text>
-            <Text style={{ fontSize: 13,  fontFamily:"Rubik-Regular", color: '#fff' }}>
-              15,aug,2021
-            </Text>
+            <View>
+              <Text style={styles.headerLabel}>Pedro Pascal</Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#fff'
+                }}>
+                15,aug,2021
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              width: '10%',
+              justifyContent: 'center',
+              alignItems: 'flex-end'
+            }}>
+            <SimpleLineIcons
+              name="options-vertical"
+              color="#fff"
+              size={18}
+              // onPress={() => {
+              //   navigation.goBack('')
+              // }}
+            />
           </View>
         </View>
       </LinearGradient>
@@ -89,7 +126,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily:"Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -101,7 +138,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily:"Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -113,7 +150,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily:"Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -123,7 +160,7 @@ export const FlagReport = ({ navigation }) => {
       </View>
 
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, height: height /1.3 }}
+        contentContainerStyle={{ flexGrow: 1, height: height / 1.3 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
         <View
@@ -146,13 +183,18 @@ export const FlagReport = ({ navigation }) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Text style={{ fontSize: 17, fontFamily:"Rubik-Medium", color: '#fff' }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontFamily: 'Rubik-Medium',
+                color: '#fff'
+              }}>
               Killing
             </Text>
             <Text
               style={{
                 fontSize: 12,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#fff',
                 marginTop: 6,
                 textAlign: 'center',
@@ -211,7 +253,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 17,
-                      fontFamily:"Rubik-Medium",
+                      fontFamily: 'Rubik-Medium',
                       color: '#DF0707',
                       marginTop: 10
                     }}>
@@ -220,7 +262,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 12,
-                      fontFamily:"Rubik-Regular",
+                      fontFamily: 'Rubik-Regular',
                       marginTop: 6,
                       textAlign: 'center',
                       paddingHorizontal: 30
@@ -249,7 +291,7 @@ export const FlagReport = ({ navigation }) => {
                       marginLeft: 20,
                       fontSize: 11,
                       color: '#8e8e93',
-                      fontFamily:"Rubik-Medium",
+                      fontFamily: 'Rubik-Medium'
                     }}>
                     Others
                   </Text>
@@ -288,7 +330,7 @@ export const FlagReport = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 1
   },
   LinearheaderContainer: {
     width: '100%',
@@ -304,7 +346,7 @@ const styles = StyleSheet.create({
   headerLabel: {
     color: '#fff',
     fontSize: 17,
-    fontFamily:"Rubik-Bold"
+    fontFamily: 'Rubik-Bold'
   },
   headerDownView: {
     flexDirection: 'row',
@@ -356,12 +398,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2
-  },
-  // buttonOpen: {
-  //   backgroundColor: "#F194FF",
-  // },
-  buttonClose: {
-    backgroundColor: '#2196F3'
   },
   textStyle: {
     color: 'white',
