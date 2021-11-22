@@ -28,7 +28,7 @@ export const Calender = ({ navigation }) => {
                 <View style={{ background: 'rgba(196, 196, 196, 0.05)', paddingHorizontal: 20 }}>
                     <View style={styles.form}>
                         <Text style={styles.text1}>From</Text>
-                        <View style={{ flexDirection: "row" }}>
+                        <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center' }}>
                             <Text style={styles.text1}>Always</Text>
                             <View style={{ marginLeft: 5 }}>
                                 <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />

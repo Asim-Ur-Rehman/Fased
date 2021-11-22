@@ -14,7 +14,7 @@ export default class CustomRadioButton extends Component {
     return (
       <View
         style={{
-          backgroundColor: '#6C8CB210',
+          backgroundColor: '#6C8CB2.10',
           width: '100%'
         }}>
         {PROP.map(res => {

@@ -417,7 +417,7 @@ Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
               <View>
                 <Button
                   onPress={() => {
-                    setModalVisible(!modalVisible)
+                    // setModalVisible(!modalVisible)
                     navigation.navigate('Home')
                   }}
                   buttonStyle={{

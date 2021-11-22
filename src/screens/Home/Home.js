@@ -306,7 +306,7 @@ export const Home = ({ navigation, route }) => {
             </View>
 
             <View>
-                <Image style={{ height: 60, width: '100%' }} source={Images.Pictures.demo} />
+                <Image style={{ height: 61, width: '100%' }} source={Images.Pictures.demo} />
             </View>
         </View>
     )
