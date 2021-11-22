@@ -43,7 +43,7 @@ export const ForgetPassword = ({ navigation }) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.ForgetPasswordText}>Forget Password</Text>
+          <Text style={styles.ForgetPasswordText}>Forgot Password</Text>
           <View
             style={{
               backgroundColor: '#FE0000',

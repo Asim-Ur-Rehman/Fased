@@ -420,7 +420,7 @@ export const FlagReport = ({ navigation }) => {
               <View>
                 <Button
                   onPress={() => {
-                    setModalVisible(!modalVisible)
+                    // setModalVisible(!modalVisible)
                     navigation.navigate('Home')
                   }}
                   buttonStyle={{

@@ -22,7 +22,9 @@ const App = () => {
   return (
     <>
       <Provider store={store}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <MainNavigation />
+      </View>
       </Provider>
     </>
   )
