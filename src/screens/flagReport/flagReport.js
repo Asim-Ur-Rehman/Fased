@@ -222,70 +222,83 @@ export const FlagReport = ({ navigation }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 2 }}>
+          <View style={{ height: height / 1.85 }}>
             <CustomScrollView
-              contentContainerStyle={{paddingBottom:20}}
-              ScrollBarStyle={{ backgroundColor: '#FDEBEB',}}
+              contentContainerStyle={{ paddingBottom: 20 }}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB',width:14 }}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
                 borderRadius: 3,
-                width: 5
-              }}>    
-                <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. Fames urna, tellus aliquam sed mi. 
-                </Text>
+                width: 5,
+                marginTop:5,
+              }}>
+              <Text style={styles.ContentTextStyle}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
+                aliquam sed mi.
+              </Text>
 
-                <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+              <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
+                semper venenatis. Adipiscing venenatis arcu a quis sit id
+                euismod nisl, purus.
+              </Text>
 
-                </Text>
-
-                <Text style={styles.ContentTextStyle}>
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
- Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-
-                </Text>
-                <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-                </Text>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
 
-                <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. Fames urna, tellus aliquam sed mi. 
-                </Text>
+              <Text style={styles.ContentTextStyle}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
+                aliquam sed mi.
+              </Text>
 
-                <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+              <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
+                semper venenatis. Adipiscing venenatis arcu a quis sit id
+                euismod nisl, purus.
+              </Text>
 
-                </Text>
-
-                <Text style={styles.ContentTextStyle}>
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
- Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-
-                </Text>
-                <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-                </Text>
-                
-                <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
- Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
 
-                </Text>
-                <Text style={styles.ContentTextStyle}>
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-                </Text>
-
-              
-              </CustomScrollView>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
+            </CustomScrollView>
           </View>
         </View>
 
@@ -303,7 +316,7 @@ Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
         </View>
 
         <Modal
-          animationType="slide"
+          animationType='fade'
           // onDismiss={() => setModalVisible(!modalVisible)}
           transparent={true}
           visible={modalVisible}
@@ -353,36 +366,22 @@ Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
                   </Text>
                 </View>
 
-
-
-                <View style={{ marginTop: 15,}}>
-
-
-              <CustomScrollView ScrollBarStyle={{ width:0 }}
-              indicatorStyle={{
-                backgroundColor: '#727070',
-                borderRadius: 3,
-                width: 3.5
-              }}
-              scrollContainer={{
-                height:260,
-                // width:"100%",
-              }}
-              contentContainerStyle={{paddingBottom:0}}
-              >
-
-                  <CustomRadioButton PROP={PROP} />
+                <View style={{ marginTop: 15 }}>
+                  <CustomScrollView
+                    ScrollBarStyle={{ width: 0 }}
+                    indicatorStyle={{
+                      backgroundColor: '#727070',
+                      borderRadius: 3,
+                      width: 3.5
+                    }}
+                    scrollContainer={{
+                      height: 260
+                      // width:"100%",
+                    }}
+                    contentContainerStyle={{ paddingBottom: 0 }}>
+                    <CustomRadioButton PROP={PROP} />
                   </CustomScrollView>
-
-                
-
-
-
                 </View>
-
-
-
-                
 
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -525,5 +524,5 @@ const styles = StyleSheet.create({
     // marginVertical: 10,
     lineHeight: 15,
     letterSpacing: 0.8
-  },
+  }
 })

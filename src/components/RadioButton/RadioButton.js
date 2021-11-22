@@ -14,7 +14,7 @@ export default class CustomRadioButton extends Component {
     return (
       <View
         style={{
-          backgroundColor: '#6C8CB210',
+          backgroundColor: '#6C8CB2.10',
           width: '100%'
         }}>
         {PROP.map(res => {
@@ -60,8 +60,7 @@ export default class CustomRadioButton extends Component {
             </View>
           )
         })}
-        {/* 
-        <Text> Selected values: {this.state.value}</Text> */}
+              {/* <Text> Selected values: {this.state.value}</Text>  */}
       </View>
     )
   }
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    backgroundColor:"#6C8CB210"
+    // backgroundColor:"#68000050"
   },
   textStyle: {
     marginLeft: 15,
