@@ -93,7 +93,7 @@ export const ReportIncidentA = ({ navigation }) => {
             </Text>
             <View>
               <Icon
-                name="chevron-right"
+                name="chevron-down"
                 color="#33333330"
                 size={22}
                 style={{ paddingRight: 15 }}
@@ -119,7 +119,7 @@ export const ReportIncidentA = ({ navigation }) => {
             </Text>
             <View>
               <Icon
-                name="chevron-right"
+                name="chevron-down"
                 color="#33333330"
                 size={22}
                 style={{ paddingRight: 15 }}
