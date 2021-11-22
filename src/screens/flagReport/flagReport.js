@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Children, useState } from 'react'
 import {
   View,
   Text,
@@ -23,6 +23,7 @@ import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/Sc
 import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 
 export const FlagReport = ({ navigation }) => {
   const [text, setText] = useState('')
@@ -43,6 +44,22 @@ export const FlagReport = ({ navigation }) => {
     },
     {
       key: 'Button-4',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-5',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-6',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-7',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-8',
       text: 'Default Sharing Selection'
     }
   ]
@@ -70,7 +87,9 @@ export const FlagReport = ({ navigation }) => {
               name="arrowleft"
               color="#fff"
               size={22}
-              onPress={() => {navigation.goBack('')}}
+              onPress={() => {
+                navigation.goBack('')
+              }}
             />
           </View>
           <View
@@ -204,7 +223,79 @@ export const FlagReport = ({ navigation }) => {
             </Text>
           </View>
           <View style={{ height: height / 2 }}>
-            <CustomScrollBarComponent />
+            <CustomScrollView
+              contentContainerStyle={{paddingBottom:20}}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB',paddingBottom:20}}
+              indicatorStyle={{
+                backgroundColor: '#DF0707',
+                borderRadius: 3,
+                width: 5
+              }}>    
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text>
+
+                <Text style={styles.ContentTextStyle}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
+                  urna, tellus aliquam sed mi. {'\n'}
+                </Text> 
+              </CustomScrollView>
           </View>
         </View>
 
@@ -271,9 +362,37 @@ export const FlagReport = ({ navigation }) => {
                     Neque,
                   </Text>
                 </View>
-                <View style={{ marginTop: 15 }}>
+
+
+
+                <View style={{ marginTop: 15,}}>
+
+
+              <CustomScrollView ScrollBarStyle={{ width:0 }}
+              indicatorStyle={{
+                backgroundColor: '#727070',
+                borderRadius: 3,
+                width: 3.5
+              }}
+              scrollContainer={{
+                height:260,
+                // width:"100%",
+              }}
+              contentContainerStyle={{paddingBottom:0}}
+              >
+
                   <CustomRadioButton PROP={PROP} />
+                  </CustomScrollView>
+
+                
+
+
+
                 </View>
+
+
+
+                
 
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -304,23 +423,21 @@ export const FlagReport = ({ navigation }) => {
                     />
                   </View>
                 </TouchableOpacity>
-
-                
               </LinearGradient>
               <View>
-                  <Button
-                    onPress={() => {
-                      setModalVisible(!modalVisible)
-                      navigation.navigate('Home')
-                    }}
-                    buttonStyle={{
-                      alignSelf: 'center',
-                      width: 275,
-                      marginBottom: 35
-                    }}
-                    title="Done"
-                  />
-                </View>
+                <Button
+                  onPress={() => {
+                    setModalVisible(!modalVisible)
+                    navigation.navigate('Home')
+                  }}
+                  buttonStyle={{
+                    alignSelf: 'center',
+                    width: 275,
+                    marginBottom: 35
+                  }}
+                  title="Done"
+                />
+              </View>
             </View>
           </View>
         </Modal>
@@ -408,5 +525,15 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center'
-  }
+  },
+  ContentTextStyle: {
+    fontSize: 12,
+    fontFamily: 'Rubik-Regular',
+    color: '#383838',
+    textAlign: 'left',
+    padding: 5,
+    // marginVertical: 10,
+    // lineHeight: 15,
+    letterSpacing: 0.8
+  },
 })
