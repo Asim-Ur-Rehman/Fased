@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: height * 0.1,
         // backgroundColor: 'red',
-        marginTop: 25,
+        marginVertical: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row'

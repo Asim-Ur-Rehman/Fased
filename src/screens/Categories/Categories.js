@@ -96,7 +96,7 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
-                        marginTop: 20
+                        marginVertical: 20
                     }}>
                     <View style={{
                         flexDirection: 'row',
@@ -148,20 +148,20 @@ export const Categories = ({ navigation }) => {
 
 
                     <View style={{
-                        width: '82%',
+                        width: '100%',
                         alignSelf: 'center',
-                        marginVertical: 20,
-                        flexDirection: 'row'
-
-
-
+                        height: 70,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        top: 5,
+                        paddingHorizontal: 22
                     }}>
 
                         <Text style={{
                             fontSize: 17,
                             fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText
-                        }}>Selected Categories</Text>
+                        }}>{select.length > 0 ? 'Selected Categories' : 'Select Categories'}</Text>
 
                         <Text style={{
                             fontSize: 17,
