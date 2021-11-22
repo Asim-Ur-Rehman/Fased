@@ -223,8 +223,8 @@ export const FlagReport = ({ navigation }) => {
             </Text>
           </View>
           <View style={{ height: height / 1.85 }}>
-            <CustomScrollView
-              contentContainerStyle={{ paddingBottom: 20 }}
+           <CustomScrollView
+              contentContainerStyle={{ paddingBottom: 20, }}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB',width:14 }}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
@@ -232,6 +232,7 @@ export const FlagReport = ({ navigation }) => {
                 width: 5,
                 marginTop:5,
               }}>
+                
               <Text style={styles.ContentTextStyle}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
                 sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
@@ -299,6 +300,9 @@ export const FlagReport = ({ navigation }) => {
                 venenatis.
               </Text>
             </CustomScrollView>
+            
+
+
           </View>
         </View>
 
