@@ -222,7 +222,7 @@ export const FlagReport = ({ navigation }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 2 }}>
+          <View style={{ height: height / 1.85 }}>
             <CustomScrollView
               contentContainerStyle={{paddingBottom:20}}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB',}}

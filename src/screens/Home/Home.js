@@ -16,8 +16,8 @@ export const Home = ({ navigation, route }) => {
     const INITIAL_REGION = {
         latitude: 52.5,
         longitude: 19.2,
-        latitudeDelta: 8.5,
-        longitudeDelta: 8.5,
+        latitudeDelta: 55,
+        longitudeDelta: 25,
     };
     const allMarkers = [
         {
@@ -99,6 +99,125 @@ export const Home = ({ navigation, route }) => {
             image: require('../../assets/images/user.png'),
 
         },
+
+
+
+
+
+        {
+            latitude: 62.0,
+            longitude: 18.2,
+            title: 'User1',
+            description: 'HelloUser1',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 62.2,
+            longitude: 18.2,
+            title: 'User2',
+            description: 'HelloUser2',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 62.6,
+            longitude: 18.3,
+            title: 'User3',
+            description: 'HelloUser3',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 61.6,
+            longitude: 18.0,
+            title: 'User4',
+            description: 'HelloUser4',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 63.1,
+            longitude: 18.8,
+            title: 'User5',
+            description: 'HelloUser5',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 62.9,
+            longitude: 19.4,
+            title: 'User6',
+            description: 'HelloUser6',
+            image: require('../../assets/images/user.png'),
+        },
+        {
+            latitude: 62.2,
+            longitude: 21,
+            title: 'User7',
+            description: 'HelloUser7',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 62.4,
+            longitude: 21,
+            title: 'User8',
+            description: 'HelloUser8',
+            image: require('../../assets/images/user.png'),
+
+        },
+
+
+
+
+
+
+
+
+
+
+        {
+            latitude: 22.0,
+            longitude: 18.2,
+            title: 'User1',
+            description: 'HelloUser1',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 22.2,
+            longitude: 18.2,
+            title: 'User2',
+            description: 'HelloUser2',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 22.6,
+            longitude: 18.3,
+            title: 'User3',
+            description: 'HelloUser3',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 21.6,
+            longitude: 18.0,
+            title: 'User4',
+            description: 'HelloUser4',
+            image: require('../../assets/images/user.png'),
+
+        },
+        {
+            latitude: 23.1,
+            longitude: 18.8,
+            title: 'User5',
+            description: 'HelloUser5',
+            image: require('../../assets/images/user.png'),
+
+        },
+    
     ]
 
     const [reason, setReason] = useState([
@@ -236,6 +355,7 @@ export const Home = ({ navigation, route }) => {
                     style={{ height: '72%' }}
                     // showsCompass
                     // compassOffset={{ x: 50, y: 100 }}
+                    zoomEnabled={false}
                     ref={mapRef}
                     renderCluster={cluster => {
                         const { id, geometry, onPress, properties, } = cluster;
