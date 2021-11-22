@@ -107,7 +107,7 @@ export const Categories = ({ navigation }) => {
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
-                            fontFamily:"Rubik-Medium",
+                            fontFamily: "Rubik-Medium",
                             color: theme.textColor.whiteText
                         }}>Categories</Text>
 
@@ -121,7 +121,7 @@ export const Categories = ({ navigation }) => {
                             activeOpacity={0.7}>
                             <Text style={{
                                 fontSize: 19,
-                                fontFamily:"Rubik-Medium",
+                                fontFamily: "Rubik-Medium",
                                 color: theme.textColor.whiteText
                             }}>Done</Text>
                         </TouchableOpacity>
@@ -192,12 +192,12 @@ export const Categories = ({ navigation }) => {
                                         alignSelf: 'center',
                                         height: 96.26,
                                         borderRadius: 10,
-                                        backgroundColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFA724')
+                                        backgroundColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9cba0' : '#FFA724')
                                             : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#fae5f8' : '#CF00BA') :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#5819C1') :
+                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#b091e5' : '#5819C1') :
                                                     i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9e8fd' : '#211DE8') :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#0CB9A2') :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#DF0707'),
+                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#b1e3dc' : '#0CB9A2') :
+                                                            ((select.findIndex(e => e.i == i) != -1) ? '#ddaeae' : '#DF0707'),
                                         flexDirection: 'row',
                                         marginBottom: 12,
                                         borderWidth: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0)
@@ -255,12 +255,12 @@ export const Categories = ({ navigation }) => {
                                             // marginTop: 4
                                         }}>
 
-                                            <MaterialCommunityIcons name='circle-slice-8' color={i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                    i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                        i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                            i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')} size={12} />
+                                            <MaterialCommunityIcons name='circle-slice-8' color={i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFFF')
+                                                : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : '#FFFF') :
+                                                    i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#FFFF') :
+                                                        i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : '#FFFF') :
+                                                            i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#FFFF') :
+                                                                ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#FFFF')} size={12} />
 
                                         </View>
 
@@ -274,26 +274,26 @@ export const Categories = ({ navigation }) => {
                                         }}>
                                             <Text style={{
                                                 fontSize: 14,
-                                                fontFamily:"Rubik-Medium",
-                                                color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                    ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF'),
+                                                fontFamily: "Rubik-Medium",
+                                                color: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFFF')
+                                                    : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : '#FFFF') :
+                                                        i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#FFFF') :
+                                                            i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : '#FFFF') :
+                                                                i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#FFFF') :
+                                                                    ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#FFFF'),
                                                 paddingBottom: 5
                                             }}>
                                                 {item.title}
                                             </Text>
                                             <Text style={{
                                                 fontSize: 11,
-                                                fontFamily:"Rubik-Regular",
-                                                color: i == 1 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF') :
-                                                                    ((select.findIndex(e => e == i) != -1) ? '#FFFF' : '#FFFF'),
+                                                fontFamily: "Rubik-Regular",
+                                                color: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF')
+                                                    : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                        i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                            i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                                i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
+                                                                    ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF'),
                                                 lineHeight: 12
                                                 // marginBottom: 10
                                             }}>

@@ -8,6 +8,7 @@ import { View } from 'react-native'
 import { Calendar } from 'react-native-calendars';
 import { CustomScrollBarComponent } from './components/ScrollBarComponent/ScollBarComp'
 import 'react-native-gesture-handler';
+import { FlagReport } from './screens/flagReport/flagReport'
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <>
+    {/* <FlagReport/> */}
       <Provider store={store}>
         <MainNavigation />
       </Provider>
