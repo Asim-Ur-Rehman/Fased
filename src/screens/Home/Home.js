@@ -110,7 +110,7 @@ export const Home = ({ navigation, route }) => {
         { text: "Assault", color: '#0CB9A2' },
     ])
     const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : [])
-    
+
     useEffect(() => {
         setSelected(route.params?.selected ? route.params?.selected : [])
     }, [route.params])
@@ -134,24 +134,24 @@ export const Home = ({ navigation, route }) => {
         const y1 = INITIAL_REGION.longitude;
         const x2 = 0;
         const y2 = 1;
-      
+
         const xDiff = x2 - x1;
         const yDiff = y2 - y1;
-      
+
         return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI;
-      };
+    };
 
     return (
         <View style={styles.container}>
             {/* <StatusBar /> */}
-            <SafeAreaView style={{flex: 1}}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.header}>
                     <TouchableOpacity activeOpacity={.8} onPress={() => navigation.toggleDrawer()}>
                         <Image style={styles.img} source={Images.Pictures.logo} />
                     </TouchableOpacity>
                     <View style={styles.header2}>
                         <View style={styles.btn}>
-                            <Text style={{ fontSize: 10, fontFamily:"Rubik-Medium", color: "#ffffff" }}>NEWS</Text>
+                            <Text style={{ fontSize: 10, fontFamily: "Rubik-Medium", color: "#ffffff" }}>NEWS</Text>
                         </View>
                         <View style={{ flexDirection: "column", }}>
                             <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
@@ -169,6 +169,8 @@ export const Home = ({ navigation, route }) => {
                         <FlatList
                             data={reason}
                             numColumns={3}
+                            showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => {
                                 const isSelect = selected.findIndex(e => e.title == item.text)
                                 return (
@@ -182,7 +184,7 @@ export const Home = ({ navigation, route }) => {
 
                                     }]}
                                     >
-                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6", fontFamily:"Rubik-Regular", fontSize:11 }}>
+                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6", fontFamily: "Rubik-Regular", fontSize: 11 }}>
                                             {item.text}
                                         </Text>
                                     </View>
@@ -193,22 +195,41 @@ export const Home = ({ navigation, route }) => {
                 </View>
 
                 <View style={styles.date}>
-                    <TouchableOpacity 
-                    activeOpacity={0.8}
-                    onPress={() => navigation.navigate('Calender')}
-                    style={styles.dateContainer}>
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={() => navigation.navigate('Calender')}
+                        style={styles.dateContainer}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
-                        <Text style={{ color: "#8E97A6", fontFamily:"Lexend-Regular", fontSize:11 }}>From : Sep 23, 2021</Text>
+                        <Text style={{ color: "#8E97A6", fontFamily: "Lexend-Regular", fontSize: 11 }}>From : Sep 23, 2021</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity 
-                            activeOpacity={0.8}
-                            onPress={() => navigation.navigate('Calender')}
-                    style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
+                    <View style={{ width: 1, height: 19, backgroundColor: '#C4C4C4' }} />
+
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={() => navigation.navigate('Calender')}
+                        style={{ flexDirection: 'row', width: '40%', justifyContent: 'space-around' }}>
                         <Icon name="date-range" size={17} color="#8E97A6" />
-                        <Text style={{ color: "#8E97A6",fontFamily:"Lexend-Regular", fontSize:11 }}>To : Sep 23, 2021</Text>
+                        <Text style={{ color: "#8E97A6", fontFamily: "Lexend-Regular", fontSize: 11 }}>To : Sep 23, 2021</Text>
                     </TouchableOpacity>
                 </View>
+
+
+                <View style={{ overflow: 'hidden', paddingBottom: 0 }}>
+                    <View
+                        style={{
+                            // backgroundColor: '#fff',
+                            width: '100%',
+                            height: 6,
+                            shadowColor: '#000',
+                            shadowOffset: { width: 1, height: 1 },
+                            shadowOpacity: 0.2,
+                            shadowRadius: 3,
+                            elevation: 5,
+                        }}
+                    />
+                </View>
+
 
                 <MapView
                     initialRegion={INITIAL_REGION}
@@ -250,7 +271,7 @@ export const Home = ({ navigation, route }) => {
                                     />
                                     <TouchableOpacity
                                         onPress={onPress}
-                                        style={{ position: 'absolute', bottom: "45%", left: "49%", top: "48%"}}>
+                                        style={{ position: 'absolute', bottom: "45%", left: "49%", top: "48%" }}>
                                         <Text style={{ color: "blue" }}>{points}</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -295,6 +316,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: theme.backgrounds.whiteBG,
+        marginTop: 10
     },
     header: {
         flexDirection: "row",
@@ -306,26 +328,28 @@ const styles = StyleSheet.create({
         // height:  '10%'
     },
     header2: {
-        flexDirection: "row", paddingHorizontal: 8,
+        flexDirection: "row",
+        paddingHorizontal: 8,
         backgroundColor: theme.backgrounds.whiteBG,
-        shadowColor: '#eff2f7',
+        shadowColor: theme.textColor.blackText,
         shadowOffset: {
-            width: 0,
-            height: 3,
+            width: 10,
+            height: 0,
         },
-        shadowOpacity: 0.27,
+        shadowOpacity: 0.17,
         shadowRadius: 4.65,
 
-        elevation: 8,
-        marginHorizontal: 10,
-        paddingVertical: 10,
-        borderRadius: 10,
+        elevation: 5,
+        marginHorizontal: 5,
+        paddingVertical: 8,
+        borderRadius: 5,
+        width: '80%'
     },
     btn: {
         backgroundColor: "#4A4C50",
         alignItems: "center",
         justifyContent: "center",
-        borderRadius: 10,
+        borderRadius: 5,
         width: 50,
         height: 35
     },
@@ -334,12 +358,12 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         fontSize: 12,
         paddingLeft: 10,
-        fontFamily:"Rubik-Regular",
+        fontFamily: "Rubik-Regular",
     },
     read: {
         color: "#b7c6d5",
         fontSize: 12,
-        fontFamily:"Rubik-Regular",
+        fontFamily: "Rubik-Regular",
         textDecorationLine: 'underline',
     },
     img: {

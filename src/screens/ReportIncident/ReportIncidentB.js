@@ -143,13 +143,13 @@ export const ReportIncidentB = ({ navigation }) => {
 
 
                     <View style={{
-                        width: '82%',
-                        alignSelf: 'center',
-                        marginVertical: 15,
-                        flexDirection: 'row'
-
-
-
+                          width: '100%',
+                          alignSelf: 'center',
+                          height: 70,
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          top: 5,
+                          paddingHorizontal: 22
                     }}>
 
                         <Text style={{
@@ -157,10 +157,6 @@ export const ReportIncidentB = ({ navigation }) => {
                             fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText
                         }}>Select Categories</Text>
-
-
-
-
 
                     </View>
 
