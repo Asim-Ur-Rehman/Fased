@@ -256,31 +256,19 @@ export const ReportIncident = ({ navigation }) => {
 
                             />
                         </View>
-
-
-
-
-
                     </View>
                     <View style={{ marginVertical: 10 }}>
                         <Button
-
                             onPress={() => {
                                 navigation.navigate('ReportIncidentA')
                             }}
                             buttonStyle={{ width: '85%', alignSelf: 'center' }}
                             title="Next"
-                        />
+                         />
                     </View>
                 </View>
 
             </ScrollView>
-
-
-
-
-
-
         </SafeAreaView>
     )
 }
