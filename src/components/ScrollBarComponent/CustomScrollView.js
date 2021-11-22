@@ -45,8 +45,8 @@ export const CustomScrollView = (
     visibleScrollBarHeight / completeScrollBarHeight
   ).interpolate({
     extrapolate: 'clamp',
-    inputRange: [1, difference],
-    outputRange: [5, difference]
+    inputRange: [0, difference],
+    outputRange: [0, difference]
   })
 
   const onContentSizeChange = (_, contentHeight) =>
