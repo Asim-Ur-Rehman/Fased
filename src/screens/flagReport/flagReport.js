@@ -225,76 +225,66 @@ export const FlagReport = ({ navigation }) => {
           <View style={{ height: height / 2 }}>
             <CustomScrollView
               contentContainerStyle={{paddingBottom:20}}
-              ScrollBarStyle={{ backgroundColor: '#FDEBEB',paddingBottom:20}}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB',}}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
                 borderRadius: 3,
                 width: 5
               }}>    
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. Fames urna, tellus aliquam sed mi. 
                 </Text>
 
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+
                 </Text>
 
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+ Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+
                 </Text>
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
                 </Text>
 
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. Fames urna, tellus aliquam sed mi. 
                 </Text>
 
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+
                 </Text>
 
                 <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+ Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+
+                </Text>
+                <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
+                </Text>
+                
+                <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+ Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+
+                </Text>
+                <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+Augue tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
                 </Text>
 
-                <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
-                </Text>
-
-                <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
-                </Text>
-
-                <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
-                </Text>
-
-                <Text style={styles.ContentTextStyle}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Neque, sit justo vel in sapien ultrices id quam nam. Fames
-                  urna, tellus aliquam sed mi. {'\n'}
-                </Text> 
+              
               </CustomScrollView>
           </View>
         </View>
@@ -531,9 +521,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik-Regular',
     color: '#383838',
     textAlign: 'left',
-    padding: 5,
+    padding: 10,
     // marginVertical: 10,
-    // lineHeight: 15,
+    lineHeight: 15,
     letterSpacing: 0.8
   },
 })
