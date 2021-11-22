@@ -27,7 +27,7 @@ export const Calender = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ background: 'rgba(196, 196, 196, 0.05)', paddingHorizontal: 20 }}>
                     <View style={styles.form}>
-                        <Text style={styles.text1}>Form</Text>
+                        <Text style={styles.text1}>From</Text>
                         <View style={{ flexDirection: "row" }}>
                             <Text style={styles.text1}>Always</Text>
                             <View style={{ marginLeft: 5 }}>
@@ -97,12 +97,11 @@ export const Calender = ({ navigation }) => {
                 </View>}
             </ScrollView>
 
-            <View style={{ flexDirection: "row", justifyContent: "space-around", paddingVertical: 20 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-evenly", paddingVertical: 20 }}>
                 <View style={styles.btn1}>
                     <Text style={styles.reset}>Reset</Text>
                 </View>
-                <View
-                >
+                <View>
                     <LinearGradient
                         style={styles.btn1}
                         colors={['#4A4C50', '#9CA3AF']}
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
     form: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginTop: 25,
+        marginTop: "14%",
         backgroundColor: 'rgba(196, 196, 196, 0.3)',
         paddingHorizontal: 10,
         paddingVertical: 10,
@@ -140,8 +139,8 @@ const styles = StyleSheet.create({
         // backgroundColor:"#ffffff",
         borderColor: "#989FAB",
         borderWidth: 1,
-        paddingHorizontal: "13%",
-        paddingVertical: 8,
+        paddingHorizontal: "16%",
+        paddingVertical: 10,
         borderRadius: 20,
         alignItems: "center"
     },
