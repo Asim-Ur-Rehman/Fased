@@ -208,13 +208,13 @@ export const ReportIncidentA = ({ navigation }) => {
           </TouchableOpacity>
           {show && (
               <DateTimePicker
-                timeZoneOffsetInMinutes={0}
                 testID="dateTimePicker"
                 value={date}
                 mode={mode}
                 is24Hour={true}
                 display="default"
                 onChange={onChange}
+                textColor="red" 
               />
             )}
         </View>
