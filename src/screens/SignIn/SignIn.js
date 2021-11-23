@@ -102,7 +102,7 @@ export const SignIn = ({ navigation }) => {
             }}
             activeOpacity={0.7}
             style={{}}>
-            <Text style={styles.label}>Forget Password?</Text>
+            <Text style={styles.label}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
         <View

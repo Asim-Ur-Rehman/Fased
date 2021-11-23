@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView, Alert } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
@@ -55,6 +55,9 @@ export const Categories = ({ navigation }) => {
     // console.log('select', select)
     const selectedCard = (i) => {
 
+       if(select.length == 5) {
+        Alert.alert("Alert", "At least must be 1 category")
+       }else {
         var arr = [...select]
         var isFind = arr.findIndex(e => e.i == i.i)
         if (isFind == -1) {
@@ -65,6 +68,7 @@ export const Categories = ({ navigation }) => {
             arr.splice(isFind, 1)
             setSelect(arr)
         }
+       }
 
     }
 
@@ -96,7 +100,7 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
-                        marginTop: 20
+                        marginVertical: 20
                     }}>
                     <View style={{
                         flexDirection: 'row',
@@ -148,27 +152,27 @@ export const Categories = ({ navigation }) => {
 
 
                     <View style={{
-                        width: '82%',
+                        width: '100%',
                         alignSelf: 'center',
-                        marginVertical: 20,
-                        flexDirection: 'row'
-
-
-
+                        height: 70,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        top: 5,
+                        paddingHorizontal: 22
                     }}>
 
                         <Text style={{
                             fontSize: 17,
                             fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText
-                        }}>Selected Categories</Text>
+                        }}>{select.length > 0 ? 'Selected Categories' : 'Select Categories'}</Text>
 
                         <Text style={{
                             fontSize: 17,
                             fontFamily: 'Rubik-SemiBold',
                             color: theme.textColor.blackText,
                             paddingLeft: 10
-                        }}>{select.length ? 6 - select.length : ''}</Text>
+                        }}>{select.length ? select.length : ''}</Text>
 
 
 

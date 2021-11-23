@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Children, useState } from 'react'
 import {
   View,
   Text,
@@ -22,6 +22,8 @@ import LinearGradient from 'react-native-linear-gradient'
 import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/ScollBarComp'
 import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 
 export const FlagReport = ({ navigation }) => {
   const [text, setText] = useState('')
@@ -43,6 +45,22 @@ export const FlagReport = ({ navigation }) => {
     {
       key: 'Button-4',
       text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-5',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-6',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-7',
+      text: 'Default Sharing Selection'
+    },
+    {
+      key: 'Button-8',
+      text: 'Default Sharing Selection'
     }
   ]
 
@@ -59,27 +77,65 @@ export const FlagReport = ({ navigation }) => {
         end={{ x: 0, y: 1 }}
         style={styles.LinearheaderContainer}>
         <View style={styles.headerView}>
-          <AntDesign
-            name="arrowleft"
-            color="#fff"
-            size={22}
-          // onPress={() => {navigation.goBack()}}
-          />
-          <Image
+          <View
             style={{
-              marginHorizontal: 15,
-              height: 50,
-              width: 50,
-              resizeMode: 'contain'
-            }}
-            source={Images.Pictures.profileIcon}
-          />
+              width: '10%',
+              justifyContent: 'center',
+              alignItems: 'flex-start'
+            }}>
+            <AntDesign
+              name="arrowleft"
+              color="#fff"
+              size={22}
+              onPress={() => {
+                navigation.goBack('')
+              }}
+            />
+          </View>
+          <View
+            style={{
+              width: '80%',
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'flex-start'
+            }}>
+            <Image
+              style={{
+                marginRight: 15,
+                height: 50,
+                width: 50,
+                resizeMode: 'contain'
+              }}
+              source={Images.Pictures.profileIcon}
+            />
 
-          <View>
-            <Text style={styles.headerLabel}>Pedro Pascal</Text>
-            <Text style={{ fontSize: 13, fontFamily: "Rubik-Regular", color: '#fff' }}>
-              15,aug,2021
-            </Text>
+            <View>
+              <Text style={styles.headerLabel}>Pedro Pascal</Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#fff'
+                }}>
+                15,aug,2021
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              width: '10%',
+              justifyContent: 'center',
+              alignItems: 'flex-end'
+            }}>
+            <SimpleLineIcons
+              name="options-vertical"
+              color="#fff"
+              size={18}
+            // onPress={() => {
+            //   navigation.goBack('')
+            // }}
+            />
           </View>
         </View>
       </LinearGradient>
@@ -89,7 +145,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily: "Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -101,7 +157,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily: "Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -113,7 +169,7 @@ export const FlagReport = ({ navigation }) => {
           <Text
             style={{
               fontSize: 13,
-              fontFamily: "Rubik-Medium",
+              fontFamily: 'Rubik-Medium',
               color: '#fff',
               marginTop: 6
             }}>
@@ -146,13 +202,18 @@ export const FlagReport = ({ navigation }) => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Text style={{ fontSize: 17, fontFamily: "Rubik-Medium", color: '#fff' }}>
+            <Text
+              style={{
+                fontSize: 17,
+                fontFamily: 'Rubik-Medium',
+                color: '#fff'
+              }}>
               Killing
             </Text>
             <Text
               style={{
                 fontSize: 12,
-                fontFamily: "Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#fff',
                 marginTop: 6,
                 textAlign: 'center',
@@ -161,8 +222,87 @@ export const FlagReport = ({ navigation }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 2 }}>
-            <CustomScrollBarComponent />
+          <View style={{ height: height / 1.85 }}>
+            <CustomScrollView
+              contentContainerStyle={{ paddingBottom: 20, }}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
+              indicatorStyle={{
+                backgroundColor: '#DF0707',
+                borderRadius: 3,
+                width: 5,
+                marginTop: 5,
+              }}>
+
+              <Text style={styles.ContentTextStyle}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
+                aliquam sed mi.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
+                semper venenatis. Adipiscing venenatis arcu a quis sit id
+                euismod nisl, purus.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
+                aliquam sed mi.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
+                semper venenatis. Adipiscing venenatis arcu a quis sit id
+                euismod nisl, purus.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
+            </CustomScrollView>
+
+
+
           </View>
         </View>
 
@@ -180,8 +320,8 @@ export const FlagReport = ({ navigation }) => {
         </View>
 
         <Modal
-          animationType="slide"
-          onDismiss={() => setModalVisible(!modalVisible)}
+          animationType='fade'
+          // onDismiss={() => setModalVisible(!modalVisible)}
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -203,7 +343,7 @@ export const FlagReport = ({ navigation }) => {
                   style={{
                     alignSelf: 'center',
                     height: 120,
-                    width: '90%',
+                    width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: '#ffffff'
@@ -211,7 +351,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 17,
-                      fontFamily: "Rubik-Medium",
+                      fontFamily: 'Rubik-Medium',
                       color: '#DF0707',
                       marginTop: 10
                     }}>
@@ -220,7 +360,7 @@ export const FlagReport = ({ navigation }) => {
                   <Text
                     style={{
                       fontSize: 12,
-                      fontFamily: "Rubik-Regular",
+                      fontFamily: 'Rubik-Regular',
                       marginTop: 6,
                       textAlign: 'center',
                       paddingHorizontal: 30
@@ -229,8 +369,22 @@ export const FlagReport = ({ navigation }) => {
                     Neque,
                   </Text>
                 </View>
+
                 <View style={{ marginTop: 15 }}>
-                  <CustomRadioButton PROP={PROP} />
+                  <CustomScrollView
+                    ScrollBarStyle={{ width: 0 }}
+                    indicatorStyle={{
+                      backgroundColor: '#727070',
+                      borderRadius: 3,
+                      width: 3.5
+                    }}
+                    scrollContainer={{
+                      height: 260
+                      // width:"100%",
+                    }}
+                    contentContainerStyle={{ paddingBottom: 0 }}>
+                    <CustomRadioButton PROP={PROP} />
+                  </CustomScrollView>
                 </View>
 
                 <TouchableOpacity
@@ -249,7 +403,7 @@ export const FlagReport = ({ navigation }) => {
                       marginLeft: 20,
                       fontSize: 11,
                       color: '#8e8e93',
-                      fontFamily: "Rubik-Medium",
+                      fontFamily: 'Rubik-Medium'
                     }}>
                     Others
                   </Text>
@@ -262,22 +416,21 @@ export const FlagReport = ({ navigation }) => {
                     />
                   </View>
                 </TouchableOpacity>
-
-                <View>
-                  <Button
-                    onPress={() => {
-                      setModalVisible(!modalVisible)
-                      navigation.navigate('Home')
-                    }}
-                    buttonStyle={{
-                      alignSelf: 'center',
-                      width: 275,
-                      marginBottom: 35
-                    }}
-                    title="Done"
-                  />
-                </View>
               </LinearGradient>
+              <View>
+                <Button
+                  onPress={() => {
+                    // setModalVisible(!modalVisible)
+                    navigation.navigate('Home')
+                  }}
+                  buttonStyle={{
+                    alignSelf: 'center',
+                    width: 275,
+                    marginBottom: 35
+                  }}
+                  title="Done"
+                />
+              </View>
             </View>
           </View>
         </Modal>
@@ -288,7 +441,7 @@ export const FlagReport = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 1
   },
   LinearheaderContainer: {
     width: '100%',
@@ -304,7 +457,7 @@ const styles = StyleSheet.create({
   headerLabel: {
     color: '#fff',
     fontSize: 17,
-    fontFamily: "Rubik-Bold"
+    fontFamily: 'Rubik-Bold'
   },
   headerDownView: {
     flexDirection: 'row',
@@ -357,12 +510,6 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2
   },
-  // buttonOpen: {
-  //   backgroundColor: "#F194FF",
-  // },
-  buttonClose: {
-    backgroundColor: '#2196F3'
-  },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
@@ -371,5 +518,15 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center'
+  },
+  ContentTextStyle: {
+    fontSize: 12,
+    fontFamily: 'Rubik-Regular',
+    color: '#383838',
+    textAlign: 'left',
+    padding: 10,
+    // marginVertical: 10,
+    lineHeight: 15,
+    letterSpacing: 0.8
   }
 })

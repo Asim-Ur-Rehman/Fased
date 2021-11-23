@@ -163,7 +163,7 @@ export const ReportIncident = ({ navigation }) => {
 
                 <MapView
                     initialRegion={INITIAL_REGION}
-                    style={{ height: '95%' }}
+                    style={{ height: '88%' }}
 
                     ref={mapRef}
 
@@ -256,31 +256,19 @@ export const ReportIncident = ({ navigation }) => {
 
                             />
                         </View>
-
-
-
-
-
                     </View>
                     <View style={{ marginVertical: 10 }}>
                         <Button
-
                             onPress={() => {
                                 navigation.navigate('ReportIncidentA')
                             }}
                             buttonStyle={{ width: '85%', alignSelf: 'center' }}
                             title="Next"
-                        />
+                         />
                     </View>
                 </View>
 
             </ScrollView>
-
-
-
-
-
-
         </SafeAreaView>
     )
 }
@@ -292,7 +280,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: height * 0.1,
         // backgroundColor: 'red',
-        marginTop: 25,
+        marginTop: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row'
