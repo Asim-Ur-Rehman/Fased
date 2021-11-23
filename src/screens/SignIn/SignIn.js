@@ -88,7 +88,7 @@ export const SignIn = ({ navigation }) => {
         <View style={styles.checkboxContainer}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <CheckBox
-              checkBoxColor="#9CA3AF"              
+              checkBoxColor="#9CA3AF"
               checkedCheckBoxColor="#BE0000"
               style={{ alignSelf: 'center', }}
               onClick={() => setChecked(!checked)}
@@ -105,8 +105,9 @@ export const SignIn = ({ navigation }) => {
             <Text style={styles.label}>Forget Password?</Text>
           </TouchableOpacity>
         </View>
-          <View
-          style={{ paddingVertical: 20
+        <View
+          style={{
+            paddingVertical: 20
           }}>
           <Button
             onPress={() => {
@@ -119,7 +120,7 @@ export const SignIn = ({ navigation }) => {
           />
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontFamily:"Inter-Regular", }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontFamily: "Inter-Regular", }}>
             Or sign in with social account
           </Text>
         </View>
@@ -143,7 +144,7 @@ export const SignIn = ({ navigation }) => {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontFamily:"Inter-Regular" }}>
+          <Text style={{ color: '#252529', fontSize: 13, fontFamily: "Inter-Regular" }}>
             Don’t have an account?
           </Text>
           <TouchableOpacity
@@ -155,7 +156,7 @@ export const SignIn = ({ navigation }) => {
               style={{
                 color: '#BE0000',
                 fontSize: 13,
-                fontFamily:"Inter-Medium",
+                fontFamily: "Inter-Medium",
                 marginLeft: 3
               }}>
               Sign Up Here
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
   },
   signInText: {
     fontSize: 18,
-    fontFamily:"Inter-Medium",
+    fontFamily: "Inter-Medium",
     textAlign: 'center',
   },
   InputContainer: {
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily:"Inter-Medium",
+    fontFamily: "Inter-Medium",
   },
   input: {
     width: '88%',
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily:"Inter-Regular",
+    fontFamily: "Inter-Regular",
     backgroundColor: '#fff'
   },
   checkboxContainer: {
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 11.7,
-    fontFamily:"Inter-SemiBold",
+    fontFamily: "Inter-SemiBold",
     color: '#9CA3AF',
     marginLeft: 5
   },
@@ -271,3 +272,5 @@ const styles = StyleSheet.create({
     elevation: 5
   }
 })
+
+
