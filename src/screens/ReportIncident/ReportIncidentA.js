@@ -19,29 +19,28 @@ import Icon from 'react-native-vector-icons/Feather'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePickerModal from 'react-native-modal-datetime-picker'
 export const ReportIncidentA = ({ navigation }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
   }
-  const [show, setShow] = useState(false);
-  const [mode, setMode] = useState('time');
-  const [date, setDate] = useState('');
-  const [currentTime, setCurrentTime]=useState('')
+  const [show, setShow] = useState(false)
+  const [mode, setMode] = useState('time')
+  const [date, setDate] = useState('')
+  const [currentTime, setCurrentTime] = useState('')
 
-  const onChange = (date) => {
+  const onChange = date => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
     // setDate(time);
-    if(mode == 'time') {
+    if (mode == 'time') {
       setCurrentTime(time)
-    }else {
-      setDate(date.toDateString(),)
+    } else {
+      setDate(date.toDateString())
       // console.log("date", date.toDateString(), "time", time)
     }
-    setShow(!show);
-  };
-
+    setShow(!show)
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -65,27 +64,39 @@ export const ReportIncidentA = ({ navigation }) => {
               name="arrowleft"
               color="#000000"
               size={22}
-              onPress={() => { navigation.goBack() }}
+              onPress={() => {
+                navigation.goBack()
+              }}
             />
             <Text style={styles.headerLabel}>Report Incident</Text>
           </View>
           <View style={{ width: '20%', alignItems: 'flex-end' }}>
-            <Text style={{ color: '#909090', fontSize: 15, fontFamily:"Rubik-Regular", }}>
+            <Text
+              style={{
+                color: '#909090',
+                fontSize: 15,
+                fontFamily: 'Rubik-Regular'
+              }}>
               02 - 03
             </Text>
           </View>
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
-          <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
+          <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
             Choose Category
           </Text>
-          <View style={styles.fieldView}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ReportIncidentB')
+            }}
+            activeOpacity={0.8}
+            style={styles.fieldView}>
             <Text
               style={{
                 width: '90%',
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#33333370',
                 paddingHorizontal: 20
               }}>
@@ -99,19 +110,24 @@ export const ReportIncidentA = ({ navigation }) => {
                 style={{ paddingRight: 15 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold" }}>
+          <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
             Choose Sub Category
           </Text>
-          <View style={styles.fieldView}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ReportIncidentB')
+            }}
+            activeOpacity={0.8}
+            style={styles.fieldView}>
             <Text
               style={{
                 width: '90%',
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#33333370',
                 paddingHorizontal: 20
               }}>
@@ -125,32 +141,38 @@ export const ReportIncidentA = ({ navigation }) => {
                 style={{ paddingRight: 15 }}
               />
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>Date</Text>
+            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+              Date
+            </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
+                style={{
+                  fontSize: 11,
+                  fontFamily: 'Rubik-SemiBold',
+                  marginRight: 12
+                }}>
                 Today
               </Text>
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <TouchableOpacity 
-          activeOpacity={0.8}
-          onPress={() => {
-            setMode('date')
-            setShow(true)
-          }}
-          style={styles.fieldView2}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              setMode('date')
+              setShow(true)
+            }}
+            style={styles.fieldView2}>
             <Text
               style={{
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#33333370',
                 margin: 10,
                 paddingLeft: 10
@@ -174,31 +196,37 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>Time</Text>
+            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+              Time
+            </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
+                style={{
+                  fontSize: 11,
+                  fontFamily: 'Rubik-SemiBold',
+                  marginRight: 12
+                }}>
                 Now
               </Text>
               <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
             </View>
           </View>
-          <TouchableOpacity 
-          activeOpacity={0.8}
-          onPress={() => {
-            setMode('time')
-            setShow(true)
-          }}
-          style={styles.fieldView}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {
+              setMode('time')
+              setShow(true)
+            }}
+            style={styles.fieldView}>
             <Text
               style={{
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#33333370',
                 margin: 10,
                 paddingLeft: 10
               }}>
-                {currentTime ? currentTime :'Choose time'}
+              {currentTime ? currentTime : 'Choose time'}
             </Text>
             <View>
               <Image
@@ -212,38 +240,48 @@ export const ReportIncidentA = ({ navigation }) => {
               />
             </View>
           </TouchableOpacity>
-             <DateTimePickerModal
-                isVisible={show}  
-                // testID="dateTimePicker"
-                onCancel={() => {
-                  setShow(!show)
-                }}
-                display={(mode == "time" || Platform.OS == "android") ? (Platform.OS == "android" ? "default" : "spinner") : "inline"}
-                value={date}
-                mode={mode}
-                is24Hour={true}
-                onConfirm={onChange}
-                // customConfirmButtonIOS={(value,e) => {
-                //   console.log("value", value, "e", e.target)
-                //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
-                // }}
-                // customCancelButtonIOS={(value,e) => {
-                //   return <View style={{backgroundColor: '#fff', padding: 5, borderRadius: 20}}>
-                //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
-                //         </View>
-                // }}
-            />
+          <DateTimePickerModal
+            isVisible={show}
+            // testID="dateTimePicker"
+            onCancel={() => {
+              setShow(!show)
+            }}
+            display={
+              mode == 'time' || Platform.OS == 'android'
+                ? Platform.OS == 'android'
+                  ? 'default'
+                  : 'spinner'
+                : 'inline'
+            }
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            onConfirm={onChange}
+            // customConfirmButtonIOS={(value,e) => {
+            //   console.log("value", value, "e", e.target)
+            //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
+            // }}
+            // customCancelButtonIOS={(value,e) => {
+            //   return <View style={{backgroundColor: '#fff', padding: 5, borderRadius: 20}}>
+            //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
+            //         </View>
+            // }}
+          />
         </View>
 
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
+            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
               Suspect Name
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
+                style={{
+                  fontSize: 11,
+                  fontFamily: 'Rubik-SemiBold',
+                  marginRight: 12
+                }}>
                 Don’t Know
               </Text>
               <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
@@ -252,9 +290,9 @@ export const ReportIncidentA = ({ navigation }) => {
           <View style={styles.fieldView2}>
             <TextInput
               style={{
-                width:"90%",
+                width: '90%',
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#000',
                 paddingHorizontal: 20
               }}
@@ -270,12 +308,16 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", }}>
+            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
               Did This Cost You Money?
             </Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
-                style={{ fontSize: 11, fontFamily:"Rubik-SemiBold", marginRight: 12 }}>
+                style={{
+                  fontSize: 11,
+                  fontFamily: 'Rubik-SemiBold',
+                  marginRight: 12
+                }}>
                 No
               </Text>
               <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
@@ -284,9 +326,9 @@ export const ReportIncidentA = ({ navigation }) => {
           <View style={styles.fieldView}>
             <TextInput
               style={{
-                width:"85%",
+                width: '85%',
                 fontSize: 14,
-                fontFamily:"Rubik-Regular",
+                fontFamily: 'Rubik-Regular',
                 color: '#000',
                 paddingHorizontal: 20
               }}
@@ -299,7 +341,7 @@ export const ReportIncidentA = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                fontFamily:"Rubik-SemiBold",
+                fontFamily: 'Rubik-SemiBold',
                 paddingRight: 15
               }}>
               USD
@@ -310,7 +352,7 @@ export const ReportIncidentA = ({ navigation }) => {
         <View style={{ marginTop: 15, paddingBottom: 50 }}>
           <Button
             onPress={() => {
-              navigation.navigate('ReportIncidentB')
+              navigation.navigate('ReportIncidentC')
             }}
             buttonStyle={{ width: '90%', alignSelf: 'center' }}
             title="Next"
@@ -339,7 +381,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     marginLeft: 20,
-    fontFamily:"Rubik-Medium",
+    fontFamily: 'Rubik-Medium'
   },
   fieldView2: {
     flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView, Alert } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
@@ -55,16 +55,21 @@ export const Categories = ({ navigation }) => {
     // console.log('select', select)
     const selectedCard = (i) => {
 
+       
         var arr = [...select]
         var isFind = arr.findIndex(e => e.i == i.i)
         if (isFind == -1) {
-            arr.push(i)
-            setSelect(arr)
+            if(select.length == 5) {
+                Alert.alert("Alert", "At least 1 category should be selected")
+            }else {
+                arr.push(i)
+                setSelect(arr)
+            }
         }
         else {
             arr.splice(isFind, 1)
             setSelect(arr)
-        }
+       }
 
     }
 
