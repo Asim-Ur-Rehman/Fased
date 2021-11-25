@@ -55,19 +55,20 @@ export const Categories = ({ navigation }) => {
     // console.log('select', select)
     const selectedCard = (i) => {
 
-       if(select.length == 5) {
-        Alert.alert("Alert", "At least must be 1 category")
-       }else {
+       
         var arr = [...select]
         var isFind = arr.findIndex(e => e.i == i.i)
         if (isFind == -1) {
-            arr.push(i)
-            setSelect(arr)
+            if(select.length == 5) {
+                Alert.alert("Alert", "At least 1 category should be selected")
+            }else {
+                arr.push(i)
+                setSelect(arr)
+            }
         }
         else {
             arr.splice(isFind, 1)
             setSelect(arr)
-        }
        }
 
     }
