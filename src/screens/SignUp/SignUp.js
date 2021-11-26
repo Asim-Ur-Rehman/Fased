@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -32,6 +33,7 @@ export const SignUp = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+      <KeyboardAvoidingView style={{flex: 1}} behavior="position">
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -108,6 +110,7 @@ export const SignUp = ({ navigation }) => {
           />
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

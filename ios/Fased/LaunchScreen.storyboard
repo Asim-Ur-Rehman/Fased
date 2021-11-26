@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -14,20 +14,20 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-Ep-wvF">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-Ep-wvF">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YwU-Ep-wvF" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="R5Y-Oo-l8K"/>
-                            <constraint firstItem="Bcu-3y-fUS" firstAttribute="bottom" secondItem="YwU-Ep-wvF" secondAttribute="bottom" id="ake-7i-NQM"/>
+                            <constraint firstAttribute="bottom" secondItem="YwU-Ep-wvF" secondAttribute="bottom" id="ake-7i-NQM"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="trailing" secondItem="YwU-Ep-wvF" secondAttribute="trailing" id="hau-bF-pS5"/>
-                            <constraint firstItem="YwU-Ep-wvF" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" id="vFD-0E-AdG"/>
+                            <constraint firstItem="YwU-Ep-wvF" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="vFD-0E-AdG"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="splash" width="562.5" height="1218"/>
+        <image name="splash" width="375" height="812"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

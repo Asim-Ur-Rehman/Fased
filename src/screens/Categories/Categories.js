@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('screen')
 import LinearGradient from 'react-native-linear-gradient'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import BackButtonHandler from '../../components/BackHandler'
 
 
 export const Categories = ({ navigation }) => {
@@ -73,6 +73,11 @@ export const Categories = ({ navigation }) => {
 
     }
 
+
+    BackButtonHandler('hardwareBackPress', async () => {
+        navigation.navigate('Home')
+    });
+
     // console.log('selcted', select)
 
     return (
@@ -108,7 +113,9 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
 
                     }}>
-                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} onPress={() => { navigation.goBack() }} />
+                        <AntDesign name='arrowleft' color='#FFFFFF' size={25} onPress={() => {
+                                navigation.navigate('Home')
+                            }} />
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,

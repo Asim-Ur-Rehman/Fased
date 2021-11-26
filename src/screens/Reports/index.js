@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, SafeAreaView, StatusBar } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -79,7 +79,9 @@ export const Reports = ({ navigation }) => {
         )
     }
     return (
-        <View style={{ flex: 1 }}>
+       <SafeAreaView style={{flex: 1}}>
+           <StatusBar backgroundColor="#000" translucent={true} barStyle="dark-content"/>
+            <View style={{ flex: 1}}>
             <LinearGradient
                 colors={['#9CA3AF', '#4A4C50']}
                 start={{ x: 0.95, y: 0 }}
@@ -143,6 +145,7 @@ export const Reports = ({ navigation }) => {
                 </Text>
             </TouchableOpacity>
         </View>
+    </SafeAreaView>
     )
 }
 

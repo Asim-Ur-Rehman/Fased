@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView, TextInput, KeyboardAvoidingView, Platform } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
@@ -94,7 +94,11 @@ export const ReportIncident = ({ navigation }) => {
                     01 - 03
                 </Text>
             </View>
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}
+            <KeyboardAvoidingView
+            style = {{ flex: 1 }}
+            behavior = "height" >
+            <ScrollView 
+                contentContainerStyle={{ flexGrow: 1 }}
                 showsVerticalScrollIndicator={false}
             >
                 
@@ -269,6 +273,7 @@ export const ReportIncident = ({ navigation }) => {
                 </View>
 
             </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
@@ -280,7 +285,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         height: height * 0.1,
         // backgroundColor: 'red',
-        marginTop: 15,
+        marginTop: Platform.OS == "android" ? 15 : -10,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row'

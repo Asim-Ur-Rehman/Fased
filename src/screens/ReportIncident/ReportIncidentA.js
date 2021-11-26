@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  Platform
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -49,6 +50,7 @@ export const ReportIncidentA = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+      <KeyboardAvoidingView style={{flex: 1}} behavior="position">
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -359,6 +361,7 @@ export const ReportIncidentA = ({ navigation }) => {
           />
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
