@@ -269,9 +269,11 @@ export const Home = ({ navigation, route }) => {
                         <Image style={styles.img} source={Images.Pictures.logo} />
                     </TouchableOpacity>
                     <View style={styles.header2}>
-                        <View style={styles.btn}>
+                        <TouchableOpacity 
+                        onPress={()=>navigation.navigate('NewsCard')}
+                        style={styles.btn} activeOpacity={0.7}>
                             <Text style={{ fontSize: 10, fontFamily: "Rubik-Medium", color: "#ffffff" }}>NEWS</Text>
-                        </View>
+                        </TouchableOpacity>
                         <View style={{ flexDirection: "column", }}>
                             <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
                             <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
