@@ -5,10 +5,10 @@ import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
 const { width, height } = Dimensions.get('screen')
 import LinearGradient from 'react-native-linear-gradient'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 
+import Feather from 'react-native-vector-icons/Feather'
+
+import { SearchBar } from 'react-native-elements';
 
 
 export const NewsCard = ({ navigation }) => {
@@ -17,6 +17,7 @@ export const NewsCard = ({ navigation }) => {
     const [New, setNew] = useState(false);
     const [Star, setStar] = useState(false);
     const [category, setCategory] = useState(false);
+    const [search, setSearch] = useState('')
 
 
 
@@ -25,40 +26,46 @@ export const NewsCard = ({ navigation }) => {
 
     const [select, setSelect] = useState([])
 
+
+    const updateSearch = (text) => {
+        // setState({...state, search: text});
+        setSearch(text)
+    };
+
     const CardsData = [
         {
             img: Images.Pictures.category,
-            title: 'Killing',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         },
         {
             img: Images.Pictures.harasment,
-            title: 'Harrasment',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         },
         {
             img: Images.Pictures.kidnap,
-            title: 'Kidnapping',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         },
         {
             img: Images.Pictures.robery,
-            title: 'Robery',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         },
         {
             img: Images.Pictures.snatch,
-            title: 'Snatching',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         },
         {
             img: Images.Pictures.assault,
-            title: 'Assault',
+            title: 'CDB Products',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
 
         }
@@ -88,30 +95,30 @@ export const NewsCard = ({ navigation }) => {
 
     // console.log('selcted', select)
 
-   const handleOld = topBar => {
+    const handleOld = topBar => {
         setOld(1);
         setNew(0);
         setStar(0);
         setCategory(0);
-      };
-      const  handleNew = topBar => {
+    };
+    const handleNew = topBar => {
         setOld(0);
         setNew(1);
         setStar(0);
         setCategory(0);
-      };
-      const  handleStar = topBar => {
+    };
+    const handleStar = topBar => {
         setOld(0);
         setNew(0);
         setStar(1);
         setCategory(0);
-      };
-      const  handleCategory = topBar => {
+    };
+    const handleCategory = topBar => {
         setOld(0);
         setNew(0);
         setStar(0);
         setCategory(1);
-      };
+    };
 
     return (
         <SafeAreaView style={{
@@ -131,39 +138,40 @@ export const NewsCard = ({ navigation }) => {
                 style={styles.linearMainViewStyle}
 
             >
-    <View style={styles.headerDownView}>
-        <TouchableOpacity
-        onPress={() => handleOld()}
-        activeOpacity={0.8} style={old ? styles.ImgView1 : styles.ImgView2}>
-          <Text  style={old ? styles.textStyle1 : styles.textStyle2}>
-         Old
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.borderView}/>
-        <TouchableOpacity 
-        onPress={() => handleNew()}
-        activeOpacity={0.8} style={New ? styles.ImgView1 : styles.ImgView2}>
-          <Text style={New ? styles.textStyle1 : styles.textStyle2}>
-            New
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.borderView}/>
-        <TouchableOpacity 
-        onPress={() => handleStar()}
-        activeOpacity={0.8} style={Star ? styles.ImgView1 : styles.ImgView2}>
-          <Text style={Star ? styles.textStyle1 : styles.textStyle2}>
-            Star
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.borderView}/>
-        <TouchableOpacity 
-        onPress={() => handleCategory()}
-        activeOpacity={0.8} style={category ? styles.ImgView1 : styles.ImgView2}>
-          <Text style={category ? styles.textStyle1 : styles.textStyle2}>
-            Category
-          </Text>
-        </TouchableOpacity>
-      </View>
+                <View style={styles.headerDownView}>
+                    <TouchableOpacity
+                        onPress={() => handleOld()}
+                        activeOpacity={0.8} style={old ? styles.ImgView1 : styles.ImgView2}>
+                        <Text style={old ? styles.textStyle1 : styles.textStyle2}>
+                            Old
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={styles.borderView} />
+                    <TouchableOpacity
+                        onPress={() => handleNew()}
+                        activeOpacity={0.8} style={New ? styles.ImgView1 : styles.ImgView2}>
+                        <Text style={New ? styles.textStyle1 : styles.textStyle2}>
+                            New
+                        </Text>
+                    </TouchableOpacity>
+                    <View style={styles.borderView} />
+                    <TouchableOpacity
+                        onPress={() => handleStar()}
+                        activeOpacity={0.8} style={Star ? styles.ImgView1 : styles.ImgView2}>
+                        <Feather name='star' size={20} color={Star ? 'red' : 'white'} />
+                        {/* <Text style={Star ? styles.textStyle1 : styles.textStyle2}>
+                            Star
+                        </Text> */}
+                    </TouchableOpacity>
+                    <View style={styles.borderView} />
+                    <TouchableOpacity
+                        onPress={() => handleCategory()}
+                        activeOpacity={0.8} style={category ? styles.ImgView1 : styles.ImgView2}>
+                        <Text style={category ? styles.textStyle1 : styles.textStyle2}>
+                            Categories
+                        </Text>
+                    </TouchableOpacity>
+                </View>
 
 
             </LinearGradient>
@@ -183,24 +191,40 @@ export const NewsCard = ({ navigation }) => {
                 }}>
 
 
-                    <View style={{
-                          width: '100%',
-                          alignSelf: 'center',
-                          height: 70,
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          top: 5,
-                          paddingHorizontal: 22
-                    }}>
 
-                        <Text style={{
-                            fontSize: 17,
-                            fontFamily: 'Rubik-SemiBold',
-                            color: theme.textColor.blackText
-                        }}>Select Categories</Text>
+                    {/* =========Search Bar view ====== */}
+                    <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
+                        <SearchBar
+                            placeholder="Search"
+                            placeholderTextColor={'#dcdcdc'}
+                            onChangeText={(text) => updateSearch(text)}
+                            value={search}
+                            containerStyle={{
+                                height: 50,
+                                borderRadius: 10,
+                                borderWidth: 0,
+                                backgroundColor: 'white',
+                                borderTopWidth: 0,
+                                borderBottomWidth: 0,
+                                shadowColor: '#000',
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 3.84,
 
+                                elevation: 5,
+                            }}
+                            inputContainerStyle={{
+                                backgroundColor: 'white',
+                                height: 40,
+                                borderRadius: 10,
+                            }}
+                            inputStyle={{ fontSize: 16 }}
+                            searchIcon={{ size: 28, color: '#dcdcdc' }}
+                        />
                     </View>
-
 
 
 
@@ -209,7 +233,7 @@ export const NewsCard = ({ navigation }) => {
                             return (
                                 <TouchableOpacity
 
-                                    onPress={() => {                                       
+                                    onPress={() => {
                                         navigation.navigate('NewsDetails')
                                     }}
                                     activeOpacity={0.7}
@@ -219,7 +243,8 @@ export const NewsCard = ({ navigation }) => {
                                         alignSelf: 'center',
                                         height: 96.26,
                                         borderRadius: 10,
-                                        backgroundColor: i == 1 ? '#FFA724' : i == 2 ? '#CF00BA' : i == 3 ? '#5819C1' : i == 4 ? '#211DE8' : i == 5 ? '#0CB9A2' : '#DF0707',
+                                        // backgroundColor: i == 1 ? '#FFA724' : i == 2 ? '#CF00BA' : i == 3 ? '#5819C1' : i == 4 ? '#211DE8' : i == 5 ? '#0CB9A2' : '#DF0707',
+                                        backgroundColor: '#9CA3AF',
                                         flexDirection: 'row',
                                         marginBottom: 12,
 
@@ -259,16 +284,7 @@ export const NewsCard = ({ navigation }) => {
                                         marginTop: 6
                                     }}>
 
-                                        <View style={{
-                                            width: '92%',
-                                            // backgroundColor: 'green',
-                                            alignItems: 'flex-end',
-                                            // marginTop: 4
-                                        }}>
 
-                                            <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
-
-                                        </View>
 
 
 
@@ -280,7 +296,7 @@ export const NewsCard = ({ navigation }) => {
                                         }}>
                                             <Text style={{
                                                 fontSize: 14,
-                                                fontFamily:"Rubik-Medium",
+                                                fontFamily: "Rubik-Medium",
                                                 color: '#ffff',
                                                 paddingBottom: 5
                                             }}>
@@ -288,8 +304,8 @@ export const NewsCard = ({ navigation }) => {
                                             </Text>
                                             <Text style={{
                                                 fontSize: 11,
-                                                fontFamily:"Rubik-Regular",
-                                                color: '#fff',
+                                                fontFamily: "Rubik-Regular",
+                                                color: 'black',
                                                 lineHeight: 12
                                                 // marginBottom: 10
                                             }}>
@@ -346,6 +362,9 @@ export const NewsCard = ({ navigation }) => {
 
 
 
+            <View>
+                <Image style={{ height: 61, width: '100%' }} source={Images.Pictures.demo} />
+            </View>
 
 
 
@@ -363,50 +382,51 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end'
     },
 
-headerDownView: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  ImgView1: {
-      height:50,
-      width:"25%",
-    //   backgroundColor:"#FE0000",
-    alignItems: 'center',
-    justifyContent: 'center',
+    headerDownView: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    ImgView1: {
+        height: 50,
+        width: "25%",
+        //   backgroundColor:"#FE0000",
+        alignItems: 'center',
+        justifyContent: 'center',
 
-    borderBottomWidth:3,
-    borderBottomColor:"#FE0000",
-  },
-  ImgView2: {
-    height:50,
-    width:"25%",
-    // backgroundColor:"#FE000050",
-  alignItems: 'center',
-  justifyContent: 'center',
+        borderBottomWidth: 3,
+        borderBottomColor: "#FE0000",
+    },
+    ImgView2: {
+        height: 50,
+        width: "25%",
+        // backgroundColor:"#FE000050",
+        alignItems: 'center',
+        justifyContent: 'center',
 
-},
-  ImgStyle: {
-    width: 22,
-    height: 24,
-    resizeMode: 'contain',
-    tintColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  borderView:{height:30, width:1, backgroundColor:"#ffffff50"},
-  textStyle1:{
-    fontSize: 15,
-    fontFamily: 'Rubik-Medium',
-    color: '#FE0000',
-    marginTop: 6
-  },
-  textStyle2:{
-    fontSize: 14,
-    fontFamily: 'Rubik-Medium',
-    color: '#fff',
-    marginTop: 6
-  }
+    },
+    ImgStyle: {
+        width: 22,
+        height: 24,
+        resizeMode: 'contain',
+        tintColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    borderView: { height: 30, width: 1, backgroundColor: "#ffffff50" },
+    textStyle1: {
+        fontSize: 15,
+        fontFamily: 'Rubik-Medium',
+        color: '#FE0000',
+        marginTop: 6,
+        // paddingRight: 10
+    },
+    textStyle2: {
+        fontSize: 14,
+        fontFamily: 'Rubik-Medium',
+        color: '#fff',
+        marginTop: 6
+    }
 
 })
