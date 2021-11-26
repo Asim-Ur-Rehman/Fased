@@ -217,7 +217,7 @@ export const Home = ({ navigation, route }) => {
             image: require('../../assets/images/user.png'),
 
         },
-    
+
     ]
 
     const [reason, setReason] = useState([
@@ -269,16 +269,18 @@ export const Home = ({ navigation, route }) => {
                         <Image style={styles.img} source={Images.Pictures.logo} />
                     </TouchableOpacity>
                     <View style={styles.header2}>
-                        <TouchableOpacity 
-                        onPress={()=>navigation.navigate('NewsCard')}
-                        style={styles.btn} activeOpacity={0.7}>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('NewsCard')}
+                            style={styles.btn} activeOpacity={0.7}>
                             <Text style={{ fontSize: 10, fontFamily: "Rubik-Medium", color: "#ffffff" }}>NEWS</Text>
                         </TouchableOpacity>
-                        <View style={{ flexDirection: "column", }}>
+                        <TouchableOpacity activeOpacity={0.7} style={{ flexDirection: "column", }} onPress={() => {
+                            navigation.navigate('NewsDetails')
+                        }}  >
                             <Text style={styles.headerText}>Metus enim nunc, conseqt diam unc  </Text>
                             <Text style={styles.headerText}>varius. Egestas tempor  <Text style={styles.read}>Read more</Text></Text>
 
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
