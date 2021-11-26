@@ -24,6 +24,8 @@ import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
+import Feather from 'react-native-vector-icons/Feather'
+
 
 export const NewsDetails = ({ navigation }) => {
   const [text, setText] = useState('')
@@ -79,21 +81,27 @@ export const NewsDetails = ({ navigation }) => {
         start={{ x: 0.95, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.LinearheaderContainer}>
-            <View>
-              <Text style={styles.headerLabel}>News Details</Text>           
-            </View>
+        <View>
+          <Feather name='star' size={20} color={'white'} />
+        </View>
+        <View>
+          <Text style={styles.headerLabel}>News Details</Text>
+        </View>
+        <TouchableOpacity activeOpacity={0.7}>
+          <Text style={styles.headerLabel}>Share</Text>
+        </TouchableOpacity>
       </LinearGradient>
 
-      <View style={{flex:1,}}>
+      <View style={{ flex: 1, }}>
 
-      <View
+        <View
           style={{
             marginTop: 20,
             width: '90%',
             alignSelf: 'center',
             backgroundColor: '#FDEBEB',
             borderWidth: 0.8,
-            borderColor: '#DF0707',
+            borderColor: '#9CA3AF',
             borderRadius: 10
           }}>
           <View
@@ -101,7 +109,7 @@ export const NewsDetails = ({ navigation }) => {
               width: '100%',
               alignSelf: 'center',
               height: 90,
-              backgroundColor: '#DF0707',
+              backgroundColor: '#9CA3AF',
               borderRadius: 9,
               justifyContent: 'center',
               alignItems: 'center'
@@ -118,7 +126,7 @@ export const NewsDetails = ({ navigation }) => {
               style={{
                 fontSize: 12,
                 fontFamily: 'Rubik-Regular',
-                color: '#fff',
+                color: 'black',
                 marginTop: 6,
                 textAlign: 'center',
                 paddingHorizontal: 50
@@ -126,43 +134,16 @@ export const NewsDetails = ({ navigation }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 1.65}}>
-           <CustomScrollView
+          <View style={{ height: height / 1.65 }}>
+            <CustomScrollView
               contentContainerStyle={{ paddingBottom: 20, }}
-              ScrollBarStyle={{ backgroundColor: '#FDEBEB',width:14 }}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
-                backgroundColor: '#DF0707',
+                backgroundColor: '#9CA3AF',
                 borderRadius: 3,
                 width: 5,
-                marginTop:5,
+                marginTop: 5,
               }}>
-                
-              <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
 
               <Text style={styles.ContentTextStyle}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
@@ -192,6 +173,20 @@ export const NewsDetails = ({ navigation }) => {
               </Text>
 
               <Text style={styles.ContentTextStyle}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
+                aliquam sed mi.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
+                semper venenatis. Adipiscing venenatis arcu a quis sit id
+                euismod nisl, purus.
+              </Text>
+
+              <Text style={styles.ContentTextStyle}>
                 Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
                 Augue tristique eu vulputate massa sed. Enim, montes, sit semper
                 venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
@@ -203,8 +198,21 @@ export const NewsDetails = ({ navigation }) => {
                 Augue tristique eu vulputate massa sed. Enim, montes, sit semper
                 venenatis.
               </Text>
-            </CustomScrollView> 
-         </View>
+
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
+                purus.
+              </Text>
+              <Text style={styles.ContentTextStyle}>
+                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
+                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
+                venenatis.
+              </Text>
+            </CustomScrollView>
+          </View>
         </View>
         <View>
           <Button
@@ -218,13 +226,13 @@ export const NewsDetails = ({ navigation }) => {
             title="Done"
           />
         </View>
-    </View> 
-    
-
- 
+      </View>
 
 
-        
+
+
+
+
     </SafeAreaView>
   )
 }
@@ -234,10 +242,11 @@ const styles = StyleSheet.create({
     flex: 1
   },
   LinearheaderContainer: {
-    width: '100%',
+    // width: '100%',
     height: 100,
-    justifyContent: 'center',
-    alignItems:"center",
+    justifyContent: 'space-evenly',
+    alignItems: "center",
+    flexDirection: 'row'
   },
   headerView: {
     flexDirection: 'row',

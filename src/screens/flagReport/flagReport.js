@@ -132,9 +132,9 @@ export const FlagReport = ({ navigation }) => {
               name="options-vertical"
               color="#fff"
               size={18}
-              // onPress={() => {
-              //   navigation.goBack('')
-              // }}
+            // onPress={() => {
+            //   navigation.goBack('')
+            // }}
             />
           </View>
         </View>
@@ -223,16 +223,16 @@ export const FlagReport = ({ navigation }) => {
             </Text>
           </View>
           <View style={{ height: height / 1.85 }}>
-           <CustomScrollView
+            <CustomScrollView
               contentContainerStyle={{ paddingBottom: 20, }}
-              ScrollBarStyle={{ backgroundColor: '#FDEBEB',width:14 }}
+              ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
                 borderRadius: 3,
                 width: 5,
-                marginTop:5,
+                marginTop: 5,
               }}>
-                
+
               <Text style={styles.ContentTextStyle}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
                 sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
@@ -300,7 +300,7 @@ export const FlagReport = ({ navigation }) => {
                 venenatis.
               </Text>
             </CustomScrollView>
-            
+
 
 
           </View>

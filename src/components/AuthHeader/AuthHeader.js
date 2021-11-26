@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet } from 'react-native'
 import { theme } from '../../constants/theme'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import LinearGradient from 'react-native-linear-gradient'
 
 
 export const AuthHeader = ({
@@ -23,21 +24,32 @@ export const AuthHeader = ({
 
 
             {
-                guestUser && <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{
-                        width: 180,
-                        height: 36,
-                        borderRadius: 10,
-                        backgroundColor: '#f9f9fb',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                             }}>
-                    <Text style={{
-                        fontSize: 14,
-                        fontFamily:"Inter-Medium",
-                        color: theme.textColor.litGrayText
-                    }}>Continue As Guest User</Text>
+                guestUser &&
+
+                <TouchableOpacity
+                    activeOpacity={0.7}>
+
+                    <LinearGradient
+                        style={{
+                            width: 180,
+                            height: 36,
+                            borderRadius: 10,
+                            backgroundColor: '#f9f9fb',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                        colors={['#9CA3AF', '#4A4C50']}
+                        start={{ x: 1, y: 0 }}
+                        end={{ x: 0, y: 1 }}
+
+                    >
+                        <Text style={{
+                            fontSize: 14,
+                            fontFamily: "Inter-Medium",
+                            color: theme.textColor.whiteText
+                        }}>Continue As Guest User</Text>
+                    </LinearGradient>
+
                 </TouchableOpacity>
             }
 
