@@ -62,8 +62,13 @@ export const ReportIncidentC = ({ navigation }) => {
           selectionColor="#a9a9a990"
           textAlignVertical="top"
           maxLength={1000}
+          blurOnSubmit
+          returnKeyType="done"
           onChangeText={e => {
             setText(e)
+          }}
+          onSubmitEditing={() => {
+            navigation.navigate('ReportingDone')
           }}
         />
         <Image

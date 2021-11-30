@@ -244,9 +244,10 @@ const styles = StyleSheet.create({
   LinearheaderContainer: {
     // width: '100%',
     height: 100,
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     alignItems: "center",
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingHorizontal: 20
   },
   headerView: {
     flexDirection: 'row',

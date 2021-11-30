@@ -121,7 +121,7 @@ export const NewsCard = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={{
+        <View style={{
             flex: 1,
 
             backgroundColor: theme.primaryColor
@@ -368,7 +368,7 @@ export const NewsCard = ({ navigation }) => {
 
 
 
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -379,7 +379,7 @@ const styles = StyleSheet.create({
 
     linearMainViewStyle: {
         height: height * 0.13,
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
 
     headerDownView: {

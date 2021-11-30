@@ -261,7 +261,7 @@ export const Home = ({ navigation, route }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={{flex: 1}}>
             {/* <StatusBar /> */}
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.header}>
