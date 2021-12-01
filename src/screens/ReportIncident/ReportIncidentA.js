@@ -21,6 +21,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 export const ReportIncidentA = ({ navigation }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
@@ -50,41 +52,128 @@ export const ReportIncidentA = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      <KeyboardAvoidingView style={{flex: 1}} behavior="position">
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        bounces={false}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.headerContainer}>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '80%',
-              alignItems: 'center'
-            }}>
-            <AntDesign
-              name="arrowleft"
-              color="#000000"
-              size={22}
-              onPress={() => {
-                navigation.goBack()
-              }}
-            />
-            <Text style={styles.headerLabel}>Report Incident</Text>
-          </View>
-          <View style={{ width: '20%', alignItems: 'flex-end' }}>
-            <Text
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.headerContainer}>
+            <View
               style={{
-                color: '#909090',
-                fontSize: 15,
-                fontFamily: 'Rubik-Regular'
+                flexDirection: 'row',
+                width: '80%',
+                alignItems: 'center'
               }}>
-              02 - 03
-            </Text>
+              <AntDesign
+                name="arrowleft"
+                color="#000000"
+                size={22}
+                onPress={() => {
+                  navigation.goBack()
+                }}
+              />
+              <Text style={styles.headerLabel}>Report Incident</Text>
+            </View>
+            <View style={{ width: '20%', alignItems: 'flex-end' }}>
+              <Text
+                style={{
+                  color: '#909090',
+                  fontSize: 15,
+                  fontFamily: 'Rubik-Regular'
+                }}>
+                02 - 03
+              </Text>
+            </View>
           </View>
-        </View>
 
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
+          <TouchableOpacity
+
+            // onPress={() => {
+            //   selectedCard(item.title)
+            // }}
+            activeOpacity={0.7}
+            style={{
+              width: '90%',
+              alignSelf: 'center',
+              height: 96.26,
+              borderRadius: 10,
+              backgroundColor: '#FFA724',
+              flexDirection: 'row',
+              marginBottom: 12,
+
+              // alignItems: 'center',
+            }}>
+
+            <View style={{
+              width: '30%',
+              alignItems: 'center',
+              justifyContent: 'center',
+
+
+            }}>
+              <Image source={Images.Pictures.harasment} style={{
+                width: 79.89,
+                height: 79.89,
+
+              }} />
+
+            </View>
+            <View style={{
+              width: '70%',
+              height: 79.89,
+              // backgroundColor: 'green',
+              // alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: 6
+            }}>
+
+              <View style={{
+                width: '92%',
+                // backgroundColor: 'green',
+                alignItems: 'flex-end',
+                // marginTop: 4
+              }}>
+
+                <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
+
+              </View>
+
+
+
+
+              <View style={{
+                height: 68,
+                width: '90%'
+                // backgroundColor: 'pink'
+              }}>
+                <Text style={{
+                  fontSize: 14,
+                  fontFamily: "Rubik-Medium",
+                  color: '#ffff',
+                  paddingBottom: 5
+                }}>
+                  Harrasment
+                </Text>
+                <Text style={{
+                  fontSize: 11,
+                  fontFamily: "Rubik-Regular",
+                  color: '#fff',
+                  lineHeight: 12
+                  // marginBottom: 10
+                }}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.
+                </Text>
+              </View>
+
+            </View>
+
+
+
+
+
+          </TouchableOpacity>
+
+          {/* <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
           <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
             Choose Category
           </Text>
@@ -113,152 +202,152 @@ export const ReportIncidentA = ({ navigation }) => {
               />
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-            Choose Sub Category
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ReportIncidentB')
-            }}
-            activeOpacity={0.8}
-            style={styles.fieldView}>
-            <Text
-              style={{
-                width: '90%',
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#33333370',
-                paddingHorizontal: 20
-              }}>
-              Select category
-            </Text>
-            <View>
-              <Icon
-                name="chevron-down"
-                color="#33333330"
-                size={22}
-                style={{ paddingRight: 15 }}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-              Date
+              Choose Sub Category
             </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('ReportIncidentB')
+              }}
+              activeOpacity={0.8}
+              style={styles.fieldView}>
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: 'Rubik-SemiBold',
-                  marginRight: 12
+                  width: '90%',
+                  fontSize: 14,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#33333370',
+                  paddingHorizontal: 20
                 }}>
-                Today
+                Select category
               </Text>
-              <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
-            </View>
+              <View>
+                <Icon
+                  name="chevron-down"
+                  color="#33333330"
+                  size={22}
+                  style={{ paddingRight: 15 }}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              setMode('date')
-              setShow(true)
-            }}
-            style={styles.fieldView2}>
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#33333370',
-                margin: 10,
-                paddingLeft: 10
-              }}>
-              {date ? date : 'Choose date'}
-            </Text>
-            <View>
-              <Image
-                source={Images.Pictures.calendar}
-                style={{
-                  width: 13,
-                  height: 14,
-                  marginRight: 15,
-                  tintColor: '#E0E5F2'
-                }}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
 
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-              Time
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Date
+              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: 'Rubik-SemiBold',
+                    marginRight: 12
+                  }}>
+                  Today
+                </Text>
+                <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
+              </View>
+            </View>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                setMode('date')
+                setShow(true)
+              }}
+              style={styles.fieldView2}>
               <Text
                 style={{
-                  fontSize: 11,
-                  fontFamily: 'Rubik-SemiBold',
-                  marginRight: 12
+                  fontSize: 14,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#33333370',
+                  margin: 10,
+                  paddingLeft: 10
                 }}>
-                Now
+                {date ? date : 'Choose date'}
               </Text>
-              <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
-            </View>
+              <View>
+                <Image
+                  source={Images.Pictures.calendar}
+                  style={{
+                    width: 13,
+                    height: 14,
+                    marginRight: 15,
+                    tintColor: '#E0E5F2'
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => {
-              setMode('time')
-              setShow(true)
-            }}
-            style={styles.fieldView}>
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#33333370',
-                margin: 10,
-                paddingLeft: 10
-              }}>
-              {currentTime ? currentTime : 'Choose time'}
-            </Text>
-            <View>
-              <Image
-                source={Images.Pictures.timeCircle}
-                style={{
-                  width: 17,
-                  height: 17,
-                  marginRight: 15,
-                  tintColor: '#E0E5F2'
-                }}
-              />
+
+          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Time
+              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: 'Rubik-SemiBold',
+                    marginRight: 12
+                  }}>
+                  Now
+                </Text>
+                <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+              </View>
             </View>
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={show}
-            // testID="dateTimePicker"
-            onCancel={() => {
-              setShow(!show)
-            }}
-            display={
-              mode == 'time' || Platform.OS == 'android'
-                ? Platform.OS == 'android'
-                  ? 'default'
-                  : 'spinner'
-                : 'inline'
-            }
-            value={date}
-            mode={mode}
-            is24Hour={true}
-            onConfirm={onChange}
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                setMode('time')
+                setShow(true)
+              }}
+              style={styles.fieldView}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#33333370',
+                  margin: 10,
+                  paddingLeft: 10
+                }}>
+                {currentTime ? currentTime : 'Choose time'}
+              </Text>
+              <View>
+                <Image
+                  source={Images.Pictures.timeCircle}
+                  style={{
+                    width: 17,
+                    height: 17,
+                    marginRight: 15,
+                    tintColor: '#E0E5F2'
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={show}
+              // testID="dateTimePicker"
+              onCancel={() => {
+                setShow(!show)
+              }}
+              display={
+                mode == 'time' || Platform.OS == 'android'
+                  ? Platform.OS == 'android'
+                    ? 'default'
+                    : 'spinner'
+                  : 'inline'
+              }
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              onConfirm={onChange}
             // customConfirmButtonIOS={(value,e) => {
             //   console.log("value", value, "e", e.target)
             //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
@@ -268,99 +357,99 @@ export const ReportIncidentA = ({ navigation }) => {
             //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
             //         </View>
             // }}
-          />
-        </View>
-
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-              Suspect Name
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: 'Rubik-SemiBold',
-                  marginRight: 12
-                }}>
-                Don’t Know
-              </Text>
-              <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
-            </View>
-          </View>
-          <View style={styles.fieldView2}>
-            <TextInput
-              style={{
-                width: '90%',
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#000',
-                paddingHorizontal: 20
-              }}
-              // onChangeText={onChangeNumber}
-              // value={'123456789012'}
-              placeholder="Enter name"
-              placeholderTextColor="#33333370"
-              keyboardType="default"
             />
           </View>
-        </View>
 
-        <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-              Did This Cost You Money?
-            </Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text
-                style={{
-                  fontSize: 11,
-                  fontFamily: 'Rubik-SemiBold',
-                  marginRight: 12
-                }}>
-                No
+          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Suspect Name
               </Text>
-              <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: 'Rubik-SemiBold',
+                    marginRight: 12
+                  }}>
+                  Don’t Know
+                </Text>
+                <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
+              </View>
+            </View>
+            <View style={styles.fieldView2}>
+              <TextInput
+                style={{
+                  width: '90%',
+                  fontSize: 14,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#000',
+                  paddingHorizontal: 20
+                }}
+                // onChangeText={onChangeNumber}
+                // value={'123456789012'}
+                placeholder="Enter name"
+                placeholderTextColor="#33333370"
+                keyboardType="default"
+              />
             </View>
           </View>
-          <View style={styles.fieldView}>
-            <TextInput
-              style={{
-                width: '85%',
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#000',
-                paddingHorizontal: 20
-              }}
-              // onChangeText={onChangeNumber}
-              // value={'123456789012'}
-              placeholder="Amount"
-              placeholderTextColor="#33333370"
-              keyboardType="numbers-and-punctuation"
-            />
-            <Text
-              style={{
-                fontSize: 14,
-                fontFamily: 'Rubik-SemiBold',
-                paddingRight: 15
-              }}>
-              USD
-            </Text>
-          </View>
-        </View>
 
-        <View style={{ marginTop: 15, paddingBottom: 50 }}>
-          <Button
-            onPress={() => {
-              navigation.navigate('ReportIncidentC')
-            }}
-            buttonStyle={{ width: '90%', alignSelf: 'center' }}
-            title="Next"
-          />
-        </View>
-      </ScrollView>
+          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Did This Cost You Money?
+              </Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontSize: 11,
+                    fontFamily: 'Rubik-SemiBold',
+                    marginRight: 12
+                  }}>
+                  No
+                </Text>
+                <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+              </View>
+            </View>
+            <View style={styles.fieldView}>
+              <TextInput
+                style={{
+                  width: '85%',
+                  fontSize: 14,
+                  fontFamily: 'Rubik-Regular',
+                  color: '#000',
+                  paddingHorizontal: 20
+                }}
+                // onChangeText={onChangeNumber}
+                // value={'123456789012'}
+                placeholder="Amount"
+                placeholderTextColor="#33333370"
+                keyboardType="numbers-and-punctuation"
+              />
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: 'Rubik-SemiBold',
+                  paddingRight: 15
+                }}>
+                USD
+              </Text>
+            </View>
+          </View>
+
+          <View style={{ marginTop: 15, paddingBottom: 50 }}>
+            <Button
+              onPress={() => {
+                navigation.navigate('ReportIncidentC')
+              }}
+              buttonStyle={{ width: '90%', alignSelf: 'center' }}
+              title="Next"
+            />
+          </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

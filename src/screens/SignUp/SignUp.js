@@ -33,83 +33,84 @@ export const SignUp = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      <KeyboardAvoidingView style={{flex: 1}} behavior="position">
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        bounces={false}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.signUpText}>Sign Up</Text>
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.logoContainer}>
+            <Image
+              source={Images.Pictures.logo}
+              style={{ width: 105, height: 105 }}
+            />
+          </View>
+          <View style={styles.textView}>
+            <Text style={styles.signUpText}>Sign Up</Text>
+            <View
+              style={{
+                backgroundColor: '#FE0000',
+                width: 21,
+                height: 1,
+                marginTop: 8
+              }}
+            />
+          </View>
+          <View style={styles.InputContainer}>
+            <View style={{ width: '83%', alignSelf: 'center' }}>
+              <Text style={styles.inputLabel}>Full Name</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="Enter your full name"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+            />
+
+            <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
+              <Text style={styles.inputLabel}>Email address</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="Eg namaemail@emailkamu.com"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="email-address"
+            />
+
+            <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
+              <Text style={styles.inputLabel}>Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+            />
+          </View>
+
           <View
             style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
-        </View>
-        <View style={styles.InputContainer}>
-          <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>Full Name</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="Enter your full name"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Email address</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="Eg namaemail@emailkamu.com"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="email-address"
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Password</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-          />
-        </View>
-
-        <View
-          style={{
-            // alignItems: 'center',
-            // justifyContent: 'center',
-            paddingVertical: 20
-          }}>
-          <Button
-            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-            title="Sign Up"
+              // alignItems: 'center',
+              // justifyContent: 'center',
+              paddingVertical: 20
+            }}>
+            <Button
+              onPress={() => navigation.navigate('AppStackNavigator')}
+              buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+              title="Sign Up"
             // textStyle={{fontFamily:"Inter-Bold",}}
-          />
-        </View>
-      </ScrollView>
+            />
+          </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: 18,
-    fontFamily:"Inter-Medium",
+    fontFamily: "Inter-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily:"Inter-Medium",
+    fontFamily: "Inter-Medium",
   },
   input: {
     width: '88%',
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily:"Inter-Regular",
+    fontFamily: "Inter-Regular",
     backgroundColor: '#fff'
   }
 })

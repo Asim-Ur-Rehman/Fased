@@ -10,10 +10,13 @@ import {
   StatusBar
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import { useSelector } from 'react-redux'
 import { Images } from '../../constants/images'
 
 export const CustomDrawer = ({ navigation }) => {
   const [active, setActive] = useState('')
+  const isGuest = useSelector((state) => state.userReducer.isGuest)
+
   const Data = [
     {
       title: 'Home',
@@ -28,9 +31,13 @@ export const CustomDrawer = ({ navigation }) => {
       // navigateTo: 'Setting'
     },
     {
-      title: 'Logout',
-      navigateTo: 'SignIn'
-    }
+      title: isGuest ? 'SignUp' : 'Logout',
+      navigateTo: isGuest ? 'SignUp' : 'SignIn'
+    },
+    // {
+    //   title: 'Logout',
+    //   navigateTo: 'SignIn'
+    // }
   ]
 
   return (
@@ -82,7 +89,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <Text
                   style={{
                     fontSize: 18,
-                    fontFamily:"OpenSans-Bold",
+                    fontFamily: "OpenSans-Bold",
                     color: i == active ? '#000' : '#ACB8BE'
                   }}>
                   {item.title}

@@ -8,77 +8,93 @@ import LinearGradient from 'react-native-linear-gradient'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import BackButtonHandler from '../../components/BackHandler'
+import CategoryComp from '../../components/CategoryCard'
 
 
 export const Categories = ({ navigation }) => {
     const [select, setSelect] = useState([])
+    const [click, setClick] = useState(true)
 
-    const CardsData = [
+    // const [state, setstate] = useState({
+    //     select: []
+    // })
+
+
+    const Data = [
         {
-            img: Images.Pictures.category,
+            key: 1,
             title: 'Killing',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel',
+            Image: Images.Pictures.category,
+            backgroundColor: '#DF0707'
         },
         {
-            img: Images.Pictures.harasment,
+            key: 2,
             title: 'Harrasment',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.harasment,
+            backgroundColor: '#FFA724'
         },
         {
-            img: Images.Pictures.kidnap,
+            key: 3,
             title: 'Kidnapping',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.kidnap,
+            backgroundColor: '#CF00BA'
         },
         {
-            img: Images.Pictures.robery,
+            key: 4,
             title: 'Robery',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.robery,
+            backgroundColor: '#5819C1'
         },
         {
-            img: Images.Pictures.snatch,
+            key: 5,
             title: 'Snatching',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.snatch,
+            backgroundColor: '#211DE8'
         },
         {
-            img: Images.Pictures.assault,
+            key: 6,
             title: 'Assault',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.assault,
+            backgroundColor: '#0CB9A2'
+        },
+    ];
 
-        }
-    ]
 
-    // console.log('select', select)
-    const selectedCard = (i) => {
-
-       
-        var arr = [...select]
-        var isFind = arr.findIndex(e => e.i == i.i)
-        if (isFind == -1) {
-            if(select.length == 5) {
-                Alert.alert("Alert", "At least 1 category should be selected")
-            }else {
-                arr.push(i)
-                setSelect(arr)
-            }
-        }
-        else {
-            arr.splice(isFind, 1)
-            setSelect(arr)
-       }
-
-    }
 
 
     BackButtonHandler('hardwareBackPress', async () => {
         navigation.navigate('Home')
     });
 
-    // console.log('selcted', select)
+    const onSelect = (item,) => {
+        var arr = []
+        const isSelected = select.findIndex((e) => e['key'] == item['key'])
+        if (isSelected == -1) {
+            if (select.length == 5) {
+                Alert.alert("Alert", "At least 1 category should be selected")
+            } else {
+                arr.push(item)
+                setSelect([...select, ...arr])
+            }
+        } else {
+            var newArr = select
+            newArr.splice(isSelected, 1)
+            setSelect(e => [...newArr])
+        }
+    }
+
 
     return (
         <SafeAreaView style={{
@@ -114,8 +130,8 @@ export const Categories = ({ navigation }) => {
 
                     }}>
                         <AntDesign name='arrowleft' color='#FFFFFF' size={25} onPress={() => {
-                                navigation.navigate('Home')
-                            }} />
+                            navigation.navigate('Home')
+                        }} />
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
@@ -186,166 +202,22 @@ export const Categories = ({ navigation }) => {
 
                     </View>
 
-
-
-
-                    {
-                        CardsData.map((item, i) => {
-                            return (
-                                <TouchableOpacity
-
-                                    onPress={() => {
-                                        selectedCard({ i: i, title: item.title })
-                                    }}
-                                    activeOpacity={0.7}
-                                    key={i}
-                                    style={{
-                                        width: '90%',
-                                        alignSelf: 'center',
-                                        height: 96.26,
-                                        borderRadius: 10,
-                                        backgroundColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9cba0' : '#FFA724')
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#fae5f8' : '#CF00BA') :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#b091e5' : '#5819C1') :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#e9e8fd' : '#211DE8') :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#b1e3dc' : '#0CB9A2') :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? '#ddaeae' : '#DF0707'),
-                                        flexDirection: 'row',
-                                        marginBottom: 12,
-                                        borderWidth: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0)
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? 1 : 0) :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? 1 : 0),
-                                        borderColor: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : 'transparent')
-                                            : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : 'transparent') :
-                                                i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : 'transparent') :
-                                                    i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : 'transparent') :
-                                                        i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : 'transparent') :
-                                                            ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : 'transparent'),
-                                        // alignItems: 'center',
-                                    }}>
-
-                                    <View style={{
-                                        width: '30%',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        // backgroundColor: 'transparent',
-                                        // shadowColor: "#000",
-                                        // shadowOffset: {
-                                        //     width: 0,
-                                        //     height: 5,
-                                        // },
-                                        // shadowOpacity: 0.34,
-                                        // shadowRadius: 6.27,
-
-                                        // elevation: 10,
-
-
-                                    }}>
-                                        <Image source={item.img} style={{
-                                            width: 79.89,
-                                            height: 79.89,
-
-                                        }} />
-
-                                    </View>
-                                    <View style={{
-                                        width: '70%',
-                                        height: 79.89,
-                                        // backgroundColor: 'green',
-                                        // alignItems: 'center',
-                                        justifyContent: 'center',
-                                        marginTop: 6
-                                    }}>
-
-                                        <View style={{
-                                            width: '92%',
-                                            // backgroundColor: 'green',
-                                            alignItems: 'flex-end',
-                                            // marginTop: 4
-                                        }}>
-
-                                            <MaterialCommunityIcons name='circle-slice-8' color={i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFFF')
-                                                : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                    i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#FFFF') :
-                                                        i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                            i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#FFFF') :
-                                                                ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#FFFF')} size={12} />
-
-                                        </View>
-
-
-
-
-                                        <View style={{
-                                            height: 68,
-                                            width: '90%'
-                                            // backgroundColor: 'pink'
-                                        }}>
-                                            <Text style={{
-                                                fontSize: 14,
-                                                fontFamily: "Rubik-Medium",
-                                                color: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#FFA724' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#CF00BA' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#5819C1' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#211DE8' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#0CB9A2' : '#FFFF') :
-                                                                    ((select.findIndex(e => e.i == i) != -1) ? '#DF0707' : '#FFFF'),
-                                                paddingBottom: 5
-                                            }}>
-                                                {item.title}
-                                            </Text>
-                                            <Text style={{
-                                                fontSize: 11,
-                                                fontFamily: "Rubik-Regular",
-                                                color: i == 1 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF')
-                                                    : i == 2 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                        i == 3 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                            i == 4 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                                i == 5 ? ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF') :
-                                                                    ((select.findIndex(e => e.i == i) != -1) ? '#4A4D51' : '#FFFF'),
-                                                lineHeight: 12
-                                                // marginBottom: 10
-                                            }}>
-                                                {item.description}
-                                            </Text>
-                                        </View>
-
-                                    </View>
-
-
-
-
-
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-
-
-
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <CategoryComp
+                            onPress={(e) => onSelect(e)}
+                            onChange={(arr) => {
+                                setSelect(e => [...arr])
+                                console.log('onchange', arr.length)
+                            }}
+                            data={Data}
+                            targetKey={"key"}
+                            selected={select}
+                        />
+                    </View>
                 </View>
-
-
-
             </ScrollView>
-
-
-
-
-            <View >
-
+            <View>
             </View>
-
-
-
-
-
-
-
-
         </SafeAreaView>
     )
 }
