@@ -167,31 +167,37 @@ export const ReportIncident = ({ navigation }) => {
                         }}
 
                     />
+                    <View style={{
+                        bottom: 50
 
-                    <MapView
-                        initialRegion={initialRegion}
-                        style={{ height: '88%' }}
-                        onRegionChangeComplete={onRegionChange}
-                        ref={mapRef}
-
-                    >
-                        {
-                            allMarkers.map((item, i) => {
-                                return (
-                                    <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                                        <Image source={item.image} style={{ width: 58, height: 58 }} resizeMode={'contain'} />
-                                    </Marker>
-                                )
-                            })
-                        }
+                    }}>
 
 
 
+                        <MapView
+                            initialRegion={initialRegion}
+                            style={{ height: '80%' }}
+                            onRegionChangeComplete={onRegionChange}
+                            ref={mapRef}
+
+                        >
+                            {
+                                allMarkers.map((item, i) => {
+                                    return (
+                                        <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }}  >
+                                            <Image source={item.image} style={{ width: 58, height: 58 }} resizeMode={'contain'} />
+                                        </Marker>
+                                    )
+                                })
+                            }
 
 
-                    </MapView>
 
 
+
+                        </MapView>
+
+                    </View>
                     <View style={styles.mapActionsContainer}>
                         <View style={styles.verticalBtnContainer}>
                             <View>
