@@ -1,5 +1,6 @@
 const initialState = {
   users: [],
+  isGuest: false,
   isLoading: false
 }
 

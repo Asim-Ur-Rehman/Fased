@@ -102,6 +102,7 @@ const MainNavigation = () => {
   return (
     <NavigationContainer theme={{ ...DefaultTheme, colors: { background: "#fff" } }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+
         <Stack.Screen
           name="AuthStackNavigator"
           options={{ headerShown: false }}

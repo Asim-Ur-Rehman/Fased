@@ -26,6 +26,7 @@ export const SignIn = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
+        navigation={navigation}
         guestUser={true}
         onPress={() => {
           navigation.navigate('Languages')

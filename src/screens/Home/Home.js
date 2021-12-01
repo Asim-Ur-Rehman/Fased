@@ -8,6 +8,7 @@ import { Marker } from "react-native-maps";
 import { VictoryPie, } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
+import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
 
     const mapRef = useRef(null)
@@ -229,7 +230,7 @@ export const Home = ({ navigation, route }) => {
         { text: "Assault", color: '#0CB9A2' },
     ])
     const [selected, setSelected] = useState(route.params?.selected ? route.params?.selected : [])
-
+    const isGuest = useSelector((state) => state.userReducer.isGuest)
     useEffect(() => {
         setSelected(route.params?.selected ? route.params?.selected : [])
     }, [route.params])
@@ -261,7 +262,7 @@ export const Home = ({ navigation, route }) => {
     };
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
             {/* <StatusBar /> */}
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.header}>
@@ -425,7 +426,13 @@ export const Home = ({ navigation, route }) => {
                     </View>
                 </View>
                 <View style={styles.reportBtn}>
-                    <Button title="Report" onPress={() => navigation.navigate('ReportIncident')} />
+                    <Button title="Report" onPress={() => {
+                        if (isGuest) {
+                            navigation.navigate('SignUp')
+                        } else {
+                            navigation.navigate('ReportIncident')
+                        }
+                    }} />
                 </View>
             </View>
 

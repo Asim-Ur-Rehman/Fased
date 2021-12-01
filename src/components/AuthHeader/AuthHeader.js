@@ -7,8 +7,8 @@ import LinearGradient from 'react-native-linear-gradient'
 
 export const AuthHeader = ({
     guestUser,
-    onPress = () => { }
-
+    onPress = () => { },
+    navigation
 }) => {
     return (
         <View style={{
@@ -27,6 +27,7 @@ export const AuthHeader = ({
                 guestUser &&
 
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('AppStackNavigator')}
                     activeOpacity={0.7}>
 
                     <LinearGradient

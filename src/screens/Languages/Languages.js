@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -8,6 +8,10 @@ import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 
 
 export const Languages = ({ navigation }) => {
+
+    // useEffect(() => {
+    //     navigation.navigate('AppStackNavigator')
+    // }, [])
 
     const Buttons = [{
         title: 'Arabic',
@@ -77,7 +81,7 @@ export const Languages = ({ navigation }) => {
                                     width: '90%',
                                     alignSelf: 'center'
                                 }}
-                                />
+                            />
                         </View>
                     )
                 })
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         textAlign: 'center',
-        fontFamily:"Rubik-Regular",
+        fontFamily: "Rubik-Regular",
         color: theme.textColor.grayText
     }
 

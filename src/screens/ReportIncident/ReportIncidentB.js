@@ -8,50 +8,64 @@ import LinearGradient from 'react-native-linear-gradient'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import CategoryComp from '../../components/CategoryCard'
 
 
 
 export const ReportIncidentB = ({ navigation }) => {
     const [select, setSelect] = useState([])
 
-    const CardsData = [
+    const Data = [
         {
-            img: Images.Pictures.category,
+            key: 1,
             title: 'Killing',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel',
+            Image: Images.Pictures.category,
+            backgroundColor: '#DF0707'
         },
         {
-            img: Images.Pictures.harasment,
+            key: 2,
             title: 'Harrasment',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.harasment,
+            backgroundColor: '#FFA724'
         },
         {
-            img: Images.Pictures.kidnap,
+            key: 3,
             title: 'Kidnapping',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.kidnap,
+            backgroundColor: '#CF00BA'
         },
         {
-            img: Images.Pictures.robery,
+            key: 4,
             title: 'Robery',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.robery,
+            backgroundColor: '#5819C1'
         },
         {
-            img: Images.Pictures.snatch,
+            key: 5,
             title: 'Snatching',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.snatch,
+            backgroundColor: '#211DE8'
         },
         {
-            img: Images.Pictures.assault,
+            key: 6,
             title: 'Assault',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
+            description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
+            Image: Images.Pictures.assault,
+            backgroundColor: '#0CB9A2'
+        },
+    ];
 
-        }
-    ]
 
     // console.log('select', select)
     const selectedCard = (title) => {
@@ -114,7 +128,7 @@ export const ReportIncidentB = ({ navigation }) => {
                         <Text style={{
                             marginLeft: 10,
                             fontSize: 20.28,
-                            fontFamily:"Rubik-Medium",
+                            fontFamily: "Rubik-Medium",
                             color: theme.textColor.whiteText
                         }}>Categories</Text>
 
@@ -143,13 +157,13 @@ export const ReportIncidentB = ({ navigation }) => {
 
 
                     <View style={{
-                          width: '100%',
-                          alignSelf: 'center',
-                          height: 70,
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          top: 5,
-                          paddingHorizontal: 22
+                        width: '100%',
+                        alignSelf: 'center',
+                        height: 70,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        top: 5,
+                        paddingHorizontal: 22
                     }}>
 
                         <Text style={{
@@ -160,113 +174,17 @@ export const ReportIncidentB = ({ navigation }) => {
 
                     </View>
 
-
-
-
-                    {
-                        CardsData.map((item, i) => {
-                            return (
-                                <TouchableOpacity
-
-                                    onPress={() => {
-                                        selectedCard(item.title)
-                                    }}
-                                    activeOpacity={0.7}
-                                    key={i}
-                                    style={{
-                                        width: '90%',
-                                        alignSelf: 'center',
-                                        height: 96.26,
-                                        borderRadius: 10,
-                                        backgroundColor: i == 1 ? '#FFA724' : i == 2 ? '#CF00BA' : i == 3 ? '#5819C1' : i == 4 ? '#211DE8' : i == 5 ? '#0CB9A2' : '#DF0707',
-                                        flexDirection: 'row',
-                                        marginBottom: 12,
-
-                                        // alignItems: 'center',
-                                    }}>
-
-                                    <View style={{
-                                        width: '30%',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        // backgroundColor: 'transparent',
-                                        // shadowColor: "#000",
-                                        // shadowOffset: {
-                                        //     width: 0,
-                                        //     height: 5,
-                                        // },
-                                        // shadowOpacity: 0.34,
-                                        // shadowRadius: 6.27,
-
-                                        // elevation: 10,
-
-
-                                    }}>
-                                        <Image source={item.img} style={{
-                                            width: 79.89,
-                                            height: 79.89,
-
-                                        }} />
-
-                                    </View>
-                                    <View style={{
-                                        width: '70%',
-                                        height: 79.89,
-                                        // backgroundColor: 'green',
-                                        // alignItems: 'center',
-                                        justifyContent: 'center',
-                                        marginTop: 6
-                                    }}>
-
-                                        <View style={{
-                                            width: '92%',
-                                            // backgroundColor: 'green',
-                                            alignItems: 'flex-end',
-                                            // marginTop: 4
-                                        }}>
-
-                                            <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
-
-                                        </View>
-
-
-
-
-                                        <View style={{
-                                            height: 68,
-                                            width: '90%'
-                                            // backgroundColor: 'pink'
-                                        }}>
-                                            <Text style={{
-                                                fontSize: 14,
-                                                fontFamily:"Rubik-Medium",
-                                                color: '#ffff',
-                                                paddingBottom: 5
-                                            }}>
-                                                {item.title}
-                                            </Text>
-                                            <Text style={{
-                                                fontSize: 11,
-                                                fontFamily:"Rubik-Regular",
-                                                color: '#fff',
-                                                lineHeight: 12
-                                                // marginBottom: 10
-                                            }}>
-                                                {item.description}
-                                            </Text>
-                                        </View>
-
-                                    </View>
-
-
-
-
-
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <CategoryComp
+                            onPress={(e) => { }}
+                            onChange={(arr) => {
+                                console.log('onchange', arr.length)
+                            }}
+                            data={Data}
+                            targetKey={"key"}
+                            selected={select}
+                        />
+                    </View>
 
                     <View
 

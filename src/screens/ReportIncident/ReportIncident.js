@@ -28,12 +28,12 @@ export const ReportIncident = ({ navigation }) => {
         }
         // alert(index === 1 ? 'Switch Off' : 'Switch On')
     }
-    const INITIAL_REGION = {
-        latitude: 52.5,
-        longitude: 19.2,
+    const [initialRegion, setinitialRegion] = useState({
+        latitude: 53.1,
+        longitude: 18.8,
         latitudeDelta: 8.5,
         longitudeDelta: 8.5,
-    };
+    })
     const allMarkers = [
 
 
@@ -47,8 +47,7 @@ export const ReportIncident = ({ navigation }) => {
 
         },
         {
-            latitude: 53.1,
-            longitude: 18.8,
+            ...initialRegion,
             title: 'User2',
             description: 'HelloUser2',
             image: Images.Pictures.red,
@@ -61,7 +60,11 @@ export const ReportIncident = ({ navigation }) => {
 
     ]
     const animateToCurrentLocation = () => {
-        mapRef.current.animateToRegion(INITIAL_REGION, 2000)
+        mapRef.current.animateToRegion(initialRegion, 2000)
+    }
+
+    const onRegionChange = region => {
+        setinitialRegion(region)
     }
 
     return (
@@ -95,184 +98,184 @@ export const ReportIncident = ({ navigation }) => {
                 </Text>
             </View>
             <KeyboardAvoidingView
-            style = {{ flex: 1 }}
-            behavior = "height" >
-            <ScrollView 
-                contentContainerStyle={{ flexGrow: 1 }}
-                showsVerticalScrollIndicator={false}
-            >
-                
-
-
-                <GooglePlacesAutocomplete
-                    placeholder='Where did it happen?'
-                    predefinedPlacesAlwaysVisible={true}
-                    onPress={(data, details = null) => {
-                        // 'details' is provided when fetchDetails = true
-                        console.log(data, details);
-                    }}
-                    query={{
-                        key: 'AIzaSyBTNtoDj9Z6V8d3zDdCVFz4LvEemFwG4Zw',
-                        language: 'en',
-                    }}
-                    onFail={(e) => console.log("onFail", e)}
-                    getAddressText={(e) => {
-                        console.log('eeeeeee', e)
-                    }}
-                    fetchDetails={true}
-                    textInputProps={{ placeholderTextColor: theme.textColor.placeholderColor }}
-                    styles={{
-                        textInputContainer: {
-                            backgroundColor: theme.backgrounds.whiteBG,
-                            // height: 2200
-                            width: '85%',
-                            alignSelf: 'center',
-                            borderWidth: 0.8,
-                            borderColor: theme.bordersColor.InputBorder,
-                            borderRadius: 5,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginBottom: 20
-                            // elevation: 5,
-                        },
-                        textInput: {
-                            height: 45,
-                            color: '#5d5d5d',
-                            fontSize: 14,
-                            fontFamily:"Rubik-Medium",
-                            // backgroundColor: 'red'
-                        },
-                        // predefinedPlacesDescription: {
-                        //     color: '#1faadb',
-                        // },
-                    }}
-                    renderLeftButton={() => {
-                        return (
-                            <View
-
-                                style={styles.searchIconStyle}
-
-                            >
-                                <Feather
-                                    name="search"
-                                    color={theme.iconsColor.SearchIcon}
-                                    size={18}
-                                // onPress={() => {navigation.goBack()}}
-                                />
-                            </View>
-                        )
-                    }}
-
-                />
-
-                <MapView
-                    initialRegion={INITIAL_REGION}
-                    style={{ height: '88%' }}
-
-                    ref={mapRef}
-
+                style={{ flex: 1 }}
+                behavior="height" >
+                <ScrollView
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    showsVerticalScrollIndicator={false}
                 >
-                    {
-                        allMarkers.map((item, i) => {
+
+
+
+                    <GooglePlacesAutocomplete
+                        placeholder='Where did it happen?'
+                        predefinedPlacesAlwaysVisible={true}
+                        onPress={(data, details = null) => {
+                            // 'details' is provided when fetchDetails = true
+                            console.log(data, details);
+                        }}
+                        query={{
+                            key: 'AIzaSyBTNtoDj9Z6V8d3zDdCVFz4LvEemFwG4Zw',
+                            language: 'en',
+                        }}
+                        onFail={(e) => console.log("onFail", e)}
+                        getAddressText={(e) => {
+                            console.log('eeeeeee', e)
+                        }}
+                        fetchDetails={true}
+                        textInputProps={{ placeholderTextColor: theme.textColor.placeholderColor }}
+                        styles={{
+                            textInputContainer: {
+                                backgroundColor: theme.backgrounds.whiteBG,
+                                // height: 2200
+                                width: '85%',
+                                alignSelf: 'center',
+                                borderWidth: 0.8,
+                                borderColor: theme.bordersColor.InputBorder,
+                                borderRadius: 5,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginBottom: 20
+                                // elevation: 5,
+                            },
+                            textInput: {
+                                height: 45,
+                                color: '#5d5d5d',
+                                fontSize: 14,
+                                fontFamily: "Rubik-Medium",
+                                // backgroundColor: 'red'
+                            },
+                            // predefinedPlacesDescription: {
+                            //     color: '#1faadb',
+                            // },
+                        }}
+                        renderLeftButton={() => {
                             return (
-                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                                    <Image source={item.image} style={{ width: 58, height: 58 }} resizeMode={'contain'} />
-                                </Marker>
+                                <View
+
+                                    style={styles.searchIconStyle}
+
+                                >
+                                    <Feather
+                                        name="search"
+                                        color={theme.iconsColor.SearchIcon}
+                                        size={18}
+                                    // onPress={() => {navigation.goBack()}}
+                                    />
+                                </View>
                             )
-                        })
-                    }
+                        }}
+
+                    />
+
+                    <MapView
+                        initialRegion={initialRegion}
+                        style={{ height: '88%' }}
+                        onRegionChangeComplete={onRegionChange}
+                        ref={mapRef}
+
+                    >
+                        {
+                            allMarkers.map((item, i) => {
+                                return (
+                                    <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
+                                        <Image source={item.image} style={{ width: 58, height: 58 }} resizeMode={'contain'} />
+                                    </Marker>
+                                )
+                            })
+                        }
 
 
 
 
 
-                </MapView>
+                    </MapView>
 
 
-                <View style={styles.mapActionsContainer}>
-                    <View style={styles.verticalBtnContainer}>
-                        <View>
-                            <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} />
+                    <View style={styles.mapActionsContainer}>
+                        <View style={styles.verticalBtnContainer}>
+                            <View>
+                                <Button image={Images.Pictures.compass} buttonStyle={styles.squareBtn} />
+                            </View>
+                            <View>
+                                <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()} />
+                            </View>
                         </View>
-                        <View>
-                            <Button image={Images.Pictures.currentLocIcon} buttonStyle={styles.squareBtn} onPress={() => animateToCurrentLocation()} />
-                        </View>
+
                     </View>
 
-                </View>
 
 
 
-
-                <View
-
-                    style={styles.footerViewStyle}
-
-                >
                     <View
 
-                        style={styles.footerRowViewStyle}
+                        style={styles.footerViewStyle}
 
                     >
                         <View
-                            style={styles.textAndToggleViewStyle}
+
+                            style={styles.footerRowViewStyle}
 
                         >
-                            <Text
-                                style={styles.footerRowTextStyle}
+                            <View
+                                style={styles.textAndToggleViewStyle}
 
                             >
-                                Ground Floor
-                            </Text>
-                            <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+                                <Text
+                                    style={styles.footerRowTextStyle}
+
+                                >
+                                    Ground Floor
+                                </Text>
+                                <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+                            </View>
+                            <View
+                                style={styles.textAndToggleViewStyle2}
+
+                            >
+                                <Text
+                                    style={styles.footerRowTextStyle}
+
+                                >
+                                    Floor
+                                </Text>
+                                <TextInput
+                                    editable={enabled ? false : true}
+                                    // disabled={true}
+                                    placeholder='11th'
+                                    placeholderTextColor={theme.textColor.placeholderColor}
+
+
+                                    style={{
+                                        width: 63,
+                                        height: 36,
+                                        borderWidth: 0.8,
+                                        borderColor: theme.bordersColor.InputBorder,
+                                        borderRadius: 5,
+                                        paddingHorizontal: 15,
+                                        fontSize: 12,
+                                        fontFamily: "Rubik-Regular",
+                                        // paddingLeft: 15
+                                        // alignItems: 'center'
+
+
+                                    }}
+
+                                />
+                            </View>
                         </View>
-                        <View
-                            style={styles.textAndToggleViewStyle2}
-
-                        >
-                            <Text
-                                style={styles.footerRowTextStyle}
-
-                            >
-                                Floor
-                            </Text>
-                            <TextInput
-                                editable={enabled ? false : true}
-                                // disabled={true}
-                                placeholder='11th'
-                                placeholderTextColor={theme.textColor.placeholderColor}
-
-
-                                style={{
-                                    width: 63,
-                                    height: 36,
-                                    borderWidth: 0.8,
-                                    borderColor: theme.bordersColor.InputBorder,
-                                    borderRadius: 5,
-                                    paddingHorizontal: 15,
-                                    fontSize: 12,
-                                    fontFamily:"Rubik-Regular",
-                                    // paddingLeft: 15
-                                    // alignItems: 'center'
-
-
+                        <View style={{ marginVertical: 10 }}>
+                            <Button
+                                onPress={() => {
+                                    navigation.navigate('ReportIncidentB')
                                 }}
-
+                                buttonStyle={{ width: '85%', alignSelf: 'center' }}
+                                title="Next"
                             />
                         </View>
                     </View>
-                    <View style={{ marginVertical: 10 }}>
-                        <Button
-                            onPress={() => {
-                                navigation.navigate('ReportIncidentA')
-                            }}
-                            buttonStyle={{ width: '85%', alignSelf: 'center' }}
-                            title="Next"
-                         />
-                    </View>
-                </View>
 
-            </ScrollView>
+                </ScrollView>
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
@@ -300,10 +303,10 @@ const styles = StyleSheet.create({
     reportTextStyle: {
         paddingLeft: 20,
         fontSize: 20.28,
-        fontFamily:"Rubik-Medium",
+        fontFamily: "Rubik-Medium",
     },
     dateTextStyle: {
-        color: theme.textColor.grayText2, fontSize: 15, fontFamily:"Rubik-Regular",
+        color: theme.textColor.grayText2, fontSize: 15, fontFamily: "Rubik-Regular",
     },
     searchIconStyle: {
         width: 30,
@@ -349,7 +352,7 @@ const styles = StyleSheet.create({
     },
     footerRowTextStyle: {
         color: theme.textColor.blackText,
-        fontFamily:"Rubik-Medium",
+        fontFamily: "Rubik-Medium",
         fontSize: 13
     }
 })
