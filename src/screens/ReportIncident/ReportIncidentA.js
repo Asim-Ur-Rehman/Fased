@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -23,15 +23,32 @@ import ToggleButton from '../../components/ToggleButton/index'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-export const ReportIncidentA = ({ navigation }) => {
+export const ReportIncidentA = ({ navigation, route }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
   }
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('time')
-  const [date, setDate] = useState('')
-  const [currentTime, setCurrentTime] = useState('')
+  const [date, setDate] = useState(new Date().toDateString())
+  const [currentTime, setCurrentTime] = useState(new Date().toString().substring(16, 21))
 
+  const [category, setCategory] = useState(null)
+  const [subcategory, setsubCategory] = useState(route.params?.subcategory ? route.params?.subcategory : null)
+
+
+  useEffect(() => {
+    if(route.params?.category) {
+      setCategory(route.params?.category)
+      // route.params?.category ? route.params?.category : null
+    }else {
+      setCategory(category => {
+        console.log("category useEFfect", category)
+        return category ?  category : null 
+      })
+    }
+  }, [route.params?.category])
+
+  console.log('report Incident ===',route.params)
   const onChange = date => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
@@ -43,6 +60,73 @@ export const ReportIncidentA = ({ navigation }) => {
       // console.log("date", date.toDateString(), "time", time)
     }
     setShow(!show)
+  }
+
+
+  const Card = ({
+    item=[],
+    onPress=() => {}
+  }) => {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.7}
+        style={{
+          width: '90%',
+          alignSelf: 'center',
+          height: 96.26,
+          borderRadius: 10,
+          backgroundColor: item[0].backgroundColor,
+          flexDirection: 'row',
+          marginBottom: 12,
+        }}>
+        <View style={{
+          width: '30%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <Image source={item[0].Image} style={{
+            width: 79.89,
+            height: 79.89,
+          }} />
+        </View>
+        <View style={{
+          width: '70%',
+          height: 79.89,
+          justifyContent: 'center',
+          marginTop: 6
+        }}>
+          <View style={{
+            width: '92%',
+            alignItems: 'flex-end',
+          }}>
+            <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
+          </View>
+
+          <View style={{
+            height: 68,
+            width: '90%'
+          }}>
+            <Text style={{
+              fontSize: 14,
+              fontFamily: "Rubik-Medium",
+              color: '#ffff',
+              paddingBottom: 5
+            }}>
+              {item[0].title}
+            </Text>
+            <Text style={{
+              fontSize: 11,
+              fontFamily: "Rubik-Regular",
+              color: '#fff',
+              lineHeight: 12
+            }}>
+              {item[0].description}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
   }
 
   return (
@@ -86,131 +170,57 @@ export const ReportIncidentA = ({ navigation }) => {
             </View>
           </View>
 
-          <TouchableOpacity
 
-            // onPress={() => {
-            //   selectedCard(item.title)
-            // }}
-            activeOpacity={0.7}
-            style={{
-              width: '90%',
-              alignSelf: 'center',
-              height: 96.26,
-              borderRadius: 10,
-              backgroundColor: '#FFA724',
-              flexDirection: 'row',
-              marginBottom: 12,
-
-              // alignItems: 'center',
-            }}>
-
-            <View style={{
-              width: '30%',
-              alignItems: 'center',
-              justifyContent: 'center',
-
-
-            }}>
-              <Image source={Images.Pictures.harasment} style={{
-                width: 79.89,
-                height: 79.89,
-
-              }} />
-
-            </View>
-            <View style={{
-              width: '70%',
-              height: 79.89,
-              // backgroundColor: 'green',
-              // alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: 6
-            }}>
-
-              <View style={{
-                width: '92%',
-                // backgroundColor: 'green',
-                alignItems: 'flex-end',
-                // marginTop: 4
-              }}>
-
-                <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
-
-              </View>
-
-
-
-
-              <View style={{
-                height: 68,
-                width: '90%'
-                // backgroundColor: 'pink'
-              }}>
-                <Text style={{
-                  fontSize: 14,
-                  fontFamily: "Rubik-Medium",
-                  color: '#ffff',
-                  paddingBottom: 5
-                }}>
-                  Harrasment
+          {category
+            ?
+            <Card onPress={() => {
+              navigation.navigate('ReportIncidentB', {type: 'category', selected: category, alternate: subcategory})
+            }} item={category} />
+            :
+            <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Choose Category
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('ReportIncidentB', {type: 'category', alternate: subcategory})
+                }}
+                activeOpacity={0.8}
+                style={styles.fieldView}>
+                <Text
+                  style={{
+                    width: '90%',
+                    fontSize: 14,
+                    fontFamily: 'Rubik-Regular',
+                    color: '#33333370',
+                    paddingHorizontal: 20
+                  }}>
+                  Select category
                 </Text>
-                <Text style={{
-                  fontSize: 11,
-                  fontFamily: "Rubik-Regular",
-                  color: '#fff',
-                  lineHeight: 12
-                  // marginBottom: 10
-                }}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.
-                </Text>
-              </View>
+                <View>
+                  <Icon
+                    name="chevron-down"
+                    color="#33333330"
+                    size={22}
+                    style={{ paddingRight: 15 }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>}
 
-            </View>
-
-
-
-
-
-          </TouchableOpacity>
-
-          {/* <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
-          <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-            Choose Category
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ReportIncidentB')
-            }}
-            activeOpacity={0.8}
-            style={styles.fieldView}>
-            <Text
-              style={{
-                width: '90%',
-                fontSize: 14,
-                fontFamily: 'Rubik-Regular',
-                color: '#33333370',
-                paddingHorizontal: 20
-              }}>
-              Select category
-            </Text>
-            <View>
-              <Icon
-                name="chevron-down"
-                color="#33333330"
-                size={22}
-                style={{ paddingRight: 15 }}
-              />
-            </View>
-          </TouchableOpacity>
-        </View> */}
-
+            {subcategory
+            ?
+            <Card onPress={() => {
+              navigation.navigate('ReportIncidentB', {type: 'subcategory', selected: subcategory, alternate: category})
+            }} item={subcategory} />
+            :
           <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
               Choose Sub Category
             </Text>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('ReportIncidentB')
+                navigation.navigate('ReportIncidentB', {type: 'subcategory', alternate: category})
               }}
               activeOpacity={0.8}
               style={styles.fieldView}>
@@ -233,7 +243,7 @@ export const ReportIncidentA = ({ navigation }) => {
                 />
               </View>
             </TouchableOpacity>
-          </View>
+          </View>}
 
           <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
