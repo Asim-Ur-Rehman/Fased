@@ -12,8 +12,8 @@ import CategoryComp from '../../components/CategoryCard'
 
 
 
-export const ReportIncidentB = ({ navigation }) => {
-    const [select, setSelect] = useState([])
+export const ReportIncidentB = ({ navigation, route }) => {
+    const [select, setSelect] = useState(route.params?.selected ? route.params?.selected : [])
 
     const Data = [
         {
@@ -89,25 +89,21 @@ export const ReportIncidentB = ({ navigation }) => {
 
     }
 
-    // console.log('selcted', select)
+    const onSelect = (item) => {
+        setSelect([item])
+    }
 
+    console.log('Category ===',route.params)
     return (
         <SafeAreaView style={{
             flex: 1,
-
             backgroundColor: theme.primaryColor
-
         }}>
             <StatusBar backgroundColor={'transparent'} translucent={true} barStyle='dark-content' />
-
-
-
             <LinearGradient
-
                 colors={['#9CA3AF', '#4A4C50']}
                 start={{ x: 1, y: 0 }} end={{ x: 0, y: 0 }}
                 style={styles.linearMainViewStyle}
-
             >
                 <View
 
@@ -176,13 +172,13 @@ export const ReportIncidentB = ({ navigation }) => {
 
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <CategoryComp
-                            onPress={(e) => { }}
-                            onChange={(arr) => {
-                                console.log('onchange', arr.length)
-                            }}
+                            onPress={(e) => { onSelect(e) }}
+                            // onChange={(arr) => {
+                            //     onSelect(arr)
+                            // }}
                             data={Data}
                             targetKey={"key"}
-                            selected={select}
+                            selected={[...select]}
                         />
                     </View>
 
@@ -193,39 +189,20 @@ export const ReportIncidentB = ({ navigation }) => {
                         }}>
                         <Button
                             onPress={() => {
-                                navigation.navigate('ReportIncidentA')
+                                let type = route.params?.type ? route.params?.type : 'category'
+                                console.log('type', type)
+                                navigation.navigate('ReportIncidentA', {[type]: select, [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate})
                             }}
                             linearColor1={'#9CA3AF'}
                             linearColor2={'#4A4C50'}
-
                             title={'Done'}
                             buttonStyle={{
                                 width: '90%',
                                 alignSelf: 'center'
                             }} />
                     </View>
-
-
                 </View>
-
-
-
             </ScrollView>
-
-
-
-
-            <View >
-
-            </View>
-
-
-
-
-
-
-
-
         </SafeAreaView>
     )
 }
