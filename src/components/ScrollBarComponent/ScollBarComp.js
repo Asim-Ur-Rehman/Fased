@@ -19,7 +19,7 @@ export const CustomScrollBarComponent = ({ navigation }) => {
   const scrollIndicatorSize =
     completeScrollBarHeight > visibleScrollBarHeight
       ? (visibleScrollBarHeight * visibleScrollBarHeight) /
-        completeScrollBarHeight
+      completeScrollBarHeight
       : visibleScrollBarHeight
 
   const difference =
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   ContentTextStyle: {
     fontSize: 12,
-    fontFamily:"Rubik-Regular",
+    fontFamily: "Rubik-Regular",
     color: '#383838',
     textAlign: 'left',
     paddingHorizontal: 12,

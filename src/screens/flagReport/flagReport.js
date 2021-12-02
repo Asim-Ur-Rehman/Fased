@@ -190,7 +190,8 @@ export const FlagReport = ({ navigation }) => {
             backgroundColor: '#FDEBEB',
             borderWidth: 0.8,
             borderColor: '#DF0707',
-            borderRadius: 10
+            borderRadius: 10,
+            overflow: 'hidden'
           }}>
           <View
             style={{
