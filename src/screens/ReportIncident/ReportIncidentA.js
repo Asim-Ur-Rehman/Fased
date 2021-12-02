@@ -37,18 +37,18 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
 
   useEffect(() => {
-    if(route.params?.category) {
+    if (route.params?.category) {
       setCategory(route.params?.category)
       // route.params?.category ? route.params?.category : null
-    }else {
+    } else {
       setCategory(category => {
         console.log("category useEFfect", category)
-        return category ?  category : null 
+        return category ? category : null
       })
     }
   }, [route.params?.category])
 
-  console.log('report Incident ===',route.params)
+  console.log('report Incident ===', route.params)
   const onChange = date => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
@@ -64,8 +64,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
 
   const Card = ({
-    item=[],
-    onPress=() => {}
+    item = [],
+    onPress = () => { }
   }) => {
     return (
       <TouchableOpacity
@@ -174,7 +174,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
           {category
             ?
             <Card onPress={() => {
-              navigation.navigate('ReportIncidentB', {type: 'category', selected: category, alternate: subcategory})
+              navigation.navigate('ReportIncidentB', { type: 'category', selected: category, alternate: subcategory })
             }} item={category} />
             :
             <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
@@ -183,7 +183,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ReportIncidentB', {type: 'category', alternate: subcategory})
+                  navigation.navigate('ReportIncidentB', { type: 'category', alternate: subcategory, selected: [] })
                 }}
                 activeOpacity={0.8}
                 style={styles.fieldView}>
@@ -208,42 +208,42 @@ export const ReportIncidentA = ({ navigation, route }) => {
               </TouchableOpacity>
             </View>}
 
-            {subcategory
+          {subcategory
             ?
             <Card onPress={() => {
-              navigation.navigate('ReportIncidentB', {type: 'subcategory', selected: subcategory, alternate: category})
+              navigation.navigate('ReportIncidentB', { type: 'subcategory', selected: subcategory, alternate: category })
             }} item={subcategory} />
             :
-          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-            <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-              Choose Sub Category
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('ReportIncidentB', {type: 'subcategory', alternate: category})
-              }}
-              activeOpacity={0.8}
-              style={styles.fieldView}>
-              <Text
-                style={{
-                  width: '90%',
-                  fontSize: 14,
-                  fontFamily: 'Rubik-Regular',
-                  color: '#33333370',
-                  paddingHorizontal: 20
-                }}>
-                Select category
+            <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                Choose Sub Category
               </Text>
-              <View>
-                <Icon
-                  name="chevron-down"
-                  color="#33333330"
-                  size={22}
-                  style={{ paddingRight: 15 }}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>}
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('ReportIncidentB', { type: 'subcategory', alternate: category, selected: [] })
+                }}
+                activeOpacity={0.8}
+                style={styles.fieldView}>
+                <Text
+                  style={{
+                    width: '90%',
+                    fontSize: 14,
+                    fontFamily: 'Rubik-Regular',
+                    color: '#33333370',
+                    paddingHorizontal: 20
+                  }}>
+                  Select category
+                </Text>
+                <View>
+                  <Icon
+                    name="chevron-down"
+                    color="#33333330"
+                    size={22}
+                    style={{ paddingRight: 15 }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>}
 
           <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
@@ -510,13 +510,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1
+    // },
+    // shadowOpacity: 0.22,
+    // shadowRadius: 2.22,
+    // elevation: 3
   }
 })

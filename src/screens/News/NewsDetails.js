@@ -102,7 +102,8 @@ export const NewsDetails = ({ navigation }) => {
             backgroundColor: '#FDEBEB',
             borderWidth: 0.8,
             borderColor: '#9CA3AF',
-            borderRadius: 10
+            borderRadius: 10,
+            overflow: 'hidden'
           }}>
           <View
             style={{
@@ -142,7 +143,12 @@ export const NewsDetails = ({ navigation }) => {
                 backgroundColor: '#9CA3AF',
                 borderRadius: 3,
                 width: 5,
-                marginTop: 5,
+
+                // paddingVertical: 20
+                // marginTop: 5,
+                // marginBottom: 15
+                // top: 10,
+                // bottom: 15
               }}>
 
               <Text style={styles.ContentTextStyle}>

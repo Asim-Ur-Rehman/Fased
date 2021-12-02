@@ -93,7 +93,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
         setSelect([item])
     }
 
-    console.log('Category ===',route.params)
+    // console.log('select', route.params)
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -189,9 +189,16 @@ export const ReportIncidentB = ({ navigation, route }) => {
                         }}>
                         <Button
                             onPress={() => {
-                                let type = route.params?.type ? route.params?.type : 'category'
-                                console.log('type', type)
-                                navigation.navigate('ReportIncidentA', {[type]: select, [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate})
+
+                                if (select.length > 0) {
+                                    let type = route.params?.type ? route.params?.type : 'category'
+                                    console.log('type', type)
+                                    navigation.navigate('ReportIncidentA', { [type]: select, [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate })
+                                } else {
+                                    alert('Please select any category')
+                                }
+
+
                             }}
                             linearColor1={'#9CA3AF'}
                             linearColor2={'#4A4C50'}
