@@ -19,6 +19,9 @@ import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useDispatch } from 'react-redux'
+import { SignUpAction } from '../../stores/actions/user.action'
+import { useSelector } from 'react-redux';
 
 export const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
@@ -26,14 +29,40 @@ export const SignUp = ({ navigation }) => {
     email: '',
     password: ''
   })
+  const dispatch = useDispatch()
+  const loading = useSelector(state => state.userReducer.isLoading)
+  console.log('loader======', loading)
+
 
   const signUp = () => {
+    let value =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        state.email,
+      );
     if (state.fullName == '' || state.email == '' || state.password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error');
+
+    }
+    else if (!value) {
+      ToastMessage('Email Error', 'Please enter a valid email address', 'info');
+    } else if (state.password.length <= 8) {
+      ToastMessage(
+        'Password Error',
+        'Password should be greater then 8 character',
+        'info',
+      );
     }
     else {
-      alert('sgn up')
+      let data = {
+        fullName: state.fullName,
+        email: state.email,
+        password: state.password
+      }
 
+      console.log('SignUp Data', data)
+
+
+      dispatch(SignUpAction(data, navigation))
     }
 
   }
@@ -138,11 +167,13 @@ export const SignUp = ({ navigation }) => {
               paddingVertical: 20
             }}>
             <Button
+
               // onPress={() => navigation.navigate('AppStackNavigator')}
+
               onPress={() => signUp()}
               buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
               title="Sign Up"
-            // textStyle={{fontFamily:"Inter-Bold",}}
+
             />
           </View>
         </ScrollView>

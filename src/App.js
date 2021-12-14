@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import MainNavigation from './navigation/navigation'
 import { Provider } from 'react-redux'
 import { store } from './stores'
 import SplashScreen from 'react-native-splash-screen'
 import { View } from 'react-native'
 import 'react-native-gesture-handler'
-
+import Toast from 'react-native-toast-message';
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -20,11 +20,12 @@ const App = () => {
   return (
     <>
       {/* <SafeAreaView style={{flex: 1}}>  */}
-        <Provider store={store}>
-          <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <MainNavigation />
-          </View>
-        </Provider>
+      <Provider store={store}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+          <MainNavigation />
+          <Toast />
+        </View>
+      </Provider>
       {/* </SafeAreaView> */}
     </>
   )

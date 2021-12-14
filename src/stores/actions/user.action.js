@@ -1,30 +1,21 @@
 import { getUser } from '../../api/fakeApiUser'
+import { SIGNUP_SUCCESS, SIGNUP } from './actionType'
 
-export const fetchUserRequest = () => {
-  return {
-    type: 'FETCH_USER_REQUEST'
-  }
+
+
+export const SignUpAction = (data, navigation) => {
+  console.log('data', data)
+  return (dispatch) => {
+
+    dispatch({ type: SIGNUP })
+
+    dispatch({ type: SIGNUP_SUCCESS, payload: data });
+    navigation.navigate('AppStackNavigator')
+
+
+  };
 }
 
-export const fetchUserSuccess = users => {
-  return {
-    type: 'FETCH_USER_SUCCESS',
-    payload: users
-  }
-}
 
-export const fetchUserFail = () => {
-  return {
-    type: 'FETCH_USER_FAILED'
-  }
-}
 
-export const fetchDataUser = () => async dispatch => {
-  try {
-    dispatch(fetchUserRequest())
-    const { data } = await getUser()
-    dispatch(fetchUserSuccess(data))
-  } catch (error) {
-    dispatch(fetchUserFail())
-  }
-}
+
