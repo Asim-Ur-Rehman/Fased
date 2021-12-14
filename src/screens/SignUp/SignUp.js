@@ -18,9 +18,25 @@ const { width, height } = Dimensions.get('window')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const SignUp = ({ navigation }) => {
+  const [state, setState] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  })
 
+  const signUp = () => {
+    if (state.fullName == '' || state.email == '' || state.password == '') {
+      ToastMessage('Form Error', 'Please fill all fields', 'error');
+    }
+    else {
+      alert('sgn up')
+
+    }
+
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -67,6 +83,12 @@ export const SignUp = ({ navigation }) => {
               placeholder="Enter your full name"
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  fullName: text,
+                })
+              }
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -80,6 +102,12 @@ export const SignUp = ({ navigation }) => {
               placeholder="Eg namaemail@emailkamu.com"
               placeholderTextColor="#9CA3AF"
               keyboardType="email-address"
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  email: text,
+                })
+              }
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -94,6 +122,12 @@ export const SignUp = ({ navigation }) => {
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               secureTextEntry={true}
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  password: text,
+                })
+              }
             />
           </View>
 
@@ -104,7 +138,8 @@ export const SignUp = ({ navigation }) => {
               paddingVertical: 20
             }}>
             <Button
-              onPress={() => navigation.navigate('AppStackNavigator')}
+              // onPress={() => navigation.navigate('AppStackNavigator')}
+              onPress={() => signUp()}
               buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
               title="Sign Up"
             // textStyle={{fontFamily:"Inter-Bold",}}
