@@ -67,7 +67,7 @@ export const NewsDetails = ({ navigation }) => {
   ]
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       <StatusBar
         backgroundColor={'transparent'}
         translucent={true}
@@ -81,6 +81,14 @@ export const NewsDetails = ({ navigation }) => {
         start={{ x: 0.95, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.LinearheaderContainer}>
+          <View style={{
+                  width: '85%',
+                  alignSelf: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  marginTop: 20
+          }}>
         <View>
           <Feather name='star' size={20} color={'white'} />
         </View>
@@ -90,9 +98,11 @@ export const NewsDetails = ({ navigation }) => {
         <TouchableOpacity activeOpacity={0.7}>
           <Text style={styles.headerLabel}>Share</Text>
         </TouchableOpacity>
+        </View>
       </LinearGradient>
 
-      <View style={{ flex: 1, }}>
+
+      <View >
 
         <View
           style={{
@@ -239,7 +249,7 @@ export const NewsDetails = ({ navigation }) => {
 
 
 
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -250,10 +260,11 @@ const styles = StyleSheet.create({
   LinearheaderContainer: {
     // width: '100%',
     height: 100,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: "center",
-    flexDirection: 'row',
-    paddingHorizontal: 20
+    // flexDirection: 'row',
+    // paddingHorizontal: 20,
+    // marginVertical:10
   },
   headerView: {
     flexDirection: 'row',

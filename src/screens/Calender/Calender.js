@@ -31,7 +31,7 @@ export const Calender = ({ navigation }) => {
   const [toggle, setToggle] = useState()
   return (
     <View style={styles.container}>
-      <StatusBar hidden={true} />
+    <StatusBar backgroundColor={'transparent'} translucent={true} barStyle='dark-content' />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
