@@ -79,8 +79,8 @@ export const Reports = ({ navigation }) => {
         )
     }
     return (
-       <SafeAreaView style={{flex: 1}}>
-           <StatusBar backgroundColor="#000" translucent={true} barStyle="dark-content"/>
+       <View style={{flex: 1}}>
+           <StatusBar backgroundColor='transparent' translucent={true} barStyle="dark-content"/>
             <View style={{ flex: 1}}>
             <LinearGradient
                 colors={['#9CA3AF', '#4A4C50']}
@@ -145,7 +145,7 @@ export const Reports = ({ navigation }) => {
                 </Text>
             </TouchableOpacity>
         </View>
-    </SafeAreaView>
+    </View>
     )
 }
 

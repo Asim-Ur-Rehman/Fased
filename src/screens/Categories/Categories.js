@@ -97,7 +97,7 @@ export const Categories = ({ navigation }) => {
 
 
     return (
-        <SafeAreaView style={{
+        <View style={{
             flex: 1,
 
             backgroundColor: theme.primaryColor
@@ -122,7 +122,7 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
-                        marginVertical: 20
+                        marginTop:20
                     }}>
                     <View style={{
                         flexDirection: 'row',
@@ -218,7 +218,7 @@ export const Categories = ({ navigation }) => {
             </ScrollView>
             <View>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -230,7 +230,8 @@ const styles = StyleSheet.create({
     linearMainViewStyle: {
         height: height * 0.13,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     }
 
 

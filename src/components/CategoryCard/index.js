@@ -10,7 +10,8 @@ export default function CategoryComp({
     targetKey = "1",
     ImageStyle = {},
     onChange = (arr) => { },
-    selected = []
+    selected = [],
+    disabled = []
 }) {
 
 
@@ -26,7 +27,10 @@ export default function CategoryComp({
         <>
             {data.map((item, i) => {
                 const isInclude = selected.findIndex((e) => e[targetKey] == item[targetKey])
+                const disabledKey = disabled ? disabled.findIndex((e) => e[targetKey] == item[targetKey]) : -1
                 const isSelected = isInclude == -1 ? true : false
+                const isDisabled = disabledKey == -1 ? true : false
+
                 // console.log('isSelected', isSelected)
                 return (
                     <>
@@ -34,8 +38,15 @@ export default function CategoryComp({
                         <TouchableOpacity
                             onPress={() => onPress(item)}
                             key={i}
+                            disabled={!isDisabled}
                             style={[
                                 styles.mainContainer,
+                                !isDisabled ?
+                                {
+                                    backgroundColor: '#cdcdcd',
+                                    borderColor: '#fff'
+                                } 
+                                :
                                 {
                                     backgroundColor: isSelected
                                         ? item.backgroundColor
@@ -84,7 +95,7 @@ export default function CategoryComp({
                                     <Text
                                         style={{
                                             fontSize: 11,
-                                            fontFamily: 'Rubik-Thin',
+                                            // fontFamily: 'Rubik-Thin',
                                             lineHeight: 15,
                                             letterSpacing: 0.08,
                                             color: isSelected ? '#fff' : '#000'

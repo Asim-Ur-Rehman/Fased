@@ -450,7 +450,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             </View>
           </View>
 
-          <View style={{ marginTop: 15, paddingBottom: 50 }}>
+          <View style={{ marginTop: 15 }}>
             <Button
               onPress={() => {
                 navigation.navigate('ReportIncidentC')

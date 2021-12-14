@@ -65,7 +65,7 @@ export const FlagReport = ({ navigation }) => {
   ]
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
+    <View style={styles.mainContainer}>
       <StatusBar
         backgroundColor={'transparent'}
         translucent={true}
@@ -436,7 +436,7 @@ export const FlagReport = ({ navigation }) => {
           </View>
         </Modal>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -453,7 +453,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '90%',
     alignSelf: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop:30
   },
   headerLabel: {
     color: '#fff',
@@ -485,7 +486,7 @@ const styles = StyleSheet.create({
     height: height,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 0,
     backgroundColor: '#00000080'
   },
   modalView: {
@@ -495,7 +496,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
-    backgroundColor: '#fff'
 
     // shadowColor: "#000",
     // shadowOffset: {

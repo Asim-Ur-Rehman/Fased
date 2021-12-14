@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet, ScrollView } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -14,6 +14,10 @@ import CategoryComp from '../../components/CategoryCard'
 
 export const ReportIncidentB = ({ navigation, route }) => {
     const [select, setSelect] = useState(route.params?.selected ? route.params?.selected : [])
+
+    useEffect(() => {
+        setSelect(route.params?.selected ? route.params?.selected : [])
+    }, [route.params?.selected])
 
     const Data = [
         {
@@ -69,33 +73,16 @@ export const ReportIncidentB = ({ navigation, route }) => {
 
     // console.log('select', select)
     const selectedCard = (title) => {
-
         setSelect(title)
-
-        // var arr = [...select]
-        // var isFind = arr.findIndex(e => e == i)
-        // if (isFind == -1) {
-        //     arr.push(i)
-        //     setSelect(arr)
-        // }
-        // else {
-        //     arr.splice(isFind, 1)
-        //     setSelect(arr)
-        // }
-
-
-
-
-
     }
 
     const onSelect = (item) => {
         setSelect([item])
     }
 
-    // console.log('select', route.params)
+    console.log('select', route.params, )
     return (
-        <SafeAreaView style={{
+        <View style={{
             flex: 1,
             backgroundColor: theme.primaryColor
         }}>
@@ -176,6 +163,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                             // onChange={(arr) => {
                             //     onSelect(arr)
                             // }}
+                            disabled={route.params?.alternate}
                             data={Data}
                             targetKey={"key"}
                             selected={[...select]}
@@ -185,7 +173,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                     <View
 
                         style={{
-                            marginTop: 10
+                            marginVertical: 15
                         }}>
                         <Button
                             onPress={() => {
@@ -210,7 +198,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                     </View>
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
 
