@@ -96,7 +96,7 @@ export default function CategoryComp({
                   <Text
                     style={{
                       fontSize: 11,
-                      fontFamily: 'Rubik-Thin',
+                      // fontFamily: 'Rubik-Thin',
                       lineHeight: 15,
                       letterSpacing: 0.08,
                       color: isSelected ? '#fff' : '#000'
