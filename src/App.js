@@ -14,9 +14,24 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import { persistCache } from 'apollo3-cache-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+const cache = new InMemoryCache()
+
+
+const client = new ApolloClient({
+  uri: 'https://fasedapp.herokuapp.com/',
+  cache,
+});
 
 const App = () => {
+  const [loadingCache, setLoadingCache] = useState(true)
   useEffect(() => {
+    persistCache({
+      cache,
+      storage: AsyncStorage,
+    }).then(() => setLoadingCache(false))
+
     setTimeout(
       () => {
         SplashScreen.hide()
@@ -25,10 +40,7 @@ const App = () => {
     )
   }, [])
 
-  const client = new ApolloClient({
-    uri: 'https://fasedapp.herokuapp.com/',
-    cache: new InMemoryCache()
-  });
+ 
 
   return (
     <>

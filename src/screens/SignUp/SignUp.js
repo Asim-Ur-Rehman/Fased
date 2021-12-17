@@ -32,7 +32,9 @@ export const SignUp = ({ navigation }) => {
     password: ''
   })
   const dispatch = useDispatch()
-  const loading = useSelector(state => state.userReducer.isLoading)
+  // const loading = useSelector(state => state.userReducer.isLoading)
+  const [addUser, { data, loading, error }] = useMutation(Add_User);
+
   // console.log('loader======', loading)
 
 
@@ -55,21 +57,16 @@ export const SignUp = ({ navigation }) => {
       );
     }
     else {
-      let FormData = {
-        fullName: state.fullName,
-        email: state.email,
-        password: state.password
-      }
 
-      console.log('SignUp Data', FormData)
-      // const [addUser, { data, loading, error }] = useMutation(Add_User);
-      // addUser({
-      //   variables: {
-      //     email: FormData.email,
-      //     name: FormData.fullName,
-      //     password: FormData.password
-      //   }
-      // })
+      addUser({
+        variables: {
+          email: state.fullName,
+          name: state.email,
+          password: state.password
+        }
+      })
+     
+      console.log("data", data, "error", error)
 
       // dispatch(SignUpAction(data, navigation))
     }
