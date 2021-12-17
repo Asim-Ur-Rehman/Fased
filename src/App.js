@@ -7,6 +7,14 @@ import SplashScreen from 'react-native-splash-screen'
 import { View } from 'react-native'
 import 'react-native-gesture-handler'
 import Toast from 'react-native-toast-message';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql
+} from "@apollo/client";
+
 const App = () => {
   useEffect(() => {
     setTimeout(
@@ -17,16 +25,21 @@ const App = () => {
     )
   }, [])
 
+  const client = new ApolloClient({
+    uri: 'https://fasedapp.herokuapp.com/',
+    cache: new InMemoryCache()
+  });
+
   return (
     <>
-      {/* <SafeAreaView style={{flex: 1}}>  */}
-      <Provider store={store}>
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
-          <MainNavigation />
-          <Toast />
-        </View>
-      </Provider>
-      {/* </SafeAreaView> */}
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <MainNavigation />
+            <Toast />
+          </View>
+        </Provider>
+      </ApolloProvider>
     </>
   )
 }

@@ -22,6 +22,8 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useDispatch } from 'react-redux'
 import { SignUpAction } from '../../stores/actions/user.action'
 import { useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client'
+import { Add_User } from '../../utils/mutation'
 
 export const SignUp = ({ navigation }) => {
   const [state, setState] = useState({
@@ -31,7 +33,7 @@ export const SignUp = ({ navigation }) => {
   })
   const dispatch = useDispatch()
   const loading = useSelector(state => state.userReducer.isLoading)
-  console.log('loader======', loading)
+  // console.log('loader======', loading)
 
 
   const signUp = () => {
@@ -53,16 +55,23 @@ export const SignUp = ({ navigation }) => {
       );
     }
     else {
-      let data = {
+      let FormData = {
         fullName: state.fullName,
         email: state.email,
         password: state.password
       }
 
-      console.log('SignUp Data', data)
+      console.log('SignUp Data', FormData)
+      // const [addUser, { data, loading, error }] = useMutation(Add_User);
+      // addUser({
+      //   variables: {
+      //     email: FormData.email,
+      //     name: FormData.fullName,
+      //     password: FormData.password
+      //   }
+      // })
 
-
-      dispatch(SignUpAction(data, navigation))
+      // dispatch(SignUpAction(data, navigation))
     }
 
   }

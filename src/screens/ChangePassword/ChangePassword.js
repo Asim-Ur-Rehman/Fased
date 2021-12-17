@@ -17,8 +17,43 @@ const { width, height } = Dimensions.get('window')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import { useDispatch } from 'react-redux'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { ChangePasswordAction } from '../../stores/actions/user.action'
 export const ChangePassword = ({ navigation }) => {
+  const [state, setState] = useState({
+    newPassword: '',
+    confirmPassword: ''
+  })
+  const dispatch = useDispatch()
+  const changePaswword = () => {
+    if (state.newPassword == '' || state.confirmPassword == '') {
+      ToastMessage('Form Error', 'Please fill all fields', 'error');
+    }
+    else if (state.newPassword.length <= 8) {
+      ToastMessage(
+        'New Password Error',
+        'New Password should be greater then 8 character',
+        'info',
+      );
+
+    }
+    else if (state.newPassword !== state.confirmPassword) {
+      ToastMessage(
+        'Confirm Password Error',
+        'Confirm Password does not match',
+        'info',
+      );
+
+    }
+    else {
+      let data = {
+        newPassword: state.newPassword,
+        confirmPassword: state.confirmPassword
+      }
+      dispatch(ChangePasswordAction(data, navigation))
+    }
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -66,6 +101,11 @@ export const ChangePassword = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
+            onChangeText={(text) => {
+              setState({
+                ...state, newPassword: text
+              })
+            }}
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -80,6 +120,11 @@ export const ChangePassword = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
+            onChangeText={(text) => {
+              setState({
+                ...state, confirmPassword: text
+              })
+            }}
           />
         </View>
 
@@ -90,7 +135,10 @@ export const ChangePassword = ({ navigation }) => {
             paddingVertical: 20
           }}>
           <Button
-            onPress={() => { navigation.navigate('SignIn') }}
+            onPress={() => {
+              changePaswword()
+            }}
+            // onPress={() => { navigation.navigate('SignIn') }}
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
             title="Submit"
           />
@@ -118,7 +166,7 @@ const styles = StyleSheet.create({
   },
   ChangePasswordText: {
     fontSize: 18,
-    fontFamily:"Rubik-Medium",
+    fontFamily: "Rubik-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -127,7 +175,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily:"Rubik-Medium",
+    fontFamily: "Rubik-Medium",
   },
   input: {
     width: '88%',
@@ -140,7 +188,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily:"Rubik-Regular",
+    fontFamily: "Rubik-Regular",
     backgroundColor: '#fff'
   }
 })

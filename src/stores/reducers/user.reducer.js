@@ -1,6 +1,6 @@
 
 
-import { SIGNUP_SUCCESS, SIGNUP } from "../actions/actionType"
+import { SIGNUP_SUCCESS, SIGNUP, LOGIN, LOGIN_SUCCESS } from "../actions/actionType"
 
 const initialState = {
   users: [],
@@ -21,7 +21,7 @@ export const userReducer = (state = initialState, action) => {
       }
 
     case SIGNUP_SUCCESS:
-      console.log('sign up data in reducer', payload)
+      // console.log('sign up data in reducer', payload)
       return {
         ...state,
         users: payload,
@@ -29,17 +29,21 @@ export const userReducer = (state = initialState, action) => {
 
       }
 
-    // case 'FETCH_USER_SUCCESS':
-    //   return {
-    //     ...state,
-    //     users: payload,
-    //     isLoading: false
-    //   }
-    // case 'FETCH_USER_FAILED':
-    //   return {
-    //     ...state,
-    //     isLoading: false
-    //   }
+    case LOGIN:
+      return {
+        ...state,
+        isLoading: true
+
+      }
+    case LOGIN_SUCCESS:
+      console.log('sign IN data in reducer', payload)
+      return {
+        ...state,
+        users: payload,
+        isLoading: false
+
+      }
+
 
     default:
       return state

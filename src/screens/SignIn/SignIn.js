@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -19,9 +19,34 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useDispatch } from 'react-redux'
+import { SignInAction } from '../../stores/actions/user.action'
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
+  const [state, setState] = useState({
+
+    email: '',
+    password: ''
+  })
+
+  const dispatch = useDispatch()
+
+  const signIn = () => {
+    if (state.email == '' || state.password == '') {
+      ToastMessage('Form Error', 'Please fill all fields', 'error');
+    }
+    else {
+      // ToastMessage('Form Error', 'Please fill all fields', 'success');
+      let data = {
+        email: state.email,
+        password: state.password
+      }
+      dispatch(SignInAction(data, navigation))
+
+
+    }
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -69,6 +94,12 @@ export const SignIn = ({ navigation }) => {
             placeholder="Eg namaemail@emailkamu.com"
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
+            onChangeText={(text) =>
+              setState({
+                ...state,
+                email: text,
+              })
+            }
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -83,6 +114,12 @@ export const SignIn = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
+            onChangeText={(text) =>
+              setState({
+                ...state,
+                password: text,
+              })
+            }
           />
         </View>
 
@@ -111,11 +148,15 @@ export const SignIn = ({ navigation }) => {
             paddingVertical: 20
           }}>
           <Button
+
             onPress={() => {
-              navigation.navigate('AppStackNavigator', {
-                screen: 'Home',
-              })
+              signIn()
             }}
+            // onPress={() => {
+            //   navigation.navigate('AppStackNavigator', {
+            //     screen: 'Home',
+            //   })
+            // }}
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
             title="Sign In"
           />
