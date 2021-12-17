@@ -11,6 +11,8 @@ import Button from '../../components/Button';
 import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
 
+    const data = useSelector(state => state.userReducer.users)
+    console.log('data in home', data)
     const mapRef = useRef(null)
 
 

@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -17,8 +17,32 @@ const { width, height } = Dimensions.get('window')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useDispatch } from 'react-redux'
+import { ForgotPasswordAction } from '../../stores/actions/user.action'
 export const ForgetPassword = ({ navigation }) => {
+  const [state, setState] = useState({
+    email: ''
+  })
+  const dispatch = useDispatch()
+  const forgotPassword = () => {
+    let value =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        state.email,
+      );
+    if (state.email == '') {
+      ToastMessage('Form Error', 'Please enter email', 'error');
+    }
+    else if (!value) {
+      ToastMessage('Email Error', 'Please enter a valid email address', 'info');
+    }
+    else {
+      let data = {
+        email: state.email
+      }
+      dispatch(ForgotPasswordAction(data, navigation))
+    }
+  }
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -67,11 +91,16 @@ export const ForgetPassword = ({ navigation }) => {
             placeholder="Eg namaemail@emailkamu.com"
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
+            onChangeText={(text) => {
+              setState({
+                ...state, email: text
+              })
+            }}
           />
         </View>
 
         <View style={{ width: '76%', alignSelf: 'center', marginTop: 8, paddingVertical: 10 }}>
-          <Text style={{ color: "#A8AEB9", fontSize: 14, fontFamily:"Rubik-Regular", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
+          <Text style={{ color: "#A8AEB9", fontSize: 14, fontFamily: "Rubik-Regular", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
             with further instructions</Text>
         </View>
 
@@ -82,9 +111,12 @@ export const ForgetPassword = ({ navigation }) => {
             paddingVertical: 20
           }}>
           <Button
-            onPress={() => { navigation.navigate('ChangePassword') }}
+            onPress={() => {
+              forgotPassword()
+            }}
+            // onPress={() => { navigation.navigate('ChangePassword') }}
             buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-            title="Recover Password"        
+            title="Recover Password"
           />
         </View>
       </ScrollView>
@@ -110,7 +142,7 @@ const styles = StyleSheet.create({
   },
   ForgetPasswordText: {
     fontSize: 18,
-    fontFamily:"Rubik-Medium",
+    fontFamily: "Rubik-Medium",
     textAlign: 'center'
   },
   InputContainer: {
@@ -119,7 +151,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily:"Rubik-Medium",
+    fontFamily: "Rubik-Medium",
   },
   input: {
     width: '88%',
@@ -132,7 +164,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily:"Rubik-Regular",
+    fontFamily: "Rubik-Regular",
     backgroundColor: '#fff'
   }
 })

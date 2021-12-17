@@ -18,9 +18,63 @@ const { width, height } = Dimensions.get('window')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useDispatch } from 'react-redux'
+import { SignUpAction } from '../../stores/actions/user.action'
+import { useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client'
+import { Add_User } from '../../utils/mutation'
 
 export const SignUp = ({ navigation }) => {
+  const [state, setState] = useState({
+    fullName: '',
+    email: '',
+    password: ''
+  })
+  const dispatch = useDispatch()
+  const loading = useSelector(state => state.userReducer.isLoading)
+  // console.log('loader======', loading)
 
+
+  const signUp = () => {
+    let value =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        state.email,
+      );
+    if (state.fullName == '' || state.email == '' || state.password == '') {
+      ToastMessage('Form Error', 'Please fill all fields', 'error');
+
+    }
+    else if (!value) {
+      ToastMessage('Email Error', 'Please enter a valid email address', 'info');
+    } else if (state.password.length <= 8) {
+      ToastMessage(
+        'Password Error',
+        'Password should be greater then 8 character',
+        'info',
+      );
+    }
+    else {
+      let FormData = {
+        fullName: state.fullName,
+        email: state.email,
+        password: state.password
+      }
+
+      console.log('SignUp Data', FormData)
+      // const [addUser, { data, loading, error }] = useMutation(Add_User);
+      // addUser({
+      //   variables: {
+      //     email: FormData.email,
+      //     name: FormData.fullName,
+      //     password: FormData.password
+      //   }
+      // })
+
+      // dispatch(SignUpAction(data, navigation))
+    }
+
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -67,6 +121,12 @@ export const SignUp = ({ navigation }) => {
               placeholder="Enter your full name"
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  fullName: text,
+                })
+              }
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -80,6 +140,12 @@ export const SignUp = ({ navigation }) => {
               placeholder="Eg namaemail@emailkamu.com"
               placeholderTextColor="#9CA3AF"
               keyboardType="email-address"
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  email: text,
+                })
+              }
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -94,6 +160,12 @@ export const SignUp = ({ navigation }) => {
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               secureTextEntry={true}
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  password: text,
+                })
+              }
             />
           </View>
 
@@ -104,10 +176,13 @@ export const SignUp = ({ navigation }) => {
               paddingVertical: 20
             }}>
             <Button
-              onPress={() => navigation.navigate('AppStackNavigator')}
+
+              // onPress={() => navigation.navigate('AppStackNavigator')}
+
+              onPress={() => signUp()}
               buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
               title="Sign Up"
-            // textStyle={{fontFamily:"Inter-Bold",}}
+
             />
           </View>
         </ScrollView>
