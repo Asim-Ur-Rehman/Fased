@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
 const { width, height } = Dimensions.get('screen')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const Languages = ({ navigation }) => {
@@ -12,6 +13,29 @@ export const Languages = ({ navigation }) => {
     // useEffect(() => {
     //     navigation.navigate('AppStackNavigator')
     // }, [])
+
+    useEffect(() => {
+        getUserData()
+    }, [])
+
+    const getUserData = async () => {
+        let userData = await AsyncStorage.getItem('userData')
+        let data = JSON.parse(userData)
+        let checkForUser = data && Object.keys(data).length > 0
+        console.log('check in lang', checkForUser)
+        if (checkForUser) {
+            navigation.navigate('AppStackNavigator')
+        }
+
+        // navigation.navigate('AppStackNavigator')
+        // let data = JSON.parse(userData)
+        // console.log('userData in navigation', navigation)
+        // setState({
+        //   ...state, userData: data
+        // })
+
+
+    }
 
     const Buttons = [{
         title: 'Arabic',

@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   StatusBar,
+  ActivityIndicator
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -20,27 +21,55 @@ import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useDispatch } from 'react-redux'
 import { ForgotPasswordAction } from '../../stores/actions/user.action'
+import { Forgot_Password } from '../../utils/mutation'
+import { useMutation, useLazyQuery } from '@apollo/client'
 export const ForgetPassword = ({ navigation }) => {
-  const [state, setState] = useState({
-    email: ''
-  })
+  const [email, setEmail] = useState('')
+
   const dispatch = useDispatch()
-  const forgotPassword = () => {
+  const [forgotPassword, { data, loading, error }] = useMutation(Forgot_Password);
+  const forgotPasswordFunc = () => {
     let value =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        state.email,
+        email,
       );
-    if (state.email == '') {
+    if (email == '') {
       ToastMessage('Form Error', 'Please enter email', 'error');
     }
     else if (!value) {
       ToastMessage('Email Error', 'Please enter a valid email address', 'info');
     }
     else {
-      let data = {
-        email: state.email
-      }
-      dispatch(ForgotPasswordAction(data, navigation))
+
+      forgotPassword({
+        variables: {
+          email: email,
+
+        }
+      }).then((data) => {
+        console.log('data return', data.data.forgotPassword.status)
+        if (data.data.forgotPassword.status) {
+
+
+          ToastMessage('User SignIn Successfully', data.data.forgotPassword.message, 'success');
+          navigation.navigate('Otp', {
+            emailFromParam: email
+          })
+
+        }
+        else {
+          ToastMessage('forgotPassword Error', data.data.forgotPassword.message, 'error');
+        }
+
+
+      })
+        .catch((error) => {
+          console.log('error', error)
+          ToastMessage('forgotPassword Error', error.data.forgotPassword.message, 'error');
+        })
+
+
+
     }
   }
 
@@ -91,10 +120,9 @@ export const ForgetPassword = ({ navigation }) => {
             placeholder="Eg namaemail@emailkamu.com"
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
+            autoCapitalize="none"
             onChangeText={(text) => {
-              setState({
-                ...state, email: text
-              })
+              setEmail(text)
             }}
           />
         </View>
@@ -110,14 +138,20 @@ export const ForgetPassword = ({ navigation }) => {
             // justifyContent: 'center',
             paddingVertical: 20
           }}>
-          <Button
-            onPress={() => {
-              forgotPassword()
-            }}
-            // onPress={() => { navigation.navigate('ChangePassword') }}
-            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-            title="Recover Password"
-          />
+
+
+          {
+            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
+              <Button
+                onPress={() => {
+                  forgotPasswordFunc()
+                }}
+                // onPress={() => { navigation.navigate('ChangePassword') }}
+                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
+                title="Recover Password"
+              />
+          }
+
         </View>
       </ScrollView>
     </SafeAreaView>

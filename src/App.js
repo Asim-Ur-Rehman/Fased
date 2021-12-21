@@ -24,7 +24,7 @@ const client = new ApolloClient({
   cache,
 });
 
-const App = () => {
+const App = ({ navigation }) => {
   const [loadingCache, setLoadingCache] = useState(true)
   useEffect(() => {
     persistCache({
@@ -40,14 +40,14 @@ const App = () => {
     )
   }, [])
 
- 
+
 
   return (
     <>
       <ApolloProvider client={client}>
         <Provider store={store}>
           <View style={{ flex: 1, backgroundColor: '#fff' }}>
-            <MainNavigation />
+            <MainNavigation navigation={navigation} />
             <Toast />
           </View>
         </Provider>

@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -24,32 +25,34 @@ import { SignUpAction } from '../../stores/actions/user.action'
 import { useSelector } from 'react-redux';
 import { useMutation } from '@apollo/client'
 import { Add_User } from '../../utils/mutation'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export const SignUp = ({ navigation }) => {
-  const [state, setState] = useState({
-    fullName: '',
-    email: '',
-    password: ''
-  })
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  // const [state, setState] = useState({
+  //   fullName: '',
+  //   email: '',
+  //   password: ''
+  // })
   const dispatch = useDispatch()
   // const loading = useSelector(state => state.userReducer.isLoading)
   const [addUser, { data, loading, error }] = useMutation(Add_User);
-
-  // console.log('loader======', loading)
 
 
   const signUp = () => {
     let value =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        state.email,
+        email,
       );
-    if (state.fullName == '' || state.email == '' || state.password == '') {
+    if (fullName == '' || email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error');
 
     }
     else if (!value) {
       ToastMessage('Email Error', 'Please enter a valid email address', 'info');
-    } else if (state.password.length <= 8) {
+    } else if (password.length <= 8) {
       ToastMessage(
         'Password Error',
         'Password should be greater then 8 character',
@@ -57,15 +60,38 @@ export const SignUp = ({ navigation }) => {
       );
     }
     else {
-
+      console.log('data from form', email, password, fullName)
       addUser({
         variables: {
-          email: state.fullName,
-          name: state.email,
-          password: state.password
+          email: fullName,
+          name: email,
+          password: password
         }
+      }).then((data) => {
+        console.log('data return', data.data.addUser.status)
+        if (data.data.addUser.status) {
+          let userData = data.data.addUser.data
+          let jsonData = JSON.stringify(userData)
+          AsyncStorage.setItem('userData', jsonData)
+          ToastMessage('SignUp Success', data.data.addUser.message, 'success');
+
+
+          navigation.navigate('AppStackNavigator', {
+            screen: 'Home',
+          })
+        }
+        else {
+          ToastMessage('SignUp Error', data.data.addUser.message, 'error');
+        }
+
+
+
       })
-     
+        .catch((error) => {
+          console.log('error', error)
+          ToastMessage('SignUp Error', error.data.addUser.message, 'info');
+        })
+
       console.log("data", data, "error", error)
 
       // dispatch(SignUpAction(data, navigation))
@@ -74,6 +100,7 @@ export const SignUp = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={styles.mainContainer}>
+
       <AuthHeader
         onPress={() => {
           navigation.goBack()
@@ -119,10 +146,8 @@ export const SignUp = ({ navigation }) => {
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               onChangeText={(text) =>
-                setState({
-                  ...state,
-                  fullName: text,
-                })
+                setFullName(text)
+
               }
             />
 
@@ -137,11 +162,9 @@ export const SignUp = ({ navigation }) => {
               placeholder="Eg namaemail@emailkamu.com"
               placeholderTextColor="#9CA3AF"
               keyboardType="email-address"
+              autoCapitalize="none"
               onChangeText={(text) =>
-                setState({
-                  ...state,
-                  email: text,
-                })
+                setEmail(text)
               }
             />
 
@@ -150,6 +173,7 @@ export const SignUp = ({ navigation }) => {
             </View>
 
             <TextInput
+
               style={styles.input}
               // onChangeText={onChangeNumber}
               // value={'123456789012'}
@@ -158,10 +182,7 @@ export const SignUp = ({ navigation }) => {
               keyboardType="default"
               secureTextEntry={true}
               onChangeText={(text) =>
-                setState({
-                  ...state,
-                  password: text,
-                })
+                setPassword(text)
               }
             />
           </View>
@@ -172,15 +193,18 @@ export const SignUp = ({ navigation }) => {
               // justifyContent: 'center',
               paddingVertical: 20
             }}>
-            <Button
+            {
+              loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
+                <Button
 
-              // onPress={() => navigation.navigate('AppStackNavigator')}
 
-              onPress={() => signUp()}
-              buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-              title="Sign Up"
+                  onPress={() => signUp()}
+                  buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+                  title="Sign Up"
 
-            />
+                />
+            }
+
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

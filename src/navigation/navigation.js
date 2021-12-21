@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -7,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Languages } from '../screens/Languages/Languages'
 import { SignIn } from '../screens/SignIn/SignIn'
 import { SignUp } from '../screens/SignUp/SignUp'
+import { Otp } from '../screens/Otp/Otp'
 import { Home } from '../screens/Home/Home'
 import { Calender } from '../screens/Calender/Calender'
 import { ForgetPassword } from '../screens/ForgetPassword/ForgetPassword'
@@ -70,6 +73,7 @@ function AuthStackNavigator() {
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+      <AuthStack.Screen name="Otp" component={Otp} />
       <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
     </AuthStack.Navigator>
   );
@@ -98,10 +102,33 @@ function AppStackNavigator() {
 }
 
 const MainNavigation = () => {
+  // const [state, setState] = useState({
+  //   userData: {}
+  // })
 
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
+
+  // const getUserData = async () => {
+  //   let userData = await AsyncStorage.getItem('userData')
+  //   let data = JSON.parse(userData)
+  //   console.log('userData in navigation', navigation)
+  //   setState({
+  //     ...state, userData: data
+  //   })
+
+
+  // }
+  // console.log('userdata from state', Boolean(Object.keys(state.userData).length > 0))
   return (
     <NavigationContainer theme={{ ...DefaultTheme, colors: { background: "#fff" } }}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+
+      <Stack.Navigator screenOptions={{ headerShown: false }}
+
+      // initialRouteName={Object.keys(state.userData).length > 0 ? 'AppStackNavigator' : 'AuthStackNavigator'}
+
+      >
 
         <Stack.Screen
           name="AuthStackNavigator"

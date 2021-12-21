@@ -8,11 +8,15 @@ import { Marker } from "react-native-maps";
 import { VictoryPie, } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
 
     const data = useSelector(state => state.userReducer.users)
-    console.log('data in home', data)
+    useEffect(() => {
+        getUserData()
+    }, [])
     const mapRef = useRef(null)
 
 
@@ -262,6 +266,13 @@ export const Home = ({ navigation, route }) => {
 
         return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI;
     };
+
+
+    const getUserData = async () => {
+        const userData = await AsyncStorage.getItem('userData')
+        console.log('userData in home', userData)
+
+    }
 
     return (
         <View style={{ flex: 1 }}>
