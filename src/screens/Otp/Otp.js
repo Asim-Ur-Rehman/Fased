@@ -21,7 +21,7 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useDispatch } from 'react-redux'
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import CountDown from 'react-native-countdown-component';
-import { Verify_Otp } from '../../utils/mutation'
+import { Verify_Otp, Forgot_Password } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
 export const Otp = ({ navigation, route }) => {
     const emailFromParam = route?.params?.emailFromParam
@@ -31,6 +31,7 @@ export const Otp = ({ navigation, route }) => {
     const dispatch = useDispatch()
 
     const [OtpVerify_Email, { data, loading, error }] = useMutation(Verify_Otp);
+    const [forgotPassword, { data1, loading1, error1 }] = useMutation(Forgot_Password);
     const Submit = async (otp) => {
         console.log('otp code ', otp)
 
@@ -110,6 +111,36 @@ export const Otp = ({ navigation, route }) => {
         // console.log('Resend Click');
         setTimer(120);
         setButtonClicked(false)
+
+
+        forgotPassword({
+            variables: {
+                email: emailFromParam,
+
+            }
+        }).then((data) => {
+            console.log('data return', data.data.forgotPassword.status)
+            if (data.data.forgotPassword.status) {
+
+
+                ToastMessage('OTP Re-send Successfully', data.data.forgotPassword.message, 'success');
+                // navigation.navigate('Otp', {
+                //     emailFromParam: email
+                // })
+
+            }
+            else {
+                ToastMessage(' Error', data.data.forgotPassword.message, 'error');
+            }
+
+
+        })
+            .catch((error) => {
+                console.log('error', error)
+                ToastMessage(' Error', error.data.forgotPassword.message, 'error');
+            })
+
+
 
     };
     return (

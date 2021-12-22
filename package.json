@@ -26,6 +26,7 @@
     "apollo-client": "^2.6.10",
     "apollo3-cache-persist": "^0.13.0",
     "graphql": "^16.1.0",
+    "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-native-calendar-picker": "^7.1.2",

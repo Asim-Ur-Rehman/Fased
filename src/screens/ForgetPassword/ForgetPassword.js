@@ -51,21 +51,21 @@ export const ForgetPassword = ({ navigation }) => {
         if (data.data.forgotPassword.status) {
 
 
-          ToastMessage('User SignIn Successfully', data.data.forgotPassword.message, 'success');
+          ToastMessage('OTP Send', data.data.forgotPassword.message, 'success');
           navigation.navigate('Otp', {
             emailFromParam: email
           })
 
         }
         else {
-          ToastMessage('forgotPassword Error', data.data.forgotPassword.message, 'error');
+          ToastMessage('Error', data.data.forgotPassword.message, 'error');
         }
 
 
       })
         .catch((error) => {
           console.log('error', error)
-          ToastMessage('forgotPassword Error', error.data.forgotPassword.message, 'error');
+          ToastMessage('Error', error.data.forgotPassword.message, 'error');
         })
 
 

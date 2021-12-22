@@ -22,7 +22,9 @@ import ModalDropdown from 'react-native-modal-dropdown'
 import ToggleButton from '../../components/ToggleButton/index'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-
+import { useDispatch } from 'react-redux'
+import { ReportIncidentAllData } from '../../stores/actions/user.action'
+import moment from 'moment';
 export const ReportIncidentA = ({ navigation, route }) => {
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
@@ -34,8 +36,10 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
   const [category, setCategory] = useState(null)
   const [subcategory, setsubCategory] = useState(route.params?.subcategory ? route.params?.subcategory : null)
+  const [suspectName, setSuspectName] = useState('')
+  const [amount, setAmount] = useState()
 
-
+  const dispatch = useDispatch()
   useEffect(() => {
     if (route.params?.category) {
       setCategory(route.params?.category)
@@ -57,6 +61,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
       setCurrentTime(time)
     } else {
       setDate(date.toDateString())
+      // setDate(date)
+
       // console.log("date", date.toDateString(), "time", time)
     }
     setShow(!show)
@@ -76,7 +82,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
           alignSelf: 'center',
           height: 96.26,
           borderRadius: 10,
-          backgroundColor: item[0].backgroundColor,
+          backgroundColor: item[0].BackgroundColor,
           flexDirection: 'row',
           marginBottom: 12,
         }}>
@@ -85,7 +91,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <Image source={item[0].Image} style={{
+          <Image source={{ uri: item[0].Image }} style={{
             width: 79.89,
             height: 79.89,
           }} />
@@ -113,7 +119,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
               color: '#ffff',
               paddingBottom: 5
             }}>
-              {item[0].title}
+              {item[0].Title}
             </Text>
             <Text style={{
               fontSize: 11,
@@ -121,12 +127,42 @@ export const ReportIncidentA = ({ navigation, route }) => {
               color: '#fff',
               lineHeight: 12
             }}>
-              {item[0].description}
+              {item[0].Description}
             </Text>
           </View>
         </View>
       </TouchableOpacity>
     )
+  }
+
+
+
+  const next = () => {
+
+
+    // console.log('data', moment(date).format('YYYY-MM-DD'))
+    let data = {
+      category: category[0].id,
+      subcategory: subcategory ? subcategory[0].id : 0,
+      date: moment(date).format('YYYY-MM-DD'),
+      time: currentTime,
+      suspectName: suspectName,
+      amount: amount
+
+
+    }
+    console.log('all data', data)
+
+    dispatch(ReportIncidentAllData(data, navigation))
+    // // console.log('category', category[0].id, subcategory[0].id)
+    // console.log('date', currentTime)
+
+    // // console.log('catogeory ', route.params.category.map((item) => {
+    // //   console.log('item', item.key)
+    // // }))
+
+
+
   }
 
   return (
@@ -397,6 +433,9 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   color: '#000',
                   paddingHorizontal: 20
                 }}
+                onChangeText={(text) => {
+                  setSuspectName(text)
+                }}
                 // onChangeText={onChangeNumber}
                 // value={'123456789012'}
                 placeholder="Enter name"
@@ -433,6 +472,9 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   color: '#000',
                   paddingHorizontal: 20
                 }}
+                onChangeText={(text) => {
+                  setAmount(text)
+                }}
                 // onChangeText={onChangeNumber}
                 // value={'123456789012'}
                 placeholder="Amount"
@@ -452,9 +494,13 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
           <View style={{ marginTop: 15 }}>
             <Button
+
               onPress={() => {
-                navigation.navigate('ReportIncidentC')
+                next()
               }}
+              // onPress={() => {
+              //   navigation.navigate('ReportIncidentC')
+              // }}
               buttonStyle={{ width: '90%', alignSelf: 'center' }}
               title="Next"
             />

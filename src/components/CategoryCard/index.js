@@ -26,6 +26,7 @@ export default function CategoryComp({
     return (
         <>
             {data.map((item, i) => {
+                // console.log('njgigu', item.id)
                 const isInclude = selected.findIndex((e) => e[targetKey] == item[targetKey])
                 const disabledKey = disabled ? disabled.findIndex((e) => e[targetKey] == item[targetKey]) : -1
                 const isSelected = isInclude == -1 ? true : false
@@ -37,26 +38,26 @@ export default function CategoryComp({
 
                         <TouchableOpacity
                             onPress={() => onPress(item)}
-                            key={i}
+                            key={item.id}
                             disabled={!isDisabled}
                             style={[
                                 styles.mainContainer,
                                 !isDisabled ?
-                                {
-                                    backgroundColor: '#cdcdcd',
-                                    borderColor: '#fff'
-                                } 
-                                :
-                                {
-                                    backgroundColor: isSelected
-                                        ? item.backgroundColor
-                                        : `${item.backgroundColor}18`,
-                                    borderColor: item.backgroundColor
-                                }
+                                    {
+                                        backgroundColor: '#cdcdcd',
+                                        borderColor: '#fff'
+                                    }
+                                    :
+                                    {
+                                        backgroundColor: isSelected
+                                            ? item.BackgroundColor
+                                            : `${item.BackgroundColor}18`,
+                                        borderColor: item.BackgroundColor
+                                    }
                             ]}
                             activeOpacity={1}>
                             <View style={[styles.ImageView, ImageStyle]}>
-                                <Image source={item.Image} style={{ height: "100%", width: "100%", borderRadius: 5 }} />
+                                <Image source={item.Image.includes('https') ? { uri: item.Image } : item.Image} style={{ height: "100%", width: "100%", borderRadius: 5 }} />
                             </View>
                             <View style={{ flex: 1, marginLeft: 15 }}>
                                 <View style={{ alignItems: 'flex-end', marginTop: 4 }}>
@@ -66,7 +67,7 @@ export default function CategoryComp({
                                             width: 12,
                                             borderRadius: 6,
                                             borderWidth: 1.4,
-                                            borderColor: isSelected ? '#fff' : item.backgroundColor,
+                                            borderColor: isSelected ? '#fff' : item.BackgroundColor,
                                             alignItems: 'center',
                                             justifyContent: 'center'
                                         }}>
@@ -75,7 +76,7 @@ export default function CategoryComp({
                                                 height: 5.5,
                                                 width: 5.5,
                                                 borderRadius: 3,
-                                                backgroundColor: isSelected ? '#fff' : item.backgroundColor
+                                                backgroundColor: isSelected ? '#fff' : item.BackgroundColor
                                             }}
                                         />
                                     </View>
@@ -88,9 +89,9 @@ export default function CategoryComp({
                                             lineHeight: 17,
                                             letterSpacing: 0.08,
                                             marginBottom: 3,
-                                            color: isSelected ? '#fff' : item.backgroundColor
+                                            color: isSelected ? '#fff' : item.BackgroundColor
                                         }}>
-                                        {item.title}
+                                        {item.Title}
                                     </Text>
                                     <Text
                                         style={{
@@ -100,7 +101,7 @@ export default function CategoryComp({
                                             letterSpacing: 0.08,
                                             color: isSelected ? '#fff' : '#000'
                                         }}>
-                                        {item.description}
+                                        {item.Description}
                                     </Text>
                                 </View>
                             </View>

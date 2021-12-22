@@ -9,15 +9,21 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import CategoryComp from '../../components/CategoryCard'
-
-
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
+import { Get_Categories } from '../../utils/queries'
 
 export const ReportIncidentB = ({ navigation, route }) => {
+
+
+    const { data, loading, error } = useQuery(Get_Categories);
     const [select, setSelect] = useState(route.params?.selected ? route.params?.selected : [])
 
     useEffect(() => {
         setSelect(route.params?.selected ? route.params?.selected : [])
     }, [route.params?.selected])
+
+    console.log('data', data.getCategories.data)
 
     const Data = [
         {
@@ -78,9 +84,11 @@ export const ReportIncidentB = ({ navigation, route }) => {
 
     const onSelect = (item) => {
         setSelect([item])
+
+
     }
 
-    console.log('select', route.params, )
+    console.log('select', route.params,)
     return (
         <View style={{
             flex: 1,
@@ -164,8 +172,8 @@ export const ReportIncidentB = ({ navigation, route }) => {
                             //     onSelect(arr)
                             // }}
                             disabled={route.params?.alternate}
-                            data={Data}
-                            targetKey={"key"}
+                            data={data?.getCategories?.data}
+                            targetKey={"id"}
                             selected={[...select]}
                         />
                     </View>
@@ -183,7 +191,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                                     console.log('type', type)
                                     navigation.navigate('ReportIncidentA', { [type]: select, [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate })
                                 } else {
-                                    alert('Please select any category')
+                                    ToastMessage('Error', 'Please select category', 'error');
                                 }
 
 

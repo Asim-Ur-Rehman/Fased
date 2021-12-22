@@ -10,11 +10,16 @@ import MapView, { Marker } from 'react-native-maps';
 
 import Feather from 'react-native-vector-icons/Feather'
 import ToggleButton from '../../components/ToggleButton/index'
-
+import { useDispatch } from 'react-redux'
+import { ReportIncidentLocationFloorData } from '../../stores/actions/user.action';
 
 export const ReportIncident = ({ navigation }) => {
+    const [location, setLocation] = useState('')
+    const [floor, setFloor] = useState(0)
     const mapRef = useRef(null)
     const [enabled, setEnabled] = useState(false)
+
+    const dispatch = useDispatch()
     const onSelectSwitch = (index) => {
         // console.log('index ', index)
 
@@ -65,6 +70,22 @@ export const ReportIncident = ({ navigation }) => {
 
     const onRegionChange = region => {
         setinitialRegion(region)
+
+        // console.log('locations ', region)
+        // set
+    }
+
+
+
+    const next = () => {
+        let data = {
+            latitude: initialRegion.latitude,
+            longitude: initialRegion.longitude,
+            floor: floor ? floor : 0
+        }
+        console.log('data ', data)
+        dispatch(ReportIncidentLocationFloorData(data, navigation))
+
     }
 
     return (
@@ -250,8 +271,11 @@ export const ReportIncident = ({ navigation }) => {
                                     // disabled={true}
                                     placeholder='11th'
                                     placeholderTextColor={theme.textColor.placeholderColor}
+                                    keyboardType='number-pad'
 
-
+                                    onChangeText={(number) => {
+                                        setFloor(number)
+                                    }}
                                     style={{
                                         width: 63,
                                         height: 36,
@@ -261,6 +285,7 @@ export const ReportIncident = ({ navigation }) => {
                                         paddingHorizontal: 15,
                                         fontSize: 12,
                                         fontFamily: "Rubik-Regular",
+                                        color: 'black'
                                         // paddingLeft: 15
                                         // alignItems: 'center'
 
@@ -273,8 +298,11 @@ export const ReportIncident = ({ navigation }) => {
                         <View style={{ marginVertical: 10 }}>
                             <Button
                                 onPress={() => {
-                                    navigation.navigate('ReportIncidentB')
+                                    next()
                                 }}
+                                // onPress={() => {
+                                //     navigation.navigate('ReportIncidentB')
+                                // }}
                                 buttonStyle={{ width: '85%', alignSelf: 'center' }}
                                 title="Next"
                             />

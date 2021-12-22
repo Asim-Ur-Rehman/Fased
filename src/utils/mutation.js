@@ -8,7 +8,7 @@ import {
 
 
 export const Add_User = gql`
-mutation SignUp($email: String!, $name: String, $password: String) {
+mutation SignUp($email: String!, $name: String!, $password: String!) {
   addUser(email: $email, name: $name, password: $password) {
     data {
       id
@@ -52,6 +52,17 @@ mutation NewPassword($password: String!, $email: String!) {
     status
     message
 
+  }
+}
+
+`
+
+export const Create_Report_Incident = gql`
+
+mutation CreateReport($userId: Int!, $categoryId: Int!, $subCategory: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $costMoney: Int!, $incidentDate: Date!, $description: String!, $floor: Int!) {
+  CreateReport(userId: $userId, CategoryId: $categoryId, SubCategory: $subCategory, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, CostMoney: $costMoney, IncidentDate: $incidentDate, Description: $description, floor: $floor) {
+    status
+    message
   }
 }
 

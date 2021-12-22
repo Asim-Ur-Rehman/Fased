@@ -63,12 +63,12 @@ export const SignUp = ({ navigation }) => {
       console.log('data from form', email, password, fullName)
       addUser({
         variables: {
-          email: fullName,
-          name: email,
+          email: email,
+          name: fullName,
           password: password
         }
       }).then((data) => {
-        console.log('data return', data.data.addUser.status)
+        console.log('data return', data)
         if (data.data.addUser.status) {
           let userData = data.data.addUser.data
           let jsonData = JSON.stringify(userData)

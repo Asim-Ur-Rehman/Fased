@@ -23,4 +23,37 @@ query SignIn($email: String, $password: String) {
 
 `
 
+export const Get_Categories = gql`
 
+query Query {
+  getCategories {
+    status
+    message
+    data {
+      id
+      Image
+      Title
+      Description
+      BackgroundColor
+    }
+  }
+}
+
+`
+
+export const Get_News = gql`
+query Query {
+  getNews {
+    status
+    message
+    data {
+      id
+      Image
+      Title
+      Tagline
+      Description
+    }
+  }
+}
+
+`
