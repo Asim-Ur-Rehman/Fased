@@ -71,6 +71,8 @@ query Query {
       SubCategory
       latitude
       longitude
+      Description
+      SuspectName
     }
   }
 }

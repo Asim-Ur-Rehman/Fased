@@ -14,6 +14,9 @@ import { Get_Categories, Get_Reports } from '../../utils/queries'
 import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
     const { data, loading, error } = useQuery(Get_Categories);
+    const reportsData = useQuery(Get_Reports);
+    const reports = reportsData?.data?.getReports?.data ? reportsData?.data?.getReports?.data: []
+    console.log("reportsData", reports)
 
     useEffect(() => {
         getUserData()
@@ -420,10 +423,10 @@ export const Home = ({ navigation, route }) => {
                     }}
                 >
                     {
-                        allMarkers.map((item, i) => {
+                        reports.map((item, i) => {
                             return (
-                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.title} description={item.description} >
-                                    <Image source={item.image} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
+                                <Marker key={i} coordinate={{ latitude: item.latitude, longitude: item.longitude }} title={item.SuspectName} description={item.Description} >
+                                    <Image source={require('../../assets/images/user.png')} style={{ width: 50, height: 50 }} resizeMode={'contain'} />
                                 </Marker>
                             )
                         })
