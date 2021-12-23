@@ -81,7 +81,7 @@ export const ReportIncident = ({ navigation }) => {
         let data = {
             latitude: initialRegion.latitude,
             longitude: initialRegion.longitude,
-            floor: floor ? floor : 0
+            floor: floor ? floor : '0'
         }
         console.log('data ', data)
         dispatch(ReportIncidentLocationFloorData(data, navigation))

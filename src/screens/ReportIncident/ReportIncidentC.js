@@ -51,9 +51,9 @@ export const ReportIncidentC = ({ navigation }) => {
 
   const next = () => {
 
-    // console.log('reportIncidentLocationFloorData', reportIncidentLocationFloorData)
+    // // console.log('reportIncidentLocationFloorData', reportIncidentLocationFloorData)
     // console.log('reportIncidentAllData', reportIncidentAllData)
-    // console.log('userid', typeof (userId))
+    // // console.log('userid', typeof (userId))
     // console.log('obj', {
     //   userId: parseInt(userId),
     //   categoryId: reportIncidentAllData?.category,
@@ -65,7 +65,7 @@ export const ReportIncidentC = ({ navigation }) => {
     //   incidentDate: reportIncidentAllData?.date,
     //   incidentTime: reportIncidentAllData?.time,
     //   description: text,
-    //   floor: reportIncidentLocationFloorData?.floor
+    //   floor: parseInt(reportIncidentLocationFloorData?.floor)
 
 
     // })
@@ -83,7 +83,7 @@ export const ReportIncidentC = ({ navigation }) => {
         incidentDate: reportIncidentAllData?.date,
         incidentTime: reportIncidentAllData?.time,
         description: text,
-        floor: reportIncidentLocationFloorData?.floor
+        floor: parseInt(reportIncidentLocationFloorData?.floor)
 
 
       }

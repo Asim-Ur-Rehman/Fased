@@ -23,7 +23,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
         setSelect(route.params?.selected ? route.params?.selected : [])
     }, [route.params?.selected])
 
-    console.log('data', data.getCategories.data)
+    // console.log('data', data.getCategories.data)
 
     const Data = [
         {

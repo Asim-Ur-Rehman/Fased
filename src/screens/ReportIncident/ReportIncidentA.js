@@ -26,9 +26,15 @@ import { useDispatch } from 'react-redux'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import moment from 'moment';
 export const ReportIncidentA = ({ navigation, route }) => {
-  const onSelectSwitch = index => {
-    // alert(index === 1 ? 'Switch Off' : 'Switch On')
-  }
+  const [disableDate, setDisableDate] = useState(false)
+  const [disableTime, setDisableTime] = useState(false)
+  const [disableName, setDisableName] = useState(false)
+  const [disableAmount, setDisableAmount] = useState(false)
+
+
+
+
+
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('time')
   const [date, setDate] = useState(new Date().toDateString())
@@ -52,7 +58,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
     }
   }, [route.params?.category])
 
-  console.log('report Incident ===', route.params)
+  // console.log('report Incident ===', route.params)
   const onChange = date => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
@@ -66,6 +72,31 @@ export const ReportIncidentA = ({ navigation, route }) => {
       // console.log("date", date.toDateString(), "time", time)
     }
     setShow(!show)
+  }
+
+
+  const onToggleSwitch = (index, key) => {
+    console.log('index', index, key)
+    // alert(index === 1 ? 'Switch Off' : 'Switch On')
+    switch (key) {
+      case 'date':
+        index === 2 ? setDisableDate(true) : setDisableDate(false)
+        break
+      case 'time':
+        index === 2 ? setDisableTime(true) : setDisableTime(false)
+        break
+
+      case 'suspectName':
+        index === 2 ? setDisableName(true) : setDisableName(false)
+        break
+      case 'amount':
+        index === 2 ? setDisableAmount(true) : setDisableAmount(false)
+        break
+
+
+    }
+
+
   }
 
 
@@ -146,8 +177,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
       subcategory: subcategory ? subcategory[0].id : 0,
       date: moment(date).format('YYYY-MM-DD'),
       time: currentTime,
-      suspectName: suspectName,
-      amount: amount
+      suspectName: suspectName ? suspectName : 'Anonymouse',
+      amount: amount ? amount : '0'
 
 
     }
@@ -296,10 +327,12 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Today
                 </Text>
-                <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
+                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'date')} />
               </View>
             </View>
             <TouchableOpacity
+              disabled={disableDate}
+
               activeOpacity={0.8}
               onPress={() => {
                 setMode('date')
@@ -345,10 +378,11 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Now
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'time')} />
               </View>
             </View>
             <TouchableOpacity
+              disabled={disableTime}
               activeOpacity={0.8}
               onPress={() => {
                 setMode('time')
@@ -421,11 +455,12 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Don’t Know
                 </Text>
-                <ToggleButton selectionMode={2} onSelectSwitch={onSelectSwitch} />
+                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'suspectName')} />
               </View>
             </View>
             <View style={styles.fieldView2}>
               <TextInput
+                editable={!disableName}
                 style={{
                   width: '90%',
                   fontSize: 14,
@@ -460,11 +495,12 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   No
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
+                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'amount')} />
               </View>
             </View>
             <View style={styles.fieldView}>
               <TextInput
+                editable={!disableAmount}
                 style={{
                   width: '85%',
                   fontSize: 14,
