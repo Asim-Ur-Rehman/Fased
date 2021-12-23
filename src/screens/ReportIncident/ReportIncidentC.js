@@ -63,6 +63,7 @@ export const ReportIncidentC = ({ navigation }) => {
     //   suspectName: reportIncidentAllData?.suspectName,
     //   costMoney: parseInt(reportIncidentAllData?.amount),
     //   incidentDate: reportIncidentAllData?.date,
+    //   incidentTime: reportIncidentAllData?.time,
     //   description: text,
     //   floor: reportIncidentLocationFloorData?.floor
 
@@ -80,6 +81,7 @@ export const ReportIncidentC = ({ navigation }) => {
         suspectName: reportIncidentAllData?.suspectName,
         costMoney: parseInt(reportIncidentAllData?.amount),
         incidentDate: reportIncidentAllData?.date,
+        incidentTime: reportIncidentAllData?.time,
         description: text,
         floor: reportIncidentLocationFloorData?.floor
 

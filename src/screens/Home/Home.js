@@ -10,11 +10,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
-import { Get_Categories } from '../../utils/queries'
+import { Get_Categories, Get_Reports } from '../../utils/queries'
 import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
     const { data, loading, error } = useQuery(Get_Categories);
-    // const data = useSelector(state => state.userReducer.users)
+
     useEffect(() => {
         getUserData()
     }, [])
@@ -310,7 +310,7 @@ export const Home = ({ navigation, route }) => {
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => {
-                                console.log('item', item)
+                                // console.log('item', item)
                                 const isSelect = selected.findIndex(e => e.Title == item.Title)
                                 return (
                                     <View style={[styles.categoryContainer,
