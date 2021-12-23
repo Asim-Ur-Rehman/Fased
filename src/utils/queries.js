@@ -57,3 +57,22 @@ query Query {
 }
 
 `
+
+export const Get_Reports = gql`
+
+query Query {
+  getReports {
+    status
+    message
+    data {
+      id
+      userId
+      CategoryId
+      SubCategory
+      latitude
+      longitude
+    }
+  }
+}
+
+`
