@@ -59,8 +59,8 @@ mutation NewPassword($password: String!, $email: String!) {
 
 export const Create_Report_Incident = gql`
 
-mutation CreateReport($userId: Int!, $categoryId: Int!, $subCategory: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $costMoney: Int!, $incidentDate: Date!, $description: String!, $floor: Int!) {
-  CreateReport(userId: $userId, CategoryId: $categoryId, SubCategory: $subCategory, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, CostMoney: $costMoney, IncidentDate: $incidentDate, Description: $description, floor: $floor) {
+mutation CreateReport($userId: Int!, $categoryId: Int!, $subCategory: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $costMoney: Int!, $description: String!, $floor: Int!, $incidentDate: Date!, $incidentTime: String!) {
+  CreateReport(userId: $userId, CategoryId: $categoryId, SubCategory: $subCategory, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, CostMoney: $costMoney, Description: $description, floor: $floor, IncidentDate: $incidentDate, IncidentTime: $incidentTime) {
     status
     message
   }
