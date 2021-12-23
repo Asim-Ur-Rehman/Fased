@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   StatusBar,
+  ActivityIndicator
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -21,30 +22,58 @@ import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useDispatch } from 'react-redux'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import { SignInAction } from '../../stores/actions/user.action'
+import { Login_User } from '../../utils/queries'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
-  const [state, setState] = useState({
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    email: '',
-    password: ''
-  })
+  const [loginUser, { data, loading, error }] = useLazyQuery(Login_User);
 
   const dispatch = useDispatch()
 
   const signIn = () => {
-    if (state.email == '' || state.password == '') {
+    if (email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error');
     }
     else {
-      // ToastMessage('Form Error', 'Please fill all fields', 'success');
-      let data = {
-        email: state.email,
-        password: state.password
-      }
-      dispatch(SignInAction(data, navigation))
 
 
+      loginUser({
+        variables: {
+          email: email,
+          password: password
+        }
+      }).then((data) => {
+        console.log('data return', data.data.loginUser.status)
+        if (data.data.loginUser.status) {
+          let userData = data.data.loginUser.data
+          let jsonData = JSON.stringify(userData)
+          AsyncStorage.setItem('userData', jsonData)
+
+          ToastMessage('User SignIn Successfully', data.data.loginUser.message, 'success');
+
+          navigation.navigate('AppStackNavigator', {
+            screen: 'Home',
+          })
+          setEmail('')
+          setPassword('')
+
+        }
+        else {
+          ToastMessage('SignIn Error', data.data.loginUser.message, 'error');
+        }
+
+
+      })
+        .catch((error) => {
+          console.log('error', error)
+          ToastMessage('SignIn Error', error.data.loginUser.message, 'error');
+        })
     }
   }
 
@@ -88,17 +117,16 @@ export const SignIn = ({ navigation }) => {
             <Text style={styles.inputLabel}>Email address</Text>
           </View>
           <TextInput
+            value={email}
             style={styles.input}
             // onChangeText={onChangeNumber}
             // value={'123456789012'}
             placeholder="Eg namaemail@emailkamu.com"
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
+            autoCapitalize="none"
             onChangeText={(text) =>
-              setState({
-                ...state,
-                email: text,
-              })
+              setEmail(text)
             }
           />
 
@@ -107,6 +135,7 @@ export const SignIn = ({ navigation }) => {
           </View>
 
           <TextInput
+            value={password}
             style={styles.input}
             // onChangeText={onChangeNumber}
             // value={'123456789012'}
@@ -115,10 +144,7 @@ export const SignIn = ({ navigation }) => {
             keyboardType="default"
             secureTextEntry={true}
             onChangeText={(text) =>
-              setState({
-                ...state,
-                password: text,
-              })
+              setPassword(text)
             }
           />
         </View>
@@ -147,19 +173,21 @@ export const SignIn = ({ navigation }) => {
           style={{
             paddingVertical: 20
           }}>
-          <Button
 
-            onPress={() => {
-              signIn()
-            }}
-            // onPress={() => {
-            //   navigation.navigate('AppStackNavigator', {
-            //     screen: 'Home',
-            //   })
-            // }}
-            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-            title="Sign In"
-          />
+          {
+            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
+              <Button
+
+                onPress={() => {
+                  signIn()
+                }}
+
+                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+                title="Sign In"
+              />
+          }
+
+
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text style={{ color: '#252529', fontSize: 13, fontFamily: "Inter-Regular", }}>

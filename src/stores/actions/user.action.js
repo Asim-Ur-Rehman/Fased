@@ -1,5 +1,5 @@
 import { getUser } from '../../api/fakeApiUser'
-import { SIGNUP_SUCCESS, SIGNUP, LOGIN, LOGIN_SUCCESS, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actionType'
+import { SIGNUP_SUCCESS, SIGNUP, LOGIN, LOGIN_SUCCESS, FORGOT_PASSWORD, CHANGE_PASSWORD, REPORT_INCIDENT_LOCATION_FLOOR_DATA, REPORT_INCIDENT_ALL_DATA } from './actionType'
 import { Login_User } from '../../utils/queries'
 import { Add_User } from '../../utils/mutation';
 
@@ -92,6 +92,37 @@ export const ChangePasswordAction = (data, navigation) => {
 }
 
 
+export const ReportIncidentLocationFloorData = (data, navigation) => {
+  console.log('REPORT_INCIDENT_LOCATION_FLOOR_DATA', data)
+  return (dispatch) => {
+
+    dispatch({ type: REPORT_INCIDENT_LOCATION_FLOOR_DATA, payload: data })
+    navigation.navigate('ReportIncidentB')
+    // navigation.navigate('SignIn')
+    // dispatch({ type: LOGIN_SUCCESS, payload: data });
+    // navigation.navigate('AppStackNavigator', {
+    //   screen: 'Home',
+    // })
+
+
+  };
+}
 
 
 
+
+export const ReportIncidentAllData = (data, navigation) => {
+  console.log('REPORT_INCIDENT_ALL_DATA', data)
+  return (dispatch) => {
+
+    dispatch({ type: REPORT_INCIDENT_ALL_DATA, payload: data })
+    navigation.navigate('ReportIncidentC')
+    // navigation.navigate('SignIn')
+    // dispatch({ type: LOGIN_SUCCESS, payload: data });
+    // navigation.navigate('AppStackNavigator', {
+    //   screen: 'Home',
+    // })
+
+
+  };
+}

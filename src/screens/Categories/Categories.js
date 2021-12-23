@@ -9,9 +9,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import BackButtonHandler from '../../components/BackHandler'
 import CategoryComp from '../../components/CategoryCard'
-
+import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
+import { Get_Categories } from '../../utils/queries'
 
 export const Categories = ({ navigation }) => {
+    const { data, loading, error } = useQuery(Get_Categories);
     const [select, setSelect] = useState([])
     const [click, setClick] = useState(true)
 
@@ -79,8 +81,9 @@ export const Categories = ({ navigation }) => {
     });
 
     const onSelect = (item,) => {
+
         var arr = []
-        const isSelected = select.findIndex((e) => e['key'] == item['key'])
+        const isSelected = select.findIndex((e) => e['id'] == item['id'])
         if (isSelected == -1) {
             if (select.length == 5) {
                 Alert.alert("Alert", "At least 1 category should be selected")
@@ -122,7 +125,7 @@ export const Categories = ({ navigation }) => {
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         flexDirection: 'row',
-                        marginTop:20
+                        marginTop: 20
                     }}>
                     <View style={{
                         flexDirection: 'row',
@@ -209,8 +212,8 @@ export const Categories = ({ navigation }) => {
                                 setSelect(e => [...arr])
                                 console.log('onchange', arr.length)
                             }}
-                            data={Data}
-                            targetKey={"key"}
+                            data={data?.getCategories?.data}
+                            targetKey={'id'}
                             selected={select}
                         />
                     </View>
@@ -231,7 +234,7 @@ const styles = StyleSheet.create({
         height: height * 0.13,
         alignItems: 'center',
         justifyContent: 'center',
-        
+
     }
 
 

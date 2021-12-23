@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -20,17 +21,22 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ChangePasswordAction } from '../../stores/actions/user.action'
-export const ChangePassword = ({ navigation }) => {
-  const [state, setState] = useState({
-    newPassword: '',
-    confirmPassword: ''
-  })
+import { Verify_Otp, New_Password } from '../../utils/mutation'
+import { useMutation, useLazyQuery } from '@apollo/client'
+export const ChangePassword = ({ navigation, route }) => {
+  const emailFromParam = route?.params?.emailFromParam
+  console.log('emailFromParam IN CAHNGE PASSS', emailFromParam)
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+
   const dispatch = useDispatch()
+
+  const [NewPassword, { data, loading, error }] = useMutation(New_Password);
   const changePaswword = () => {
-    if (state.newPassword == '' || state.confirmPassword == '') {
+    if (newPassword == '' || confirmPassword == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error');
     }
-    else if (state.newPassword.length <= 8) {
+    else if (newPassword.length <= 8) {
       ToastMessage(
         'New Password Error',
         'New Password should be greater then 8 character',
@@ -38,7 +44,7 @@ export const ChangePassword = ({ navigation }) => {
       );
 
     }
-    else if (state.newPassword !== state.confirmPassword) {
+    else if (newPassword !== confirmPassword) {
       ToastMessage(
         'Confirm Password Error',
         'Confirm Password does not match',
@@ -47,11 +53,40 @@ export const ChangePassword = ({ navigation }) => {
 
     }
     else {
-      let data = {
-        newPassword: state.newPassword,
-        confirmPassword: state.confirmPassword
-      }
-      dispatch(ChangePasswordAction(data, navigation))
+
+
+      // let data = {
+      //   newPassword: state.newPassword,
+      //   confirmPassword: state.confirmPassword
+      // }
+      // dispatch(ChangePasswordAction(data, navigation))
+      NewPassword({
+        variables: {
+          password: confirmPassword,
+          email: emailFromParam
+        }
+      }).then((data) => {
+        console.log('data return', data.data.NewPassword.status)
+        if (data.data.NewPassword.status) {
+
+
+          ToastMessage('Update Password Successfully', data.data.NewPassword.message, 'success');
+          navigation.push('SignIn')
+
+
+        }
+        else {
+          ToastMessage('Password Error', data.data.NewPassword.message, 'error');
+        }
+
+
+      })
+        .catch((error) => {
+          console.log('error', error)
+          ToastMessage('Password Error', error.data.NewPassword.message, 'error');
+        })
+
+
     }
   }
 
@@ -102,9 +137,7 @@ export const ChangePassword = ({ navigation }) => {
             keyboardType="default"
             secureTextEntry={true}
             onChangeText={(text) => {
-              setState({
-                ...state, newPassword: text
-              })
+              setNewPassword(text)
             }}
           />
 
@@ -121,9 +154,7 @@ export const ChangePassword = ({ navigation }) => {
             keyboardType="default"
             secureTextEntry={true}
             onChangeText={(text) => {
-              setState({
-                ...state, confirmPassword: text
-              })
+              setConfirmPassword(text)
             }}
           />
         </View>
@@ -134,14 +165,20 @@ export const ChangePassword = ({ navigation }) => {
             // justifyContent: 'center',
             paddingVertical: 20
           }}>
-          <Button
-            onPress={() => {
-              changePaswword()
-            }}
-            // onPress={() => { navigation.navigate('SignIn') }}
-            buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-            title="Submit"
-          />
+
+          {
+            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
+              <Button
+                onPress={() => {
+                  changePaswword()
+                }}
+                // onPress={() => { navigation.navigate('SignIn') }}
+                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
+                title="Submit"
+              />
+          }
+
+
         </View>
       </ScrollView>
     </SafeAreaView>

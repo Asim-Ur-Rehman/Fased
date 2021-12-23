@@ -8,11 +8,16 @@ import { Marker } from "react-native-maps";
 import { VictoryPie, } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Button from '../../components/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
+import { Get_Categories } from '../../utils/queries'
 import { useSelector } from 'react-redux';
 export const Home = ({ navigation, route }) => {
-
-    const data = useSelector(state => state.userReducer.users)
-    console.log('data in home', data)
+    const { data, loading, error } = useQuery(Get_Categories);
+    // const data = useSelector(state => state.userReducer.users)
+    useEffect(() => {
+        getUserData()
+    }, [])
     const mapRef = useRef(null)
 
 
@@ -263,6 +268,13 @@ export const Home = ({ navigation, route }) => {
         return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI;
     };
 
+
+    const getUserData = async () => {
+        const userData = await AsyncStorage.getItem('userData')
+        console.log('userData in home', userData)
+
+    }
+
     return (
         <View style={{ flex: 1 }}>
             {/* <StatusBar /> */}
@@ -293,12 +305,13 @@ export const Home = ({ navigation, route }) => {
                     </View>
                     <View style={{ height: 85, width: '70%', borderWidth: 1, borderColor: '#BBBBBB1A', backgroundColor: 'rgba(187, 187, 187, 0.1)', padding: 5 }}>
                         <FlatList
-                            data={reason}
+                            data={data?.getCategories?.data}
                             numColumns={3}
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => {
-                                const isSelect = selected.findIndex(e => e.title == item.text)
+                                console.log('item', item)
+                                const isSelect = selected.findIndex(e => e.Title == item.Title)
                                 return (
                                     <View style={[styles.categoryContainer,
                                     {
@@ -310,8 +323,8 @@ export const Home = ({ navigation, route }) => {
 
                                     }]}
                                     >
-                                        <Text style={{ color: isSelect == -1 ? item.color : "#9CB2C6", fontFamily: "Rubik-Regular", fontSize: 11 }}>
-                                            {item.text}
+                                        <Text style={{ color: isSelect == -1 ? item.BackgroundColor : "#9CB2C6", fontFamily: "Rubik-Regular", fontSize: 11 }}>
+                                            {item.Title}
                                         </Text>
                                     </View>
                                 )

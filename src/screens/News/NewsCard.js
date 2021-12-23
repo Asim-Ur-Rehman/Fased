@@ -9,10 +9,12 @@ import LinearGradient from 'react-native-linear-gradient'
 import Feather from 'react-native-vector-icons/Feather'
 
 import { SearchBar } from 'react-native-elements';
-
+import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
+import { Get_News } from '../../utils/queries'
 
 export const NewsCard = ({ navigation }) => {
 
+    const { data, loading, error } = useQuery(Get_News);
     const [old, setOld] = useState(true);
     const [New, setNew] = useState(false);
     const [Star, setStar] = useState(false);
@@ -229,7 +231,7 @@ export const NewsCard = ({ navigation }) => {
 
 
                     {
-                        CardsData.map((item, i) => {
+                        data?.getNews?.data.map((item, i) => {
                             return (
                                 <TouchableOpacity
 
@@ -268,7 +270,7 @@ export const NewsCard = ({ navigation }) => {
 
 
                                     }}>
-                                        <Image source={item.img} style={{
+                                        <Image source={{ uri: item.Image }} style={{
                                             width: 79.89,
                                             height: 79.89,
 
@@ -300,7 +302,7 @@ export const NewsCard = ({ navigation }) => {
                                                 color: '#ffff',
                                                 paddingBottom: 5
                                             }}>
-                                                {item.title}
+                                                {item.Title}
                                             </Text>
                                             <Text style={{
                                                 fontSize: 11,
@@ -309,7 +311,7 @@ export const NewsCard = ({ navigation }) => {
                                                 lineHeight: 12
                                                 // marginBottom: 10
                                             }}>
-                                                {item.description}
+                                                {item.Description}
                                             </Text>
                                         </View>
 

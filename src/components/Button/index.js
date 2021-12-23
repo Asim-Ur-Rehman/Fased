@@ -14,12 +14,15 @@ export default function Button({
   isIcon = false,
   image = false,
   iconName = "menu",
-  imageStyle= {},
-  iconStyle = {}
+  imageStyle = {},
+  iconStyle = {},
+  disabled
 }) {
   return (
     <>
-      <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={onPress} activeOpacity={0.9}>
         <LinearGradient
           style={[styles.button, buttonStyle]}
           colors={[linearColor1, linearColor2]}
@@ -27,13 +30,13 @@ export default function Button({
 
           start={startColor}
           end={endColor}>
-          {!isIcon && !image ? 
-            <Text style={[styles.text, textStyle]}>{title}</Text> 
+          {!isIcon && !image ?
+            <Text style={[styles.text, textStyle]}>{title}</Text>
             :
             <>
               {isIcon ? <Icon name={iconName} style={[iconStyle]} /> : <Image source={image} style={[imageStyle]} />}
             </>
-            }
+          }
         </LinearGradient>
       </TouchableOpacity>
     </>
@@ -58,7 +61,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 15,
-    fontFamily:"OpenSans-Bold",
+    fontFamily: "OpenSans-Bold",
     textAlign: 'center'
   }
 })

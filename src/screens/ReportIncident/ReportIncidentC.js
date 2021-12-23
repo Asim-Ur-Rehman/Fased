@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -15,12 +15,98 @@ const { width, height } = Dimensions.get('window')
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-
+import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Create_Report_Incident } from '../../utils/mutation'
+import { useMutation, useLazyQuery } from '@apollo/client'
+import { ReportIncidentAllData } from '../../stores/actions/user.action'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const ReportIncidentC = ({ navigation }) => {
-
+  const [CreateReport, { data, loading, error }] = useMutation(Create_Report_Incident);
+  const reportIncidentLocationFloorData = useSelector(state => state?.userReducer?.reportIncidentLocationFloorData)
+  const reportIncidentAllData = useSelector(state => state?.userReducer?.reportIncidentAllData)
   const [text, setText] = useState('')
+  const [userId, setUserId] = useState('')
 
+
+
+
+
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+
+
+  const getUserData = async () => {
+    const userData = await AsyncStorage.getItem('userData')
+    let data = JSON.parse(userData)
+    setUserId(data?.id)
+
+    // console.log('data', data.id)
+  }
+
+
+  const next = () => {
+
+    // console.log('reportIncidentLocationFloorData', reportIncidentLocationFloorData)
+    // console.log('reportIncidentAllData', reportIncidentAllData)
+    // console.log('userid', typeof (userId))
+    // console.log('obj', {
+    //   userId: parseInt(userId),
+    //   categoryId: reportIncidentAllData?.category,
+    //   subCategory: reportIncidentAllData?.subcategory,
+    //   latitude: reportIncidentLocationFloorData?.latitude,
+    //   longitude: reportIncidentLocationFloorData?.longitude,
+    //   suspectName: reportIncidentAllData?.suspectName,
+    //   costMoney: parseInt(reportIncidentAllData?.amount),
+    //   incidentDate: reportIncidentAllData?.date,
+    //   description: text,
+    //   floor: reportIncidentLocationFloorData?.floor
+
+
+    // })
+
+
+    CreateReport({
+      variables: {
+        userId: parseInt(userId),
+        categoryId: reportIncidentAllData?.category,
+        subCategory: reportIncidentAllData?.subcategory,
+        latitude: reportIncidentLocationFloorData?.latitude,
+        longitude: reportIncidentLocationFloorData?.longitude,
+        suspectName: reportIncidentAllData?.suspectName,
+        costMoney: parseInt(reportIncidentAllData?.amount),
+        incidentDate: reportIncidentAllData?.date,
+        description: text,
+        floor: reportIncidentLocationFloorData?.floor
+
+
+      }
+    }).then((data) => {
+      console.log('data return', data)
+      if (data.data.CreateReport.status) {
+
+
+        ToastMessage('Report Create Successfully', data.data.CreateReport.message, 'success');
+        navigation.navigate('ReportingDone')
+
+
+      }
+      else {
+        ToastMessage('Error', data.data.CreateReport.message, 'error');
+      }
+
+
+    })
+      .catch((error) => {
+        console.log('error', error)
+        ToastMessage('Error', error.data.CreateReport.message, 'error');
+      })
+
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -45,7 +131,7 @@ export const ReportIncidentC = ({ navigation }) => {
           <Text style={styles.headerLabel}>Report Incident</Text>
         </View>
         <View style={{ width: '20%', alignItems: 'flex-end' }}>
-          <Text style={{ color: '#909090', fontSize: 15,  fontFamily:"Rubik-Regular", }}>
+          <Text style={{ color: '#909090', fontSize: 15, fontFamily: "Rubik-Regular", }}>
             02 - 03
           </Text>
         </View>
@@ -67,9 +153,9 @@ export const ReportIncidentC = ({ navigation }) => {
           onChangeText={e => {
             setText(e)
           }}
-          onSubmitEditing={() => {
-            navigation.navigate('ReportingDone')
-          }}
+        // onSubmitEditing={() => {
+        //   navigation.navigate('ReportingDone')
+        // }}
         />
         <Image
           source={Images.Pictures.textAreaIcon}
@@ -98,8 +184,11 @@ export const ReportIncidentC = ({ navigation }) => {
       <View>
         <Button
           onPress={() => {
-            navigation.navigate('ReportingDone')
+            next()
           }}
+          // onPress={() => {
+          //   navigation.navigate('ReportingDone')
+          // }}
           buttonStyle={{ width: '90%', alignSelf: 'center' }}
           title="Next"
         />
@@ -126,7 +215,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     marginLeft: 20,
-    fontFamily:"Rubik-Medium",
+    fontFamily: "Rubik-Medium",
   },
   textAreaContainer: {
     width: '90%',
@@ -140,14 +229,15 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 30,
     textAlign: 'justify',
-    fontFamily:"Rubik-Regular",
+    fontFamily: "Rubik-Regular",
     borderRadius: 12,
     backgroundColor: '#F4F7FC',
-    padding: 15
+    padding: 15,
+    color: 'black'
   },
   countText: {
     color: '#8F9BBA',
     fontSize: 13,
-    fontFamily:"Rubik-Regular",
+    fontFamily: "Rubik-Regular",
   }
 })

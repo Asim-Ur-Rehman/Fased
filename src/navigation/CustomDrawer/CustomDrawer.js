@@ -12,6 +12,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 import { useSelector } from 'react-redux'
 import { Images } from '../../constants/images'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CustomDrawer = ({ navigation }) => {
   const [active, setActive] = useState('')
@@ -30,14 +31,14 @@ export const CustomDrawer = ({ navigation }) => {
       title: 'Settings'
       // navigateTo: 'Setting'
     },
-    {
-      title: isGuest ? 'SignUp' : 'Logout',
-      navigateTo: isGuest ? 'SignUp' : 'SignIn'
-    },
     // {
-    //   title: 'Logout',
-    //   navigateTo: 'SignIn'
-    // }
+    //   title: isGuest ? 'SignUp' : 'Logout',
+    //   navigateTo: isGuest ? 'SignUp' : 'SignIn'
+    // },
+    {
+      title: 'Logout',
+      // navigateTo: 'SignIn'
+    }
   ]
 
   return (
@@ -74,7 +75,18 @@ export const CustomDrawer = ({ navigation }) => {
               <TouchableOpacity
                 onPress={() => {
                   setActive(i)
-                  item.navigateTo && navigation.navigate(item.navigateTo)
+                  if (i == 3) {
+                    AsyncStorage.removeItem('userData')
+                    navigation.navigate('AuthStackNavigator', {
+                      screen: 'SignIn'
+                    })
+                  }
+                  else {
+                    item.navigateTo && navigation.navigate(item.navigateTo)
+                  }
+
+                  // i == 3 ? AsyncStorage.removeItem('userData')   :
+                  // item.navigateTo && navigation.navigate(item.navigateTo)
                   //   alert('Navigate')
                 }}
                 activeOpacity={0.7}
