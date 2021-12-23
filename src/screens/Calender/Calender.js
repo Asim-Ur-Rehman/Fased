@@ -23,6 +23,8 @@ export const Calender = ({ navigation }) => {
   const [untilToday, setUntilToday] = useState(false)
   const startDate = selectedStartDate ? selectedStartDate.toString() : ''
   const [selectedStartDate, setSelectedStartDate] = useState()
+  const [selectedEndDate, setSelectedEndDate] = useState()
+
   const onDateChange = date => {
     setSelectedStartDate({
       selectedStartDate: date
@@ -31,7 +33,11 @@ export const Calender = ({ navigation }) => {
   const [toggle, setToggle] = useState()
   return (
     <View style={styles.container}>
-    <StatusBar backgroundColor={'transparent'} translucent={true} barStyle='dark-content' />
+      <StatusBar
+        backgroundColor={'transparent'}
+        translucent={true}
+        barStyle="dark-content"
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -139,7 +145,7 @@ export const Calender = ({ navigation }) => {
         </View>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() => navigation.navigate('Home', { fromTo: {} })}>
           <LinearGradient
             style={styles.btn1}
             colors={['#4A4C50', '#9CA3AF']}
