@@ -73,8 +73,35 @@ query Query {
       longitude
       Description
       SuspectName
+      Category {
+        BackgroundColor
+      }
     }
   }
 }
 
 `
+
+export const FILTER_CATEGORIES = gql`
+query Query($showIds: [Int!]) {
+  filterReports(showIds: $showIds) {
+    status
+    message
+    data {
+      id
+      userId
+      CategoryId
+      latitude
+      SubCategory
+      longitude
+      SuspectName
+      IncidentDate
+      CostMoney
+      Description
+      createdAt
+      Category {
+        BackgroundColor
+      }
+    }
+  }
+}`
