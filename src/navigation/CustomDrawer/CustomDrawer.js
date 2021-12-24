@@ -12,11 +12,11 @@ import {
 import LinearGradient from 'react-native-linear-gradient'
 import { useSelector } from 'react-redux'
 import { Images } from '../../constants/images'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const CustomDrawer = ({ navigation }) => {
   const [active, setActive] = useState('')
-  const isGuest = useSelector((state) => state.userReducer.isGuest)
+  const isGuest = useSelector(state => state.userReducer.isGuest)
 
   const Data = [
     {
@@ -36,11 +36,18 @@ export const CustomDrawer = ({ navigation }) => {
     //   navigateTo: isGuest ? 'SignUp' : 'SignIn'
     // },
     {
-      title: 'Logout',
+      title: 'Logout'
       // navigateTo: 'SignIn'
     }
   ]
-
+  const removeUser = async () => {
+    try {
+      await AsyncStorage.removeItem('userData')
+      return true
+    } catch (exception) {
+      return false
+    }
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -76,12 +83,12 @@ export const CustomDrawer = ({ navigation }) => {
                 onPress={() => {
                   setActive(i)
                   if (i == 3) {
-                    AsyncStorage.removeItem('userData')
+                    // AsyncStorage.removeItem('userData')
+                    removeUser()
                     navigation.navigate('AuthStackNavigator', {
                       screen: 'SignIn'
                     })
-                  }
-                  else {
+                  } else {
                     item.navigateTo && navigation.navigate(item.navigateTo)
                   }
 
@@ -101,7 +108,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <Text
                   style={{
                     fontSize: 18,
-                    fontFamily: "OpenSans-Bold",
+                    fontFamily: 'OpenSans-Bold',
                     color: i == active ? '#000' : '#ACB8BE'
                   }}>
                   {item.title}
@@ -127,5 +134,5 @@ const styles = StyleSheet.create({
   },
   mainView: {
     width: '100%'
-  },
+  }
 })

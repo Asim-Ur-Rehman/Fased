@@ -26,7 +26,7 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 
-let reportsData = [];
+let reportsData = []
 
 export const Home = ({ navigation, route }) => {
   const [selected, setSelected] = useState(
@@ -55,16 +55,14 @@ export const Home = ({ navigation, route }) => {
       }
     })
     reportsData = filterReports?.data?.filterReports?.data
-    console.log("filterReports?.data?.filterReports?.data", reportsData)
+    // console.log("filterReports?.data?.filterReports?.data", reportsData)
   } else if (fromTo) {
     // reportsData = useQuery(Get_Reports);
-    alert("sa")
+    alert('sa')
   } else {
     reportsData = useQuery(Get_Reports)?.data?.getReports?.data
   }
-  const reports = reportsData
-    ? reportsData
-    : []
+  const reports = reportsData ? reportsData : []
   const colors = [...new Set([...reports.map(e => e.Category.BackgroundColor)])]
   // console.log('reportsData', reports)
 
@@ -79,180 +77,7 @@ export const Home = ({ navigation, route }) => {
     latitudeDelta: 55,
     longitudeDelta: 25
   }
-  const allMarkers = [
-    {
-      latitude: 52.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 51.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 53.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.9,
-      longitude: 19.4,
-      title: 'User6',
-      description: 'HelloUser6',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.2,
-      longitude: 21,
-      title: 'User7',
-      description: 'HelloUser7',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.4,
-      longitude: 21,
-      title: 'User8',
-      description: 'HelloUser8',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 51.8,
-      longitude: 20,
-      title: 'User9',
-      description: 'HelloUser9',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 54.8,
-      longitude: 22,
-      title: 'User10',
-      description: 'HelloUser10',
-      image: require('../../assets/images/user.png')
-    },
 
-    {
-      latitude: 62.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 61.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 63.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.9,
-      longitude: 19.4,
-      title: 'User6',
-      description: 'HelloUser6',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.2,
-      longitude: 21,
-      title: 'User7',
-      description: 'HelloUser7',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.4,
-      longitude: 21,
-      title: 'User8',
-      description: 'HelloUser8',
-      image: require('../../assets/images/user.png')
-    },
-
-    {
-      latitude: 22.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 22.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 22.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 21.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 23.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    }
-  ]
-
-  const [reason, setReason] = useState([
-    { text: 'Robery', color: '#5819C1' },
-    { text: 'Harrasment', color: '#FFA724' },
-    { text: 'Kidnapping', color: '#CF00BA' },
-    { text: 'Killing', color: '#DF0707' },
-    { text: 'Snatching', color: '#0A8A35' },
-    { text: 'Assault', color: '#0CB9A2' }
-  ])
   const isGuest = useSelector(state => state.userReducer.isGuest)
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
@@ -286,7 +111,8 @@ export const Home = ({ navigation, route }) => {
 
   const getUserData = async () => {
     const userData = await AsyncStorage.getItem('userData')
-    console.log('userData in home', userData)
+    let data = JSON.parse(userData)
+    console.log('userData in home', data.id)
   }
 
   return (
@@ -349,7 +175,7 @@ export const Home = ({ navigation, route }) => {
               padding: 5
             }}>
             <FlatList
-              data={data?.getCategories?.data}
+              data={data && data?.getCategories?.data}
               numColumns={3}
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
