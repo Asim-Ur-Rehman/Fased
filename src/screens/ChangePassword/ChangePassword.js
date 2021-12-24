@@ -66,24 +66,30 @@ export const ChangePassword = ({ navigation, route }) => {
           email: emailFromParam
         }
       }).then((data) => {
-        console.log('data return', data.data.NewPassword.status)
-        if (data.data.NewPassword.status) {
+        // console.log('data return', data.data.NewPassword.status)
+        if (data?.data?.NewPassword?.status) {
 
 
-          ToastMessage('Update Password Successfully', data.data.NewPassword.message, 'success');
+          ToastMessage('Update Password Successfully', data?.data?.NewPassword?.message, 'success');
           navigation.push('SignIn')
 
 
         }
         else {
-          ToastMessage('Password Error', data.data.NewPassword.message, 'error');
+          ToastMessage('Password Error', data?.data?.NewPassword?.message, 'error');
         }
 
 
       })
         .catch((error) => {
           console.log('error', error)
-          ToastMessage('Password Error', error.data.NewPassword.message, 'error');
+          if (error) {
+            ToastMessage('Password Error', 'Something went wrong', 'error');
+          }
+          else {
+            ToastMessage('Password Error', error.data.NewPassword.message, 'error');
+          }
+
         })
 
 

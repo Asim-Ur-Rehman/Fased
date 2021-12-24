@@ -22,57 +22,69 @@ import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useDispatch } from 'react-redux'
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import { SignInAction } from '../../stores/actions/user.action'
 import { Login_User } from '../../utils/queries'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [loginUser, { data, loading, error }] = useLazyQuery(Login_User);
+  const [loginUser, { data, loading, error }] = useQuery(
+    Login_User({
+      variables: {
+        email: email,
+        password: password
+      }
+    })
+  )
 
   const dispatch = useDispatch()
 
   const signIn = () => {
     if (email == '' || password == '') {
-      ToastMessage('Form Error', 'Please fill all fields', 'error');
-    }
-    else {
+      ToastMessage('Form Error', 'Please fill all fields', 'error')
+    } else {
+      loginUser()
+        .then(data => {
+          console.log('data return', data.data.loginUser.data)
+          if (data?.data?.loginUser?.status) {
+            let userData = data?.data?.loginUser?.data
+            let jsonData = JSON.stringify(userData)
+            AsyncStorage.setItem('userData', jsonData)
 
+            ToastMessage(
+              'User SignIn Successfully',
+              data?.data?.loginUser?.message,
+              'success'
+            )
 
-      loginUser({
-        variables: {
-          email: email,
-          password: password
-        }
-      }).then((data) => {
-        console.log('data return', data.data.loginUser.status)
-        if (data.data.loginUser.status) {
-          let userData = data.data.loginUser.data
-          let jsonData = JSON.stringify(userData)
-          AsyncStorage.setItem('userData', jsonData)
-
-          ToastMessage('User SignIn Successfully', data.data.loginUser.message, 'success');
-
-          navigation.navigate('AppStackNavigator', {
-            screen: 'Home',
-          })
-          setEmail('')
-          setPassword('')
-
-        }
-        else {
-          ToastMessage('SignIn Error', data.data.loginUser.message, 'error');
-        }
-
-
-      })
-        .catch((error) => {
+            navigation.navigate('AppStackNavigator', {
+              screen: 'Home'
+            })
+            setEmail('')
+            setPassword('')
+          } else {
+            ToastMessage(
+              'SignIn Error',
+              data?.data?.loginUser?.message,
+              'error'
+            )
+          }
+        })
+        .catch(error => {
           console.log('error', error)
-          ToastMessage('SignIn Error', error.data.loginUser.message, 'error');
+          if (error) {
+            ToastMessage('SignIn Error', 'Something went wrong', 'info')
+          } else {
+            ToastMessage(
+              'SignIn Error',
+              error?.data?.loginUser?.message,
+              'error'
+            )
+          }
         })
     }
   }
@@ -125,9 +137,7 @@ export const SignIn = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
             autoCapitalize="none"
-            onChangeText={(text) =>
-              setEmail(text)
-            }
+            onChangeText={text => setEmail(text)}
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
@@ -143,9 +153,7 @@ export const SignIn = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
-            onChangeText={(text) =>
-              setPassword(text)
-            }
+            onChangeText={text => setPassword(text)}
           />
         </View>
 
@@ -154,7 +162,7 @@ export const SignIn = ({ navigation }) => {
             <CheckBox
               checkBoxColor="#9CA3AF"
               checkedCheckBoxColor="#BE0000"
-              style={{ alignSelf: 'center', }}
+              style={{ alignSelf: 'center' }}
               onClick={() => setChecked(!checked)}
               isChecked={checked}
             />
@@ -173,24 +181,25 @@ export const SignIn = ({ navigation }) => {
           style={{
             paddingVertical: 20
           }}>
-
-          {
-            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
-              <Button
-
-                onPress={() => {
-                  signIn()
-                }}
-
-                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-                title="Sign In"
-              />
-          }
-
-
+          {loading ? (
+            <ActivityIndicator size="large" color="#4A4C50" />
+          ) : (
+            <Button
+              onPress={() => {
+                signIn()
+              }}
+              buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+              title="Sign In"
+            />
+          )}
         </View>
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontFamily: "Inter-Regular", }}>
+          <Text
+            style={{
+              color: '#252529',
+              fontSize: 13,
+              fontFamily: 'Inter-Regular'
+            }}>
             Or sign in with social account
           </Text>
         </View>
@@ -214,7 +223,12 @@ export const SignIn = ({ navigation }) => {
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-          <Text style={{ color: '#252529', fontSize: 13, fontFamily: "Inter-Regular" }}>
+          <Text
+            style={{
+              color: '#252529',
+              fontSize: 13,
+              fontFamily: 'Inter-Regular'
+            }}>
             Don’t have an account?
           </Text>
           <TouchableOpacity
@@ -226,7 +240,7 @@ export const SignIn = ({ navigation }) => {
               style={{
                 color: '#BE0000',
                 fontSize: 13,
-                fontFamily: "Inter-Medium",
+                fontFamily: 'Inter-Medium',
                 marginLeft: 3
               }}>
               Sign Up Here
@@ -258,8 +272,8 @@ const styles = StyleSheet.create({
   },
   signInText: {
     fontSize: 18,
-    fontFamily: "Inter-Medium",
-    textAlign: 'center',
+    fontFamily: 'Inter-Medium',
+    textAlign: 'center'
   },
   InputContainer: {
     alignItems: 'center'
@@ -267,7 +281,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily: "Inter-Medium",
+    fontFamily: 'Inter-Medium'
   },
   input: {
     width: '88%',
@@ -280,7 +294,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily: "Inter-Regular",
+    fontFamily: 'Inter-Regular',
     backgroundColor: '#fff'
   },
   checkboxContainer: {
@@ -291,7 +305,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 11.7,
-    fontFamily: "Inter-SemiBold",
+    fontFamily: 'Inter-SemiBold',
     color: '#9CA3AF',
     marginLeft: 5
   },
@@ -342,5 +356,3 @@ const styles = StyleSheet.create({
     elevation: 5
   }
 })
-
-

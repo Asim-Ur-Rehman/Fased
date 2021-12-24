@@ -212,7 +212,7 @@ export const Categories = ({ navigation }) => {
                                 setSelect(e => [...arr])
                                 console.log('onchange', arr.length)
                             }}
-                            data={data?.getCategories?.data}
+                            data={data && data?.getCategories?.data}
                             targetKey={'id'}
                             selected={select}
                         />
