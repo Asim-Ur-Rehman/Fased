@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -25,11 +25,28 @@ import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 import Feather from 'react-native-vector-icons/Feather'
+import { useMutation } from '@apollo/client'
+import { ADD_TO_FAV } from '../../utils/mutation'
+import { getUserData } from '../../utils/helper'
 
 
-export const NewsDetails = ({ navigation }) => {
+export const NewsDetails = ({ navigation, route }) => {
+
+  useEffect(() => {
+    getUserData()
+    .then((res) => {
+        setUserData(res)
+    })
+}, [])
+
+  const [userData, setUserData] = useState(null)
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
+  const [title, setTitle] = useState(route.params?.title ? route.params?.title : "TITLE")
+  const [tagline, setTagline] = useState(route.params?.tagline ? route.params?.tagline : "TAGLINE")
+  const [description, setdescription] = useState(route.params?.description ? route.params?.description : "DESCRIPTION")
+  const [newsData, setnewsData] = useState(route.params?.newsData ? route.params?.newsData : null)
+
 
   const PROP = [
     {
@@ -66,6 +83,19 @@ export const NewsDetails = ({ navigation }) => {
     }
   ]
 
+  const addToFavRes = useMutation(ADD_TO_FAV)
+
+  const addToFav = async () => {
+    // console.log(typeof parseFloat(userData?.id), typeof newsData?.id)
+    const result = await addToFavRes[0]({
+      variables: {
+        userId: parseFloat(userData?.id),
+        newsId: newsData?.id
+      }
+    })
+
+    console.log("addToFavRes", result)
+  }
   return (
     <View style={styles.mainContainer}>
       <StatusBar
@@ -89,9 +119,9 @@ export const NewsDetails = ({ navigation }) => {
                   flexDirection: 'row',
                   marginTop: 20
           }}>
-        <View>
+        <TouchableOpacity onPress={() => addToFav()}>
           <Feather name='star' size={20} color={'white'} />
-        </View>
+        </TouchableOpacity>
         <View>
           <Text style={styles.headerLabel}>News Details</Text>
         </View>
@@ -131,7 +161,7 @@ export const NewsDetails = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: '#fff'
               }}>
-              CDB Products
+              {title}
             </Text>
             <Text
               style={{
@@ -142,7 +172,7 @@ export const NewsDetails = ({ navigation }) => {
                 textAlign: 'center',
                 paddingHorizontal: 50
               }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+              {tagline}
             </Text>
           </View>
           <View style={{ height: height / 1.65 }}>
@@ -162,71 +192,9 @@ export const NewsDetails = ({ navigation }) => {
               }}>
 
               <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
+                {description}
               </Text>
 
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
             </CustomScrollView>
           </View>
         </View>

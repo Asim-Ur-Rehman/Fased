@@ -22,11 +22,12 @@ import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import {
   FILTER_CATEGORIES,
   Get_Categories,
+  Get_News,
   Get_Reports
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 
-let reportsData = [];
+let reportsData = []
 
 export const Home = ({ navigation, route }) => {
   const [selected, setSelected] = useState(
@@ -38,38 +39,28 @@ export const Home = ({ navigation, route }) => {
   )
 
   const { data, loading, error } = useQuery(Get_Categories)
+  const News = useQuery(Get_News);
 
   if (selected.length > 0) {
-    const showingCat = selected.map(val => {
-      var index = data?.getCategories?.data.filter(e => {
-        // console.log("reports e.id != val.id", e.id ,  val.id)
-        if(e.id != val.id) return e
-      })
-      // console.log("report index", index)
-      return index
+    const results = data?.getCategories?.data.filter(({ id: id1 }) => !selected.some(({ id: id2 }) => id2 === id1));
+    const filterReports = useQuery(FILTER_CATEGORIES, {
+      variables: {
+        showIds: [...results.map(e => e.id)]
+      }
     })
-    console.log("reports showingCat", showingCat, "selected", [...showingCat[0].map(e => e.id)])
-    // const filterReports = useQuery(FILTER_CATEGORIES, {
-    //   variables: {
-    //     showIds: [...showingCat[0].map(e => e.id)]
-    //   }
-    // })
-    // console.log("reports showingCat", showingCat)
-    // reportsData = filterReports?.data?.filterReports?.data
+    reportsData = filterReports?.data?.filterReports?.data
   } else if (fromTo) {
     // reportsData = useQuery(Get_Reports);
-    alert("sa")
+    alert('sa')
   } else {
     reportsData = useQuery(Get_Reports)?.data?.getReports?.data
   }
-  const reports = reportsData
-    ? reportsData
-    : []
+  const reports = reportsData ? reportsData : []
   const colors = [...new Set([...reports.map(e => e.Category.BackgroundColor)])]
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
   const mapRef = useRef(null)
 
   const INITIAL_REGION = {
@@ -78,180 +69,7 @@ export const Home = ({ navigation, route }) => {
     latitudeDelta: 55,
     longitudeDelta: 25
   }
-  const allMarkers = [
-    {
-      latitude: 52.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 51.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 53.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.9,
-      longitude: 19.4,
-      title: 'User6',
-      description: 'HelloUser6',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.2,
-      longitude: 21,
-      title: 'User7',
-      description: 'HelloUser7',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 52.4,
-      longitude: 21,
-      title: 'User8',
-      description: 'HelloUser8',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 51.8,
-      longitude: 20,
-      title: 'User9',
-      description: 'HelloUser9',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 54.8,
-      longitude: 22,
-      title: 'User10',
-      description: 'HelloUser10',
-      image: require('../../assets/images/user.png')
-    },
 
-    {
-      latitude: 62.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 61.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 63.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.9,
-      longitude: 19.4,
-      title: 'User6',
-      description: 'HelloUser6',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.2,
-      longitude: 21,
-      title: 'User7',
-      description: 'HelloUser7',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 62.4,
-      longitude: 21,
-      title: 'User8',
-      description: 'HelloUser8',
-      image: require('../../assets/images/user.png')
-    },
-
-    {
-      latitude: 22.0,
-      longitude: 18.2,
-      title: 'User1',
-      description: 'HelloUser1',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 22.2,
-      longitude: 18.2,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 22.6,
-      longitude: 18.3,
-      title: 'User3',
-      description: 'HelloUser3',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 21.6,
-      longitude: 18.0,
-      title: 'User4',
-      description: 'HelloUser4',
-      image: require('../../assets/images/user.png')
-    },
-    {
-      latitude: 23.1,
-      longitude: 18.8,
-      title: 'User5',
-      description: 'HelloUser5',
-      image: require('../../assets/images/user.png')
-    }
-  ]
-
-  const [reason, setReason] = useState([
-    { text: 'Robery', color: '#5819C1' },
-    { text: 'Harrasment', color: '#FFA724' },
-    { text: 'Kidnapping', color: '#CF00BA' },
-    { text: 'Killing', color: '#DF0707' },
-    { text: 'Snatching', color: '#0A8A35' },
-    { text: 'Assault', color: '#0CB9A2' }
-  ])
   const isGuest = useSelector(state => state.userReducer.isGuest)
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
@@ -260,16 +78,6 @@ export const Home = ({ navigation, route }) => {
   const animateToCurrentLocation = () => {
     mapRef.current.animateToRegion(INITIAL_REGION, 800)
   }
-
-  // const animateAngle = async () => {
-  //     mapRef.current.animateCamera(
-  //         {
-  //           center: INITIAL_REGION,
-  //         //   zoom: 15,
-  //         },
-  //         {duration: 5000},
-  //       );
-  // }
 
   const getRotationAngle = () => {
     const x1 = INITIAL_REGION.latitude
@@ -283,10 +91,7 @@ export const Home = ({ navigation, route }) => {
     return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI
   }
 
-  const getUserData = async () => {
-    const userData = await AsyncStorage.getItem('userData')
-  }
-  console.log("reports", reports)
+  
   return (
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
@@ -313,16 +118,18 @@ export const Home = ({ navigation, route }) => {
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.7}
-              style={{ flexDirection: 'column' }}
+              style={{ flexDirection: 'column', width: '80%' }}
               onPress={() => {
-                navigation.navigate('NewsDetails')
+                navigation.navigate('NewsDetails', {
+                  title: News?.data?.getNews?.data[0]?.Title,
+                  tagline: News?.data?.getNews?.data[0]?.Tagline,
+                  description: News?.data?.getNews?.data[0]?.Description,
+                  newsData: News?.data?.getNews?.data[0]
+                })
               }}>
               <Text style={styles.headerText}>
-                Metus enim nunc, conseqt diam unc{' '}
-              </Text>
-              <Text style={styles.headerText}>
-                varius. Egestas tempor{' '}
-                <Text style={styles.read}>Read more</Text>
+                {News?.data?.getNews?.data[0]?.Description}
+                <Text style={[styles.read, {marginRight: 10}]}> Read more</Text>
               </Text>
             </TouchableOpacity>
           </View>
@@ -347,12 +154,11 @@ export const Home = ({ navigation, route }) => {
               padding: 5
             }}>
             <FlatList
-              data={data?.getCategories?.data}
+              data={data && data?.getCategories?.data}
               numColumns={3}
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               renderItem={({ item, index }) => {
-                // console.log('item', item)
                 const isSelect = selected.findIndex(e => e.Title == item.Title)
                 return (
                   <View
@@ -445,7 +251,6 @@ export const Home = ({ navigation, route }) => {
           ref={mapRef}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties } = cluster
-            console.log('cluster data', cluster)
             const points = properties.point_count
             return (
               <Marker

@@ -31,11 +31,6 @@ export const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  // const [state, setState] = useState({
-  //   fullName: '',
-  //   email: '',
-  //   password: ''
-  // })
   const dispatch = useDispatch()
   // const loading = useSelector(state => state.userReducer.isLoading)
   const [addUser, { data, loading, error }] = useMutation(Add_User);
@@ -68,12 +63,12 @@ export const SignUp = ({ navigation }) => {
           password: password
         }
       }).then((data) => {
-        console.log('data return', data)
-        if (data.data.addUser.status) {
-          let userData = data.data.addUser.data
+        // console.log('data return', data)
+        if (data?.data?.addUser?.status) {
+          let userData = data?.data?.addUser?.data
           let jsonData = JSON.stringify(userData)
           AsyncStorage.setItem('userData', jsonData)
-          ToastMessage('SignUp Success', data.data.addUser.message, 'success');
+          ToastMessage('SignUp Success', data?.data?.addUser?.message, 'success');
 
 
           navigation.navigate('AppStackNavigator', {
@@ -81,7 +76,7 @@ export const SignUp = ({ navigation }) => {
           })
         }
         else {
-          ToastMessage('SignUp Error', data.data.addUser.message, 'error');
+          ToastMessage('SignUp Error', data?.data?.addUser?.message, 'error');
         }
 
 
@@ -89,7 +84,13 @@ export const SignUp = ({ navigation }) => {
       })
         .catch((error) => {
           console.log('error', error)
-          ToastMessage('SignUp Error', error.data.addUser.message, 'info');
+          if (error) {
+            ToastMessage('SignUp Error', 'Something went wrong', 'info');
+          }
+          else {
+            ToastMessage('SignUp Error', error?.data?.addUser?.message, 'info');
+          }
+
         })
 
       console.log("data", data, "error", error)
