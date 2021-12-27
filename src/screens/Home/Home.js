@@ -40,22 +40,22 @@ export const Home = ({ navigation, route }) => {
   const { data, loading, error } = useQuery(Get_Categories)
 
   if (selected.length > 0) {
-    const showingCat = data?.getCategories?.data.map(val => {
-      var index = selected.filter(e => e.id != val.id)
-      if (index.length > 0) {
-        return index[0]?.id
-      } else {
-        return 0
-      }
+    const showingCat = selected.map(val => {
+      var index = data?.getCategories?.data.filter(e => {
+        // console.log("reports e.id != val.id", e.id ,  val.id)
+        if(e.id != val.id) return e
+      })
+      // console.log("report index", index)
+      return index
     })
-
-    const filterReports = useQuery(FILTER_CATEGORIES, {
-      variables: {
-        showIds: showingCat
-      }
-    })
-    reportsData = filterReports?.data?.filterReports?.data
-    console.log("filterReports?.data?.filterReports?.data", reportsData)
+    console.log("reports showingCat", showingCat, "selected", [...showingCat[0].map(e => e.id)])
+    // const filterReports = useQuery(FILTER_CATEGORIES, {
+    //   variables: {
+    //     showIds: [...showingCat[0].map(e => e.id)]
+    //   }
+    // })
+    // console.log("reports showingCat", showingCat)
+    // reportsData = filterReports?.data?.filterReports?.data
   } else if (fromTo) {
     // reportsData = useQuery(Get_Reports);
     alert("sa")
@@ -66,7 +66,6 @@ export const Home = ({ navigation, route }) => {
     ? reportsData
     : []
   const colors = [...new Set([...reports.map(e => e.Category.BackgroundColor)])]
-  // console.log('reportsData', reports)
 
   useEffect(() => {
     getUserData()
@@ -286,9 +285,8 @@ export const Home = ({ navigation, route }) => {
 
   const getUserData = async () => {
     const userData = await AsyncStorage.getItem('userData')
-    console.log('userData in home', userData)
   }
-
+  console.log("reports", reports)
   return (
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
@@ -447,7 +445,7 @@ export const Home = ({ navigation, route }) => {
           ref={mapRef}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties } = cluster
-            // console.log('cluster data', cluster)
+            console.log('cluster data', cluster)
             const points = properties.point_count
             return (
               <Marker
