@@ -43,6 +43,9 @@ export const Get_News = gql`
         Title
         Tagline
         Description
+        createdAt
+        CategoryId
+        CategoryName
       }
     }
   }
@@ -111,4 +114,30 @@ export const FILTER_CATEGORIES = gql`
       }
     }
   }
+`
+export const FILTER_BY_DATE = gql`
+query FilterReportsByDate($from: Date!, $to: Date!) {
+  filterReportsByDate(from: $from, to: $to) {
+    status
+    message
+    data {
+      id
+      userId
+      SubCategory
+      CategoryId
+      longitude
+      latitude
+      IncidentDate
+      IncidentTime
+      SuspectName
+      CostMoney
+      floor
+      Description
+      createdAt
+      Category {
+        BackgroundColor
+      }
+    }
+  }
+}
 `

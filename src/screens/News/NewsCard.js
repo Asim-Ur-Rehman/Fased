@@ -21,16 +21,18 @@ import Feather from 'react-native-vector-icons/Feather'
 
 import { SearchBar } from 'react-native-elements'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
-import { GET_FAV_NEWS_BY_ID, Get_News } from '../../utils/queries'
+import {
+  Get_Categories,
+  GET_FAV_NEWS_BY_ID,
+  Get_News
+} from '../../utils/queries'
 import { getUserData } from '../../utils/helper'
-
+import { useIsFocused } from '@react-navigation/native'
+import moment from 'moment'
 export const NewsCard = ({ navigation }) => {
-  useEffect(() => {
-    getUserData().then(res => {
-      setUserData(res)
-    })
-  }, [])
   const [userData, setUserData] = useState(null)
+
+  const { data, loading, error } = useQuery(Get_Categories)
   const OldNews = useQuery(Get_News)
   const favNew = useQuery(GET_FAV_NEWS_BY_ID, {
     variables: {
@@ -42,9 +44,19 @@ export const NewsCard = ({ navigation }) => {
   const [New, setNew] = useState(false)
   const [Star, setStar] = useState(false)
   const [category, setCategory] = useState(false)
-  const [search, setSearch] = useState('')
+  const [activetab, setActiveTab] = useState('old')
 
-  const [select, setSelect] = useState([])
+  const [search, setSearch] = useState('')
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    getUserData().then(res => {
+      setUserData(res)
+    })
+
+    OldNews.refetch()
+    favNew.refetch()
+  }, [activetab, isFocused])
 
   const updateSearch = text => {
     setSearch(text)
@@ -104,7 +116,9 @@ export const NewsCard = ({ navigation }) => {
             justifyContent: 'center'
           }}>
           <Image
-            source={item.Image  ? { uri: item.Image } : Images.Pictures.profileIcon}
+            source={
+              item.Image ? { uri: item.Image } : Images.Pictures.profileIcon
+            }
             style={{
               width: 79.89,
               height: 79.89
@@ -147,29 +161,59 @@ export const NewsCard = ({ navigation }) => {
       </TouchableOpacity>
     )
   }
-  console.log('favNew', favNew)
+
+  ;[[], []]
+
+  let CatNews = {}
+  const catIds = data?.getCategories?.data.map(val => val.Title)
+  for (let index = 0; index < catIds.length; index++) {
+    let filterArray = OldNews.data?.getNews?.data.filter(
+      val => val.CategoryName == catIds[index]
+    )
+    if (filterArray.length > 0) {
+      CatNews[catIds[index]] = {
+        catName: filterArray[0].CategoryName,
+        data: filterArray,
+        catId: filterArray[0].CategoryId
+      }
+    }
+  }
+
+  console.log('CatNews', CatNews, OldNews.data?.getNews?.data)
   const renderContent = () => {
-    if (old) {
+    if (activetab == 'old') {
       return (
         <FlatList
           data={OldNews.data?.getNews?.data}
           renderItem={({ item, index }) => {
-            return newsCard(item, index)
+            const oneWeekOlddate = new Date(
+              Date.now() - 7 * 24 * 60 * 60 * 1000
+            )
+            const isOld = moment(item.createdAt).isSameOrBefore(oneWeekOlddate) // true
+            if (isOld) {
+              return newsCard(item, index)
+            }
           }}
         />
       )
     }
-    if (New) {
+    if (activetab == 'new') {
       return (
         <FlatList
           data={OldNews.data?.getNews?.data}
           renderItem={({ item, index }) => {
-            return newsCard(item, index)
+            const oneWeekOlddate = new Date(
+              Date.now() - 7 * 24 * 60 * 60 * 1000
+            )
+            const isOld = moment(item.createdAt).isSameOrBefore(oneWeekOlddate) // true
+            if (!isOld) {
+              return newsCard(item, index)
+            }
           }}
         />
       )
     }
-    if (Star) {
+    if (activetab == 'fav') {
       return (
         <FlatList
           data={favNew?.data?.getFavoriteByUserId?.data}
@@ -179,15 +223,27 @@ export const NewsCard = ({ navigation }) => {
         />
       )
     }
-    if (category) {
-      return (
-        <FlatList
-          data={OldNews.data?.getNews?.data}
-          renderItem={({ item, index }) => {
-            return newsCard(item, index)
-          }}
-        />
+    if (activetab == 'catTab') {
+      var arr = []
+      for (var title in CatNews) {
+        arr.push(CatNews[title].data)
+      }
+      return(
+        arr.map((val, ind) => {
+          return (
+            <View>
+            <Text style={[styles.textStyle1, {paddingHorizontal: 25, paddingBottom: 10, fontSize: 20}]}>{val[0].CategoryName}</Text>
+              <FlatList
+                data={val}
+                renderItem={({ item, index }) => {
+                  return newsCard(item, index)
+                }}
+              />
+            </View>
+          )
+        })
       )
+  
     }
   }
 
@@ -210,34 +266,51 @@ export const NewsCard = ({ navigation }) => {
         style={styles.linearMainViewStyle}>
         <View style={styles.headerDownView}>
           <TouchableOpacity
-            onPress={() => handleOld()}
+            onPress={() => setActiveTab('old')}
             activeOpacity={0.8}
-            style={old ? styles.ImgView1 : styles.ImgView2}>
-            <Text style={old ? styles.textStyle1 : styles.textStyle2}>Old</Text>
+            style={activetab == 'old' ? styles.ImgView1 : styles.ImgView2}>
+            <Text
+              style={
+                activetab == 'old' ? styles.textStyle1 : styles.textStyle2
+              }>
+              Old
+            </Text>
           </TouchableOpacity>
           <View style={styles.borderView} />
           <TouchableOpacity
-            onPress={() => handleNew()}
+            onPress={() => setActiveTab('new')}
             activeOpacity={0.8}
-            style={New ? styles.ImgView1 : styles.ImgView2}>
-            <Text style={New ? styles.textStyle1 : styles.textStyle2}>New</Text>
+            style={activetab == 'new' ? styles.ImgView1 : styles.ImgView2}>
+            <Text
+              style={
+                activetab == 'new' ? styles.textStyle1 : styles.textStyle2
+              }>
+              New
+            </Text>
           </TouchableOpacity>
           <View style={styles.borderView} />
           <TouchableOpacity
-            onPress={() => handleStar()}
+            onPress={() => setActiveTab('fav')}
             activeOpacity={0.8}
-            style={Star ? styles.ImgView1 : styles.ImgView2}>
-            <Feather name="star" size={20} color={Star ? 'red' : 'white'} />
+            style={activetab == 'fav' ? styles.ImgView1 : styles.ImgView2}>
+            <Feather
+              name="star"
+              size={20}
+              color={activetab == 'fav' ? 'red' : 'white'}
+            />
             {/* <Text style={Star ? styles.textStyle1 : styles.textStyle2}>
                             Star
                         </Text> */}
           </TouchableOpacity>
           <View style={styles.borderView} />
           <TouchableOpacity
-            onPress={() => handleCategory()}
+            onPress={() => setActiveTab('catTab')}
             activeOpacity={0.8}
-            style={category ? styles.ImgView1 : styles.ImgView2}>
-            <Text style={category ? styles.textStyle1 : styles.textStyle2}>
+            style={activetab == 'catTab' ? styles.ImgView1 : styles.ImgView2}>
+            <Text
+              style={
+                activetab == 'catTab' ? styles.textStyle1 : styles.textStyle2
+              }>
               Categories
             </Text>
           </TouchableOpacity>
@@ -313,8 +386,6 @@ export const NewsCard = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-
-      <View></View>
 
       <View>
         <Image

@@ -9,25 +9,21 @@ import {
   StatusBar,
   Alert,
   Modal,
-  Pressable
+  Pressable,
+  Share
 } from 'react-native'
-import { Images } from '../../constants/images'
+
 import { Dimensions } from 'react-native'
 import Button from '../../components/Button'
 const { width, height } = Dimensions.get('window')
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { ScrollView } from 'react-native-gesture-handler'
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
-import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/ScollBarComp'
-import CustomRadioButton from '../../components/RadioButton/RadioButton'
-import Icon from 'react-native-vector-icons/Feather'
-import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
-import Feather from 'react-native-vector-icons/Feather'
-import { useMutation } from '@apollo/client'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { useMutation, useQuery } from '@apollo/client'
 import { ADD_TO_FAV } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
 
 
 export const NewsDetails = ({ navigation, route }) => {
@@ -40,8 +36,6 @@ export const NewsDetails = ({ navigation, route }) => {
 }, [])
 
   const [userData, setUserData] = useState(null)
-  const [text, setText] = useState('')
-  const [modalVisible, setModalVisible] = useState(false)
   const [title, setTitle] = useState(route.params?.title ? route.params?.title : "TITLE")
   const [tagline, setTagline] = useState(route.params?.tagline ? route.params?.tagline : "TAGLINE")
   const [description, setdescription] = useState(route.params?.description ? route.params?.description : "DESCRIPTION")
@@ -84,6 +78,11 @@ export const NewsDetails = ({ navigation, route }) => {
   ]
 
   const addToFavRes = useMutation(ADD_TO_FAV)
+  const favNew = useQuery(GET_FAV_NEWS_BY_ID, {
+    variables: {
+      userId: parseFloat(userData?.id)
+    }
+  })
 
   const addToFav = async () => {
     // console.log(typeof parseFloat(userData?.id), typeof newsData?.id)
@@ -93,9 +92,31 @@ export const NewsDetails = ({ navigation, route }) => {
         newsId: newsData?.id
       }
     })
-
-    console.log("addToFavRes", result)
+    favNew.refetch()
+    ToastMessage('News', result.data.addToFavorite.message);
   }
+
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:  `FASED {APP_URL} \n \n Title: ${title} \n Tagline: ${tagline} \n Description: ${description}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const isFav = favNew?.data?.getFavoriteByUserId?.data.find(val => val.News.id == newsData.id)
   return (
     <View style={styles.mainContainer}>
       <StatusBar
@@ -103,9 +124,6 @@ export const NewsDetails = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-
-
-
       <LinearGradient
         colors={['#9CA3AF', '#4A4C50']}
         start={{ x: 0.95, y: 0 }}
@@ -120,12 +138,12 @@ export const NewsDetails = ({ navigation, route }) => {
                   marginTop: 20
           }}>
         <TouchableOpacity onPress={() => addToFav()}>
-          <Feather name='star' size={20} color={'white'} />
+          <MaterialIcons name={isFav ? 'star' : 'star-outline'} size={20} color={'white'}  />
         </TouchableOpacity>
         <View>
           <Text style={styles.headerLabel}>News Details</Text>
         </View>
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity onPress={() => onShare()} activeOpacity={0.7}>
           <Text style={styles.headerLabel}>Share</Text>
         </TouchableOpacity>
         </View>
@@ -200,7 +218,7 @@ export const NewsDetails = ({ navigation, route }) => {
         </View>
         <View>
           <Button
-            onPress={() => navigation.goBack('')}
+            onPress={() => navigation.goBack()}
             buttonStyle={{
               top: -25,
               bottom: 0,

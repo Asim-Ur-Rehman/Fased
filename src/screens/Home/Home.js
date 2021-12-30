@@ -20,12 +20,14 @@ import Button from '../../components/Button'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import {
+  FILTER_BY_DATE,
   FILTER_CATEGORIES,
   Get_Categories,
   Get_News,
   Get_Reports
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
+import { distance, getSimplifyArr } from '../../utils/helper'
 
 let reportsData = []
 
@@ -39,10 +41,12 @@ export const Home = ({ navigation, route }) => {
   )
 
   const { data, loading, error } = useQuery(Get_Categories)
-  const News = useQuery(Get_News);
+  const News = useQuery(Get_News)
 
   if (selected.length > 0) {
-    const results = data?.getCategories?.data.filter(({ id: id1 }) => !selected.some(({ id: id2 }) => id2 === id1));
+    const results = data?.getCategories?.data.filter(
+      ({ id: id1 }) => !selected.some(({ id: id2 }) => id2 === id1)
+    )
     const filterReports = useQuery(FILTER_CATEGORIES, {
       variables: {
         showIds: [...results.map(e => e.id)]
@@ -50,8 +54,10 @@ export const Home = ({ navigation, route }) => {
     })
     reportsData = filterReports?.data?.filterReports?.data
   } else if (fromTo) {
-    // reportsData = useQuery(Get_Reports);
-    alert('sa')
+    const data = useQuery(FILTER_BY_DATE, {
+      variables: fromTo
+    })
+    reportsData = data?.data?.filterReportsByDate?.data
   } else {
     reportsData = useQuery(Get_Reports)?.data?.getReports?.data
   }
@@ -73,6 +79,7 @@ export const Home = ({ navigation, route }) => {
   const isGuest = useSelector(state => state.userReducer.isGuest)
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
+    setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
   }, [route.params])
 
   const animateToCurrentLocation = () => {
@@ -91,7 +98,19 @@ export const Home = ({ navigation, route }) => {
     return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI
   }
 
-  
+  const getDistance = async (geometry) => {
+    // for (let index = 0; index < reports.length; index++) {
+    //   const km = await distance(
+    //     geometry.coordinates[0],
+    //     geometry.coordinates[1],
+    //     reports[index].latitude,
+    //     reports[index].longitude,
+    //   )
+    //   console.log('km', km)
+    // }
+    console.log('getDistance', await getSimplifyArr(geometry.data))
+  }
+
   return (
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
@@ -102,37 +121,44 @@ export const Home = ({ navigation, route }) => {
             onPress={() => navigation.toggleDrawer()}>
             <Image style={styles.img} source={Images.Pictures.logo} />
           </TouchableOpacity>
-          <View style={styles.header2}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('NewsCard')}
-              style={styles.btn}
-              activeOpacity={0.7}>
-              <Text
-                style={{
-                  fontSize: 10,
-                  fontFamily: 'Rubik-Medium',
-                  color: '#ffffff'
-                }}>
-                NEWS
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={{ flexDirection: 'column', width: '80%' }}
-              onPress={() => {
-                navigation.navigate('NewsDetails', {
-                  title: News?.data?.getNews?.data[0]?.Title,
-                  tagline: News?.data?.getNews?.data[0]?.Tagline,
-                  description: News?.data?.getNews?.data[0]?.Description,
-                  newsData: News?.data?.getNews?.data[0]
-                })
-              }}>
-              <Text style={styles.headerText}>
-                {News?.data?.getNews?.data[0]?.Description}
-                <Text style={[styles.read, {marginRight: 10}]}> Read more</Text>
-              </Text>
-            </TouchableOpacity>
-          </View>
+          {News?.data?.getNews?.data[0] && (
+            <View style={styles.header2}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('NewsCard')}
+                style={styles.btn}
+                activeOpacity={0.7}>
+                <Text
+                  style={{
+                    fontSize: 10,
+                    fontFamily: 'Rubik-Medium',
+                    color: '#ffffff'
+                  }}>
+                  NEWS
+                </Text>
+              </TouchableOpacity>
+              {News?.data?.getNews?.data[0] && (
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  style={{ flexDirection: 'column', width: '80%' }}
+                  onPress={() => {
+                    navigation.navigate('NewsDetails', {
+                      title: News?.data?.getNews?.data[0]?.Title,
+                      tagline: News?.data?.getNews?.data[0]?.Tagline,
+                      description: News?.data?.getNews?.data[0]?.Description,
+                      newsData: News?.data?.getNews?.data[0]
+                    })
+                  }}>
+                  <Text numberOfLines={2} style={styles.headerText}>
+                    {News?.data?.getNews?.data[0]?.Description}
+                    <Text style={[styles.read, { marginRight: 10 }]}>
+                      {' '}
+                      Read more
+                    </Text>
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
         </View>
 
         <View
@@ -201,7 +227,7 @@ export const Home = ({ navigation, route }) => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-              From : Sep 23, 2021
+              From : {fromTo?.from ? fromTo?.from : 'From start'}
             </Text>
           </TouchableOpacity>
 
@@ -222,7 +248,7 @@ export const Home = ({ navigation, route }) => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-              To : Sep 23, 2021
+              To : {fromTo?.to ? fromTo?.to : 'Till today'}
             </Text>
           </TouchableOpacity>
         </View>
@@ -248,6 +274,7 @@ export const Home = ({ navigation, route }) => {
           // showsCompass
           // compassOffset={{ x: 50, y: 100 }}
           zoomEnabled={false}
+          radius={40}
           ref={mapRef}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties } = cluster
@@ -259,7 +286,8 @@ export const Home = ({ navigation, route }) => {
                   longitude: geometry.coordinates[0],
                   latitude: geometry.coordinates[1]
                 }}
-                onPress={() => navigation.navigate('Reports')}>
+                onPress={() => getDistance(cluster)}
+                >
                 <View
                   style={
                     {
@@ -292,6 +320,7 @@ export const Home = ({ navigation, route }) => {
             )
           }}>
           {reports.map((item, i) => {
+            // console.log("getDistance item", item)
             return (
               <Marker
                 key={i}
@@ -299,6 +328,7 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
+                did={item.id}
                 title={item.SuspectName}
                 description={item.Description}>
                 <Image
