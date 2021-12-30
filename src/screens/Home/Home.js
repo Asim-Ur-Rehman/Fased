@@ -72,8 +72,8 @@ export const Home = ({ navigation, route }) => {
   const INITIAL_REGION = {
     latitude: 52.5,
     longitude: 19.2,
-    latitudeDelta: 55,
-    longitudeDelta: 25
+    latitudeDelta: 1,
+    longitudeDelta: 1
   }
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
@@ -99,16 +99,11 @@ export const Home = ({ navigation, route }) => {
   }
 
   const getDistance = async (geometry) => {
-    // for (let index = 0; index < reports.length; index++) {
-    //   const km = await distance(
-    //     geometry.coordinates[0],
-    //     geometry.coordinates[1],
-    //     reports[index].latitude,
-    //     reports[index].longitude,
-    //   )
-    //   console.log('km', km)
-    // }
     console.log('getDistance', await getSimplifyArr(geometry.data))
+  }
+
+  const onClusterPress=(e)=>{
+    e.stopPropagation()
   }
 
   return (
@@ -273,11 +268,19 @@ export const Home = ({ navigation, route }) => {
           style={{ height: '72%' }}
           // showsCompass
           // compassOffset={{ x: 50, y: 100 }}
-          zoomEnabled={false}
+          // zoomEnabled={false}
           radius={40}
           ref={mapRef}
+          animationEnabled={false}
+          // preserveClusterPressBehavior={true}
+          // onClusterPress={(e) => {
+          //   console.log("onMarkerPress eeeee", e)
+          //   // alert("asda")
+          // }}
           renderCluster={cluster => {
-            const { id, geometry, onPress, properties } = cluster
+            const { id, geometry, onPress, properties, data } = cluster
+            const reports =  getSimplifyArr(data)
+            console.log("renderCluster data", reports)
             const points = properties.point_count
             return (
               <Marker
@@ -286,7 +289,9 @@ export const Home = ({ navigation, route }) => {
                   longitude: geometry.coordinates[0],
                   latitude: geometry.coordinates[1]
                 }}
-                onPress={() => getDistance(cluster)}
+                // onPress={(e) => onClusterPress(e, id)}
+                // onPress={() => alert(id)}
+                onPress={() =>  navigation.navigate('Reports', {reports: reports})}
                 >
                 <View
                   style={
@@ -296,17 +301,17 @@ export const Home = ({ navigation, route }) => {
                     }
                   }>
                   <VictoryPie
-                    colorScale={colors}
+                    colorScale={[...new Set([...reports.map(e => e.data.Category.BackgroundColor)])]}
                     padAngle={({ datum }) => datum.y}
                     radius={20}
                     innerRadius={30}
                     labels={({ datum }) => ``}
-                    data={colors.map(e => {
+                    data={[...new Set([...reports.map(e => e.data.Category.BackgroundColor)])].map(e => {
                       return { x: 1, y: 3 }
                     })}
                   />
                   <TouchableOpacity
-                    onPress={onPress}
+                    // onPress={onPress}
                     style={{
                       position: 'absolute',
                       bottom: '45%',
@@ -328,7 +333,8 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                did={item.id}
+                // onPress={onClusterPress}
+                data={item}
                 title={item.SuspectName}
                 description={item.Description}>
                 <Image

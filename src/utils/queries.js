@@ -75,17 +75,23 @@ export const Get_Reports = gql`
       status
       message
       data {
-        id
-        userId
-        CategoryId
-        SubCategory
-        latitude
-        longitude
-        Description
-        SuspectName
-        Category {
-          BackgroundColor
-        }
+        createdAt
+      Description
+      CostMoney
+      IncidentDate
+      latitude
+      SubCategory
+      longitude
+      userId
+      id
+      CategoryId
+      SuspectName
+      IncidentTime
+      floor
+      Category {
+        BackgroundColor
+        Title
+      }
       }
     }
   }
@@ -97,20 +103,23 @@ export const FILTER_CATEGORIES = gql`
       status
       message
       data {
-        id
-        userId
-        CategoryId
-        latitude
-        SubCategory
-        longitude
-        SuspectName
-        IncidentDate
-        CostMoney
-        Description
         createdAt
-        Category {
-          BackgroundColor
-        }
+      Description
+      CostMoney
+      IncidentDate
+      latitude
+      SubCategory
+      longitude
+      userId
+      id
+      CategoryId
+      SuspectName
+      IncidentTime
+      floor
+      Category {
+        BackgroundColor
+        Title
+      }
       }
     }
   }
@@ -121,21 +130,22 @@ query FilterReportsByDate($from: Date!, $to: Date!) {
     status
     message
     data {
-      id
-      userId
-      SubCategory
-      CategoryId
-      longitude
-      latitude
-      IncidentDate
-      IncidentTime
-      SuspectName
-      CostMoney
-      floor
-      Description
       createdAt
+      Description
+      CostMoney
+      IncidentDate
+      latitude
+      SubCategory
+      longitude
+      userId
+      id
+      CategoryId
+      SuspectName
+      IncidentTime
+      floor
       Category {
         BackgroundColor
+        Title
       }
     }
   }

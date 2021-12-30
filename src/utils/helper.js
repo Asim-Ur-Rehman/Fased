@@ -41,7 +41,7 @@ export const distance = async (lat1=24.8704651, lon1=67.03403, lat2=24.8578104, 
 }
 
 
-export const getSimplifyArr = async (arr) => {
+export const getSimplifyArr = (arr) => {
   var resultantArray = [];
   recurrsion(arr)
   function recurrsion(arr) {
