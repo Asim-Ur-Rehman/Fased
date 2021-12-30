@@ -280,7 +280,6 @@ export const Home = ({ navigation, route }) => {
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports =  getSimplifyArr(data)
-            console.log("renderCluster data", reports)
             const points = properties.point_count
             return (
               <Marker

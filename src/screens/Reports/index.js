@@ -199,6 +199,9 @@ export const Reports = ({ navigation, route }) => {
         {data.map((value, index) => {
           return (
             <TouchableOpacity
+              onPress={() => navigation.navigate('FlagReport', {
+                  data: value.data
+              })}
             activeOpacity={0.9}
               key={index}
               style={[

@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -25,10 +25,17 @@ import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 
-export const FlagReport = ({ navigation }) => {
+export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
+  const [data, setData] = useState(
+    route.params?.data ? route.params?.data : []
+  )
+  useEffect(() => {
+    setData(route.params?.data ? route.params?.data : [])
+  }, [route.params])
+  console.log("data", data)
   const PROP = [
     {
       key: 'Button-1',
@@ -110,14 +117,14 @@ export const FlagReport = ({ navigation }) => {
             />
 
             <View>
-              <Text style={styles.headerLabel}>Pedro Pascal</Text>
+              <Text style={styles.headerLabel}>{data.SuspectName}</Text>
               <Text
                 style={{
                   fontSize: 13,
                   fontFamily: 'Rubik-Regular',
                   color: '#fff'
                 }}>
-                15,aug,2021
+                {data.createdAt}
               </Text>
             </View>
           </View>
@@ -149,7 +156,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            3rd floor
+            {data.floor} floor
           </Text>
         </View>
         <View style={styles.ImgView}>
@@ -161,7 +168,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            10:35 pm
+            {data.IncidentTime}
           </Text>
         </View>
         <View style={styles.ImgView}>
@@ -173,7 +180,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            $500,00
+            ${data.CostMoney}
           </Text>
         </View>
       </View>
@@ -209,7 +216,7 @@ export const FlagReport = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: '#fff'
               }}>
-              Killing
+              {data.Category.Title}
             </Text>
             <Text
               style={{
@@ -235,70 +242,7 @@ export const FlagReport = ({ navigation }) => {
               }}>
 
               <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
+                {data.Description}
               </Text>
             </CustomScrollView>
 
