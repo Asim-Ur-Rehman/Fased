@@ -42,7 +42,7 @@ export const CustomDrawer = ({ navigation }) => {
   ]
   const removeUser = async () => {
     try {
-      await AsyncStorage.removeItem('userData')
+      await AsyncStorage.clear()
       return true
     } catch (exception) {
       return false

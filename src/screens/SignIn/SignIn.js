@@ -32,60 +32,41 @@ export const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [loginUser, { data, loading, error }] = useQuery(
-    Login_User({
-      variables: {
-        email: email,
-        password: password
-      }
-    })
-  )
-
-  const dispatch = useDispatch()
+  const loginUser = useQuery(Login_User, {
+    variables: {
+      email: email,
+      password: password
+    }
+  })
 
   const signIn = () => {
     if (email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error')
     } else {
-      loginUser()
-        .then(data => {
-          console.log('data return', data.data.loginUser.data)
-          if (data?.data?.loginUser?.status) {
-            let userData = data?.data?.loginUser?.data
-            let jsonData = JSON.stringify(userData)
-            AsyncStorage.setItem('userData', jsonData)
-
-            ToastMessage(
-              'User SignIn Successfully',
-              data?.data?.loginUser?.message,
-              'success'
-            )
-
-            navigation.navigate('AppStackNavigator', {
-              screen: 'Home'
-            })
-            setEmail('')
-            setPassword('')
-          } else {
-            ToastMessage(
-              'SignIn Error',
-              data?.data?.loginUser?.message,
-              'error'
-            )
-          }
+      console.log("loginUser?.data?.loginUser?", loginUser?.data?.loginUser)
+      if (loginUser?.error) {
+        ToastMessage('SignIn Error', 'Something went wrong', 'info')
+      } 
+      if (loginUser?.data?.loginUser?.status) {
+        let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
+        AsyncStorage.setItem('userData', jsonData)
+        ToastMessage(
+          'User SignIn Successfully',
+          loginUser?.data?.loginUser?.message,
+          'success'
+        )
+        navigation.navigate('AppStackNavigator', {
+          screen: 'Home'
         })
-        .catch(error => {
-          console.log('error', error)
-          if (error) {
-            ToastMessage('SignIn Error', 'Something went wrong', 'info')
-          } else {
-            ToastMessage(
-              'SignIn Error',
-              error?.data?.loginUser?.message,
-              'error'
-            )
-          }
-        })
+        setEmail('')
+        setPassword('')
+      }else {
+        ToastMessage(
+          'SignIn Error',
+          loginUser?.data?.loginUser?.message,
+          'error'
+        )
+      }
     }
   }
 
@@ -181,7 +162,7 @@ export const SignIn = ({ navigation }) => {
           style={{
             paddingVertical: 20
           }}>
-          {loading ? (
+          {loginUser?.loading ? (
             <ActivityIndicator size="large" color="#4A4C50" />
           ) : (
             <Button

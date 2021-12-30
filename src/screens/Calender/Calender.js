@@ -15,6 +15,7 @@ import CalendarPicker from 'react-native-calendar-picker'
 import Calendar from 'react-native-calendars'
 import Feather from 'react-native-vector-icons/Feather'
 import LinearGradient from 'react-native-linear-gradient'
+import moment from 'moment'
 const INITIAL_DATE = '2020-02-02'
 export const Calender = ({ navigation }) => {
   const onSelectSwitch = index => {
@@ -22,13 +23,15 @@ export const Calender = ({ navigation }) => {
   }
   const [untilToday, setUntilToday] = useState(false)
   const startDate = selectedStartDate ? selectedStartDate.toString() : ''
-  const [selectedStartDate, setSelectedStartDate] = useState()
-  const [selectedEndDate, setSelectedEndDate] = useState()
+  const [selectedStartDate, setSelectedStartDate] = useState(new Date())
+  const [selectedEndDate, setSelectedEndDate] = useState(new Date())
 
-  const onDateChange = date => {
-    setSelectedStartDate({
-      selectedStartDate: date
-    })
+  const onDateChange = (date, type) => {
+    if (type == 'startDate') {
+      setSelectedStartDate(date)
+    } else {
+      setSelectedEndDate(date)
+    }
   }
   const [toggle, setToggle] = useState()
   return (
@@ -58,12 +61,13 @@ export const Calender = ({ navigation }) => {
           </View>
           <View style={{ borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}>
             <CalendarPicker
-              onDateChange={onDateChange}
+              onDateChange={e => onDateChange(e, 'startDate')}
               weekdays={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
-              selectedDayTextColor="#fff"
-              todayBackgroundColor="#DF0707"
+              todayBackgroundColor="#fff"
+              todayTextStyle={{ color: '#000' }}
               headerWrapperStyle={false}
-              selectedDayColor="#760404"
+              selectedDayTextColor="#fff"
+              selectedDayStyle={{ backgroundColor: '#760404' }}
               previousComponent={
                 <Feather
                   style={{ left: 280 }}
@@ -76,6 +80,7 @@ export const Calender = ({ navigation }) => {
                 <Feather name="chevron-right" size={28} color="#333333" />
               }
               monthYearHeaderWrapperStyle={{ right: 100 }}
+              initialDate={selectedStartDate}
             />
           </View>
         </View>
@@ -92,6 +97,7 @@ export const Calender = ({ navigation }) => {
                 <ToggleButton
                   selectionMode={1}
                   onSelectSwitch={e => {
+                    setSelectedEndDate(new Date())
                     setUntilToday(e)
                   }}
                 />
@@ -100,24 +106,28 @@ export const Calender = ({ navigation }) => {
           </View>
           <View style={{ borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}>
             <CalendarPicker
-              onDateChange={onDateChange}
+              onDateChange={e => onDateChange(e, 'endDate')}
               weekdays={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
-              selectedDayTextColor="#fff"
-              todayBackgroundColor="#DF0707"
               headerWrapperStyle={false}
-              selectedDayColor="#760404"
+              todayBackgroundColor="#fff"
+              todayTextStyle={{ color: '#000' }}
+              selectedDayTextColor="#fff"
+              selectedDayStyle={{ backgroundColor: '#760404' }}
+              
               previousComponent={
                 <Feather
                   style={{ left: 280 }}
                   name="chevron-left"
                   size={28}
-                  color="#333333"
+                  color="#760404"
                 />
               }
+              previousContainer
               nextComponent={
                 <Feather name="chevron-right" size={28} color="#333333" />
               }
               monthYearHeaderWrapperStyle={{ right: 100 }}
+              initialDate={selectedEndDate}
             />
           </View>
         </View>
@@ -140,12 +150,19 @@ export const Calender = ({ navigation }) => {
           justifyContent: 'space-evenly',
           paddingVertical: 20
         }}>
-        <View style={styles.btn1}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.btn1}>
           <Text style={styles.reset}>Reset</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Home', { fromTo: {} })}>
+          onPress={() =>
+            navigation.navigate('Home', {
+              fromTo: {
+                from: moment(selectedStartDate).format("YYYY-MM-DD"),
+                to: moment(selectedEndDate).format("YYYY-MM-DD")
+              }
+            })
+          }>
           <LinearGradient
             style={styles.btn1}
             colors={['#4A4C50', '#9CA3AF']}

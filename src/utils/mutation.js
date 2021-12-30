@@ -105,3 +105,24 @@ export const Create_Report_Incident_without_SubCat = gql`
     }
   }
 `
+
+export const ADD_TO_FAV = gql`
+mutation AddToFavorite($userId: Int!, $newsId: Int!) {
+  addToFavorite(userId: $userId, newsId: $newsId) {
+    status
+    message
+    data {
+      createdAt
+      newsId
+      userId
+      id
+      News {
+        id
+        Image
+        Title
+        Tagline
+        Description
+      }
+    }
+  }
+}`
