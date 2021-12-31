@@ -103,10 +103,7 @@ export const Home = ({ navigation, route }) => {
     return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI
   }
 
-  const getDistance = async (geometry) => {
-    console.log('getDistance', await getSimplifyArr(geometry.data))
-  }
-
+ 
   const onClusterPress=(e)=>{
     e.stopPropagation()
   }
@@ -286,6 +283,7 @@ export const Home = ({ navigation, route }) => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports =  getSimplifyArr(data)
             const points = properties.point_count
+
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -329,7 +327,6 @@ export const Home = ({ navigation, route }) => {
             )
           }}>
           {reports.map((item, i) => {
-            // console.log("getDistance item", item)
             return (
               <Marker
                 key={i}
@@ -337,7 +334,7 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                // onPress={onClusterPress}
+                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}]})}
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>

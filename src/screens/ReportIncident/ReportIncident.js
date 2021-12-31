@@ -51,8 +51,8 @@ export const ReportIncident = ({ navigation }) => {
   const [initialRegion, setinitialRegion] = useState({
     latitude: 52.5,
     longitude: 19.2,
-    latitudeDelta: 1,
-    longitudeDelta: 1
+    latitudeDelta: 8,
+    longitudeDelta: 8
   })
   const allMarkers = [
     {
@@ -126,7 +126,7 @@ export const ReportIncident = ({ navigation }) => {
         </View>
         <Text style={styles.dateTextStyle}>01 - 03</Text>
       </View>
-      {/* <KeyboardAvoidingView style={{ flex: 1 }} behavior="height"> */}
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
       {/* <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}> */}
@@ -139,7 +139,8 @@ export const ReportIncident = ({ navigation }) => {
               width: '90%',
               alignSelf: 'center',
               borderRadius: 5,
-              marginVertical: 10
+              marginVertical: 10,
+              height: height/22
             }}>
             <View style={{ justifyContent: 'center', paddingHorizontal: 15 }}>
               <Feather
@@ -148,7 +149,7 @@ export const ReportIncident = ({ navigation }) => {
                 size={18}
               />
             </View>
-            <View>
+            <View style={{top: Platform.OS == "ios" ? 10 : 0}}>
               <TextInput
                 placeholder="Where did it happen?"
                 placeholderTextColor={theme.textColor.placeholderColor}
@@ -243,7 +244,7 @@ export const ReportIncident = ({ navigation }) => {
           </View>
         </View>
       {/* </ScrollView> */}
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
