@@ -28,6 +28,7 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { distance, getSimplifyArr } from '../../utils/helper'
+import Geolocation from '@react-native-community/geolocation';
 
 let reportsData = []
 
@@ -83,7 +84,11 @@ export const Home = ({ navigation, route }) => {
   }, [route.params])
 
   const animateToCurrentLocation = () => {
-    mapRef.current.animateToRegion(INITIAL_REGION, 800)
+    Geolocation.getCurrentPosition(info => {
+        mapRef.current.animateToRegion({...INITIAL_REGION, ...info.coords}, 2000)
+
+    });
+
   }
 
   const getRotationAngle = () => {
@@ -98,10 +103,7 @@ export const Home = ({ navigation, route }) => {
     return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI
   }
 
-  const getDistance = async (geometry) => {
-    console.log('getDistance', await getSimplifyArr(geometry.data))
-  }
-
+ 
   const onClusterPress=(e)=>{
     e.stopPropagation()
   }
@@ -280,8 +282,8 @@ export const Home = ({ navigation, route }) => {
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports =  getSimplifyArr(data)
-            console.log("renderCluster data", reports)
             const points = properties.point_count
+
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -325,7 +327,6 @@ export const Home = ({ navigation, route }) => {
             )
           }}>
           {reports.map((item, i) => {
-            // console.log("getDistance item", item)
             return (
               <Marker
                 key={i}
@@ -333,7 +334,7 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                // onPress={onClusterPress}
+                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}]})}
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
