@@ -14,7 +14,7 @@ import {
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
 import Button from '../../components/Button'
-const { width, height } = Dimensions.get('window')
+const  { width, height } = Dimensions.get('window')
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'

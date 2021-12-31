@@ -28,6 +28,7 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { distance, getSimplifyArr } from '../../utils/helper'
+import Geolocation from '@react-native-community/geolocation';
 
 let reportsData = []
 
@@ -83,7 +84,11 @@ export const Home = ({ navigation, route }) => {
   }, [route.params])
 
   const animateToCurrentLocation = () => {
-    mapRef.current.animateToRegion(INITIAL_REGION, 800)
+    Geolocation.getCurrentPosition(info => {
+        mapRef.current.animateToRegion({...INITIAL_REGION, ...info.coords}, 2000)
+
+    });
+
   }
 
   const getRotationAngle = () => {
