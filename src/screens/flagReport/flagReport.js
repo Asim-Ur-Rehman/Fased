@@ -14,7 +14,7 @@ import {
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
 import Button from '../../components/Button'
-const  { width, height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -29,13 +29,11 @@ export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
 
-  const [data, setData] = useState(
-    route.params?.data ? route.params?.data : []
-  )
+  const [data, setData] = useState(route.params?.data ? route.params?.data : [])
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
   }, [route.params])
-  console.log("data", data)
+  console.log('data', data)
   const PROP = [
     {
       key: 'Button-1',
@@ -139,9 +137,9 @@ export const FlagReport = ({ navigation, route }) => {
               name="options-vertical"
               color="#fff"
               size={18}
-            // onPress={() => {
-            //   navigation.goBack('')
-            // }}
+              // onPress={() => {
+              //   navigation.goBack('')
+              // }}
             />
           </View>
         </View>
@@ -230,24 +228,17 @@ export const FlagReport = ({ navigation, route }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 1.85 }}>
+          <View style={{ height: height / 1.82 }}>
             <CustomScrollView
-              contentContainerStyle={{ paddingBottom: 20, }}
+              contentContainerStyle={{ paddingBottom: 20 }}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
                 borderRadius: 3,
-                width: 5,
-                marginTop: 5,
+                width: 5
               }}>
-
-              <Text style={styles.ContentTextStyle}>
-                {data.Description}
-              </Text>
+              <Text style={styles.ContentTextStyle}>{data.Description}</Text>
             </CustomScrollView>
-
-
-
           </View>
         </View>
 
@@ -265,7 +256,7 @@ export const FlagReport = ({ navigation, route }) => {
         </View>
 
         <Modal
-          animationType='fade'
+          animationType="fade"
           // onDismiss={() => setModalVisible(!modalVisible)}
           transparent={true}
           visible={modalVisible}
@@ -398,7 +389,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop:30
+    marginTop: 30
   },
   headerLabel: {
     color: '#fff',
@@ -439,7 +430,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: '#fff',
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'center'
 
     // shadowColor: "#000",
     // shadowOffset: {

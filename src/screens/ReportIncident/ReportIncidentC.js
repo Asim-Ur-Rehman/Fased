@@ -71,7 +71,6 @@ export const ReportIncidentC = ({ navigation }) => {
         }
       })
         .then(data => {
-          // console.log('data return', data)
           if (data?.data?.CreateReport?.status) {
             ToastMessage(
               'Report Create Successfully',

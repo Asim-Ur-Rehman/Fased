@@ -63,11 +63,8 @@ export const Home = ({ navigation, route }) => {
     reportsData = useQuery(Get_Reports)?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
-  const colors = [...new Set([...reports.map(e => e.Category.BackgroundColor)])]
 
-  // useEffect(() => {
-  //   getUserData()
-  // }, [])
+
   const mapRef = useRef(null)
 
   const INITIAL_REGION = {
@@ -268,22 +265,13 @@ export const Home = ({ navigation, route }) => {
         <MapView
           initialRegion={INITIAL_REGION}
           style={{ height: '72%' }}
-          // showsCompass
-          // compassOffset={{ x: 50, y: 100 }}
-          // zoomEnabled={false}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
-          // preserveClusterPressBehavior={true}
-          // onClusterPress={(e) => {
-          //   console.log("onMarkerPress eeeee", e)
-          //   // alert("asda")
-          // }}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports =  getSimplifyArr(data)
             const points = properties.point_count
-
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -293,7 +281,10 @@ export const Home = ({ navigation, route }) => {
                 }}
                 // onPress={(e) => onClusterPress(e, id)}
                 // onPress={() => alert(id)}
-                onPress={() =>  navigation.navigate('Reports', {reports: reports})}
+                onPress={() =>  navigation.navigate('Reports', {reports: reports, geometry: {
+                  longitude: geometry.coordinates[0],
+                  latitude: geometry.coordinates[1]
+                }})}
                 >
                 <View
                   style={
@@ -334,7 +325,10 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}]})}
+                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}], geometry: {
+                  latitude: item.latitude,
+                  longitude: item.longitude
+                }})}
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>

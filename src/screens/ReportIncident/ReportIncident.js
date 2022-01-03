@@ -27,13 +27,16 @@ import ToggleButton from '../../components/ToggleButton/index'
 import { useDispatch } from 'react-redux'
 import { ReportIncidentLocationFloorData } from '../../stores/actions/user.action'
 import { renderSearchLocation } from './locationModal'
-import Geolocation from '@react-native-community/geolocation';
-
+import Geolocation from '@react-native-community/geolocation'
 
 export const ReportIncident = ({ navigation }) => {
-
-    
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState({
+    latitude: 51.6,
+    longitude: 18.0,
+    title: 'User1',
+    description: 'HelloUser1',
+    image: Images.Pictures.green
+  })
   const [visible, setVisible] = useState(false)
   const [floor, setFloor] = useState(0)
   const mapRef = useRef(null)
@@ -51,9 +54,14 @@ export const ReportIncident = ({ navigation }) => {
   const [initialRegion, setinitialRegion] = useState({
     latitude: 52.5,
     longitude: 19.2,
-    latitudeDelta: 8,
-    longitudeDelta: 8
+    latitudeDelta: 1,
+    longitudeDelta: 1
   })
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      setLocation({...location, ...info.coords})
+    })
+  }, [])
   const allMarkers = [
     {
       latitude: 51.6,
@@ -62,21 +70,12 @@ export const ReportIncident = ({ navigation }) => {
       description: 'HelloUser1',
       image: Images.Pictures.green
     },
-    {
-      ...initialRegion,
-      title: 'User2',
-      description: 'HelloUser2',
-      image: Images.Pictures.red
-    }
   ]
-
 
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(info => {
-        mapRef.current.animateToRegion({...initialRegion, ...info.coords}, 2000)
-
-    });
-
+      mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
+    })
   }
 
   const onRegionChange = region => {
@@ -96,10 +95,10 @@ export const ReportIncident = ({ navigation }) => {
     dispatch(ReportIncidentLocationFloorData(data, navigation))
   }
 
-  const onDone = (e) => {
+  const onDone = e => {
     setVisible(!visible)
-    setinitialRegion({...initialRegion, ...e})
-    mapRef.current.animateToRegion({...initialRegion, ...e}, 2000)
+    setinitialRegion({ ...initialRegion, ...e })
+    mapRef.current.animateToRegion({ ...initialRegion, ...e }, 2000)
   }
   return (
     <SafeAreaView
@@ -107,6 +106,8 @@ export const ReportIncident = ({ navigation }) => {
         flex: 1,
         backgroundColor: theme.primaryColor
       }}>
+      {renderSearchLocation(visible, onDone)}
+
       <StatusBar
         backgroundColor={'transparent'}
         translucent={true}
@@ -127,7 +128,7 @@ export const ReportIncident = ({ navigation }) => {
         <Text style={styles.dateTextStyle}>01 - 03</Text>
       </View>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
-      {/* <ScrollView
+        {/* <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}> */}
         <View>
@@ -140,7 +141,7 @@ export const ReportIncident = ({ navigation }) => {
               alignSelf: 'center',
               borderRadius: 5,
               marginVertical: 10,
-              height: height/22
+              height: height / 20
             }}>
             <View style={{ justifyContent: 'center', paddingHorizontal: 15 }}>
               <Feather
@@ -149,7 +150,7 @@ export const ReportIncident = ({ navigation }) => {
                 size={18}
               />
             </View>
-            <View style={{top: Platform.OS == "ios" ? 10 : 0}}>
+            <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
               <TextInput
                 placeholder="Where did it happen?"
                 placeholderTextColor={theme.textColor.placeholderColor}
@@ -158,10 +159,14 @@ export const ReportIncident = ({ navigation }) => {
             </View>
           </View>
         </View>
-        {renderSearchLocation(visible, onDone)}
-        <View
-          style={{
-          }}>
+        <View style={styles.markerFixed}>
+          <Image
+            style={{ width: 58, height: 58 }}
+            resizeMode={'contain'}
+            source={Images.Pictures.red}
+          />
+        </View>
+        <View style={{}}>
           <MapView
             initialRegion={initialRegion}
             style={{ height: '80%' }}
@@ -170,6 +175,7 @@ export const ReportIncident = ({ navigation }) => {
             {allMarkers.map((item, i) => {
               return (
                 <Marker
+                  pointerEvents="none"
                   key={i}
                   coordinate={{
                     latitude: item.latitude,
@@ -229,7 +235,7 @@ export const ReportIncident = ({ navigation }) => {
                   fontSize: 12,
                   fontFamily: 'Rubik-Regular',
                   color: 'black'
-                          }}
+                }}
               />
             </View>
           </View>
@@ -243,7 +249,7 @@ export const ReportIncident = ({ navigation }) => {
             />
           </View>
         </View>
-      {/* </ScrollView> */}
+        {/* </ScrollView> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
@@ -331,5 +337,13 @@ const styles = StyleSheet.create({
     color: theme.textColor.blackText,
     fontFamily: 'Rubik-Medium',
     fontSize: 13
+  },
+  markerFixed: {
+    left: '50%',
+    marginLeft: -24,
+    marginTop: -48,
+    position: 'absolute',
+    top: '50%',
+    zIndex: 1
   }
 })

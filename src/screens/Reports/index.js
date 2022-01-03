@@ -10,18 +10,30 @@ import {
   SafeAreaView,
   StatusBar
 } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../constants/images'
 import { Get_Categories } from '../../utils/queries'
-const {width, height} = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen')
 export const Reports = ({ navigation, route }) => {
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
   )
+  const [address, setAddress] = useState('')
+  const [isFilter, setisFilter] = useState(false)
   useEffect(() => {
     setreports(route.params?.reports ? route.params?.reports : [])
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.params?.geometry?.latitude},${route.params?.geometry?.longitude}&key=AIzaSyCRqapKfPvsVTyk4XyYtsN3Fz413Iixz_w`
+    ).then(res =>
+      res.json().then(address => {
+        console.log(
+          'Address0',
+          setAddress(address.results[0].formatted_address)
+        )
+      })
+    )
   }, [route.params])
 
   const { data, loading, error } = useQuery(Get_Categories)
@@ -48,149 +60,25 @@ export const Reports = ({ navigation, route }) => {
 
   var arr = []
   var categories = []
-  for (var title in CatNews) {
-    arr.push(CatNews[title].data)
-    categories.push(CatNews[title].CatName)
+  if (!isFilter) {
+    for (var title in CatNews) {
+      arr.push(CatNews[title].data)
+      categories.push(CatNews[title].CatName)
+    }
+  } else {
+    let sortedArr = reports.sort(
+      (a, b) =>
+        new Date(...a.data.createdAt.split('/').reverse()) -
+        new Date(...b.data.createdAt.split('/').reverse())
+    )
+    arr = sortedArr.reverse()
   }
 
-  console.log('reports', reports, arr, categories)
-  //   const data = {
-  //     killing: [
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       }
-  //     ],
-  //     snatching: [
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       }
-  //     ],
-  //     kidnapping: [
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       },
-  //       {
-  //         initials: 'AK',
-  //         Floor: '3rd Floor',
-  //         category: 'Killing',
-  //         value: '$11,795.70'
-  //       }
-  //     ]
-  //   }
-
-  const renderData = (
-    data = [],
-  ) => {
+  const renderData = (data = []) => {
     return (
       <View
-        // onPress={() => navigation.navigate('FlagReport')}
         style={{
-          backgroundColor: data[0].data.Category.BackgroundColor+'14',
+          backgroundColor: data[0].data.Category.BackgroundColor + '14',
           borderTopWidth: 1,
           borderBottomWidth: 1,
           borderTopColor: data[0].data.Category.BackgroundColor,
@@ -199,63 +87,170 @@ export const Reports = ({ navigation, route }) => {
         {data.map((value, index) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('FlagReport', {
+              onPress={() =>
+                navigation.navigate('FlagReport', {
                   data: value.data
-              })}
-            activeOpacity={0.9}
+                })
+              }
+              activeOpacity={0.9}
               key={index}
               style={[
                 styles.tableHeader,
                 [
                   {
                     borderBottomWidth: 1,
-                    borderColor: value.data.Category.BackgroundColor+'14',
-                    padding: 10,
+                    borderColor: value.data.Category.BackgroundColor + '14',
+                    padding: 10
                   }
                 ]
               ]}>
-              <View style={{width: width/5, alignItems: 'center'}}>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
                 <Text
                   style={{
                     fontFamily: 'Rubik-Medium',
-                    fontSize: 13,
+                    fontSize: 13
                   }}>
-                    AK
+                  {value?.data?.SuspectName.split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()}
                 </Text>
               </View>
-              <View style={{width: width/5, alignItems: 'center'}}>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
                 <Text
                   style={{
                     fontFamily: 'Rubik-Regular',
-                    fontSize: 13,
-
+                    fontSize: 13
                   }}>
                   {value.data.floor}
                 </Text>
               </View>
-              <View style={{width: width/5, alignItems: 'center'}}>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
                 <Text
                   style={{
                     color: value.data.Category.BackgroundColor,
                     fontFamily: 'Rubik-Regular',
-                    fontSize: 13,
+                    fontSize: 13
                   }}>
                   {value.data.Category.Title}
                 </Text>
               </View>
-              <View style={{width: width/5, alignItems: 'center'}}>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
                 <Text
                   style={{
                     fontFamily: 'Rubik-Regular',
-                    fontSize: 13,
+                    fontSize: 13
                   }}>
                   ${value.data.CostMoney}
+                </Text>
+              </View>
+              <View style={{ width: width / 2, alignItems: 'center' }}>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.Description}
+                </Text>
+              </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.createdAt}
                 </Text>
               </View>
             </TouchableOpacity>
           )
         })}
       </View>
+    )
+  }
+
+  const renderFilterByDate = (value, index) => {
+    return (
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('FlagReport', {
+            data: value.data
+          })
+        }
+        activeOpacity={0.9}
+        key={index}
+        style={[
+          styles.tableHeader,
+          [
+            {
+              borderBottomWidth: 1,
+              borderColor: value.data.Category.BackgroundColor,
+              backgroundColor: value.data.Category.BackgroundColor + '14',
+              padding: 10
+            }
+          ]
+        ]}>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Medium',
+              fontSize: 13
+            }}>
+            {value?.data?.SuspectName.split(' ')
+              .map(n => n[0])
+              .join('')
+              .toUpperCase()}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.floor}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              color: value.data.Category.BackgroundColor,
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.Category.Title}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            ${value.data.CostMoney}
+          </Text>
+        </View>
+        <View style={{ width: width / 2, alignItems: 'center' }}>
+          <Text
+            numberOfLines={1}
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.Description}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.createdAt}
+          </Text>
+        </View>
+      </TouchableOpacity>
     )
   }
   return (
@@ -296,29 +291,40 @@ export const Reports = ({ navigation, route }) => {
               </View>
             </View>
 
-            <View style={styles.swapIcon}>
-              <Image source={Images.Pictures.swapIcon} />
-            </View>
+            <TouchableOpacity
+              onPress={() => setisFilter(!isFilter)}
+              style={styles.swapIcon}>
+              <Image source={Images.Pictures.swapIcon} style={{tintColor: isFilter ? 'red' : null}} />
+            </TouchableOpacity>
           </View>
 
           <View style={[styles.headerCol1, { paddingVertical: 0 }]}>
             <View>
-              <Text style={styles.headerRow2Text1}>Briggsillle, Arkansas</Text>
+              <Text style={styles.headerRow2Text1}>{address}</Text>
               <Text style={styles.headerRow2Text2}>
-                Updated: 2020-09-01, 5:24 PM
+                Updated: {!isFilter ? arr[0][0]?.data?.createdAt : arr[0]?.data?.createdAt}
               </Text>
             </View>
           </View>
         </LinearGradient>
 
-        <ScrollView>
-          <View>
-            <View style={styles.tableHeader}>
-              {['Initials', 'Floor', 'Category', 'Value'].map(
-                (value, index) => {
+        <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
+          <ScrollView horizontal={true}>
+            <View>
+              <View style={styles.tableHeader}>
+                {[
+                  'Initials',
+                  'Floor',
+                  'Category',
+                  'Value',
+                  'What happened',
+                  'date'
+                ].map((value, index) => {
                   return (
                     <>
-                      <View key={index} style={{ width: '27%' }}>
+                      <View
+                        key={index}
+                        style={{ width: index == 4 ? width / 2 : width / 4 }}>
                         <Text style={styles.th}>{value}</Text>
                       </View>
                       <View
@@ -331,28 +337,30 @@ export const Reports = ({ navigation, route }) => {
                       />
                     </>
                   )
-                }
+                })}
+              </View>
+              {!isFilter ? (
+                <View style={{ flex: 1 }}>
+                  {arr.map((value, index) => {
+                    return renderData(value, '#FEDFE3')
+                  })}
+                </View>
+              ) : (
+                <View>
+                  {arr.map((value, index) => {
+                    return renderFilterByDate(value, index)
+                  })}
+                </View>
               )}
             </View>
-            <View style={{ flex: 1 }}>
-                {arr.map((value, index) => {
-                    return(
-                        renderData(value, '#FEDFE3')
-                    )
-                })}
-              {/* {renderData(data.killing, '#DF070714', '#DF0707', '#FEDFE3')}
-              {renderData(data.snatching, '#211DE814', '#211DE8', '#CCCAF3')}
-              {renderData(data.kidnapping, '#CF00BA14', '#CF00BA', '#FAC4F3')} */}
-            </View>
-          </View>
+          </ScrollView>
         </ScrollView>
         <TouchableOpacity
           style={styles.showMoreBtn}
           activeOpacity={1}
           onPress={() => {
             navigation.goBack()
-          }}
-        >
+          }}>
           <Text
             style={{
               fontFamily: 'Rubik-Regular',
