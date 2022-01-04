@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   View,
   Text,
@@ -21,17 +21,20 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
-import { useDispatch } from 'react-redux'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
-import { SignInAction } from '../../stores/actions/user.action'
 import { Login_User } from '../../utils/queries'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LoginManager, Profile } from 'react-native-fbsdk-next'
+
+import LinkedInModal from 'react-native-linkedin'
+import { SOCIAL_LOGIN } from '../../utils/mutation'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const linkedRef = useRef(null)
   const loginUser = useQuery(Login_User, {
     variables: {
       email: email,
@@ -39,14 +42,15 @@ export const SignIn = ({ navigation }) => {
     }
   })
 
+  const [socialMediaLogin, {data, loading, error}] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
     if (email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error')
     } else {
-      console.log("loginUser?.data?.loginUser?", loginUser?.data?.loginUser)
+      console.log('loginUser?.data?.loginUser?', loginUser?.data?.loginUser)
       if (loginUser?.error) {
         ToastMessage('SignIn Error', 'Something went wrong', 'info')
-      } 
+      }
       if (loginUser?.data?.loginUser?.status) {
         let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
         AsyncStorage.setItem('userData', jsonData)
@@ -60,7 +64,7 @@ export const SignIn = ({ navigation }) => {
         })
         setEmail('')
         setPassword('')
-      }else {
+      } else {
         ToastMessage(
           'SignIn Error',
           loginUser?.data?.loginUser?.message,
@@ -68,6 +72,42 @@ export const SignIn = ({ navigation }) => {
         )
       }
     }
+  }
+
+  const fbLogin = () => {
+    // Attempt a login using the Facebook login dialog asking for default permissions.
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled')
+        } else {
+          
+          Profile.getCurrentProfile().then(
+            async function(currentProfile) {
+              if (currentProfile) {
+                await socialMediaLogin({variables:{
+                  providerId: currentProfile.userID,
+                  registrationType: 'facebook',
+                  name: currentProfile.name,
+                  email: currentProfile.email ? currentProfile.email : undefined
+                }})
+                AsyncStorage.setItem('userData', JSON.stringify(data))
+                ToastMessage(
+                  'User SignIn Successfully',
+                  data?.socialMediaLogin?.message,
+                  'success'
+                )
+                navigation.navigate('AppStackNavigator', {
+                  screen: 'Home'
+                })
+              }
+            })
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error)
+      }
+    )
   }
 
   return (
@@ -186,15 +226,29 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles.socialIconContainer}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.fbImg}>
+          <TouchableOpacity onPress={fbLogin} activeOpacity={0.7} style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
             <MaterialIcon name="twitter" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.InImg}>
-            <Icon name="linkedin" size={25} color="#fff" />
-          </TouchableOpacity>
+          <LinkedInModal
+            ref={linkedRef}
+            clientID="78dauvk4h579n4"
+            clientSecret="Z02I7Pk9v8Q9DSEo"
+            renderButton={() => {
+              return (
+                <TouchableOpacity
+                  onPress={() => linkedRef.current.open()}
+                  activeOpacity={0.7}
+                  style={styles.InImg}>
+                  <Icon name="linkedin" size={25} color="#fff" />
+                </TouchableOpacity>
+              )
+            }}
+            redirectUri="https://www.appstirr.com/"
+            onSuccess={token => console.log(token)}
+          />
         </View>
 
         <View
