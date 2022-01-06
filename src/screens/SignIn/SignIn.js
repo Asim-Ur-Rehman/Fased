@@ -28,12 +28,13 @@ import { LoginManager, Profile } from 'react-native-fbsdk-next'
 
 import LinkedInModal from 'react-native-linkedin'
 import { SOCIAL_LOGIN } from '../../utils/mutation'
+import { getApi } from '../../api/fakeApiUser'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const [loader, setLoader] = useState(false)
   const linkedRef = useRef(null)
   const loginUser = useQuery(Login_User, {
     variables: {
@@ -42,12 +43,14 @@ export const SignIn = ({ navigation }) => {
     }
   })
 
-  const [socialMediaLogin, {data, loading, error}] = useMutation(SOCIAL_LOGIN)
+  const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
+    setLoader(true)
     if (email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error')
+      setLoader(false)
     } else {
-      console.log('loginUser?.data?.loginUser?', loginUser?.data?.loginUser)
+      setLoader(false)
       if (loginUser?.error) {
         ToastMessage('SignIn Error', 'Something went wrong', 'info')
       }
@@ -81,33 +84,70 @@ export const SignIn = ({ navigation }) => {
         if (result.isCancelled) {
           console.log('Login cancelled')
         } else {
-          
-          Profile.getCurrentProfile().then(
-            async function(currentProfile) {
-              if (currentProfile) {
-                await socialMediaLogin({variables:{
+          Profile.getCurrentProfile().then(async function (currentProfile) {
+            if (currentProfile) {
+              await socialMediaLogin({
+                variables: {
                   providerId: currentProfile.userID,
                   registrationType: 'facebook',
                   name: currentProfile.name,
                   email: currentProfile.email ? currentProfile.email : undefined
-                }})
-                AsyncStorage.setItem('userData', JSON.stringify(data))
-                ToastMessage(
-                  'User SignIn Successfully',
-                  data?.socialMediaLogin?.message,
-                  'success'
-                )
-                navigation.navigate('AppStackNavigator', {
-                  screen: 'Home'
-                })
-              }
-            })
+                }
+              })
+              AsyncStorage.setItem('userData', JSON.stringify(data))
+              ToastMessage(
+                'User SignIn Successfully',
+                data?.socialMediaLogin?.message,
+                'success'
+              )
+              navigation.navigate('AppStackNavigator', {
+                screen: 'Home'
+              })
+            }
+          })
         }
       },
       function (error) {
         console.log('Login fail with error: ' + error)
       }
     )
+  }
+
+  const linkedLogin = async token => {
+    // Attempt a login using the LinkedIn login dialog asking for default permissions.
+    try {
+      const userData = await getApi(
+        'https://api.linkedin.com/v2/me',
+        '',
+        token.access_token
+      )
+      socialMediaLogin({
+        variables: {
+          providerId: userData?.data?.id,
+          registrationType: 'linikedin',
+          name:
+            userData?.data?.localizedFirstName +
+            userData?.data?.localizedLastName,
+          email: undefined
+        }
+      }).then(res => {
+        AsyncStorage.setItem(
+          'userData',
+          JSON.stringify(res?.data?.socialMediaLogin?.data)
+        )
+        ToastMessage(
+          'User SignIn Successfully',
+          res?.data?.socialMediaLogin?.message,
+          'success'
+        )
+        navigation.navigate('AppStackNavigator', {
+          screen: 'Home'
+        })
+      })
+    } catch (error) {
+      console.log('error', error)
+      ToastMessage('error', error, 'error')
+    }
   }
 
   return (
@@ -202,7 +242,7 @@ export const SignIn = ({ navigation }) => {
           style={{
             paddingVertical: 20
           }}>
-          {loginUser?.loading ? (
+          {loader ? (
             <ActivityIndicator size="large" color="#4A4C50" />
           ) : (
             <Button
@@ -226,7 +266,10 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles.socialIconContainer}>
-          <TouchableOpacity onPress={fbLogin} activeOpacity={0.7} style={styles.fbImg}>
+          <TouchableOpacity
+            onPress={fbLogin}
+            activeOpacity={0.7}
+            style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
@@ -247,7 +290,7 @@ export const SignIn = ({ navigation }) => {
               )
             }}
             redirectUri="https://www.appstirr.com/"
-            onSuccess={token => console.log(token)}
+            onSuccess={linkedLogin}
           />
         </View>
 

@@ -144,3 +144,11 @@ mutation SocialMediaLogin($providerId: String!, $registrationType: String!, $nam
     }
   }
 }`
+
+export const FLAG_REPORT = gql`
+mutation CreateFlagReport($userId: Int!, $reasonId: Int!, $reason: String!) {
+  CreateFlagReport(userId: $userId, reasonId: $reasonId, reason: $reason) {
+    status
+    message
+  }
+}`

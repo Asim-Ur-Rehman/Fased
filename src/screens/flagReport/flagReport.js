@@ -20,20 +20,25 @@ import { ScrollView } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/ScollBarComp'
-import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
-
+import { useMutation, useQuery } from '@apollo/client'
+import { FLAG_REPORT } from '../../utils/mutation'
+import { getUserData } from '../../utils/helper'
+import { GET_REASONS } from '../../utils/queries'
+import {CustomRadioButton} from '../../components/RadioButton/RadioButton'
 export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
-
+  const [others, setothers] = useState(false)
+  const [reason, setreason] = useState(null)
+  const flagReasons = useQuery(GET_REASONS)
+  const [reasons, setReasons] = useState(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
   const [data, setData] = useState(route.params?.data ? route.params?.data : [])
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
   }, [route.params])
-  console.log('data', data)
   const PROP = [
     {
       key: 'Button-1',
@@ -69,6 +74,49 @@ export const FlagReport = ({ navigation, route }) => {
     }
   ]
 
+
+  const [CreateFlagReport] = useMutation(FLAG_REPORT)
+  useEffect(() => {
+    getUserData().then(res => {
+      setUserData(res)
+    })
+    setReasons(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
+  }, [flagReasons?.data?.getFlagReasons?.data])
+
+  const [userData, setUserData] = useState(null)
+  const onDone = () => {
+    CreateFlagReport({
+      variables: others
+        ? {
+            userId: parseFloat(userData?.id),
+            reasonId: 0,
+            reason: text
+          }
+        : {
+            userId: parseFloat(userData?.id),
+            reasonId: reason.id,
+            reason: reason.reason
+          }
+    }).then((res) => {
+      console.log("res", res)
+      navigation.navigate('Home')
+    })
+    .catch(err => {
+      console.log("err", err, "err condition", others
+      ? {
+          userId: parseFloat(userData?.id),
+          reasonId: 0,
+          reason: text
+        }
+      : {
+          userId: parseFloat(userData?.id),
+          reasonId: reason.id,
+          reason: reason.reason
+        })
+    })
+  }
+
+  console.log("reason",reason)
   return (
     <View style={styles.mainContainer}>
       <StatusBar
@@ -264,7 +312,8 @@ export const FlagReport = ({ navigation, route }) => {
             // Alert.alert("Modal has been closed.");
             setModalVisible(!modalVisible)
           }}>
-          <View style={styles.centeredView}>
+          <View
+            style={styles.centeredView}>
             <View style={styles.modalView}>
               <LinearGradient
                 colors={['#fff', '#6C8CB210', '#fff']}
@@ -291,73 +340,89 @@ export const FlagReport = ({ navigation, route }) => {
                       color: '#DF0707',
                       marginTop: 10
                     }}>
-                    Killing
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontFamily: 'Rubik-Regular',
-                      marginTop: 6,
-                      textAlign: 'center',
-                      paddingHorizontal: 30
-                    }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Neque,
+                    {data.Category.Title}
                   </Text>
                 </View>
 
-                <View style={{ marginTop: 15 }}>
-                  <CustomScrollView
-                    ScrollBarStyle={{ width: 0 }}
-                    indicatorStyle={{
-                      backgroundColor: '#727070',
-                      borderRadius: 3,
-                      width: 3.5
-                    }}
-                    scrollContainer={{
-                      height: 260
-                      // width:"100%",
-                    }}
-                    contentContainerStyle={{ paddingBottom: 0 }}>
-                    <CustomRadioButton PROP={PROP} />
-                  </CustomScrollView>
-                </View>
-
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#fff',
-                    width: '100%',
-                    alignSelf: 'center',
-                    height: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}>
-                  <Text
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 11,
-                      color: '#8e8e93',
-                      fontFamily: 'Rubik-Medium'
-                    }}>
-                    Others
-                  </Text>
-                  <View>
-                    <Icon
-                      name="chevron-down"
-                      color="#8e8e93"
-                      size={18}
-                      style={{ marginLeft: 6 }}
-                    />
+                {!others ? (
+                  <View style={{ marginTop: 15 }}>
+                    <CustomScrollView
+                      ScrollBarStyle={{ width: 0 }}
+                      indicatorStyle={{
+                        backgroundColor: '#727070',
+                        borderRadius: 3,
+                        width: 3.5
+                      }}
+                      scrollContainer={{
+                        height: 260
+                        // width:"100%",
+                      }}
+                      contentContainerStyle={{ paddingBottom: 0 }}>
+                      <View style={{width: '100%'}}>
+                        <CustomRadioButton PROP={reasons} onChange={e => setreason(e)} />
+                      </View>
+                    </CustomScrollView>
                   </View>
-                </TouchableOpacity>
+                ) : (
+                  <TextInput
+                    style={styles.textArea}
+                    underlineColorAndroid="transparent"
+                    placeholder="Tell us the reason"
+                    placeholderTextColor="#8F9BBA"
+                    numberOfLines={10}
+                    multiline={true}
+                    selectionColor="#a9a9a990"
+                    textAlignVertical="top"
+                    maxLength={1000}
+                    blurOnSubmit
+                    returnKeyType="done"
+                    onChangeText={e => {
+                      setText(e)
+                    }}
+                    // onSubmitEditing={() => {
+                    //   navigation.navigate('ReportingDone')
+                    // }}
+                  />
+                )}
+
+                {!others && (
+                  <TouchableOpacity
+                    onPress={() => setothers(!others)}
+                    activeOpacity={0.7}
+                    style={{
+                      flexDirection: 'row',
+                      backgroundColor: '#fff',
+                      width: '100%',
+                      alignSelf: 'center',
+                      height: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}>
+                    <Text
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 11,
+                        color: '#8e8e93',
+                        fontFamily: 'Rubik-Medium'
+                      }}>
+                      Others
+                    </Text>
+                    <View>
+                      <Icon
+                        name="chevron-down"
+                        color="#8e8e93"
+                        size={18}
+                        style={{ marginLeft: 6 }}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                )}
               </LinearGradient>
               <View>
                 <Button
                   onPress={() => {
                     // setModalVisible(!modalVisible)
-                    navigation.navigate('Home')
+                    onDone()
                   }}
                   buttonStyle={{
                     alignSelf: 'center',
@@ -464,5 +529,17 @@ const styles = StyleSheet.create({
     // marginVertical: 10,
     lineHeight: 15,
     letterSpacing: 0.8
+  },
+  textArea: {
+    height: 250,
+    fontSize: 13,
+    lineHeight: 30,
+    textAlign: 'justify',
+    fontFamily: 'Rubik-Regular',
+    borderRadius: 12,
+    backgroundColor: '#F4F7FC',
+    padding: 15,
+    color: 'black',
+    width: '100%'
   }
 })
