@@ -28,6 +28,7 @@ import { useDispatch } from 'react-redux'
 import { ReportIncidentLocationFloorData } from '../../stores/actions/user.action'
 import { renderSearchLocation } from './locationModal'
 import Geolocation from '@react-native-community/geolocation'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const ReportIncident = ({ navigation }) => {
   const [location, setLocation] = useState({
@@ -92,7 +93,11 @@ export const ReportIncident = ({ navigation }) => {
       floor: floor ? floor : '0'
     }
     console.log('data ', data)
-    dispatch(ReportIncidentLocationFloorData(data, navigation))
+    if(floor || enabled) {
+      dispatch(ReportIncidentLocationFloorData(data, navigation))
+    }else {
+      ToastMessage('error',"Floor field should'nt be null", "error" )
+    }
   }
 
   const onDone = e => {
@@ -125,7 +130,7 @@ export const ReportIncident = ({ navigation }) => {
           />
           <Text style={styles.reportTextStyle}>Report Incident</Text>
         </View>
-        <Text style={styles.dateTextStyle}>01 - 03</Text>
+        {/* <Text style={styles.dateTextStyle}>01 - 03</Text> */}
       </View>
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
         {/* <ScrollView
@@ -217,7 +222,7 @@ export const ReportIncident = ({ navigation }) => {
             </View>
             <View style={styles.textAndToggleViewStyle2}>
               <Text style={styles.footerRowTextStyle}>Floor</Text>
-              <TextInput
+              {!enabled ? <TextInput
                 editable={enabled ? false : true}
                 placeholder="11th"
                 placeholderTextColor={theme.textColor.placeholderColor}
@@ -236,7 +241,7 @@ export const ReportIncident = ({ navigation }) => {
                   fontFamily: 'Rubik-Regular',
                   color: 'black'
                 }}
-              />
+              /> : <Text>Ground floor</Text>}
             </View>
           </View>
           <View style={{ marginVertical: 10 }}>

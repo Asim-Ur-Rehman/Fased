@@ -17,7 +17,6 @@ import {
 import { persistCache } from 'apollo3-cache-persist'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Settings } from 'react-native-fbsdk-next';
-
 // const cache = new InMemoryCache()
 
 const client = new ApolloClient({

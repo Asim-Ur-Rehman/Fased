@@ -18,7 +18,8 @@
   <string>73090ba4737229b9c0928f12e8fe84a3</string>
   <key>FacebookDisplayName</key>
   <string>Fased App</string>
-  
+  <key>GADApplicationIdentifier</key>
+  <string>ca-app-pub-3546267366417804~8673981225</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

@@ -55,78 +55,82 @@ export const ReportIncidentC = ({ navigation }) => {
 
   const next = () => {
     // this if check when user doses not select subCategor then we does not send subCategory integer in query
-    if (reportIncidentAllData?.subcategory == '0') {
-      CreateReportWithoutSubCat({
-        variables: {
-          userId: parseInt(userId),
-          categoryId: reportIncidentAllData?.category,
-          latitude: reportIncidentLocationFloorData?.latitude,
-          longitude: reportIncidentLocationFloorData?.longitude,
-          suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(reportIncidentAllData?.amount),
-          incidentDate: reportIncidentAllData?.date,
-          incidentTime: reportIncidentAllData?.time,
-          description: text,
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
-        }
-      })
-        .then(data => {
-          if (data?.data?.CreateReport?.status) {
-            ToastMessage(
-              'Report Create Successfully',
-              data?.data?.CreateReport?.message,
-              'success'
-            )
-            navigation.navigate('ReportingDone')
-          } else {
-            ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
+    if(text.length > 0) {
+      if (reportIncidentAllData?.subcategory == '0') {
+        CreateReportWithoutSubCat({
+          variables: {
+            userId: parseInt(userId),
+            categoryId: reportIncidentAllData?.category,
+            latitude: reportIncidentLocationFloorData?.latitude,
+            longitude: reportIncidentLocationFloorData?.longitude,
+            suspectName: reportIncidentAllData?.suspectName,
+            costMoney: parseInt(reportIncidentAllData?.amount),
+            incidentDate: reportIncidentAllData?.date,
+            incidentTime: reportIncidentAllData?.time,
+            description: text,
+            floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
-        .catch(error => {
-          console.log('error', error)
-          if (error) {
-            ToastMessage('Error', 'Something went wrong', 'error')
-          } else {
-            ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
+          .then(data => {
+            if (data?.data?.CreateReport?.status) {
+              ToastMessage(
+                'Report Create Successfully',
+                data?.data?.CreateReport?.message,
+                'success'
+              )
+              navigation.navigate('ReportingDone')
+            } else {
+              ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
+            }
+          })
+          .catch(error => {
+            console.log('error', error)
+            if (error) {
+              ToastMessage('Error', 'Something went wrong', 'error')
+            } else {
+              ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
+            }
+          })
+      } else {
+        CreateReport({
+          variables: {
+            userId: parseInt(userId),
+            categoryId: reportIncidentAllData?.category,
+            subCategory: reportIncidentAllData?.subcategory,
+            latitude: reportIncidentLocationFloorData?.latitude,
+            longitude: reportIncidentLocationFloorData?.longitude,
+            suspectName: reportIncidentAllData?.suspectName,
+            costMoney: parseInt(reportIncidentAllData?.amount),
+            incidentDate: reportIncidentAllData?.date,
+            incidentTime: reportIncidentAllData?.time,
+            description: text,
+            floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
-    } else {
-      CreateReport({
-        variables: {
-          userId: parseInt(userId),
-          categoryId: reportIncidentAllData?.category,
-          subCategory: reportIncidentAllData?.subcategory,
-          latitude: reportIncidentLocationFloorData?.latitude,
-          longitude: reportIncidentLocationFloorData?.longitude,
-          suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(reportIncidentAllData?.amount),
-          incidentDate: reportIncidentAllData?.date,
-          incidentTime: reportIncidentAllData?.time,
-          description: text,
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
-        }
-      })
-        .then(data => {
-          // console.log('data return', data)
-          if (data?.data?.CreateReport?.status) {
-            ToastMessage(
-              'Report Create Successfully',
-              data?.data?.CreateReport?.message,
-              'success'
-            )
-            navigation.navigate('ReportingDone')
-          } else {
-            ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
-          }
-        })
-        .catch(error => {
-          console.log('error', error)
-          if (error) {
-            ToastMessage('Error', 'Something went wrong', 'error')
-          } else {
-            ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
-          }
-        })
+          .then(data => {
+            // console.log('data return', data)
+            if (data?.data?.CreateReport?.status) {
+              ToastMessage(
+                'Report Create Successfully',
+                data?.data?.CreateReport?.message,
+                'success'
+              )
+              navigation.navigate('ReportingDone')
+            } else {
+              ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
+            }
+          })
+          .catch(error => {
+            console.log('error', error)
+            if (error) {
+              ToastMessage('Error', 'Something went wrong', 'error')
+            } else {
+              ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
+            }
+          })
+      }
+    }else {
+      ToastMessage('error', "Description field should'nt be empty", 'error')
     }
   }
   return (

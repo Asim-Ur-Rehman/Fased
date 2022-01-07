@@ -29,10 +29,13 @@ import {
 import { useSelector } from 'react-redux'
 import { distance, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation';
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob';
+import { useIsFocused } from '@react-navigation/native'
 
 let reportsData = []
 
-export const Home = ({ navigation, route }) => {
+export const Home = (props) => {
+  const { navigation, route, state } = props
   const [selected, setSelected] = useState(
     route.params?.selected ? route.params?.selected : []
   )
@@ -75,6 +78,11 @@ export const Home = ({ navigation, route }) => {
   }
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
+  const isFocused = useIsFocused()
+  useEffect(() => {
+    console.log("allReports.refetch()", isFocused)
+  }, [isFocused])
+  
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
@@ -374,10 +382,16 @@ export const Home = ({ navigation, route }) => {
       </View>
 
       <View>
-        <Image
+      <BannerAd
+      style={{width: '100%'}}
+        size={BannerAdSize.FULL_BANNER}
+        unitId={TestIds.BANNER}
+        // ref={bannerRef}
+      />
+        {/* <Image
           style={{ height: 61, width: '100%' }}
           source={Images.Pictures.demo}
-        />
+        /> */}
       </View>
     </View>
   )

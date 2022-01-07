@@ -106,7 +106,7 @@ export const FlagReport = ({ navigation, route }) => {
       ? {
           userId: parseFloat(userData?.id),
           reasonId: 0,
-          reason: text
+          reason: text 
         }
       : {
           userId: parseFloat(userData?.id),
