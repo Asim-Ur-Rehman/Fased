@@ -6,9 +6,10 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  StatusBar,
+  BackHandler,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -36,6 +37,7 @@ let reportsData = []
 
 export const Home = (props) => {
   const { navigation, route, state } = props
+  const [forUpdate, setUpdate] = useState(false)
   const [selected, setSelected] = useState(
     route.params?.selected ? route.params?.selected : []
   )
@@ -46,6 +48,32 @@ export const Home = (props) => {
 
   const { data, loading, error } = useQuery(Get_Categories)
   const News = useQuery(Get_News)
+  // const isFocuesd = useIsFocused()
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  const backAction = () => {
+    if(navigation.isFocused()) {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    }else {
+      return false
+    }
+  };
+
 
   if (selected.length > 0) {
     const results = data?.getCategories?.data.filter(
@@ -63,7 +91,9 @@ export const Home = (props) => {
     })
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
-    reportsData = useQuery(Get_Reports)?.data?.getReports?.data
+    const query = useQuery(Get_Reports)
+    query.refetch();
+    reportsData = query?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
 
@@ -80,7 +110,7 @@ export const Home = (props) => {
   const isGuest = useSelector(state => state.userReducer.isGuest)
   const isFocused = useIsFocused()
   useEffect(() => {
-    console.log("allReports.refetch()", isFocused)
+    setUpdate(!forUpdate)
   }, [isFocused])
   
   useEffect(() => {

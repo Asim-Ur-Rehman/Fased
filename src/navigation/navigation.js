@@ -29,6 +29,7 @@ import { CustomDrawer } from './CustomDrawer/CustomDrawer'
 import { FlagReport } from '../screens/flagReport/flagReport'
 import { NewsCard } from '../screens/News/NewsCard'
 import { NewsDetails } from '../screens/News/NewsDetails'
+import { AboutUs } from '../screens/AboutUs';
 
 
 
@@ -57,6 +58,7 @@ function MyDrawer() {
       drawerType="front">
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Categories" component={Categories} />
+      <Drawer.Screen name="AboutUs" component={AboutUs} />
       <Drawer.Screen name="Calender" component={Calender} />
 
 
@@ -126,11 +128,8 @@ const MainNavigation = () => {
     <NavigationContainer theme={{ ...DefaultTheme, colors: { background: "#fff" } }}>
 
       <Stack.Navigator screenOptions={{ headerShown: false }}
-
       // initialRouteName={Object.keys(state.userData).length > 0 ? 'AppStackNavigator' : 'AuthStackNavigator'}
-
       >
-
         <Stack.Screen
           name="AuthStackNavigator"
           options={{ headerShown: false }}

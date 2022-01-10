@@ -29,6 +29,7 @@ import {
 import { getUserData } from '../../utils/helper'
 import { useIsFocused } from '@react-navigation/native'
 import moment from 'moment'
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 export const NewsCard = ({ navigation }) => {
   const [userData, setUserData] = useState(null)
 
@@ -179,7 +180,6 @@ export const NewsCard = ({ navigation }) => {
     }
   }
 
-  console.log('CatNews', CatNews, OldNews.data?.getNews?.data)
   const renderContent = () => {
     if (activetab == 'old') {
       return (
@@ -228,22 +228,25 @@ export const NewsCard = ({ navigation }) => {
       for (var title in CatNews) {
         arr.push(CatNews[title].data)
       }
-      return(
-        arr.map((val, ind) => {
-          return (
-            <View>
-            <Text style={[styles.textStyle1, {paddingHorizontal: 25, paddingBottom: 10, fontSize: 20}]}>{val[0].CategoryName}</Text>
-              <FlatList
-                data={val}
-                renderItem={({ item, index }) => {
-                  return newsCard(item, index)
-                }}
-              />
-            </View>
-          )
-        })
-      )
-  
+      return arr.map((val, ind) => {
+        return (
+          <View>
+            <Text
+              style={[
+                styles.textStyle1,
+                { paddingHorizontal: 25, paddingBottom: 10, fontSize: 20 }
+              ]}>
+              {val[0].CategoryName}
+            </Text>
+            <FlatList
+              data={val}
+              renderItem={({ item, index }) => {
+                return newsCard(item, index)
+              }}
+            />
+          </View>
+        )
+      })
     }
   }
 
@@ -388,10 +391,16 @@ export const NewsCard = ({ navigation }) => {
       </ScrollView>
 
       <View>
-        <Image
+        <BannerAd
+          style={{ width: '100%' }}
+          size={BannerAdSize.FULL_BANNER}
+          unitId={TestIds.BANNER}
+          // ref={bannerRef}
+        />
+        {/* <Image
           style={{ height: 61, width: '100%' }}
           source={Images.Pictures.demo}
-        />
+        /> */}
       </View>
     </View>
   )

@@ -21,7 +21,6 @@ import {
   useMutation
 } from '@apollo/client'
 export const SignUpAction = (userData, navigation) => {
-  console.log('data sign up', userData)
 
   // const [addUser, { data, loading, error }] = useMutation(Add_User);
   // addUser({
@@ -50,7 +49,6 @@ export const SignUpAction = (userData, navigation) => {
   }
 }
 export const SignInAction = (data, navigation) => {
-  console.log('data sign in', data)
   return dispatch => {
     dispatch({ type: LOGIN })
 
@@ -62,7 +60,6 @@ export const SignInAction = (data, navigation) => {
 }
 
 export const ForgotPasswordAction = (data, navigation) => {
-  console.log('data forgot pass', data)
   return dispatch => {
     dispatch({ type: FORGOT_PASSWORD })
     navigation.navigate('ChangePassword')
@@ -73,7 +70,6 @@ export const ForgotPasswordAction = (data, navigation) => {
   }
 }
 export const ChangePasswordAction = (data, navigation) => {
-  console.log('data forgot pass', data)
   return dispatch => {
     dispatch({ type: CHANGE_PASSWORD })
     navigation.navigate('SignIn')

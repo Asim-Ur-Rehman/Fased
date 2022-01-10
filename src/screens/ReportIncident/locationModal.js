@@ -49,7 +49,6 @@ export const renderSearchLocation = (visible, toggleModal) => {
             predefinedPlacesAlwaysVisible={true}
             autoFocus={true}
             onPress={(data, details = null) => {
-              console.log('onPressonPress', details)
               toggleModal({
                 latitude: details?.geometry?.location?.lat,
                 longitude: details?.geometry?.location?.lng

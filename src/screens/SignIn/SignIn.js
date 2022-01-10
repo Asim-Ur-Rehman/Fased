@@ -86,7 +86,7 @@ export const SignIn = ({ navigation }) => {
         } else {
           Profile.getCurrentProfile().then(async function (currentProfile) {
             if (currentProfile) {
-              await socialMediaLogin({
+               socialMediaLogin({
                 variables: {
                   providerId: currentProfile.userID,
                   registrationType: 'facebook',
@@ -94,14 +94,16 @@ export const SignIn = ({ navigation }) => {
                   email: currentProfile.email ? currentProfile.email : undefined
                 }
               })
-              AsyncStorage.setItem('userData', JSON.stringify(data))
-              ToastMessage(
-                'User SignIn Successfully',
-                data?.socialMediaLogin?.message,
-                'success'
-              )
-              navigation.navigate('AppStackNavigator', {
-                screen: 'Home'
+              .then((res) => {
+                AsyncStorage.setItem('userData', JSON.stringify(res?.data?.socialMediaLogin?.data))
+                ToastMessage(
+                  'User SignIn Successfully',
+                  res?.data?.socialMediaLogin?.data,
+                  'success'
+                )
+                navigation.navigate('AppStackNavigator', {
+                  screen: 'Home'
+                })
               })
             }
           })
@@ -282,7 +284,9 @@ export const SignIn = ({ navigation }) => {
             renderButton={() => {
               return (
                 <TouchableOpacity
-                  onPress={() => linkedRef.current.open()}
+                  onPress={() => {
+                    // linkedRef.current.open()
+                  }}
                   activeOpacity={0.7}
                   style={styles.InImg}>
                   <Icon name="linkedin" size={25} color="#fff" />

@@ -24,8 +24,8 @@ export const CustomDrawer = ({ navigation }) => {
       navigateTo: 'Home'
     },
     {
-      title: 'About Us'
-      //   navigateTo: 'AboutUs'
+      title: 'About Us',
+      navigateTo: 'AboutUs'
     },
     {
       title: 'Settings'

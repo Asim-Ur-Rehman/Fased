@@ -47,7 +47,6 @@ export const ReportIncident = ({ navigation }) => {
   const onSelectSwitch = index => {
     if (index == 2) {
       setEnabled(true)
-      console.log('inbdex ', index)
     } else {
       setEnabled(false)
     }
@@ -82,7 +81,6 @@ export const ReportIncident = ({ navigation }) => {
   const onRegionChange = region => {
     setinitialRegion(region)
 
-    console.log('locations onRegionChange', region)
     // set
   }
 
@@ -92,7 +90,6 @@ export const ReportIncident = ({ navigation }) => {
       longitude: initialRegion.longitude,
       floor: floor ? floor : '0'
     }
-    console.log('data ', data)
     if(floor || enabled) {
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     }else {

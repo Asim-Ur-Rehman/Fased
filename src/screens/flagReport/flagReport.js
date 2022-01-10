@@ -98,7 +98,6 @@ export const FlagReport = ({ navigation, route }) => {
             reason: reason.reason
           }
     }).then((res) => {
-      console.log("res", res)
       navigation.navigate('Home')
     })
     .catch(err => {
@@ -116,7 +115,6 @@ export const FlagReport = ({ navigation, route }) => {
     })
   }
 
-  console.log("reason",reason)
   return (
     <View style={styles.mainContainer}>
       <StatusBar
