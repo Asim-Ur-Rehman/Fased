@@ -7,7 +7,8 @@ import {
   FORGOT_PASSWORD,
   CHANGE_PASSWORD,
   REPORT_INCIDENT_LOCATION_FLOOR_DATA,
-  REPORT_INCIDENT_ALL_DATA
+  REPORT_INCIDENT_ALL_DATA,
+  CONT_AS_GUEST
 } from './actionType'
 import { Login_User } from '../../utils/queries'
 import { Add_User } from '../../utils/mutation'
@@ -53,9 +54,9 @@ export const SignInAction = (data, navigation) => {
     dispatch({ type: LOGIN })
 
     dispatch({ type: LOGIN_SUCCESS, payload: data })
-    navigation.navigate('AppStackNavigator', {
-      screen: 'Home'
-    })
+    // navigation.navigate('AppStackNavigator', {
+    //   screen: 'Home'
+    // })
   }
 }
 
@@ -103,5 +104,11 @@ export const ReportIncidentAllData = (data, navigation) => {
     // navigation.navigate('AppStackNavigator', {
     //   screen: 'Home',
     // })
+  }
+}
+
+export const continueAsGuest = () => {
+  return dispatch => {
+    dispatch({ type: CONT_AS_GUEST})
   }
 }

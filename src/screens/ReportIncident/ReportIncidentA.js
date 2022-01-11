@@ -177,7 +177,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
       subcategory: subcategory ? subcategory[0].id : 0,
       date: moment(date).format('YYYY-MM-DD'),
       time: currentTime,
-      suspectName: suspectName ? suspectName : 'Anonymouse',
+      suspectName: suspectName ? suspectName : 'Anonymous',
       amount: amount ? amount : '0'
 
 

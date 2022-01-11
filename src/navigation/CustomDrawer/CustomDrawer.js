@@ -31,14 +31,14 @@ export const CustomDrawer = ({ navigation }) => {
       title: 'Settings'
       // navigateTo: 'Setting'
     },
-    // {
-    //   title: isGuest ? 'SignUp' : 'Logout',
-    //   navigateTo: isGuest ? 'SignUp' : 'SignIn'
-    // },
     {
-      title: 'Logout'
-      // navigateTo: 'SignIn'
-    }
+      title: isGuest ? 'SignUp' : 'Logout',
+      navigateTo: isGuest ? 'SignUp' : 'SignIn'
+    },
+    // {
+    //   title: 'Logout'
+    //   // navigateTo: 'SignIn'
+    // }
   ]
   const removeUser = async () => {
     try {

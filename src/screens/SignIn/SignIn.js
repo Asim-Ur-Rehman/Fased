@@ -29,6 +29,8 @@ import { LoginManager, Profile } from 'react-native-fbsdk-next'
 import LinkedInModal from 'react-native-linkedin'
 import { SOCIAL_LOGIN } from '../../utils/mutation'
 import { getApi } from '../../api/fakeApiUser'
+import { useDispatch } from 'react-redux'
+import { SignInAction } from '../../stores/actions/user.action'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
@@ -42,7 +44,7 @@ export const SignIn = ({ navigation }) => {
       password: password
     }
   })
-
+  const dispatch = useDispatch()
   const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
     setLoader(true)
@@ -62,6 +64,7 @@ export const SignIn = ({ navigation }) => {
           loginUser?.data?.loginUser?.message,
           'success'
         )
+        dispatch(SignInAction(loginUser?.data?.loginUser?.data))
         navigation.navigate('AppStackNavigator', {
           screen: 'Home'
         })
@@ -96,6 +99,7 @@ export const SignIn = ({ navigation }) => {
               })
               .then((res) => {
                 AsyncStorage.setItem('userData', JSON.stringify(res?.data?.socialMediaLogin?.data))
+                dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
                 ToastMessage(
                   'User SignIn Successfully',
                   res?.data?.socialMediaLogin?.data,
@@ -137,6 +141,7 @@ export const SignIn = ({ navigation }) => {
           'userData',
           JSON.stringify(res?.data?.socialMediaLogin?.data)
         )
+        dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
         ToastMessage(
           'User SignIn Successfully',
           res?.data?.socialMediaLogin?.message,

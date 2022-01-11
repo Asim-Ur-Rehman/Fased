@@ -402,7 +402,14 @@ export const Home = (props) => {
             title="Report"
             onPress={() => {
               if (isGuest) {
-                navigation.navigate('SignUp')
+                Alert.alert("Alert", "You have to Sign Up for this action", [
+                  {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                  },
+                  { text: "Ok", onPress: () => navigation.navigate('SignUp') }
+                ]);
               } else {
                 navigation.navigate('ReportIncident')
               }

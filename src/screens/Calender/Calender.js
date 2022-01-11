@@ -33,6 +33,12 @@ export const Calender = ({ navigation }) => {
       setSelectedEndDate(date)
     }
   }
+
+  const onReset = () => {
+    setSelectedStartDate()
+    setSelectedEndDate()
+    navigation.navigate('Home')
+  }
   const [toggle, setToggle] = useState()
   return (
     <View style={styles.container}>
@@ -119,7 +125,7 @@ export const Calender = ({ navigation }) => {
                   style={{ left: 280 }}
                   name="chevron-left"
                   size={28}
-                  color="#760404"
+                  // color="#760404"
                 />
               }
               previousContainer
@@ -150,7 +156,7 @@ export const Calender = ({ navigation }) => {
           justifyContent: 'space-evenly',
           paddingVertical: 20
         }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.btn1}>
+        <TouchableOpacity onPress={() => onReset()} style={styles.btn1}>
           <Text style={styles.reset}>Reset</Text>
         </TouchableOpacity>
         <TouchableOpacity

@@ -24,6 +24,7 @@ import { ADD_TO_FAV } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
+import { useSelector } from 'react-redux'
 
 
 export const NewsDetails = ({ navigation, route }) => {
@@ -116,6 +117,7 @@ export const NewsDetails = ({ navigation, route }) => {
     }
   };
 
+  const isGuest = useSelector(state => state.userReducer.isGuest)
   const isFav = favNew?.data?.getFavoriteByUserId?.data.find(val => val.News.id == newsData.id)
   return (
     <View style={styles.mainContainer}>
@@ -137,7 +139,20 @@ export const NewsDetails = ({ navigation, route }) => {
                   flexDirection: 'row',
                   marginTop: 20
           }}>
-        <TouchableOpacity onPress={() => addToFav()}>
+        <TouchableOpacity onPress={() => {
+          if(isGuest) {
+            Alert.alert("Alert", "You have to Sign Up for this action", [
+              {
+                text: "Cancel",
+                onPress: () => null,
+                style: "cancel"
+              },
+              { text: "Ok", onPress: () => navigation.navigate('SignUp') }
+            ]);
+          }else {
+            addToFav()
+          }
+        }}>
           <MaterialIcons name={isFav ? 'star' : 'star-outline'} size={20} color={'white'}  />
         </TouchableOpacity>
         <View>
