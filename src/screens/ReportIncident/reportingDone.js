@@ -23,7 +23,9 @@ export const ReportingDone = ({ navigation }) => {
             <View style={styles.btnStyle}>
                 <Button
                     title="Done"
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('Home', {
+                        reportSuccess: 'reportSuccess'
+                      })}
                 />
             </View>
 

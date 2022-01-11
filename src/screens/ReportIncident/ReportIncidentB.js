@@ -88,7 +88,6 @@ export const ReportIncidentB = ({ navigation, route }) => {
 
     }
 
-    console.log('select', route.params,)
     return (
         <View style={{
             flex: 1,
@@ -188,7 +187,6 @@ export const ReportIncidentB = ({ navigation, route }) => {
 
                                 if (select.length > 0) {
                                     let type = route.params?.type ? route.params?.type : 'category'
-                                    console.log('type', type)
                                     navigation.navigate('ReportIncidentA', { [type]: select, [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate })
                                 } else {
                                     ToastMessage('Error', 'Please select category', 'error');

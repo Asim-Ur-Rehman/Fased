@@ -4,6 +4,7 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 
 export const LOGIN = 'LOGIN';
+export const CONT_AS_GUEST = 'CONT_AS_GUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD'

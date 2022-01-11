@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -20,15 +20,25 @@ import { ScrollView } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { CustomScrollBarComponent } from '../../components/ScrollBarComponent/ScollBarComp'
-import CustomRadioButton from '../../components/RadioButton/RadioButton'
 import Icon from 'react-native-vector-icons/Feather'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
-
-export const FlagReport = ({ navigation }) => {
+import { useMutation, useQuery } from '@apollo/client'
+import { FLAG_REPORT } from '../../utils/mutation'
+import { getUserData } from '../../utils/helper'
+import { GET_REASONS } from '../../utils/queries'
+import {CustomRadioButton} from '../../components/RadioButton/RadioButton'
+export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
-
+  const [others, setothers] = useState(false)
+  const [reason, setreason] = useState(null)
+  const flagReasons = useQuery(GET_REASONS)
+  const [reasons, setReasons] = useState(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
+  const [data, setData] = useState(route.params?.data ? route.params?.data : [])
+  useEffect(() => {
+    setData(route.params?.data ? route.params?.data : [])
+  }, [route.params])
   const PROP = [
     {
       key: 'Button-1',
@@ -63,6 +73,47 @@ export const FlagReport = ({ navigation }) => {
       text: 'Default Sharing Selection'
     }
   ]
+
+
+  const [CreateFlagReport] = useMutation(FLAG_REPORT)
+  useEffect(() => {
+    getUserData().then(res => {
+      setUserData(res)
+    })
+    setReasons(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
+  }, [flagReasons?.data?.getFlagReasons?.data])
+
+  const [userData, setUserData] = useState(null)
+  const onDone = () => {
+    CreateFlagReport({
+      variables: others
+        ? {
+            userId: parseFloat(userData?.id),
+            reasonId: 0,
+            reason: text
+          }
+        : {
+            userId: parseFloat(userData?.id),
+            reasonId: reason.id,
+            reason: reason.reason
+          }
+    }).then((res) => {
+      navigation.navigate('Home')
+    })
+    .catch(err => {
+      console.log("err", err, "err condition", others
+      ? {
+          userId: parseFloat(userData?.id),
+          reasonId: 0,
+          reason: text 
+        }
+      : {
+          userId: parseFloat(userData?.id),
+          reasonId: reason.id,
+          reason: reason.reason
+        })
+    })
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -110,14 +161,14 @@ export const FlagReport = ({ navigation }) => {
             />
 
             <View>
-              <Text style={styles.headerLabel}>Pedro Pascal</Text>
+              <Text style={styles.headerLabel}>{data.SuspectName}</Text>
               <Text
                 style={{
                   fontSize: 13,
                   fontFamily: 'Rubik-Regular',
                   color: '#fff'
                 }}>
-                15,aug,2021
+                {data.createdAt}
               </Text>
             </View>
           </View>
@@ -132,9 +183,9 @@ export const FlagReport = ({ navigation }) => {
               name="options-vertical"
               color="#fff"
               size={18}
-            // onPress={() => {
-            //   navigation.goBack('')
-            // }}
+              // onPress={() => {
+              //   navigation.goBack('')
+              // }}
             />
           </View>
         </View>
@@ -149,7 +200,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            3rd floor
+            {data.floor} floor
           </Text>
         </View>
         <View style={styles.ImgView}>
@@ -161,7 +212,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            10:35 pm
+            {data.IncidentTime}
           </Text>
         </View>
         <View style={styles.ImgView}>
@@ -173,7 +224,7 @@ export const FlagReport = ({ navigation }) => {
               color: '#fff',
               marginTop: 6
             }}>
-            $500,00
+            ${data.CostMoney}
           </Text>
         </View>
       </View>
@@ -209,7 +260,7 @@ export const FlagReport = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: '#fff'
               }}>
-              Killing
+              {data.Category.Title}
             </Text>
             <Text
               style={{
@@ -223,87 +274,17 @@ export const FlagReport = ({ navigation }) => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
             </Text>
           </View>
-          <View style={{ height: height / 1.85 }}>
+          <View style={{ height: height / 1.82 }}>
             <CustomScrollView
-              contentContainerStyle={{ paddingBottom: 20, }}
+              contentContainerStyle={{ paddingBottom: 20 }}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
                 backgroundColor: '#DF0707',
                 borderRadius: 3,
-                width: 5,
-                marginTop: 5,
+                width: 5
               }}>
-
-              <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                sit justo vel in sapien ultrices id quam nam. Fames urna, tellus
-                aliquam sed mi.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-                semper venenatis. Adipiscing venenatis arcu a quis sit id
-                euismod nisl, purus.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
-
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus. Adipiscing venenatis arcu a quis sit id euismod nisl,
-                purus.
-              </Text>
-              <Text style={styles.ContentTextStyle}>
-                Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-                Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-                venenatis.
-              </Text>
+              <Text style={styles.ContentTextStyle}>{data.Description}</Text>
             </CustomScrollView>
-
-
-
           </View>
         </View>
 
@@ -321,7 +302,7 @@ export const FlagReport = ({ navigation }) => {
         </View>
 
         <Modal
-          animationType='fade'
+          animationType="fade"
           // onDismiss={() => setModalVisible(!modalVisible)}
           transparent={true}
           visible={modalVisible}
@@ -329,7 +310,8 @@ export const FlagReport = ({ navigation }) => {
             // Alert.alert("Modal has been closed.");
             setModalVisible(!modalVisible)
           }}>
-          <View style={styles.centeredView}>
+          <View
+            style={styles.centeredView}>
             <View style={styles.modalView}>
               <LinearGradient
                 colors={['#fff', '#6C8CB210', '#fff']}
@@ -356,73 +338,89 @@ export const FlagReport = ({ navigation }) => {
                       color: '#DF0707',
                       marginTop: 10
                     }}>
-                    Killing
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      fontFamily: 'Rubik-Regular',
-                      marginTop: 6,
-                      textAlign: 'center',
-                      paddingHorizontal: 30
-                    }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Neque,
+                    {data.Category.Title}
                   </Text>
                 </View>
 
-                <View style={{ marginTop: 15 }}>
-                  <CustomScrollView
-                    ScrollBarStyle={{ width: 0 }}
-                    indicatorStyle={{
-                      backgroundColor: '#727070',
-                      borderRadius: 3,
-                      width: 3.5
-                    }}
-                    scrollContainer={{
-                      height: 260
-                      // width:"100%",
-                    }}
-                    contentContainerStyle={{ paddingBottom: 0 }}>
-                    <CustomRadioButton PROP={PROP} />
-                  </CustomScrollView>
-                </View>
-
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#fff',
-                    width: '100%',
-                    alignSelf: 'center',
-                    height: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}>
-                  <Text
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 11,
-                      color: '#8e8e93',
-                      fontFamily: 'Rubik-Medium'
-                    }}>
-                    Others
-                  </Text>
-                  <View>
-                    <Icon
-                      name="chevron-down"
-                      color="#8e8e93"
-                      size={18}
-                      style={{ marginLeft: 6 }}
-                    />
+                {!others ? (
+                  <View style={{ marginTop: 15 }}>
+                    <CustomScrollView
+                      ScrollBarStyle={{ width: 0 }}
+                      indicatorStyle={{
+                        backgroundColor: '#727070',
+                        borderRadius: 3,
+                        width: 3.5
+                      }}
+                      scrollContainer={{
+                        height: 260
+                        // width:"100%",
+                      }}
+                      contentContainerStyle={{ paddingBottom: 0 }}>
+                      <View style={{width: '100%'}}>
+                        <CustomRadioButton PROP={reasons} onChange={e => setreason(e)} />
+                      </View>
+                    </CustomScrollView>
                   </View>
-                </TouchableOpacity>
+                ) : (
+                  <TextInput
+                    style={styles.textArea}
+                    underlineColorAndroid="transparent"
+                    placeholder="Tell us the reason"
+                    placeholderTextColor="#8F9BBA"
+                    numberOfLines={10}
+                    multiline={true}
+                    selectionColor="#a9a9a990"
+                    textAlignVertical="top"
+                    maxLength={1000}
+                    blurOnSubmit
+                    returnKeyType="done"
+                    onChangeText={e => {
+                      setText(e)
+                    }}
+                    // onSubmitEditing={() => {
+                    //   navigation.navigate('ReportingDone')
+                    // }}
+                  />
+                )}
+
+                {!others && (
+                  <TouchableOpacity
+                    onPress={() => setothers(!others)}
+                    activeOpacity={0.7}
+                    style={{
+                      flexDirection: 'row',
+                      backgroundColor: '#fff',
+                      width: '100%',
+                      alignSelf: 'center',
+                      height: 50,
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}>
+                    <Text
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 11,
+                        color: '#8e8e93',
+                        fontFamily: 'Rubik-Medium'
+                      }}>
+                      Others
+                    </Text>
+                    <View>
+                      <Icon
+                        name="chevron-down"
+                        color="#8e8e93"
+                        size={18}
+                        style={{ marginLeft: 6 }}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                )}
               </LinearGradient>
               <View>
                 <Button
                   onPress={() => {
                     // setModalVisible(!modalVisible)
-                    navigation.navigate('Home')
+                    onDone()
                   }}
                   buttonStyle={{
                     alignSelf: 'center',
@@ -454,7 +452,7 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     alignItems: 'center',
-    marginTop:30
+    marginTop: 30
   },
   headerLabel: {
     color: '#fff',
@@ -495,7 +493,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: '#fff',
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'center'
 
     // shadowColor: "#000",
     // shadowOffset: {
@@ -529,5 +527,17 @@ const styles = StyleSheet.create({
     // marginVertical: 10,
     lineHeight: 15,
     letterSpacing: 0.8
+  },
+  textArea: {
+    height: 250,
+    fontSize: 13,
+    lineHeight: 30,
+    textAlign: 'justify',
+    fontFamily: 'Rubik-Regular',
+    borderRadius: 12,
+    backgroundColor: '#F4F7FC',
+    padding: 15,
+    color: 'black',
+    width: '100%'
   }
 })

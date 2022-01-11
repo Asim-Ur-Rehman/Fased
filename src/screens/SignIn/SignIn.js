@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   View,
   Text,
@@ -21,71 +21,139 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icon from 'react-native-vector-icons/Fontisto'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
-import { useDispatch } from 'react-redux'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
-import { SignInAction } from '../../stores/actions/user.action'
 import { Login_User } from '../../utils/queries'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LoginManager, Profile } from 'react-native-fbsdk-next'
+
+import LinkedInModal from 'react-native-linkedin'
+import { SOCIAL_LOGIN } from '../../utils/mutation'
+import { getApi } from '../../api/fakeApiUser'
+import { useDispatch } from 'react-redux'
+import { SignInAction } from '../../stores/actions/user.action'
 
 export const SignIn = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  const [loginUser, { data, loading, error }] = useQuery(
-    Login_User({
-      variables: {
-        email: email,
-        password: password
-      }
-    })
-  )
-
+  const [loader, setLoader] = useState(false)
+  const linkedRef = useRef(null)
+  const loginUser = useQuery(Login_User, {
+    variables: {
+      email: email,
+      password: password
+    }
+  })
   const dispatch = useDispatch()
-
+  const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
+    setLoader(true)
     if (email == '' || password == '') {
       ToastMessage('Form Error', 'Please fill all fields', 'error')
+      setLoader(false)
     } else {
-      loginUser()
-        .then(data => {
-          console.log('data return', data.data.loginUser.data)
-          if (data?.data?.loginUser?.status) {
-            let userData = data?.data?.loginUser?.data
-            let jsonData = JSON.stringify(userData)
-            AsyncStorage.setItem('userData', jsonData)
-
-            ToastMessage(
-              'User SignIn Successfully',
-              data?.data?.loginUser?.message,
-              'success'
-            )
-
-            navigation.navigate('AppStackNavigator', {
-              screen: 'Home'
-            })
-            setEmail('')
-            setPassword('')
-          } else {
-            ToastMessage(
-              'SignIn Error',
-              data?.data?.loginUser?.message,
-              'error'
-            )
-          }
+      setLoader(false)
+      if (loginUser?.error) {
+        ToastMessage('SignIn Error', 'Something went wrong', 'info')
+      }
+      if (loginUser?.data?.loginUser?.status) {
+        let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
+        AsyncStorage.setItem('userData', jsonData)
+        ToastMessage(
+          'User SignIn Successfully',
+          loginUser?.data?.loginUser?.message,
+          'success'
+        )
+        dispatch(SignInAction(loginUser?.data?.loginUser?.data))
+        navigation.navigate('AppStackNavigator', {
+          screen: 'Home'
         })
-        .catch(error => {
-          console.log('error', error)
-          if (error) {
-            ToastMessage('SignIn Error', 'Something went wrong', 'info')
-          } else {
-            ToastMessage(
-              'SignIn Error',
-              error?.data?.loginUser?.message,
-              'error'
-            )
-          }
+        setEmail('')
+        setPassword('')
+      } else {
+        ToastMessage(
+          'SignIn Error',
+          loginUser?.data?.loginUser?.message,
+          'error'
+        )
+      }
+    }
+  }
+
+  const fbLogin = () => {
+    // Attempt a login using the Facebook login dialog asking for default permissions.
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.log('Login cancelled')
+        } else {
+          Profile.getCurrentProfile().then(async function (currentProfile) {
+            if (currentProfile) {
+               socialMediaLogin({
+                variables: {
+                  providerId: currentProfile.userID,
+                  registrationType: 'facebook',
+                  name: currentProfile.name,
+                  email: currentProfile.email ? currentProfile.email : undefined
+                }
+              })
+              .then((res) => {
+                AsyncStorage.setItem('userData', JSON.stringify(res?.data?.socialMediaLogin?.data))
+                dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
+                ToastMessage(
+                  'User SignIn Successfully',
+                  res?.data?.socialMediaLogin?.data,
+                  'success'
+                )
+                navigation.navigate('AppStackNavigator', {
+                  screen: 'Home'
+                })
+              })
+            }
+          })
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error)
+      }
+    )
+  }
+
+  const linkedLogin = async token => {
+    // Attempt a login using the LinkedIn login dialog asking for default permissions.
+    try {
+      const userData = await getApi(
+        'https://api.linkedin.com/v2/me',
+        '',
+        token.access_token
+      )
+      socialMediaLogin({
+        variables: {
+          providerId: userData?.data?.id,
+          registrationType: 'linikedin',
+          name:
+            userData?.data?.localizedFirstName +
+            userData?.data?.localizedLastName,
+          email: undefined
+        }
+      }).then(res => {
+        AsyncStorage.setItem(
+          'userData',
+          JSON.stringify(res?.data?.socialMediaLogin?.data)
+        )
+        dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
+        ToastMessage(
+          'User SignIn Successfully',
+          res?.data?.socialMediaLogin?.message,
+          'success'
+        )
+        navigation.navigate('AppStackNavigator', {
+          screen: 'Home'
         })
+      })
+    } catch (error) {
+      console.log('error', error)
+      ToastMessage('error', error, 'error')
     }
   }
 
@@ -181,7 +249,7 @@ export const SignIn = ({ navigation }) => {
           style={{
             paddingVertical: 20
           }}>
-          {loading ? (
+          {loader ? (
             <ActivityIndicator size="large" color="#4A4C50" />
           ) : (
             <Button
@@ -205,15 +273,34 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles.socialIconContainer}>
-          <TouchableOpacity activeOpacity={0.7} style={styles.fbImg}>
+          <TouchableOpacity
+            onPress={fbLogin}
+            activeOpacity={0.7}
+            style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
           <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
             <MaterialIcon name="twitter" size={28} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.InImg}>
-            <Icon name="linkedin" size={25} color="#fff" />
-          </TouchableOpacity>
+          <LinkedInModal
+            ref={linkedRef}
+            clientID="78dauvk4h579n4"
+            clientSecret="Z02I7Pk9v8Q9DSEo"
+            renderButton={() => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    // linkedRef.current.open()
+                  }}
+                  activeOpacity={0.7}
+                  style={styles.InImg}>
+                  <Icon name="linkedin" size={25} color="#fff" />
+                </TouchableOpacity>
+              )
+            }}
+            redirectUri="https://www.appstirr.com/"
+            onSuccess={linkedLogin}
+          />
         </View>
 
         <View

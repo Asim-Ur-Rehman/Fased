@@ -18,7 +18,7 @@ export const Languages = ({ navigation }) => {
         getUserData()
     }, [])
 
-    const getUserData = async () => {
+    const getUserData = async (e) => {
         let userData = await AsyncStorage.getItem('userData')
         let data = JSON.parse(userData)
         let checkForUser = data && Object.keys(data).length > 0
@@ -26,15 +26,9 @@ export const Languages = ({ navigation }) => {
         if (checkForUser) {
             navigation.navigate('AppStackNavigator')
         }
-
-        // navigation.navigate('AppStackNavigator')
-        // let data = JSON.parse(userData)
-        // console.log('userData in navigation', navigation)
-        // setState({
-        //   ...state, userData: data
-        // })
-
-
+        if(e && !checkForUser){
+            navigation.navigate('SignIn')
+        }
     }
 
     const Buttons = [{
@@ -95,7 +89,7 @@ export const Languages = ({ navigation }) => {
                             }}>
                             <Button
                                 onPress={() => {
-                                    navigation.navigate('SignIn')
+                                    getUserData("click")
                                 }}
                                 linearColor1={i == 1 ? '#FE0000' : '#9CA3AF'}
                                 linearColor2={i == 1 ? '#680000' : '#4A4C50'}

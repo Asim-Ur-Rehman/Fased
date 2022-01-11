@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-export default class CustomRadioButton extends Component {
-  state = {
-    value: null
-  }
+export const CustomRadioButton = ({
+  PROP = [],
+  onChange = (e) => {}
+}) => {
 
-  render() {
-    const { PROP } = this.props
-    const { value } = this.state
+  const [value, setValue] = useState(null)
+
+
 
     return (
       <View
@@ -32,53 +32,53 @@ export default class CustomRadioButton extends Component {
                   shadowColor: 'blue'
                 }}
                 onPress={() => {
-                  this.setState({
-                    value: res.key
-                  })
+                  setValue(res.id)
+                  onChange(res)
                 }}>
                 <View style={[styles.rbStyle]}>
                   <LinearGradient
                     colors={
-                      value === res.key
+                      value === res.id
                         ? ['#680000', '#FE0000']
                         : ['#8e8e93', '#8e8e93']
                     }
                     start={{ x: 1, y: 1 }}
                     end={{ x: 0.1, y: 1 }}
                     style={
-                      value === res.key ? styles.selected : styles.unSelected
+                      value === res.id ? styles.selected : styles.unSelected
                     }>
-                    {value === res.key && (
+                    {value === res.id && (
                       <View>
                         <View style={styles.selected1} />
                       </View>
                     )}
                   </LinearGradient>
                 </View>
-                <Text style={styles.textStyle}>{res.text}</Text>
+                <Text style={styles.textStyle}>{res.reason}</Text>
               </TouchableOpacity>
             </View>
           )
         })}
-              {/* <Text> Selected values: {this.state.value}</Text>  */}
       </View>
     )
   }
-}
+
 
 const styles = StyleSheet.create({
   rbWrapper: {
     marginBottom: 15,
-    alignItems: 'center',
+    // alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
-    // backgroundColor:"#68000050"
+    // justifyContent: 'center',
+    width: '100%',
+    backgroundColor:"#68000050"
   },
   textStyle: {
     marginLeft: 15,
     fontSize: 11,
     color: '#8e8e93',
     fontFamily:"Rubik-Medium",
+    width: '60%'
   },
   rbStyle: {
     height: 18,

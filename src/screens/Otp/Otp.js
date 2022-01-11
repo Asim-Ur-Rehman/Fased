@@ -25,7 +25,6 @@ import { Verify_Otp, Forgot_Password } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
 export const Otp = ({ navigation, route }) => {
     const emailFromParam = route?.params?.emailFromParam
-    console.log('emailFromParam', emailFromParam)
     const [buttonClick, setButtonClicked] = useState(false);
     const [timer, setTimer] = useState(120)
     const dispatch = useDispatch()
@@ -33,7 +32,6 @@ export const Otp = ({ navigation, route }) => {
     const [OtpVerify_Email, { data, loading, error }] = useMutation(Verify_Otp);
     const [forgotPassword, { data1, loading1, error1 }] = useMutation(Forgot_Password);
     const Submit = async (otp) => {
-        console.log('otp code ', otp)
 
         OtpVerify_Email({
             variables: {
@@ -41,7 +39,6 @@ export const Otp = ({ navigation, route }) => {
                 email: emailFromParam
             }
         }).then((data) => {
-            console.log('data return', data.data.OtpVerify_Email.status)
             if (data.data.OtpVerify_Email.status) {
 
 
@@ -119,7 +116,6 @@ export const Otp = ({ navigation, route }) => {
 
             }
         }).then((data) => {
-            console.log('data return', data.data.forgotPassword.status)
             if (data.data.forgotPassword.status) {
 
 

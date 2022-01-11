@@ -13,6 +13,20 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		638C22C1E6C3468F2C3949FF /* libPods-Fased-FasedTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5F311048191ABD41F9B545 /* libPods-Fased-FasedTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8479DE802779D33A00EEB415 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409D02744EF9C00592F21 /* Rubik-Bold.ttf */; };
+		8479DE812779D33A00EEB415 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BD2744EB8600592F21 /* Inter-Bold.ttf */; };
+		8479DE822779D33A00EEB415 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BA2744EB8600592F21 /* Inter-Medium.ttf */; };
+		8479DE832779D33A00EEB415 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B72744EB8600592F21 /* Inter-Regular.ttf */; };
+		8479DE842779D33A00EEB415 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BC2744EB8600592F21 /* Inter-SemiBold.ttf */; };
+		8479DE852779D33A00EEB415 /* Lexend-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BE2744EB8700592F21 /* Lexend-Bold.ttf */; };
+		8479DE862779D33A00EEB415 /* Lexend-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B62744EB8600592F21 /* Lexend-Medium.ttf */; };
+		8479DE872779D33A00EEB415 /* Lexend-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B82744EB8600592F21 /* Lexend-Regular.ttf */; };
+		8479DE882779D33A00EEB415 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C22744EB8700592F21 /* OpenSans-Bold.ttf */; };
+		8479DE892779D33A00EEB415 /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BB2744EB8600592F21 /* OpenSans-Medium.ttf */; };
+		8479DE8A2779D33A00EEB415 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409B92744EB8600592F21 /* OpenSans-Regular.ttf */; };
+		8479DE8B2779D33A00EEB415 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C02744EB8700592F21 /* Rubik-Medium.ttf */; };
+		8479DE8C2779D33A00EEB415 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409BF2744EB8700592F21 /* Rubik-Regular.ttf */; };
+		8479DE8D2779D33A00EEB415 /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 12B409C12744EB8700592F21 /* Rubik-SemiBold.ttf */; };
 		EE83587F37F5207A8EBAC856 /* libPods-Fased.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 071684C8A97236E7FFCBDFC4 /* libPods-Fased.a */; };
 /* End PBXBuildFile section */
 
@@ -312,6 +326,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8479DE802779D33A00EEB415 /* Rubik-Bold.ttf in Resources */,
+				8479DE812779D33A00EEB415 /* Inter-Bold.ttf in Resources */,
+				8479DE822779D33A00EEB415 /* Inter-Medium.ttf in Resources */,
+				8479DE832779D33A00EEB415 /* Inter-Regular.ttf in Resources */,
+				8479DE842779D33A00EEB415 /* Inter-SemiBold.ttf in Resources */,
+				8479DE852779D33A00EEB415 /* Lexend-Bold.ttf in Resources */,
+				8479DE862779D33A00EEB415 /* Lexend-Medium.ttf in Resources */,
+				8479DE872779D33A00EEB415 /* Lexend-Regular.ttf in Resources */,
+				8479DE882779D33A00EEB415 /* OpenSans-Bold.ttf in Resources */,
+				8479DE892779D33A00EEB415 /* OpenSans-Medium.ttf in Resources */,
+				8479DE8A2779D33A00EEB415 /* OpenSans-Regular.ttf in Resources */,
+				8479DE8B2779D33A00EEB415 /* Rubik-Medium.ttf in Resources */,
+				8479DE8C2779D33A00EEB415 /* Rubik-Regular.ttf in Resources */,
+				8479DE8D2779D33A00EEB415 /* Rubik-SemiBold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -555,7 +583,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BD4WP2UW9P;
+				DEVELOPMENT_TEAM = B5387AGUHB;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -583,7 +611,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BD4WP2UW9P;
+				DEVELOPMENT_TEAM = B5387AGUHB;
 				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -105,3 +105,50 @@ export const Create_Report_Incident_without_SubCat = gql`
     }
   }
 `
+
+export const ADD_TO_FAV = gql`
+mutation AddToFavorite($userId: Int!, $newsId: Int!) {
+  addToFavorite(userId: $userId, newsId: $newsId) {
+    status
+    message
+    data {
+      createdAt
+      newsId
+      userId
+      id
+      News {
+        id
+        Image
+        Title
+        Tagline
+        Description
+      }
+    }
+  }
+}`
+
+export const SOCIAL_LOGIN = gql`
+mutation SocialMediaLogin($providerId: String!, $registrationType: String!, $name: String, $email: String) {
+  socialMediaLogin(providerId: $providerId, registrationType: $registrationType, name: $name, email: $email) {
+    status
+    message
+    data {
+      id
+      email
+      name
+      password
+      isVerified
+      providerId
+      registrationType
+      createdAt
+    }
+  }
+}`
+
+export const FLAG_REPORT = gql`
+mutation CreateFlagReport($userId: Int!, $reasonId: Int!, $reason: String!) {
+  CreateFlagReport(userId: $userId, reasonId: $reasonId, reason: $reason) {
+    status
+    message
+  }
+}`

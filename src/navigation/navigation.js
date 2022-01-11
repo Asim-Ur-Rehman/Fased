@@ -29,6 +29,7 @@ import { CustomDrawer } from './CustomDrawer/CustomDrawer'
 import { FlagReport } from '../screens/flagReport/flagReport'
 import { NewsCard } from '../screens/News/NewsCard'
 import { NewsDetails } from '../screens/News/NewsDetails'
+import { AboutUs } from '../screens/AboutUs'
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -53,6 +54,8 @@ function MyDrawer() {
       drawerType="front">
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Categories" component={Categories} />
+      <Drawer.Screen name="AboutUs" component={AboutUs} />
+      <Drawer.Screen name="Calender" component={Calender} />
     </Drawer.Navigator>
   )
 }
@@ -83,7 +86,6 @@ function AppStackNavigator() {
       initialRouteName="Home">
       <AppStack.Screen name="Home" component={MyDrawer} />
       <AppStack.Screen name="Reports" component={Reports} />
-      <AppStack.Screen name="Calender" component={Calender} />
       <AppStack.Screen name="ReportingDone" component={ReportingDone} />
       <AppStack.Screen name="ReportIncident" component={ReportIncident} />
       <AppStack.Screen name="ReportIncidentA" component={ReportIncidentA} />
@@ -120,7 +122,6 @@ const MainNavigation = () => {
       theme={{ ...DefaultTheme, colors: { background: '#fff' } }}>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
-
         // initialRouteName={Object.keys(state.userData).length > 0 ? 'AppStackNavigator' : 'AuthStackNavigator'}
       >
         <Stack.Screen

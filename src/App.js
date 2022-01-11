@@ -16,20 +16,26 @@ import {
 } from '@apollo/client'
 import { persistCache } from 'apollo3-cache-persist'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-const cache = new InMemoryCache()
+import { Settings } from 'react-native-fbsdk-next';
+// const cache = new InMemoryCache()
 
 const client = new ApolloClient({
   uri: 'https://fasedapp.herokuapp.com/',
-  cache
+  cache: new InMemoryCache()
 })
 
+// Setting the facebook app id using setAppID
+// Remember to set CFBundleURLSchemes in Info.plist on iOS if needed
+Settings.setAppID('1553192515049980');
+Settings.initializeSDK();
+
 const App = ({ navigation }) => {
-  const [loadingCache, setLoadingCache] = useState(true)
+  // const [loadingCache, setLoadingCache] = useState(true)
   useEffect(() => {
-    persistCache({
-      cache,
-      storage: AsyncStorage
-    }).then(() => setLoadingCache(false))
+    // persistCache({
+    //   cache,
+    //   storage: AsyncStorage
+    // }).then(() => setLoadingCache(false))
 
     setTimeout(
       () => {
