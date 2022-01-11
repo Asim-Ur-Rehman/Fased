@@ -27,14 +27,18 @@ import { useMutation, useQuery } from '@apollo/client'
 import { FLAG_REPORT } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import { GET_REASONS } from '../../utils/queries'
-import {CustomRadioButton} from '../../components/RadioButton/RadioButton'
+import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
 export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
   const [others, setothers] = useState(false)
   const [reason, setreason] = useState(null)
   const flagReasons = useQuery(GET_REASONS)
-  const [reasons, setReasons] = useState(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
+  const [reasons, setReasons] = useState(
+    flagReasons?.data?.getFlagReasons?.data
+      ? flagReasons?.data?.getFlagReasons?.data
+      : []
+  )
   const [data, setData] = useState(route.params?.data ? route.params?.data : [])
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
@@ -74,13 +78,16 @@ export const FlagReport = ({ navigation, route }) => {
     }
   ]
 
-
   const [CreateFlagReport] = useMutation(FLAG_REPORT)
   useEffect(() => {
     getUserData().then(res => {
       setUserData(res)
     })
-    setReasons(flagReasons?.data?.getFlagReasons?.data ? flagReasons?.data?.getFlagReasons?.data : [])
+    setReasons(
+      flagReasons?.data?.getFlagReasons?.data
+        ? flagReasons?.data?.getFlagReasons?.data
+        : []
+    )
   }, [flagReasons?.data?.getFlagReasons?.data])
 
   const [userData, setUserData] = useState(null)
@@ -97,22 +104,28 @@ export const FlagReport = ({ navigation, route }) => {
             reasonId: reason.id,
             reason: reason.reason
           }
-    }).then((res) => {
-      navigation.navigate('Home')
     })
-    .catch(err => {
-      console.log("err", err, "err condition", others
-      ? {
-          userId: parseFloat(userData?.id),
-          reasonId: 0,
-          reason: text 
-        }
-      : {
-          userId: parseFloat(userData?.id),
-          reasonId: reason.id,
-          reason: reason.reason
-        })
-    })
+      .then(res => {
+        navigation.navigate('Home')
+      })
+      .catch(err => {
+        console.log(
+          'err',
+          err,
+          'err condition',
+          others
+            ? {
+                userId: parseFloat(userData?.id),
+                reasonId: 0,
+                reason: text
+              }
+            : {
+                userId: parseFloat(userData?.id),
+                reasonId: reason.id,
+                reason: reason.reason
+              }
+        )
+      })
   }
 
   return (
@@ -150,7 +163,7 @@ export const FlagReport = ({ navigation, route }) => {
               flexDirection: 'row',
               justifyContent: 'flex-start'
             }}>
-            <Image
+            {/* <Image
               style={{
                 marginRight: 15,
                 height: 50,
@@ -158,7 +171,7 @@ export const FlagReport = ({ navigation, route }) => {
                 resizeMode: 'contain'
               }}
               source={Images.Pictures.profileIcon}
-            />
+            /> */}
 
             <View>
               <Text style={styles.headerLabel}>{data.SuspectName}</Text>
@@ -310,8 +323,7 @@ export const FlagReport = ({ navigation, route }) => {
             // Alert.alert("Modal has been closed.");
             setModalVisible(!modalVisible)
           }}>
-          <View
-            style={styles.centeredView}>
+          <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <LinearGradient
                 colors={['#fff', '#6C8CB210', '#fff']}
@@ -356,8 +368,11 @@ export const FlagReport = ({ navigation, route }) => {
                         // width:"100%",
                       }}
                       contentContainerStyle={{ paddingBottom: 0 }}>
-                      <View style={{width: '100%'}}>
-                        <CustomRadioButton PROP={reasons} onChange={e => setreason(e)} />
+                      <View style={{ width: '100%' }}>
+                        <CustomRadioButton
+                          PROP={reasons}
+                          onChange={e => setreason(e)}
+                        />
                       </View>
                     </CustomScrollView>
                   </View>
