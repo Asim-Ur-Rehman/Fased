@@ -6,9 +6,10 @@ import {
   Image,
   StyleSheet,
   FlatList,
-  StatusBar,
+  BackHandler,
   SafeAreaView,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -29,10 +30,14 @@ import {
 import { useSelector } from 'react-redux'
 import { distance, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation';
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob';
+import { useIsFocused } from '@react-navigation/native'
 
 let reportsData = []
 
-export const Home = ({ navigation, route }) => {
+export const Home = (props) => {
+  const { navigation, route, state } = props
+  const [forUpdate, setUpdate] = useState(false)
   const [selected, setSelected] = useState(
     route.params?.selected ? route.params?.selected : []
   )
@@ -43,6 +48,32 @@ export const Home = ({ navigation, route }) => {
 
   const { data, loading, error } = useQuery(Get_Categories)
   const News = useQuery(Get_News)
+  // const isFocuesd = useIsFocused()
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+  const backAction = () => {
+    if(navigation.isFocused()) {
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel"
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() }
+      ]);
+      return true;
+    }else {
+      return false
+    }
+  };
+
 
   if (selected.length > 0) {
     const results = data?.getCategories?.data.filter(
@@ -60,14 +91,13 @@ export const Home = ({ navigation, route }) => {
     })
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
-    reportsData = useQuery(Get_Reports)?.data?.getReports?.data
+    const query = useQuery(Get_Reports)
+    query.refetch();
+    reportsData = query?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
-  const colors = [...new Set([...reports.map(e => e.Category.BackgroundColor)])]
 
-  // useEffect(() => {
-  //   getUserData()
-  // }, [])
+
   const mapRef = useRef(null)
 
   const INITIAL_REGION = {
@@ -78,6 +108,11 @@ export const Home = ({ navigation, route }) => {
   }
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
+  const isFocused = useIsFocused()
+  useEffect(() => {
+    setUpdate(!forUpdate)
+  }, [isFocused])
+  
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
@@ -268,22 +303,13 @@ export const Home = ({ navigation, route }) => {
         <MapView
           initialRegion={INITIAL_REGION}
           style={{ height: '72%' }}
-          // showsCompass
-          // compassOffset={{ x: 50, y: 100 }}
-          // zoomEnabled={false}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
-          // preserveClusterPressBehavior={true}
-          // onClusterPress={(e) => {
-          //   console.log("onMarkerPress eeeee", e)
-          //   // alert("asda")
-          // }}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports =  getSimplifyArr(data)
             const points = properties.point_count
-
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -293,7 +319,10 @@ export const Home = ({ navigation, route }) => {
                 }}
                 // onPress={(e) => onClusterPress(e, id)}
                 // onPress={() => alert(id)}
-                onPress={() =>  navigation.navigate('Reports', {reports: reports})}
+                onPress={() =>  navigation.navigate('Reports', {reports: reports, geometry: {
+                  longitude: geometry.coordinates[0],
+                  latitude: geometry.coordinates[1]
+                }})}
                 >
                 <View
                   style={
@@ -334,7 +363,10 @@ export const Home = ({ navigation, route }) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}]})}
+                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}], geometry: {
+                  latitude: item.latitude,
+                  longitude: item.longitude
+                }})}
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
@@ -370,7 +402,14 @@ export const Home = ({ navigation, route }) => {
             title="Report"
             onPress={() => {
               if (isGuest) {
-                navigation.navigate('SignUp')
+                Alert.alert("Alert", "You have to Sign Up for this action", [
+                  {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                  },
+                  { text: "Ok", onPress: () => navigation.navigate('SignUp') }
+                ]);
               } else {
                 navigation.navigate('ReportIncident')
               }
@@ -380,10 +419,16 @@ export const Home = ({ navigation, route }) => {
       </View>
 
       <View>
-        <Image
+      <BannerAd
+      style={{width: '100%'}}
+        size={BannerAdSize.FULL_BANNER}
+        unitId={TestIds.BANNER}
+        // ref={bannerRef}
+      />
+        {/* <Image
           style={{ height: 61, width: '100%' }}
           source={Images.Pictures.demo}
-        />
+        /> */}
       </View>
     </View>
   )

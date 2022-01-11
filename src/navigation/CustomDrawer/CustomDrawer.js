@@ -24,21 +24,21 @@ export const CustomDrawer = ({ navigation }) => {
       navigateTo: 'Home'
     },
     {
-      title: 'About Us'
-      //   navigateTo: 'AboutUs'
+      title: 'About Us',
+      navigateTo: 'AboutUs'
     },
     {
       title: 'Settings'
       // navigateTo: 'Setting'
     },
-    // {
-    //   title: isGuest ? 'SignUp' : 'Logout',
-    //   navigateTo: isGuest ? 'SignUp' : 'SignIn'
-    // },
     {
-      title: 'Logout'
-      // navigateTo: 'SignIn'
-    }
+      title: isGuest ? 'SignUp' : 'Logout',
+      navigateTo: isGuest ? 'SignUp' : 'SignIn'
+    },
+    // {
+    //   title: 'Logout'
+    //   // navigateTo: 'SignIn'
+    // }
   ]
   const removeUser = async () => {
     try {

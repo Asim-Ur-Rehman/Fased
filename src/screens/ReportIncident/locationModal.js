@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, Platform } from 'react-native'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { theme } from '../../constants/theme'
 const GOOGLE_PLACES_API_KEY = 'AIzaSyCRqapKfPvsVTyk4XyYtsN3Fz413Iixz_w'
@@ -7,10 +7,10 @@ import Feather from 'react-native-vector-icons/Feather'
 
 export const renderSearchLocation = (visible, toggleModal) => {
   // console.log(navigator.geolocation)
-  const ref = useRef();
+  const ref = useRef()
   useEffect(() => {
-    ref.current?.focus();
-  }, [visible]);
+    ref.current?.focus()
+  }, [visible])
   return (
     <View
       style={{
@@ -27,14 +27,28 @@ export const renderSearchLocation = (visible, toggleModal) => {
         onRequestClose={() => {
           toggleModal()
         }}>
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: '#fff',
+            marginTop: Platform.OS == 'ios' ? 40 : 0,
+          }}>
+          <View style={{ justifyContent: 'center', paddingHorizontal: 15, top: 30 }}>
+            <Feather
+            onPress={() => {
+              toggleModal()
+            }}
+              name="arrow-left"
+              color={theme.textColor.blackText}
+              size={18}
+            />
+          </View>
           <GooglePlacesAutocomplete
             ref={ref}
             placeholder="Where did it happen?"
             predefinedPlacesAlwaysVisible={true}
             autoFocus={true}
             onPress={(data, details = null) => {
-              console.log('onPressonPress', details)
               toggleModal({
                 latitude: details?.geometry?.location?.lat,
                 longitude: details?.geometry?.location?.lng
@@ -52,14 +66,14 @@ export const renderSearchLocation = (visible, toggleModal) => {
             styles={{
               textInputContainer: {
                 backgroundColor: theme.backgrounds.whiteBG,
-                width: '85%',
+                width: '80%',
                 alignSelf: 'center',
                 borderWidth: 0.8,
                 borderColor: theme.bordersColor.InputBorder,
                 borderRadius: 5,
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: 20,
+                marginBottom: 20
               },
               textInput: {
                 height: 45,
@@ -81,18 +95,6 @@ export const renderSearchLocation = (visible, toggleModal) => {
               )
             }}
           />
-
-          {/* <GooglePlacesAutocomplete
-            placeholder="Search"
-            onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(data, details)
-            }}
-            query={{
-              key: GOOGLE_PLACES_API_KEY,
-              language: 'en'
-            }}
-          /> */}
         </View>
       </Modal>
     </View>

@@ -151,3 +151,16 @@ query FilterReportsByDate($from: Date!, $to: Date!) {
   }
 }
 `
+
+export const GET_REASONS = gql`
+query GetFlagReasons {
+  getFlagReasons {
+    status
+    message
+    data {
+      createdAt
+      reason
+      id
+    }
+  }
+}`

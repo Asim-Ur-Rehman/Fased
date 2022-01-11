@@ -55,7 +55,6 @@ export const SignUp = ({ navigation }) => {
       );
     }
     else {
-      console.log('data from form', email, password, fullName)
       addUser({
         variables: {
           email: email,
@@ -93,7 +92,6 @@ export const SignUp = ({ navigation }) => {
 
         })
 
-      console.log("data", data, "error", error)
 
       // dispatch(SignUpAction(data, navigation))
     }

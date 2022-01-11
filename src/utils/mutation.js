@@ -126,3 +126,29 @@ mutation AddToFavorite($userId: Int!, $newsId: Int!) {
     }
   }
 }`
+
+export const SOCIAL_LOGIN = gql`
+mutation SocialMediaLogin($providerId: String!, $registrationType: String!, $name: String, $email: String) {
+  socialMediaLogin(providerId: $providerId, registrationType: $registrationType, name: $name, email: $email) {
+    status
+    message
+    data {
+      id
+      email
+      name
+      password
+      isVerified
+      providerId
+      registrationType
+      createdAt
+    }
+  }
+}`
+
+export const FLAG_REPORT = gql`
+mutation CreateFlagReport($userId: Int!, $reasonId: Int!, $reason: String!) {
+  CreateFlagReport(userId: $userId, reasonId: $reasonId, reason: $reason) {
+    status
+    message
+  }
+}`

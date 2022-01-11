@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimension
 import { theme } from '../../constants/theme'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
+import { useDispatch } from 'react-redux'
+import { continueAsGuest } from '../../stores/actions/user.action'
 
 
 export const AuthHeader = ({
@@ -10,6 +12,8 @@ export const AuthHeader = ({
     onPress = () => { },
     navigation
 }) => {
+
+    const dispatch = useDispatch()
     return (
         <View style={{
             width: '88%',
@@ -27,7 +31,10 @@ export const AuthHeader = ({
                 guestUser &&
 
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('AppStackNavigator')}
+                    onPress={() => {
+                        dispatch(continueAsGuest())
+                        navigation.navigate('AppStackNavigator')
+                    }}
                     activeOpacity={0.7}>
 
                     <LinearGradient
