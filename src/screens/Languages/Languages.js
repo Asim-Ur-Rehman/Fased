@@ -1,137 +1,162 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar, Dimensions, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+  StatusBar,
+  Dimensions,
+  StyleSheet
+} from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import Button from '../../components/Button'
 const { width, height } = Dimensions.get('screen')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 export const Languages = ({ navigation }) => {
+  const [select, setSelect] = useState()
+  // useEffect(() => {
+  //     navigation.navigate('AppStackNavigator')
+  // }, [])
 
-    // useEffect(() => {
-    //     navigation.navigate('AppStackNavigator')
-    // }, [])
+  useEffect(() => {
+    getUserData()
+  }, [])
 
-    useEffect(() => {
-        getUserData()
-    }, [])
-
-    const getUserData = async (e) => {
-        let userData = await AsyncStorage.getItem('userData')
-        let data = JSON.parse(userData)
-        let checkForUser = data && Object.keys(data).length > 0
-        console.log('check in lang', checkForUser)
-        if (checkForUser) {
-            navigation.navigate('AppStackNavigator')
-        }
-        if(e && !checkForUser){
-            navigation.navigate('SignIn')
-        }
+  const getUserData = async e => {
+    let userData = await AsyncStorage.getItem('userData')
+    let data = JSON.parse(userData)
+    let checkForUser = data && Object.keys(data).length > 0
+    console.log('check in lang', checkForUser)
+    if (checkForUser) {
+      navigation.navigate('AppStackNavigator')
     }
+    if (e && !checkForUser) {
+      navigation.navigate('SignIn')
+    }
+  }
 
-    const Buttons = [{
-        title: 'Arabic',
-
+  const Buttons = [
+    {
+      title: 'Arabic'
     },
     {
-        title: 'English'
+      title: 'English'
     },
     {
-        title: 'French'
+      title: 'French'
     },
     {
-        title: 'Spanish'
-    },
-    ]
-    return (
-        <SafeAreaView style={{
-            flex: 1,
+      title: 'Spanish'
+    }
+  ]
 
-            backgroundColor: theme.primaryColor
+  const selectLanguage = () => {
+    console.log('slected', select)
+    getUserData('click')
+  }
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
 
-        }}>
-            <StatusBar backgroundColor={'transparent'} translucent={true} barStyle={'dark-content'} />
-            {/* <AuthHeader guestUser={true} onPress={() => {
+        backgroundColor: theme.primaryColor
+      }}>
+      <StatusBar
+        backgroundColor={'transparent'}
+        translucent={true}
+        barStyle={'dark-content'}
+      />
+      {/* <AuthHeader guestUser={true} onPress={() => {
                 navigation.navigate('SignIn')
             }} /> */}
-            <View
+      <View style={styles.logoMainViewStyle}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{
+            width: 105,
+            height: 105
+          }}
+        />
+      </View>
+      <View style={styles.textViewStyle}>
+        <Text style={styles.textStyle}>Select your preffered language</Text>
+      </View>
 
-                style={styles.logoMainViewStyle}
+      {Buttons.map((item, i) => {
+        return (
+          <View
+            key={i}
+            style={{
+              marginTop: i == 0 ? 30 : 20
+            }}>
+            <Button
+              onPress={() => {
+                setSelect(item)
+              }}
+              linearColor1={
+                select?.title == item?.title ? '#FE0000' : '#9CA3AF'
+              }
+              linearColor2={
+                select?.title == item?.title ? '#680000' : '#4A4C50'
+              }
+              title={item.title}
+              buttonStyle={{
+                width: '90%',
+                alignSelf: 'center'
+              }}
+            />
+          </View>
+        )
+      })}
 
-            >
-                <Image source={Images.Pictures.logo} style={{
-                    width: 105,
-                    height: 105
-                }} />
-            </View>
-            <View
-                style={styles.textViewStyle}
+      <TouchableOpacity
+        onPress={() => {
+          selectLanguage()
+        }}
+        activeOpacity={0.9}
+        style={{
+          width: '20%',
+          alignSelf: 'flex-end',
+          //   height: 50,
+          alignItems: 'center',
+          justifyContent: 'space-between',
 
-            >
-                <Text
-                    style={styles.textStyle}
-
-                >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
-                </Text>
-            </View>
-
-
-            {
-                Buttons.map((item, i) => {
-                    return (
-                        <View
-                            key={i}
-                            style={{
-                                marginTop: i == 0 ? 30 : 20
-                            }}>
-                            <Button
-                                onPress={() => {
-                                    getUserData("click")
-                                }}
-                                linearColor1={i == 1 ? '#FE0000' : '#9CA3AF'}
-                                linearColor2={i == 1 ? '#680000' : '#4A4C50'}
-
-                                title={item.title}
-                                buttonStyle={{
-                                    width: '90%',
-                                    alignSelf: 'center'
-                                }}
-                            />
-                        </View>
-                    )
-                })
-            }
-
-
-
-
-
-
-        </SafeAreaView>
-    )
+          //   backgroundColor: 'red',
+          marginTop: 20,
+          flexDirection: 'row',
+          marginRight: 25
+        }}>
+        <Text
+          style={{
+            fontSize: 20
+          }}>
+          Next
+        </Text>
+        <AntDesign name="arrowright" color="#000000" size={24} />
+      </TouchableOpacity>
+    </SafeAreaView>
+  )
 }
 const styles = StyleSheet.create({
-
-    logoMainViewStyle: {
-        // marginTop: 60,
-        height: height * 0.33,
-        alignItems: 'center',
-        // backgroundColor: 'green',
-        justifyContent: 'flex-end'
-    },
-    textViewStyle: {
-        width: '80%',
-        alignSelf: 'center',
-        marginTop: 10
-    },
-    textStyle: {
-        textAlign: 'center',
-        fontFamily: "Rubik-Regular",
-        color: theme.textColor.grayText
-    }
-
-
+  logoMainViewStyle: {
+    // marginTop: 60,
+    height: height * 0.33,
+    alignItems: 'center',
+    // backgroundColor: 'green',
+    justifyContent: 'flex-end'
+  },
+  textViewStyle: {
+    width: '80%',
+    alignSelf: 'center',
+    marginTop: 10
+  },
+  textStyle: {
+    textAlign: 'center',
+    fontFamily: 'Rubik-Regular',
+    color: theme.textColor.grayText
+  }
 })

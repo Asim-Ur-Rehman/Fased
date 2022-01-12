@@ -294,7 +294,10 @@ export const Reports = ({ navigation, route }) => {
             <TouchableOpacity
               onPress={() => setisFilter(!isFilter)}
               style={styles.swapIcon}>
-              <Image source={Images.Pictures.swapIcon} style={{tintColor: isFilter ? 'red' : null}} />
+              <Image
+                source={Images.Pictures.swapIcon}
+                style={{ tintColor: isFilter ? 'red' : null }}
+              />
             </TouchableOpacity>
           </View>
 
@@ -302,7 +305,10 @@ export const Reports = ({ navigation, route }) => {
             <View>
               <Text style={styles.headerRow2Text1}>{address}</Text>
               <Text style={styles.headerRow2Text2}>
-                Updated: {!isFilter ? arr[0][0]?.data?.createdAt : arr[0]?.data?.createdAt}
+                Updated:{' '}
+                {!isFilter
+                  ? arr[0][0]?.data?.createdAt
+                  : arr[0]?.data?.createdAt}
               </Text>
             </View>
           </View>
@@ -355,7 +361,7 @@ export const Reports = ({ navigation, route }) => {
             </View>
           </ScrollView>
         </ScrollView>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.showMoreBtn}
           activeOpacity={1}
           onPress={() => {
@@ -368,7 +374,7 @@ export const Reports = ({ navigation, route }) => {
             }}>
             Show More
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   )

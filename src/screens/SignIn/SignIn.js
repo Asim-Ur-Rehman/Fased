@@ -49,21 +49,17 @@ export const SignIn = ({ navigation }) => {
   const signIn = () => {
     setLoader(true)
     if (email == '' || password == '') {
-      ToastMessage('Form Error', 'Please fill all fields', 'error')
+      ToastMessage('Please fill all fields', null, 'error')
       setLoader(false)
     } else {
       setLoader(false)
       if (loginUser?.error) {
-        ToastMessage('SignIn Error', 'Something went wrong', 'info')
+        ToastMessage('Something went wrong', null, 'info')
       }
       if (loginUser?.data?.loginUser?.status) {
         let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
         AsyncStorage.setItem('userData', jsonData)
-        ToastMessage(
-          'User SignIn Successfully',
-          loginUser?.data?.loginUser?.message,
-          'success'
-        )
+        ToastMessage(loginUser?.data?.loginUser?.message, null, 'success')
         dispatch(SignInAction(loginUser?.data?.loginUser?.data))
         navigation.navigate('AppStackNavigator', {
           screen: 'Home'
@@ -71,11 +67,7 @@ export const SignIn = ({ navigation }) => {
         setEmail('')
         setPassword('')
       } else {
-        ToastMessage(
-          'SignIn Error',
-          loginUser?.data?.loginUser?.message,
-          'error'
-        )
+        ToastMessage(loginUser?.data?.loginUser?.message, null, 'error')
       }
     }
   }
@@ -89,22 +81,20 @@ export const SignIn = ({ navigation }) => {
         } else {
           Profile.getCurrentProfile().then(async function (currentProfile) {
             if (currentProfile) {
-               socialMediaLogin({
+              socialMediaLogin({
                 variables: {
                   providerId: currentProfile.userID,
                   registrationType: 'facebook',
                   name: currentProfile.name,
                   email: currentProfile.email ? currentProfile.email : undefined
                 }
-              })
-              .then((res) => {
-                AsyncStorage.setItem('userData', JSON.stringify(res?.data?.socialMediaLogin?.data))
-                dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
-                ToastMessage(
-                  'User SignIn Successfully',
-                  res?.data?.socialMediaLogin?.data,
-                  'success'
+              }).then(res => {
+                AsyncStorage.setItem(
+                  'userData',
+                  JSON.stringify(res?.data?.socialMediaLogin?.data)
                 )
+                dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
+                ToastMessage(res?.data?.socialMediaLogin?.data, null, 'success')
                 navigation.navigate('AppStackNavigator', {
                   screen: 'Home'
                 })
