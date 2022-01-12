@@ -51,6 +51,24 @@ export const Get_News = gql`
   }
 `
 
+export const SEARCH_NEWS = gql`
+query SearchNews($text: String!) {
+  searchNews(text: $text) {
+    status
+    message
+    data {
+      id
+      Image
+      Title
+      Tagline
+      Description
+      createdAt
+      CategoryName
+      CategoryId
+    }
+  }
+}`
+
 export const GET_FAV_NEWS_BY_ID = gql`
 query GetFavoriteByUserId($userId: Int!) {
   getFavoriteByUserId(userId: $userId) {

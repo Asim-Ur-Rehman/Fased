@@ -1,0 +1,111 @@
+{
+  "translation": {
+    "Sign In ": "================Sign In Translation    only for comments==============",
+
+    "Continue As Guest User": "Continue As Guest User",
+    "Sign In": "Sign In",
+    "Email address": "Email address",
+    "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+    "Password": "Password",
+    "Remember me": "Remember me",
+    "Forgot Password": "Forgot Password",
+    "Or sign in with social account": "Or sign in with social account",
+    "Don’t have an account?": "Don’t have an account?",
+    "Sign Up Here": "Sign Up Here",
+
+    "SignUP": "================Sign Up Translation only for comments==============",
+
+    "Sign Up": "Sign Up",
+    "Full Name": "Full Name",
+    "Enter your full name": "Enter your full name",
+
+    "ForGot Password": "================ForGot Password Translation only for comments==============",
+
+    "A message will be sent to your email address with further instructions": "A message will be sent to your email address with further instructions",
+    "Recover Password": "Recover Password",
+
+    "OTP": "================OTP Translation only for comments==============",
+
+    "Verify OTP": "Verify OTP",
+    "OTP will expired in": "OTP will expired in",
+    "Resend OTP": "Resend OTP",
+
+    "Change PPassword": "================Change  Password Translation only for comments==============",
+
+    "Change Password": "Change Password",
+    "New Password": "New Password",
+    "Confirm Password": "Confirm Password",
+    "Submit": "Submit",
+
+    "Drawer Data": "================Drawer Data Translation only for comments==============",
+
+    "Home": "Home",
+    "About Us": "About Us",
+    "Settings": "Settings",
+    "LogOut": "LogOut",
+
+    "Home Screen": "================Home Screen Translation only for comments=================",
+
+    "News": "News",
+    "Read more": " Read more",
+    "Categories": "Categories",
+    "From": "From",
+    "From start": "From start",
+    "To": "To",
+    "Till today": "Till today",
+    "Report": "Report",
+    "You have to Sign Up for this action": "You have to Sign Up for this action",
+
+    "Filter Categories": "================Filter Categories Translation only for comments=================",
+
+    "Done": "Done",
+    "Selected Categories": "Selected Categories",
+    "Select Categories": "Select Categories",
+
+    "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
+
+    "Report Incident": "Report Incident",
+    "Where did it happen?": "Where did it happen?",
+    "Ground Floor": "Ground Floor",
+    "Floor": "Floor",
+    "11th": "11th",
+    "Next": "Next",
+    "Choose Category": "Choose Category",
+    "Select category": "Select category",
+    "Choose Sub Category": "Choose Sub Category",
+    "Date": "Date",
+    "Today": "Today",
+    "Choose date": "Choose date",
+    "Time": "Time",
+    "Now": "Now",
+    "Choose time": "Choose time",
+    "Suspect Name": "Suspect Name",
+    "Don’t Know": "Don’t Know",
+    "Enter name": "Enter name",
+    "Did This Cost You Money?": "Did This Cost You Money?",
+    "No": "No",
+    "Amount": "Amount",
+    "Tell us what happen": "Tell us what happen",
+    "Thanks for Reporting us": "Thanks for Reporting us",
+    "About your Incident": "About your Incident",
+
+    "All Reports": "===================== All Reports Translation only for comments ====================== ",
+
+    "Reports": "Reports",
+    "Initials": "Initials",
+    "Category": "Category",
+    "Value": "Value",
+    "What happened": "What happened",
+    "date": "date",
+    "Show More": "Show More",
+    "Flag": "Flag",
+
+    "News  screen": "================News screen Translation only for comments=================",
+
+    "Old": "Old",
+    "New": "New",
+    "Search": "Search",
+    "News Details": "News Details",
+    "Share": "Share"
+  }
+}

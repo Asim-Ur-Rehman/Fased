@@ -121,7 +121,8 @@ export const Home = (props) => {
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(info => {
         mapRef.current.animateToRegion({...INITIAL_REGION, ...info.coords}, 2000)
-
+    }, err => {
+      console.log("err", Alert.alert(err.message))
     });
 
   }
@@ -423,12 +424,7 @@ export const Home = (props) => {
       style={{width: '100%'}}
         size={BannerAdSize.FULL_BANNER}
         unitId={TestIds.BANNER}
-        // ref={bannerRef}
       />
-        {/* <Image
-          style={{ height: 61, width: '100%' }}
-          source={Images.Pictures.demo}
-        /> */}
       </View>
     </View>
   )
