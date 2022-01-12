@@ -31,30 +31,19 @@ export const ChangePassword = ({ navigation, route }) => {
 
   const dispatch = useDispatch()
 
-  const [NewPassword, { data, loading, error }] = useMutation(New_Password);
+  const [NewPassword, { data, loading, error }] = useMutation(New_Password)
   const changePaswword = () => {
     if (newPassword == '' || confirmPassword == '') {
-      ToastMessage('Form Error', 'Please fill all fields', 'error');
-    }
-    else if (newPassword.length <= 8) {
+      ToastMessage('Please fill all fields', null, 'error')
+    } else if (newPassword.length <= 8) {
       ToastMessage(
-        'New Password Error',
         'New Password should be greater then 8 character',
-        'info',
-      );
-
-    }
-    else if (newPassword !== confirmPassword) {
-      ToastMessage(
-        'Confirm Password Error',
-        'Confirm Password does not match',
-        'info',
-      );
-
-    }
-    else {
-
-
+        null,
+        'info'
+      )
+    } else if (newPassword !== confirmPassword) {
+      ToastMessage('Confirm Password does not match', null, 'info')
+    } else {
       // let data = {
       //   newPassword: state.newPassword,
       //   confirmPassword: state.confirmPassword
@@ -65,34 +54,24 @@ export const ChangePassword = ({ navigation, route }) => {
           password: confirmPassword,
           email: emailFromParam
         }
-      }).then((data) => {
-        // console.log('data return', data.data.NewPassword.status)
-        if (data?.data?.NewPassword?.status) {
-
-
-          ToastMessage('Update Password Successfully', data?.data?.NewPassword?.message, 'success');
-          navigation.push('SignIn')
-
-
-        }
-        else {
-          ToastMessage('Password Error', data?.data?.NewPassword?.message, 'error');
-        }
-
-
       })
-        .catch((error) => {
+        .then(data => {
+          // console.log('data return', data.data.NewPassword.status)
+          if (data?.data?.NewPassword?.status) {
+            ToastMessage(data?.data?.NewPassword?.message, null, 'success')
+            navigation.push('SignIn')
+          } else {
+            ToastMessage(data?.data?.NewPassword?.message, null, 'error')
+          }
+        })
+        .catch(error => {
           console.log('error', error)
           if (error) {
-            ToastMessage('Password Error', 'Something went wrong', 'error');
+            ToastMessage('Something went wrong', null, 'error')
+          } else {
+            ToastMessage(error.data.NewPassword.message, null, 'error')
           }
-          else {
-            ToastMessage('Password Error', error.data.NewPassword.message, 'error');
-          }
-
         })
-
-
     }
   }
 
@@ -130,7 +109,7 @@ export const ChangePassword = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-          <View style={{ width: '83%', alignSelf: 'center', }}>
+          <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>New Password</Text>
           </View>
 
@@ -142,7 +121,7 @@ export const ChangePassword = ({ navigation, route }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setNewPassword(text)
             }}
           />
@@ -159,7 +138,7 @@ export const ChangePassword = ({ navigation, route }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="default"
             secureTextEntry={true}
-            onChangeText={(text) => {
+            onChangeText={text => {
               setConfirmPassword(text)
             }}
           />
@@ -171,20 +150,23 @@ export const ChangePassword = ({ navigation, route }) => {
             // justifyContent: 'center',
             paddingVertical: 20
           }}>
-
-          {
-            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
-              <Button
-                onPress={() => {
-                  changePaswword()
-                }}
-                // onPress={() => { navigation.navigate('SignIn') }}
-                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-                title="Submit"
-              />
-          }
-
-
+          {loading ? (
+            <ActivityIndicator size="large" color="#4A4C50" />
+          ) : (
+            <Button
+              onPress={() => {
+                changePaswword()
+              }}
+              // onPress={() => { navigation.navigate('SignIn') }}
+              buttonStyle={{
+                width: '90%',
+                height: 48,
+                alignSelf: 'center',
+                marginTop: 10
+              }}
+              title="Submit"
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -209,7 +191,7 @@ const styles = StyleSheet.create({
   },
   ChangePasswordText: {
     fontSize: 18,
-    fontFamily: "Rubik-Medium",
+    fontFamily: 'Rubik-Medium',
     textAlign: 'center'
   },
   InputContainer: {
@@ -218,7 +200,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily: "Rubik-Medium",
+    fontFamily: 'Rubik-Medium'
   },
   input: {
     width: '88%',
@@ -231,8 +213,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily: "Rubik-Regular",
+    fontFamily: 'Rubik-Regular',
     backgroundColor: '#fff'
   }
 })
-

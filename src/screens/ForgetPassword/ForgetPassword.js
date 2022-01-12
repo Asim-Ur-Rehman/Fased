@@ -27,55 +27,42 @@ export const ForgetPassword = ({ navigation }) => {
   const [email, setEmail] = useState('')
 
   const dispatch = useDispatch()
-  const [forgotPassword, { data, loading, error }] = useMutation(Forgot_Password);
+  const [forgotPassword, { data, loading, error }] =
+    useMutation(Forgot_Password)
   const forgotPasswordFunc = () => {
     let value =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        email,
-      );
+        email
+      )
     if (email == '') {
-      ToastMessage('Form Error', 'Please enter email', 'error');
-    }
-    else if (!value) {
-      ToastMessage('Email Error', 'Please enter a valid email address', 'info');
-    }
-    else {
-
+      ToastMessage('Please enter email', null, 'error')
+    } else if (!value) {
+      ToastMessage('Please enter a valid email address', null, 'info')
+    } else {
       forgotPassword({
         variables: {
-          email: email,
-
+          email: email
         }
-      }).then((data) => {
-        // console.log('data return', data.data.forgotPassword.status)
-        if (data?.data?.forgotPassword?.status) {
-
-
-          ToastMessage('OTP Send', data?.data?.forgotPassword?.message, 'success');
-          navigation.navigate('Otp', {
-            emailFromParam: email
-          })
-
-        }
-        else {
-          ToastMessage('Error', data?.data?.forgotPassword?.message, 'error');
-        }
-
-
       })
-        .catch((error) => {
+        .then(data => {
+          // console.log('data return', data.data.forgotPassword.status)
+          if (data?.data?.forgotPassword?.status) {
+            ToastMessage(data?.data?.forgotPassword?.message, null, 'success')
+            navigation.navigate('Otp', {
+              emailFromParam: email
+            })
+          } else {
+            ToastMessage(data?.data?.forgotPassword?.message, null, 'error')
+          }
+        })
+        .catch(error => {
           console.log('error', error)
           if (error) {
-            ToastMessage('Error', 'Something went wrong', 'error');
+            ToastMessage('Something went wrong', null, 'error')
+          } else {
+            ToastMessage(error?.data?.forgotPassword?.message, null, 'error')
           }
-          else {
-            ToastMessage('Error', error?.data?.forgotPassword?.message, 'error');
-          }
-
         })
-
-
-
     }
   }
 
@@ -113,8 +100,6 @@ export const ForgetPassword = ({ navigation }) => {
           />
         </View>
         <View style={styles.InputContainer}>
-
-
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Email address</Text>
           </View>
@@ -127,15 +112,30 @@ export const ForgetPassword = ({ navigation }) => {
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
             autoCapitalize="none"
-            onChangeText={(text) => {
+            onChangeText={text => {
               setEmail(text)
             }}
           />
         </View>
 
-        <View style={{ width: '76%', alignSelf: 'center', marginTop: 8, paddingVertical: 10 }}>
-          <Text style={{ color: "#A8AEB9", fontSize: 14, fontFamily: "Rubik-Regular", lineHeight: 16, textAlign: "center" }}>A message will be sent to your email address
-            with further instructions</Text>
+        <View
+          style={{
+            width: '76%',
+            alignSelf: 'center',
+            marginTop: 8,
+            paddingVertical: 10
+          }}>
+          <Text
+            style={{
+              color: '#A8AEB9',
+              fontSize: 14,
+              fontFamily: 'Rubik-Regular',
+              lineHeight: 16,
+              textAlign: 'center'
+            }}>
+            A message will be sent to your email address with further
+            instructions
+          </Text>
         </View>
 
         <View
@@ -144,20 +144,23 @@ export const ForgetPassword = ({ navigation }) => {
             // justifyContent: 'center',
             paddingVertical: 20
           }}>
-
-
-          {
-            loading ? <ActivityIndicator size='large' color='#4A4C50' /> :
-              <Button
-                onPress={() => {
-                  forgotPasswordFunc()
-                }}
-                // onPress={() => { navigation.navigate('ChangePassword') }}
-                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center', marginTop: 10 }}
-                title="Recover Password"
-              />
-          }
-
+          {loading ? (
+            <ActivityIndicator size="large" color="#4A4C50" />
+          ) : (
+            <Button
+              onPress={() => {
+                forgotPasswordFunc()
+              }}
+              // onPress={() => { navigation.navigate('ChangePassword') }}
+              buttonStyle={{
+                width: '90%',
+                height: 48,
+                alignSelf: 'center',
+                marginTop: 10
+              }}
+              title="Recover Password"
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -182,7 +185,7 @@ const styles = StyleSheet.create({
   },
   ForgetPasswordText: {
     fontSize: 18,
-    fontFamily: "Rubik-Medium",
+    fontFamily: 'Rubik-Medium',
     textAlign: 'center'
   },
   InputContainer: {
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
   inputLabel: {
     color: '#374151',
     fontSize: 14,
-    fontFamily: "Rubik-Medium",
+    fontFamily: 'Rubik-Medium'
   },
   input: {
     width: '88%',
@@ -204,9 +207,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     color: '#374151',
     fontSize: 12,
-    fontFamily: "Rubik-Regular",
+    fontFamily: 'Rubik-Regular',
     backgroundColor: '#fff'
   }
 })
-
-

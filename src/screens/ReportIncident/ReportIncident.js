@@ -12,7 +12,9 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Keyboard,
+  TouchableWithoutFeedback
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -59,7 +61,7 @@ export const ReportIncident = ({ navigation }) => {
   })
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
-      setLocation({...location, ...info.coords})
+      setLocation({ ...location, ...info.coords })
     })
   }, [])
   const allMarkers = [
@@ -69,7 +71,7 @@ export const ReportIncident = ({ navigation }) => {
       title: 'User1',
       description: 'HelloUser1',
       image: Images.Pictures.green
-    },
+    }
   ]
 
   const animateToCurrentLocation = () => {
@@ -90,10 +92,10 @@ export const ReportIncident = ({ navigation }) => {
       longitude: initialRegion.longitude,
       floor: floor ? floor : '0'
     }
-    if(floor || enabled) {
+    if (floor || enabled) {
       dispatch(ReportIncidentLocationFloorData(data, navigation))
-    }else {
-      ToastMessage('error',"Floor field should'nt be null", "error" )
+    } else {
+      ToastMessage('floor field should not  be blank.', null, 'error')
     }
   }
 
@@ -133,125 +135,137 @@ export const ReportIncident = ({ navigation }) => {
         {/* <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}> */}
-        <View>
-          <View
-            style={{
-              flexDirection: 'row',
-              borderWidth: 1,
-              borderColor: '#bdbdbd',
-              width: '90%',
-              alignSelf: 'center',
-              borderRadius: 5,
-              marginVertical: 10,
-              height: height / 20
-            }}>
-            <View style={{ justifyContent: 'center', paddingHorizontal: 15 }}>
-              <Feather
-                name="search"
-                color={theme.iconsColor.SearchIcon}
-                size={18}
-              />
-            </View>
-            <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
-              <TextInput
-                placeholder="Where did it happen?"
-                placeholderTextColor={theme.textColor.placeholderColor}
-                onPressIn={() => setVisible(true)}
-              />
-            </View>
-          </View>
-        </View>
-        <View style={styles.markerFixed}>
-          <Image
-            style={{ width: 58, height: 58 }}
-            resizeMode={'contain'}
-            source={Images.Pictures.red}
-          />
-        </View>
-        <View style={{}}>
-          <MapView
-            initialRegion={initialRegion}
-            style={{ height: '80%' }}
-            onRegionChangeComplete={onRegionChange}
-            ref={mapRef}>
-            {allMarkers.map((item, i) => {
-              return (
-                <Marker
-                  pointerEvents="none"
-                  key={i}
-                  coordinate={{
-                    latitude: item.latitude,
-                    longitude: item.longitude
-                  }}>
-                  <Image
-                    source={item.image}
-                    style={{ width: 58, height: 58 }}
-                    resizeMode={'contain'}
-                  />
-                </Marker>
-              )
-            })}
-          </MapView>
-        </View>
-        <View style={styles.mapActionsContainer}>
-          <View style={styles.verticalBtnContainer}>
-            <View>
-              <Button
-                image={Images.Pictures.compass}
-                buttonStyle={styles.squareBtn}
-              />
-            </View>
-            <View>
-              <Button
-                image={Images.Pictures.currentLocIcon}
-                buttonStyle={styles.squareBtn}
-                onPress={() => animateToCurrentLocation()}
-              />
+        <>
+          <View>
+            <View
+              style={{
+                flexDirection: 'row',
+                borderWidth: 1,
+                borderColor: '#bdbdbd',
+                width: '90%',
+                alignSelf: 'center',
+                borderRadius: 5,
+                marginVertical: 10,
+                height: height / 20
+                // alignItems: 'center'
+                // justifyContent: 'center'
+              }}>
+              <View style={{ justifyContent: 'center', paddingHorizontal: 15 }}>
+                <Feather
+                  name="search"
+                  color={theme.iconsColor.SearchIcon}
+                  size={18}
+                />
+              </View>
+              <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
+                <TextInput
+                  placeholder="Where did it happen?"
+                  placeholderTextColor={theme.textColor.placeholderColor}
+                  onPressIn={() => setVisible(true)}
+                />
+              </View>
             </View>
           </View>
-        </View>
-
-        <View style={styles.footerViewStyle}>
-          <View style={styles.footerRowViewStyle}>
-            <View style={styles.textAndToggleViewStyle}>
-              <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
-              <ToggleButton selectionMode={1} onSelectSwitch={onSelectSwitch} />
-            </View>
-            <View style={styles.textAndToggleViewStyle2}>
-              <Text style={styles.footerRowTextStyle}>Floor</Text>
-              {!enabled ? <TextInput
-                editable={enabled ? false : true}
-                placeholder="11th"
-                placeholderTextColor={theme.textColor.placeholderColor}
-                keyboardType="number-pad"
-                onChangeText={number => {
-                  setFloor(number)
-                }}
-                style={{
-                  width: 63,
-                  height: 36,
-                  borderWidth: 0.8,
-                  borderColor: theme.bordersColor.InputBorder,
-                  borderRadius: 5,
-                  paddingHorizontal: 15,
-                  fontSize: 12,
-                  fontFamily: 'Rubik-Regular',
-                  color: 'black'
-                }}
-              /> : <Text>Ground floor</Text>}
-            </View>
-          </View>
-          <View style={{ marginVertical: 10 }}>
-            <Button
-              onPress={() => {
-                next()
-              }}
-              buttonStyle={{ width: '85%', alignSelf: 'center' }}
-              title="Next"
+          <View style={styles.markerFixed}>
+            <Image
+              style={{ width: 58, height: 58 }}
+              resizeMode={'contain'}
+              source={Images.Pictures.red}
             />
           </View>
-        </View>
-        {/* </ScrollView> */}
+          <View style={{}}>
+            <MapView
+              initialRegion={initialRegion}
+              style={{ height: '80%' }}
+              onRegionChangeComplete={onRegionChange}
+              ref={mapRef}>
+              {allMarkers.map((item, i) => {
+                return (
+                  <Marker
+                    pointerEvents="none"
+                    key={i}
+                    coordinate={{
+                      latitude: item.latitude,
+                      longitude: item.longitude
+                    }}>
+                    <Image
+                      source={item.image}
+                      style={{ width: 58, height: 58 }}
+                      resizeMode={'contain'}
+                    />
+                  </Marker>
+                )
+              })}
+            </MapView>
+          </View>
+          <View style={styles.mapActionsContainer}>
+            <View style={styles.verticalBtnContainer}>
+              <View>
+                <Button
+                  image={Images.Pictures.compass}
+                  buttonStyle={styles.squareBtn}
+                />
+              </View>
+              <View>
+                <Button
+                  image={Images.Pictures.currentLocIcon}
+                  buttonStyle={styles.squareBtn}
+                  onPress={() => animateToCurrentLocation()}
+                />
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.footerViewStyle}>
+            <View style={styles.footerRowViewStyle}>
+              <View style={styles.textAndToggleViewStyle}>
+                <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
+                <ToggleButton
+                  selectionMode={1}
+                  onSelectSwitch={onSelectSwitch}
+                />
+              </View>
+              <View style={styles.textAndToggleViewStyle2}>
+                <Text style={styles.footerRowTextStyle}>Floor</Text>
+                {!enabled ? (
+                  <TextInput
+                    editable={enabled ? false : true}
+                    placeholder="11th"
+                    placeholderTextColor={theme.textColor.placeholderColor}
+                    keyboardType="number-pad"
+                    maxLength={3}
+                    onChangeText={number => {
+                      setFloor(number)
+                    }}
+                    style={{
+                      width: 63,
+                      height: 36,
+                      borderWidth: 0.8,
+                      borderColor: theme.bordersColor.InputBorder,
+                      borderRadius: 5,
+                      paddingHorizontal: 15,
+                      fontSize: 12,
+                      fontFamily: 'Rubik-Regular',
+                      color: 'black'
+                    }}
+                  />
+                ) : (
+                  <Text>Ground floor</Text>
+                )}
+              </View>
+            </View>
+            <View style={{ marginVertical: 10 }}>
+              <Button
+                onPress={() => {
+                  next()
+                }}
+                buttonStyle={{ width: '85%', alignSelf: 'center' }}
+                title="Next"
+              />
+            </View>
+          </View>
+          {/* </ScrollView> */}
+        </>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

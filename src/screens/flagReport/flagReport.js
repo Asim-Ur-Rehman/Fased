@@ -106,7 +106,8 @@ export const FlagReport = ({ navigation, route }) => {
           }
     })
       .then(res => {
-        navigation.navigate('Home')
+        // navigation.navigate('Home')
+        setModalVisible(false)
       })
       .catch(err => {
         console.log(
@@ -186,7 +187,7 @@ export const FlagReport = ({ navigation, route }) => {
             </View>
           </View>
 
-          <View
+          {/* <View
             style={{
               width: '10%',
               justifyContent: 'center',
@@ -200,7 +201,7 @@ export const FlagReport = ({ navigation, route }) => {
               //   navigation.goBack('')
               // }}
             />
-          </View>
+          </View> */}
         </View>
       </LinearGradient>
       <View style={styles.headerDownView}>
