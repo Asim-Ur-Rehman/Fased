@@ -31,13 +31,18 @@ export const renderSearchLocation = (visible, toggleModal) => {
           style={{
             flex: 1,
             backgroundColor: '#fff',
-            marginTop: Platform.OS == 'ios' ? 40 : 0,
+            marginTop: Platform.OS == 'ios' ? 40 : 0
           }}>
-          <View style={{ justifyContent: 'center', paddingHorizontal: 15, top: 30 }}>
+          <View
+            style={{
+              justifyContent: 'center',
+              paddingHorizontal: 15,
+              top: 40
+            }}>
             <Feather
-            onPress={() => {
-              toggleModal()
-            }}
+              onPress={() => {
+                toggleModal()
+              }}
               name="arrow-left"
               color={theme.textColor.blackText}
               size={18}
@@ -76,10 +81,13 @@ export const renderSearchLocation = (visible, toggleModal) => {
                 marginBottom: 20
               },
               textInput: {
-                height: 45,
+                // height: 45,
                 color: '#5d5d5d',
                 fontSize: 14,
-                fontFamily: 'Rubik-Medium'
+                fontFamily: 'Rubik-Medium',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 5
               }
             }}
             renderLeftButton={() => {

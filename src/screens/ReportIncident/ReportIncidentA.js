@@ -24,24 +24,24 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useDispatch } from 'react-redux'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
-import moment from 'moment';
+import moment from 'moment'
 export const ReportIncidentA = ({ navigation, route }) => {
   const [disableDate, setDisableDate] = useState(false)
   const [disableTime, setDisableTime] = useState(false)
   const [disableName, setDisableName] = useState(false)
   const [disableAmount, setDisableAmount] = useState(false)
 
-
-
-
-
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('time')
   const [date, setDate] = useState(new Date().toDateString())
-  const [currentTime, setCurrentTime] = useState(new Date().toString().substring(16, 21))
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toString().substring(16, 21)
+  )
 
   const [category, setCategory] = useState(null)
-  const [subcategory, setsubCategory] = useState(route.params?.subcategory ? route.params?.subcategory : null)
+  const [subcategory, setsubCategory] = useState(
+    route.params?.subcategory ? route.params?.subcategory : null
+  )
   const [suspectName, setSuspectName] = useState('')
   const [amount, setAmount] = useState()
 
@@ -52,7 +52,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
       // route.params?.category ? route.params?.category : null
     } else {
       setCategory(category => {
-        console.log("category useEFfect", category)
+        console.log('category useEFfect', category)
         return category ? category : null
       })
     }
@@ -74,7 +74,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
     setShow(!show)
   }
 
-
   const onToggleSwitch = (index, key) => {
     console.log('index', index, key)
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
@@ -92,18 +91,10 @@ export const ReportIncidentA = ({ navigation, route }) => {
       case 'amount':
         index === 2 ? setDisableAmount(true) : setDisableAmount(false)
         break
-
-
     }
-
-
   }
 
-
-  const Card = ({
-    item = [],
-    onPress = () => { }
-  }) => {
+  const Card = ({ item = [], onPress = () => {} }) => {
     return (
       <TouchableOpacity
         onPress={onPress}
@@ -115,49 +106,63 @@ export const ReportIncidentA = ({ navigation, route }) => {
           borderRadius: 10,
           backgroundColor: item[0].BackgroundColor,
           flexDirection: 'row',
-          marginBottom: 12,
+          marginBottom: 12
         }}>
-        <View style={{
-          width: '30%',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-          <Image source={{ uri: item[0].Image }} style={{
-            width: 79.89,
-            height: 79.89,
-          }} />
-        </View>
-        <View style={{
-          width: '70%',
-          height: 79.89,
-          justifyContent: 'center',
-          marginTop: 6
-        }}>
-          <View style={{
-            width: '92%',
-            alignItems: 'flex-end',
+        <View
+          style={{
+            width: '30%',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}>
-            <MaterialCommunityIcons name='circle-slice-8' color={'#ffff'} size={12} />
+          <Image
+            source={{ uri: item[0].Image }}
+            style={{
+              width: 79.89,
+              height: 79.89
+            }}
+          />
+        </View>
+        <View
+          style={{
+            width: '70%',
+            height: 79.89,
+            justifyContent: 'center',
+            marginTop: 6
+          }}>
+          <View
+            style={{
+              width: '92%',
+              alignItems: 'flex-end'
+            }}>
+            <MaterialCommunityIcons
+              name="circle-slice-8"
+              color={'#ffff'}
+              size={12}
+            />
           </View>
 
-          <View style={{
-            height: 68,
-            width: '90%'
-          }}>
-            <Text style={{
-              fontSize: 14,
-              fontFamily: "Rubik-Medium",
-              color: '#ffff',
-              paddingBottom: 5
+          <View
+            style={{
+              height: 68,
+              width: '90%'
             }}>
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: 'Rubik-Medium',
+                color: '#ffff',
+                paddingBottom: 5
+              }}>
               {item[0].Title}
             </Text>
-            <Text style={{
-              fontSize: 11,
-              fontFamily: "Rubik-Regular",
-              color: '#fff',
-              lineHeight: 12
-            }}>
+            <Text
+              numberOfLines={2}
+              style={{
+                fontSize: 11,
+                fontFamily: 'Rubik-Regular',
+                color: '#fff',
+                lineHeight: 12
+              }}>
               {item[0].Description}
             </Text>
           </View>
@@ -166,11 +171,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
     )
   }
 
-
-
   const next = () => {
-
-
     // console.log('data', moment(date).format('YYYY-MM-DD'))
     let data = {
       category: category[0].id,
@@ -179,8 +180,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
       time: currentTime,
       suspectName: suspectName ? suspectName : 'Anonymous',
       amount: amount ? amount : '0'
-
-
     }
     console.log('all data', data)
 
@@ -191,9 +190,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
     // // console.log('catogeory ', route.params.category.map((item) => {
     // //   console.log('item', item.key)
     // // }))
-
-
-
   }
 
   return (
@@ -237,20 +233,30 @@ export const ReportIncidentA = ({ navigation, route }) => {
             </View>
           </View>
 
-
-          {category
-            ?
-            <Card onPress={() => {
-              navigation.navigate('ReportIncidentB', { type: 'category', selected: category, alternate: subcategory })
-            }} item={category} />
-            :
-            <View style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
+          {category ? (
+            <Card
+              onPress={() => {
+                navigation.navigate('ReportIncidentB', {
+                  type: 'category',
+                  selected: category,
+                  alternate: subcategory
+                })
+              }}
+              item={category}
+            />
+          ) : (
+            <View
+              style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
                 Choose Category
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ReportIncidentB', { type: 'category', alternate: subcategory, selected: [] })
+                  navigation.navigate('ReportIncidentB', {
+                    type: 'category',
+                    alternate: subcategory,
+                    selected: []
+                  })
                 }}
                 activeOpacity={0.8}
                 style={styles.fieldView}>
@@ -273,21 +279,33 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   />
                 </View>
               </TouchableOpacity>
-            </View>}
+            </View>
+          )}
 
-          {subcategory
-            ?
-            <Card onPress={() => {
-              navigation.navigate('ReportIncidentB', { type: 'subcategory', selected: subcategory, alternate: category })
-            }} item={subcategory} />
-            :
-            <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+          {subcategory ? (
+            <Card
+              onPress={() => {
+                navigation.navigate('ReportIncidentB', {
+                  type: 'subcategory',
+                  selected: subcategory,
+                  alternate: category
+                })
+              }}
+              item={subcategory}
+            />
+          ) : (
+            <View
+              style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
                 Choose Sub Category
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ReportIncidentB', { type: 'subcategory', alternate: category, selected: [] })
+                  navigation.navigate('ReportIncidentB', {
+                    type: 'subcategory',
+                    alternate: category,
+                    selected: []
+                  })
                 }}
                 activeOpacity={0.8}
                 style={styles.fieldView}>
@@ -310,9 +328,11 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   />
                 </View>
               </TouchableOpacity>
-            </View>}
+            </View>
+          )}
 
-          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+          <View
+            style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
@@ -327,12 +347,14 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Today
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'date')} />
+                <ToggleButton
+                  selectionMode={1}
+                  onSelectSwitch={index => onToggleSwitch(index, 'date')}
+                />
               </View>
             </View>
             <TouchableOpacity
               disabled={disableDate}
-
               activeOpacity={0.8}
               onPress={() => {
                 setMode('date')
@@ -363,7 +385,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
 
-          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+          <View
+            style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
@@ -378,7 +401,10 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Now
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'time')} />
+                <ToggleButton
+                  selectionMode={1}
+                  onSelectSwitch={index => onToggleSwitch(index, 'time')}
+                />
               </View>
             </View>
             <TouchableOpacity
@@ -428,19 +454,20 @@ export const ReportIncidentA = ({ navigation, route }) => {
               mode={mode}
               is24Hour={true}
               onConfirm={onChange}
-            // customConfirmButtonIOS={(value,e) => {
-            //   console.log("value", value, "e", e.target)
-            //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
-            // }}
-            // customCancelButtonIOS={(value,e) => {
-            //   return <View style={{backgroundColor: '#fff', padding: 5, borderRadius: 20}}>
-            //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
-            //         </View>
-            // }}
+              // customConfirmButtonIOS={(value,e) => {
+              //   console.log("value", value, "e", e.target)
+              //   return <Button title="Confirm" buttonStyle={{alignSelf: "center", marginVertical: 10}} />
+              // }}
+              // customCancelButtonIOS={(value,e) => {
+              //   return <View style={{backgroundColor: '#fff', padding: 5, borderRadius: 20}}>
+              //             <Button title="Cancel" buttonStyle={{alignSelf: "center", marginVertical: 10, backgroundColor: '#fff'}} />
+              //         </View>
+              // }}
             />
           </View>
 
-          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+          <View
+            style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
@@ -455,7 +482,10 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   Don’t Know
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'suspectName')} />
+                <ToggleButton
+                  selectionMode={1}
+                  onSelectSwitch={index => onToggleSwitch(index, 'suspectName')}
+                />
               </View>
             </View>
             <View style={styles.fieldView2}>
@@ -468,7 +498,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   color: '#000',
                   paddingHorizontal: 20
                 }}
-                onChangeText={(text) => {
+                onChangeText={text => {
                   setSuspectName(text)
                 }}
                 // onChangeText={onChangeNumber}
@@ -480,7 +510,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
             </View>
           </View>
 
-          <View style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
+          <View
+            style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
@@ -495,7 +526,10 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   }}>
                   No
                 </Text>
-                <ToggleButton selectionMode={1} onSelectSwitch={(index) => onToggleSwitch(index, 'amount')} />
+                <ToggleButton
+                  selectionMode={1}
+                  onSelectSwitch={index => onToggleSwitch(index, 'amount')}
+                />
               </View>
             </View>
             <View style={styles.fieldView}>
@@ -508,7 +542,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   color: '#000',
                   paddingHorizontal: 20
                 }}
-                onChangeText={(text) => {
+                onChangeText={text => {
                   setAmount(text)
                 }}
                 // onChangeText={onChangeNumber}
@@ -530,7 +564,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
           <View style={{ marginTop: 15 }}>
             <Button
-
               onPress={() => {
                 next()
               }}
@@ -591,7 +624,7 @@ const styles = StyleSheet.create({
     borderColor: '#33333330',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
     // shadowColor: '#000',
     // shadowOffset: {
     //   width: 0,
