@@ -26,22 +26,26 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 
-
 export const NewsDetails = ({ navigation, route }) => {
-
   useEffect(() => {
-    getUserData()
-    .then((res) => {
-        setUserData(res)
+    getUserData().then(res => {
+      setUserData(res)
     })
-}, [])
+  }, [])
 
   const [userData, setUserData] = useState(null)
-  const [title, setTitle] = useState(route.params?.title ? route.params?.title : "TITLE")
-  const [tagline, setTagline] = useState(route.params?.tagline ? route.params?.tagline : "TAGLINE")
-  const [description, setdescription] = useState(route.params?.description ? route.params?.description : "DESCRIPTION")
-  const [newsData, setnewsData] = useState(route.params?.newsData ? route.params?.newsData : null)
-
+  const [title, setTitle] = useState(
+    route.params?.title ? route.params?.title : 'TITLE'
+  )
+  const [tagline, setTagline] = useState(
+    route.params?.tagline ? route.params?.tagline : 'TAGLINE'
+  )
+  const [description, setdescription] = useState(
+    route.params?.description ? route.params?.description : 'DESCRIPTION'
+  )
+  const [newsData, setnewsData] = useState(
+    route.params?.newsData ? route.params?.newsData : null
+  )
 
   const PROP = [
     {
@@ -94,15 +98,14 @@ export const NewsDetails = ({ navigation, route }) => {
       }
     })
     favNew.refetch()
-    ToastMessage('News', result.data.addToFavorite.message);
+    ToastMessage(result.data.addToFavorite.message, null, 'success')
   }
-
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message:  `FASED {APP_URL} \n \n Title: ${title} \n Tagline: ${tagline} \n Description: ${description}`,
-      });
+        message: `FASED {APP_URL} \n \n Title: ${title} \n Tagline: ${tagline} \n Description: ${description}`
+      })
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
@@ -113,12 +116,14 @@ export const NewsDetails = ({ navigation, route }) => {
         // dismissed
       }
     } catch (error) {
-      alert(error.message);
+      alert(error.message)
     }
-  };
+  }
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
-  const isFav = favNew?.data?.getFavoriteByUserId?.data.find(val => val.News.id == newsData.id)
+  const isFav = favNew?.data?.getFavoriteByUserId?.data.find(
+    val => val.News.id == newsData.id
+  )
   return (
     <View style={styles.mainContainer}>
       <StatusBar
@@ -131,42 +136,46 @@ export const NewsDetails = ({ navigation, route }) => {
         start={{ x: 0.95, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.LinearheaderContainer}>
-          <View style={{
-                  width: '85%',
-                  alignSelf: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                  marginTop: 20
+        <View
+          style={{
+            width: '85%',
+            alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            marginTop: 20
           }}>
-        <TouchableOpacity onPress={() => {
-          if(isGuest) {
-            Alert.alert("Alert", "You have to Sign Up for this action", [
-              {
-                text: "Cancel",
-                onPress: () => null,
-                style: "cancel"
-              },
-              { text: "Ok", onPress: () => navigation.navigate('SignUp') }
-            ]);
-          }else {
-            addToFav()
-          }
-        }}>
-          <MaterialIcons name={isFav ? 'star' : 'star-outline'} size={20} color={'white'}  />
-        </TouchableOpacity>
-        <View>
-          <Text style={styles.headerLabel}>News Details</Text>
-        </View>
-        <TouchableOpacity onPress={() => onShare()} activeOpacity={0.7}>
-          <Text style={styles.headerLabel}>Share</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (isGuest) {
+                Alert.alert('Alert', 'You have to Sign Up for this action', [
+                  {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel'
+                  },
+                  { text: 'Ok', onPress: () => navigation.navigate('SignUp') }
+                ])
+              } else {
+                addToFav()
+              }
+            }}>
+            <MaterialIcons
+              name={isFav ? 'star' : 'star-outline'}
+              size={20}
+              color={'white'}
+            />
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.headerLabel}>News Details</Text>
+          </View>
+          <TouchableOpacity onPress={() => onShare()} activeOpacity={0.7}>
+            <Text style={styles.headerLabel}>Share</Text>
+          </TouchableOpacity>
         </View>
       </LinearGradient>
 
-
-      <View >
-
+      <View>
         <View
           style={{
             marginTop: 20,
@@ -189,6 +198,7 @@ export const NewsDetails = ({ navigation, route }) => {
               alignItems: 'center'
             }}>
             <Text
+              numberOfLines={1}
               style={{
                 fontSize: 17,
                 fontFamily: 'Rubik-Medium',
@@ -197,6 +207,7 @@ export const NewsDetails = ({ navigation, route }) => {
               {title}
             </Text>
             <Text
+              numberOfLines={2}
               style={{
                 fontSize: 12,
                 fontFamily: 'Rubik-Regular',
@@ -210,12 +221,12 @@ export const NewsDetails = ({ navigation, route }) => {
           </View>
           <View style={{ height: height / 1.65 }}>
             <CustomScrollView
-              contentContainerStyle={{ paddingBottom: 20, }}
+              contentContainerStyle={{ paddingBottom: 20 }}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
                 backgroundColor: '#9CA3AF',
                 borderRadius: 3,
-                width: 5,
+                width: 5
 
                 // paddingVertical: 20
                 // marginTop: 5,
@@ -223,11 +234,7 @@ export const NewsDetails = ({ navigation, route }) => {
                 // top: 10,
                 // bottom: 15
               }}>
-
-              <Text style={styles.ContentTextStyle}>
-                {description}
-              </Text>
-
+              <Text style={styles.ContentTextStyle}>{description}</Text>
             </CustomScrollView>
           </View>
         </View>
@@ -244,12 +251,6 @@ export const NewsDetails = ({ navigation, route }) => {
           />
         </View>
       </View>
-
-
-
-
-
-
     </View>
   )
 }
@@ -262,7 +263,7 @@ const styles = StyleSheet.create({
     // width: '100%',
     height: 100,
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center'
     // flexDirection: 'row',
     // paddingHorizontal: 20,
     // marginVertical:10

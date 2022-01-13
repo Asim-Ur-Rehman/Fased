@@ -80,9 +80,11 @@ export const ReportIncidentA = ({ navigation, route }) => {
     switch (key) {
       case 'date':
         index === 2 ? setDisableDate(true) : setDisableDate(false)
+        setDate(new Date().toDateString())
         break
       case 'time':
         index === 2 ? setDisableTime(true) : setDisableTime(false)
+        setCurrentTime(new Date().toString().substring(16, 21))
         break
 
       case 'suspectName':
@@ -248,7 +250,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Choose Category
+                Choose category
               </Text>
               <TouchableOpacity
                 onPress={() => {
@@ -297,7 +299,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Choose Sub Category
+                Choose sub category
               </Text>
               <TouchableOpacity
                 onPress={() => {
@@ -369,7 +371,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   margin: 10,
                   paddingLeft: 10
                 }}>
-                {date ? date : 'Choose date'}
+                {disableDate ? date : date}
               </Text>
               <View>
                 <Image
@@ -423,7 +425,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   margin: 10,
                   paddingLeft: 10
                 }}>
-                {currentTime ? currentTime : 'Choose time'}
+                {disableTime ? currentTime : currentTime}
               </Text>
               <View>
                 <Image
@@ -443,6 +445,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
               onCancel={() => {
                 setShow(!show)
               }}
+              maximumDate={new Date()}
               display={
                 mode == 'time' || Platform.OS == 'android'
                   ? Platform.OS == 'android'
@@ -471,7 +474,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Suspect Name
+                Suspect's Name
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -480,7 +483,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     fontFamily: 'Rubik-SemiBold',
                     marginRight: 12
                   }}>
-                  Don’t Know
+                  Don’t know
                 </Text>
                 <ToggleButton
                   selectionMode={1}
@@ -506,6 +509,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 placeholder="Enter name"
                 placeholderTextColor="#33333370"
                 keyboardType="default"
+                maxLength={30}
               />
             </View>
           </View>
@@ -515,7 +519,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Did This Cost You Money?
+                Did this cost you money?
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -549,7 +553,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 // value={'123456789012'}
                 placeholder="Amount"
                 placeholderTextColor="#33333370"
-                keyboardType="numbers-and-punctuation"
+                keyboardType="number-pad"
+                maxLength={6}
               />
               <Text
                 style={{
@@ -562,7 +567,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             </View>
           </View>
 
-          <View style={{ marginTop: 15 }}>
+          <View style={{ marginVertical: 15 }}>
             <Button
               onPress={() => {
                 next()

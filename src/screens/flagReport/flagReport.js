@@ -92,41 +92,45 @@ export const FlagReport = ({ navigation, route }) => {
 
   const [userData, setUserData] = useState(null)
   const onDone = () => {
-    CreateFlagReport({
-      variables: others
-        ? {
-            userId: parseFloat(userData?.id),
-            reasonId: 0,
-            reason: text
-          }
-        : {
-            userId: parseFloat(userData?.id),
-            reasonId: reason.id,
-            reason: reason.reason
-          }
-    })
-      .then(res => {
-        // navigation.navigate('Home')
-        setModalVisible(false)
+    if (reason || text) {
+      CreateFlagReport({
+        variables: others
+          ? {
+              userId: parseFloat(userData?.id),
+              reasonId: 0,
+              reason: text
+            }
+          : {
+              userId: parseFloat(userData?.id),
+              reasonId: reason.id,
+              reason: reason.reason
+            }
       })
-      .catch(err => {
-        console.log(
-          'err',
-          err,
-          'err condition',
-          others
-            ? {
-                userId: parseFloat(userData?.id),
-                reasonId: 0,
-                reason: text
-              }
-            : {
-                userId: parseFloat(userData?.id),
-                reasonId: reason.id,
-                reason: reason.reason
-              }
-        )
-      })
+        .then(res => {
+          // navigation.navigate('Home')
+          setModalVisible(false)
+        })
+        .catch(err => {
+          console.log(
+            'err',
+            err,
+            'err condition',
+            others
+              ? {
+                  userId: parseFloat(userData?.id),
+                  reasonId: 0,
+                  reason: text
+                }
+              : {
+                  userId: parseFloat(userData?.id),
+                  reasonId: reason.id,
+                  reason: reason.reason
+                }
+          )
+        })
+    } else {
+      alert('Please define any reason')
+    }
   }
 
   return (
