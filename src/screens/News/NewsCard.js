@@ -24,7 +24,9 @@ import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import {
   Get_Categories,
   GET_FAV_NEWS_BY_ID,
-  Get_News
+  Get_News,
+  SEARCH_FAV,
+  SEARCH_NEWS
 } from '../../utils/queries'
 import { getUserData } from '../../utils/helper'
 import { useIsFocused } from '@react-navigation/native'
@@ -35,26 +37,34 @@ export const NewsCard = ({ navigation }) => {
 
   const { data, loading, error } = useQuery(Get_Categories)
   const OldNews = useQuery(Get_News)
+  const [search, setSearch] = useState('')
+
+  const SearchNews = useQuery(SEARCH_NEWS, {
+    variables: {
+      text: search
+    }
+  })
   const favNew = useQuery(GET_FAV_NEWS_BY_ID, {
     variables: {
       userId: parseFloat(userData?.id)
     }
   })
+  const searchFav = useQuery(SEARCH_FAV, {
+    variables: {
+      userId: parseFloat(userData?.id),
+      text: search
+    }
+  })
 
-  const [old, setOld] = useState(true)
-  const [New, setNew] = useState(false)
-  const [Star, setStar] = useState(false)
-  const [category, setCategory] = useState(false)
   const [activetab, setActiveTab] = useState('old')
 
-  const [search, setSearch] = useState('')
   const isFocused = useIsFocused()
 
   useEffect(() => {
     getUserData().then(res => {
       setUserData(res)
     })
-
+    setSearch('')
     OldNews.refetch()
     favNew.refetch()
   }, [activetab, isFocused])
@@ -63,30 +73,6 @@ export const NewsCard = ({ navigation }) => {
     setSearch(text)
   }
 
-  const handleOld = topBar => {
-    setOld(1)
-    setNew(0)
-    setStar(0)
-    setCategory(0)
-  }
-  const handleNew = topBar => {
-    setOld(0)
-    setNew(1)
-    setStar(0)
-    setCategory(0)
-  }
-  const handleStar = topBar => {
-    setOld(0)
-    setNew(0)
-    setStar(1)
-    setCategory(0)
-  }
-  const handleCategory = topBar => {
-    setOld(0)
-    setNew(0)
-    setStar(0)
-    setCategory(1)
-  }
 
   const newsCard = (item, index) => {
     return (
@@ -163,7 +149,6 @@ export const NewsCard = ({ navigation }) => {
     )
   }
 
-  ;[[], []]
 
   let CatNews = {}
   const catIds = data?.getCategories?.data.map(val => val.Title)
@@ -180,46 +165,99 @@ export const NewsCard = ({ navigation }) => {
     }
   }
 
+
   const renderContent = () => {
     if (activetab == 'old') {
+      var newArr = []
+       if(search) {
+         console.log("SearchNews.data?.searchNews?.data", SearchNews)
+        newArr = SearchNews.data?.searchNews?.data?.filter(e => {
+          const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
+        })
+       }else {
+        newArr = OldNews.data?.getNews?.data?.filter(e => {
+          const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
+        })
+       }
+       console.log("newArr", newArr)
       return (
-        <FlatList
-          data={OldNews.data?.getNews?.data}
-          renderItem={({ item, index }) => {
-            const oneWeekOlddate = new Date(
-              Date.now() - 7 * 24 * 60 * 60 * 1000
-            )
-            const isOld = moment(item.createdAt).isSameOrBefore(oneWeekOlddate) // true
-            if (isOld) {
+        <>
+          <FlatList
+            data={newArr}
+            renderItem={({ item, index }) => {
               return newsCard(item, index)
+            }}
+            ListEmptyComponent={
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: height / 2
+                }}>
+                <Text>Empty List</Text>
+              </View>
             }
-          }}
-        />
+          />
+        </>
       )
     }
     if (activetab == 'new') {
+      var newArr = []
+       if(search) {
+         console.log("SearchNews.data?.searchNews?.data", SearchNews)
+        newArr = SearchNews.data?.searchNews?.data?.filter(e => {
+          const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          return !(moment(e.createdAt).isSameOrBefore(oneWeekOlddate))
+        })
+       }else {
+        newArr = OldNews.data?.getNews?.data?.filter(e => {
+          const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+          return !(moment(e.createdAt).isSameOrBefore(oneWeekOlddate))
+        })
+       }
       return (
-        <FlatList
-          data={OldNews.data?.getNews?.data}
-          renderItem={({ item, index }) => {
-            const oneWeekOlddate = new Date(
-              Date.now() - 7 * 24 * 60 * 60 * 1000
-            )
-            const isOld = moment(item.createdAt).isSameOrBefore(oneWeekOlddate) // true
-            if (!isOld) {
+        <>
+          <FlatList
+            data={newArr}
+            renderItem={({ item, index }) => {
               return newsCard(item, index)
+            }}
+            ListEmptyComponent={
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: height / 2
+                }}>
+                <Text>Empty List</Text>
+              </View>
             }
-          }}
-        />
+          />
+        </>
       )
     }
     if (activetab == 'fav') {
       return (
         <FlatList
-          data={favNew?.data?.getFavoriteByUserId?.data}
+          data={search ? searchFav?.data?.searchFav?.data : favNew?.data?.getFavoriteByUserId?.data}
           renderItem={({ item, index }) => {
             return newsCard(item.News, index)
           }}
+          ListEmptyComponent={
+            <View
+              style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: height / 2
+              }}>
+              <Text>Empty List</Text>
+            </View>
+          }
         />
       )
     }
@@ -228,25 +266,39 @@ export const NewsCard = ({ navigation }) => {
       for (var title in CatNews) {
         arr.push(CatNews[title].data)
       }
-      return arr.map((val, ind) => {
+      if (arr.length > 0) {
+        return arr.map((val, ind) => {
+          return (
+            <View>
+              <Text
+                style={[
+                  styles.textStyle1,
+                  { paddingHorizontal: 25, paddingBottom: 10, fontSize: 20 }
+                ]}>
+                {val[0].CategoryName}
+              </Text>
+              <FlatList
+                data={val}
+                renderItem={({ item, index }) => {
+                  return newsCard(item, index)
+                }}
+              />
+            </View>
+          )
+        })
+      } else {
         return (
-          <View>
-            <Text
-              style={[
-                styles.textStyle1,
-                { paddingHorizontal: 25, paddingBottom: 10, fontSize: 20 }
-              ]}>
-              {val[0].CategoryName}
-            </Text>
-            <FlatList
-              data={val}
-              renderItem={({ item, index }) => {
-                return newsCard(item, index)
-              }}
-            />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: height / 2
+            }}>
+            <Text>Empty List</Text>
           </View>
         )
-      })
+      }
     }
   }
 
@@ -320,6 +372,39 @@ export const NewsCard = ({ navigation }) => {
         </View>
       </LinearGradient>
 
+      {/* =========Search Bar view ====== */}
+    {activetab != 'catTab' &&  <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
+        <SearchBar
+          placeholder="Search"
+          placeholderTextColor={'#dcdcdc'}
+          onChangeText={text => updateSearch(text)}
+          value={search}
+          containerStyle={{
+            height: 50,
+            borderRadius: 10,
+            borderWidth: 0,
+            backgroundColor: 'white',
+            borderTopWidth: 0,
+            borderBottomWidth: 0,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5
+          }}
+          inputContainerStyle={{
+            backgroundColor: 'white',
+            height: 40,
+            borderRadius: 10
+          }}
+          inputStyle={{ fontSize: 16 }}
+          searchIcon={{ size: 28, color: '#dcdcdc' }}
+        />
+      </View>}
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -329,50 +414,15 @@ export const NewsCard = ({ navigation }) => {
           style={{
             borderTopRightRadius: 15,
             borderTopLeftRadius: 15,
-            backgroundColor: theme.backgrounds.whiteBG,
-            bottom: 10
+            backgroundColor: theme.backgrounds.whiteBG
+            // bottom: 10
           }}>
-          {/* =========Search Bar view ====== */}
-          <View
-            style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
-            <SearchBar
-              placeholder="Search"
-              placeholderTextColor={'#dcdcdc'}
-              onChangeText={text => updateSearch(text)}
-              value={search}
-              containerStyle={{
-                height: 50,
-                borderRadius: 10,
-                borderWidth: 0,
-                backgroundColor: 'white',
-                borderTopWidth: 0,
-                borderBottomWidth: 0,
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-
-                elevation: 5
-              }}
-              inputContainerStyle={{
-                backgroundColor: 'white',
-                height: 40,
-                borderRadius: 10
-              }}
-              inputStyle={{ fontSize: 16 }}
-              searchIcon={{ size: 28, color: '#dcdcdc' }}
-            />
-          </View>
-
           {/* RENDER CONTENT */}
           {renderContent()}
 
           <View
             style={{
-              marginTop: 10
+              marginVertical: 10
             }}>
             <Button
               onPress={() => {

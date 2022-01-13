@@ -51,6 +51,24 @@ export const Get_News = gql`
   }
 `
 
+export const SEARCH_NEWS = gql`
+query SearchNews($text: String!) {
+  searchNews(text: $text) {
+    status
+    message
+    data {
+      id
+      Image
+      Title
+      Tagline
+      Description
+      createdAt
+      CategoryName
+      CategoryId
+    }
+  }
+}`
+
 export const GET_FAV_NEWS_BY_ID = gql`
 query GetFavoriteByUserId($userId: Int!) {
   getFavoriteByUserId(userId: $userId) {
@@ -66,6 +84,30 @@ query GetFavoriteByUserId($userId: Int!) {
     }
     status
     message
+  }
+}`
+
+export const SEARCH_FAV = gql`
+query SearchFav($userId: Int!, $text: String!) {
+  searchFav(userId: $userId, text: $text) {
+    status
+    message
+    data {
+      News {
+        CategoryName
+        CategoryId
+        createdAt
+        Description
+        Title
+        Image
+        id
+        Tagline
+      }
+      createdAt
+      newsId
+      userId
+      id
+    }
   }
 }`
 

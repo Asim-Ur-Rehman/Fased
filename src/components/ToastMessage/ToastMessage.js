@@ -11,7 +11,6 @@ const ToastMessage = (text1, text2, type, position) => {
         autoHide: true,
         topOffset: 30,
         bottomOffset: 40,
-
     });
 
 }
