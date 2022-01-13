@@ -2,67 +2,62 @@ import React, { Component, useState } from 'react'
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-export const CustomRadioButton = ({
-  PROP = [],
-  onChange = (e) => {}
-}) => {
-
+export const CustomRadioButton = ({ PROP = [], onChange = e => {} }) => {
   const [value, setValue] = useState(null)
 
-
-
-    return (
-      <View
-        style={{
-          backgroundColor: '#6C8CB2.10',
-          width: '100%'
-        }}>
-        {PROP.map(res => {
-          return (
-            <View key={res.key} style={styles.rbWrapper}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'row',
-                  height: 50,
-                  width: '100%',
-                  backgroundColor: '#ffffff',
-                  shadowColor: 'blue'
-                }}
-                onPress={() => {
-                  setValue(res.id)
-                  onChange(res)
-                }}>
-                <View style={[styles.rbStyle]}>
-                  <LinearGradient
-                    colors={
-                      value === res.id
-                        ? ['#680000', '#FE0000']
-                        : ['#8e8e93', '#8e8e93']
-                    }
-                    start={{ x: 1, y: 1 }}
-                    end={{ x: 0.1, y: 1 }}
-                    style={
-                      value === res.id ? styles.selected : styles.unSelected
-                    }>
-                    {value === res.id && (
-                      <View>
-                        <View style={styles.selected1} />
-                      </View>
-                    )}
-                  </LinearGradient>
-                </View>
-                <Text style={styles.textStyle}>{res.reason}</Text>
-              </TouchableOpacity>
-            </View>
-          )
-        })}
-      </View>
-    )
-  }
-
+  return (
+    <View
+      style={{
+        backgroundColor: '#6C8CB2.10',
+        width: '100%'
+      }}>
+      {PROP.map(res => {
+        return (
+          <View key={res.key} style={styles.rbWrapper}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                height: 50,
+                width: '100%',
+                backgroundColor: '#ffffff',
+                shadowColor: 'blue'
+              }}
+              onPress={() => {
+                setValue(res.id)
+                onChange(res)
+              }}>
+              <View style={[styles.rbStyle]}>
+                <LinearGradient
+                  colors={
+                    value === res.id
+                      ? ['#680000', '#FE0000']
+                      : ['#8e8e93', '#8e8e93']
+                  }
+                  start={{ x: 1, y: 1 }}
+                  end={{ x: 0.1, y: 1 }}
+                  style={
+                    value === res.id ? styles.selected : styles.unSelected
+                  }>
+                  {value === res.id && (
+                    <View>
+                      <View style={styles.selected1} />
+                    </View>
+                  )}
+                </LinearGradient>
+              </View>
+              <Text numberOfLines={2} style={styles.textStyle}>
+                {res.reason}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )
+      })}
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   rbWrapper: {
@@ -71,13 +66,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // justifyContent: 'center',
     width: '100%',
-    backgroundColor:"#68000050"
+    backgroundColor: '#68000050'
   },
   textStyle: {
     marginLeft: 15,
     fontSize: 11,
     color: '#8e8e93',
-    fontFamily:"Rubik-Medium",
+    fontFamily: 'Rubik-Medium',
     width: '60%'
   },
   rbStyle: {
