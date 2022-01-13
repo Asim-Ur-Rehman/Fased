@@ -87,6 +87,30 @@ query GetFavoriteByUserId($userId: Int!) {
   }
 }`
 
+export const SEARCH_FAV = gql`
+query SearchFav($userId: Int!, $text: String!) {
+  searchFav(userId: $userId, text: $text) {
+    status
+    message
+    data {
+      News {
+        CategoryName
+        CategoryId
+        createdAt
+        Description
+        Title
+        Image
+        id
+        Tagline
+      }
+      createdAt
+      newsId
+      userId
+      id
+    }
+  }
+}`
+
 export const Get_Reports = gql`
   query Query {
     getReports {

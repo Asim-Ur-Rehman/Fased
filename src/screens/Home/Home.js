@@ -233,6 +233,7 @@ export const Home = (props) => {
                       }
                     ]}>
                     <Text
+                      numberOfLines={1}
                       style={{
                         color:
                           isSelect == -1 ? item.BackgroundColor : '#9CB2C6',

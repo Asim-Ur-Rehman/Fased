@@ -25,6 +25,7 @@ import {
   Get_Categories,
   GET_FAV_NEWS_BY_ID,
   Get_News,
+  SEARCH_FAV,
   SEARCH_NEWS
 } from '../../utils/queries'
 import { getUserData } from '../../utils/helper'
@@ -48,6 +49,12 @@ export const NewsCard = ({ navigation }) => {
       userId: parseFloat(userData?.id)
     }
   })
+  const searchFav = useQuery(SEARCH_FAV, {
+    variables: {
+      userId: parseFloat(userData?.id),
+      text: search
+    }
+  })
 
   const [activetab, setActiveTab] = useState('old')
 
@@ -57,7 +64,7 @@ export const NewsCard = ({ navigation }) => {
     getUserData().then(res => {
       setUserData(res)
     })
-
+    setSearch('')
     OldNews.refetch()
     favNew.refetch()
   }, [activetab, isFocused])
@@ -158,6 +165,7 @@ export const NewsCard = ({ navigation }) => {
     }
   }
 
+
   const renderContent = () => {
     if (activetab == 'old') {
       var newArr = []
@@ -235,7 +243,7 @@ export const NewsCard = ({ navigation }) => {
     if (activetab == 'fav') {
       return (
         <FlatList
-          data={favNew?.data?.getFavoriteByUserId?.data}
+          data={search ? searchFav?.data?.searchFav?.data : favNew?.data?.getFavoriteByUserId?.data}
           renderItem={({ item, index }) => {
             return newsCard(item.News, index)
           }}
@@ -365,7 +373,7 @@ export const NewsCard = ({ navigation }) => {
       </LinearGradient>
 
       {/* =========Search Bar view ====== */}
-      <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
+    {activetab != 'catTab' &&  <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
         <SearchBar
           placeholder="Search"
           placeholderTextColor={'#dcdcdc'}
@@ -395,7 +403,7 @@ export const NewsCard = ({ navigation }) => {
           inputStyle={{ fontSize: 16 }}
           searchIcon={{ size: 28, color: '#dcdcdc' }}
         />
-      </View>
+      </View>}
 
       <ScrollView
         showsVerticalScrollIndicator={false}
