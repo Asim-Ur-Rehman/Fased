@@ -194,6 +194,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
     // // }))
   }
 
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -280
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar
@@ -201,7 +202,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="position">
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           bounces={false}

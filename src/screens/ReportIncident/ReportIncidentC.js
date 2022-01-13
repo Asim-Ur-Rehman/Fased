@@ -31,7 +31,7 @@ export const ReportIncidentC = ({ navigation }) => {
   const [loader, setLoader] = useState(false)
   const [state, setState] = useState({
     text: '',
-    height: 50
+    height: 0
   })
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
@@ -283,13 +283,13 @@ const styles = StyleSheet.create({
   textArea: {
     // height: 350,
     fontSize: 13,
-    lineHeight: 30,
+    lineHeight: 20,
     textAlign: 'justify',
     fontFamily: 'Rubik-Regular',
     borderRadius: 12,
     backgroundColor: '#F4F7FC',
     padding: 15,
-    color: 'black'
+    color: 'black',
   },
   countText: {
     color: '#8F9BBA',

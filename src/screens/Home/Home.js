@@ -122,7 +122,7 @@ export const Home = (props) => {
     Geolocation.getCurrentPosition(info => {
         mapRef.current.animateToRegion({...INITIAL_REGION, ...info.coords}, 2000)
     }, err => {
-      console.log("err", Alert.alert(err.message))
+      console.log("err", Alert.alert("Permission denied!",err.message))
     });
 
   }

@@ -232,8 +232,9 @@ export const ReportIncident = ({ navigation }) => {
                     editable={enabled ? false : true}
                     placeholder="11th"
                     placeholderTextColor={theme.textColor.placeholderColor}
-                    keyboardType="number-pad"
+                    keyboardType={Platform.OS == "ios" ? "numbers-and-punctuation" : "number-pad"}
                     maxLength={3}
+                  
                     onChangeText={number => {
                       setFloor(number)
                     }}
