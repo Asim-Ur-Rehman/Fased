@@ -30,6 +30,8 @@ import { FlagReport } from '../screens/flagReport/flagReport'
 import { NewsCard } from '../screens/News/NewsCard'
 import { NewsDetails } from '../screens/News/NewsDetails'
 import { AboutUs } from '../screens/AboutUs'
+import { Settings } from '../screens/Settings/Settings'
+import { SettingChangePassword } from '../screens/SettingChangePassword/SettingChangePassword'
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -55,6 +57,7 @@ function MyDrawer() {
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="Categories" component={Categories} />
       <Drawer.Screen name="AboutUs" component={AboutUs} />
+      <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="Calender" component={Calender} />
     </Drawer.Navigator>
   )
@@ -94,6 +97,10 @@ function AppStackNavigator() {
       <AppStack.Screen name="FlagReport" component={FlagReport} />
       <AppStack.Screen name="NewsCard" component={NewsCard} />
       <AppStack.Screen name="NewsDetails" component={NewsDetails} />
+      <AppStack.Screen
+        name="SettingChangePassword"
+        component={SettingChangePassword}
+      />
     </AppStack.Navigator>
   )
 }
