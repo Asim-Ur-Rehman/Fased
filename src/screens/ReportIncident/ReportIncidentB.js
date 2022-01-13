@@ -210,7 +210,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                       route.params?.alternate
                   })
                 } else {
-                  ToastMessage('Error', 'Please select category', 'error')
+                  ToastMessage('Please select category', null, 'error')
                 }
               }}
               linearColor1={'#9CA3AF'}

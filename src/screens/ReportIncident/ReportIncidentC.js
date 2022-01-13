@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Image,
   TextInput,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -26,6 +27,7 @@ import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const ReportIncidentC = ({ navigation }) => {
+  const [loader, setLoader] = useState(false)
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -54,8 +56,9 @@ export const ReportIncidentC = ({ navigation }) => {
   }
 
   const next = () => {
+    setLoader(true)
     // this if check when user doses not select subCategor then we does not send subCategory integer in query
-    if(text.length > 0) {
+    if (text.length > 0) {
       if (reportIncidentAllData?.subcategory == '0') {
         CreateReportWithoutSubCat({
           variables: {
@@ -73,22 +76,22 @@ export const ReportIncidentC = ({ navigation }) => {
         })
           .then(data => {
             if (data?.data?.CreateReport?.status) {
-              ToastMessage(
-                'Report Create Successfully',
-                data?.data?.CreateReport?.message,
-                'success'
-              )
+              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+              setLoader(false)
               navigation.navigate('ReportingDone')
             } else {
-              ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
+              setLoader(false)
+              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
             }
           })
           .catch(error => {
             console.log('error', error)
             if (error) {
-              ToastMessage('Error', 'Something went wrong', 'error')
+              setLoader(false)
+              ToastMessage('Something went wrong', null, 'error')
             } else {
-              ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
+              setLoader(false)
+              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
             }
           })
       } else {
@@ -110,27 +113,28 @@ export const ReportIncidentC = ({ navigation }) => {
           .then(data => {
             // console.log('data return', data)
             if (data?.data?.CreateReport?.status) {
-              ToastMessage(
-                'Report Create Successfully',
-                data?.data?.CreateReport?.message,
-                'success'
-              )
+              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+              setLoader(false)
               navigation.navigate('ReportingDone')
             } else {
-              ToastMessage('Error', data?.data?.CreateReport?.message, 'error')
+              setLoader(false)
+              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
             }
           })
           .catch(error => {
             console.log('error', error)
             if (error) {
-              ToastMessage('Error', 'Something went wrong', 'error')
+              setLoader(false)
+              ToastMessage('Something went wrong', null, 'error')
             } else {
-              ToastMessage('Error', error?.data?.CreateReport?.message, 'error')
+              setLoader(false)
+              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
             }
           })
       }
-    }else {
-      ToastMessage('error', "Description field should'nt be empty", 'error')
+    } else {
+      setLoader(false)
+      ToastMessage("Description field should'nt be empty", null, 'error')
     }
   }
   return (
@@ -215,16 +219,20 @@ export const ReportIncidentC = ({ navigation }) => {
       </View>
 
       <View>
-        <Button
-          onPress={() => {
-            next()
-          }}
-          // onPress={() => {
-          //   navigation.navigate('ReportingDone')
-          // }}
-          buttonStyle={{ width: '90%', alignSelf: 'center' }}
-          title="Next"
-        />
+        {loader ? (
+          <ActivityIndicator size="large" color="#4A4C50" />
+        ) : (
+          <Button
+            onPress={() => {
+              next()
+            }}
+            // onPress={() => {
+            //   navigation.navigate('ReportingDone')
+            // }}
+            buttonStyle={{ width: '90%', alignSelf: 'center' }}
+            title="Next"
+          />
+        )}
       </View>
     </SafeAreaView>
   )
