@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -28,6 +29,10 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const ReportIncidentC = ({ navigation }) => {
   const [loader, setLoader] = useState(false)
+  const [state, setState] = useState({
+    text: '',
+    height: 50
+  })
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -40,7 +45,7 @@ export const ReportIncidentC = ({ navigation }) => {
   const reportIncidentAllData = useSelector(
     state => state?.userReducer?.reportIncidentAllData
   )
-  const [text, setText] = useState('')
+  // const [text, setText] = useState('')
   const [userId, setUserId] = useState('')
 
   useEffect(() => {
@@ -58,7 +63,7 @@ export const ReportIncidentC = ({ navigation }) => {
   const next = () => {
     setLoader(true)
     // this if check when user doses not select subCategor then we does not send subCategory integer in query
-    if (text.length > 0) {
+    if (state.text.length > 0) {
       if (reportIncidentAllData?.subcategory == '0') {
         CreateReportWithoutSubCat({
           variables: {
@@ -70,7 +75,7 @@ export const ReportIncidentC = ({ navigation }) => {
             costMoney: parseInt(reportIncidentAllData?.amount),
             incidentDate: reportIncidentAllData?.date,
             incidentTime: reportIncidentAllData?.time,
-            description: text,
+            description: state?.text,
             floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
@@ -106,7 +111,7 @@ export const ReportIncidentC = ({ navigation }) => {
             costMoney: parseInt(reportIncidentAllData?.amount),
             incidentDate: reportIncidentAllData?.date,
             incidentTime: reportIncidentAllData?.time,
-            description: text,
+            description: state?.text,
             floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
@@ -144,57 +149,65 @@ export const ReportIncidentC = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.headerContainer}>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '80%',
+                alignItems: 'center'
+              }}>
+              <AntDesign
+                name="arrowleft"
+                color="#000000"
+                size={22}
+                onPress={() => {
+                  navigation.goBack()
+                }}
+              />
+              <Text style={styles.headerLabel}>Report Incident</Text>
+            </View>
+            <View style={{ width: '20%', alignItems: 'flex-end' }}>
+              <Text
+                style={{
+                  color: '#909090',
+                  fontSize: 15,
+                  fontFamily: 'Rubik-Regular'
+                }}>
+                02 - 03
+              </Text>
+            </View>
+          </View>
 
-      <View style={styles.headerContainer}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '80%',
-            alignItems: 'center'
-          }}>
-          <AntDesign
-            name="arrowleft"
-            color="#000000"
-            size={22}
-            onPress={() => {
-              navigation.goBack()
-            }}
-          />
-          <Text style={styles.headerLabel}>Report Incident</Text>
-        </View>
-        <View style={{ width: '20%', alignItems: 'flex-end' }}>
-          <Text
-            style={{
-              color: '#909090',
-              fontSize: 15,
-              fontFamily: 'Rubik-Regular'
-            }}>
-            02 - 03
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.textAreaContainer}>
-        <TextInput
-          style={styles.textArea}
-          underlineColorAndroid="transparent"
-          placeholder="Tell us what happen"
-          placeholderTextColor="#8F9BBA"
-          numberOfLines={10}
-          multiline={true}
-          selectionColor="#a9a9a990"
-          textAlignVertical="top"
-          maxLength={1000}
-          blurOnSubmit
-          returnKeyType="done"
-          onChangeText={e => {
-            setText(e)
-          }}
-          // onSubmitEditing={() => {
-          //   navigation.navigate('ReportingDone')
-          // }}
-        />
-        <Image
+          <View style={styles.textAreaContainer}>
+            <TextInput
+              style={[styles.textArea, { height: Math.max(35, state.height) }]}
+              underlineColorAndroid="transparent"
+              placeholder="Tell us what happen"
+              placeholderTextColor="#8F9BBA"
+              numberOfLines={10}
+              multiline={true}
+              selectionColor="#a9a9a990"
+              textAlignVertical="top"
+              maxLength={1000}
+              blurOnSubmit
+              returnKeyType="done"
+              onChangeText={e => {
+                // setText(e)
+                setState({ ...state, text: e })
+              }}
+              onContentSizeChange={event => {
+                setState({ height: event.nativeEvent.contentSize.height })
+              }}
+              // onSubmitEditing={() => {
+              //   navigation.navigate('ReportingDone')
+              // }}
+            />
+            {/* <Image
           source={Images.Pictures.textAreaIcon}
           style={{
             position: 'absolute',
@@ -205,35 +218,37 @@ export const ReportIncidentC = ({ navigation }) => {
             resizeMode: 'contain',
             tintColor: '#8F9BBA'
           }}
-        />
+        /> */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            margin: 15
-          }}>
-          <Text style={styles.countText}>{text.length}</Text>
-          <Text style={styles.countText}>/1000</Text>
-        </View>
-      </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                margin: 15
+              }}>
+              <Text style={styles.countText}>{state?.text?.length}</Text>
+              <Text style={styles.countText}>/1000</Text>
+            </View>
+          </View>
 
-      <View>
-        {loader ? (
-          <ActivityIndicator size="large" color="#4A4C50" />
-        ) : (
-          <Button
-            onPress={() => {
-              next()
-            }}
-            // onPress={() => {
-            //   navigation.navigate('ReportingDone')
-            // }}
-            buttonStyle={{ width: '90%', alignSelf: 'center' }}
-            title="Next"
-          />
-        )}
-      </View>
+          <View>
+            {loader ? (
+              <ActivityIndicator size="large" color="#4A4C50" />
+            ) : (
+              <Button
+                onPress={() => {
+                  next()
+                }}
+                // onPress={() => {
+                //   navigation.navigate('ReportingDone')
+                // }}
+                buttonStyle={{ width: '90%', alignSelf: 'center' }}
+                title="Next"
+              />
+            )}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
@@ -266,7 +281,7 @@ const styles = StyleSheet.create({
     marginTop: 60
   },
   textArea: {
-    height: 350,
+    // height: 350,
     fontSize: 13,
     lineHeight: 30,
     textAlign: 'justify',
