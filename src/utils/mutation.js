@@ -43,6 +43,14 @@ export const New_Password = gql`
   }
 `
 
+export const CHANGE_PASSWORD = gql`
+mutation ChangePassword($changePasswordId: Int!, $currentPassword: String!, $newPassword: String!) {
+  changePassword(id: $changePasswordId, currentPassword: $currentPassword, newPassword: $newPassword) {
+    status
+    message
+  }
+}`
+
 export const Create_Report_Incident = gql`
   mutation CreateReport(
     $userId: Int!
