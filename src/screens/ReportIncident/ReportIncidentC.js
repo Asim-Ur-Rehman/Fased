@@ -8,7 +8,8 @@ import {
   TextInput,
   StatusBar,
   ActivityIndicator,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -185,7 +186,7 @@ export const ReportIncidentC = ({ navigation }) => {
 
           <View style={styles.textAreaContainer}>
             <TextInput
-              style={[styles.textArea, { height: Math.max(35, state.height) }]}
+              style={[styles.textArea, { height: Math.max(Platform.OS == "android" ? 35 : 35, state.height) }]}
               underlineColorAndroid="transparent"
               placeholder="Tell us what happen"
               placeholderTextColor="#8F9BBA"
@@ -201,7 +202,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 setState({ ...state, text: e })
               }}
               onContentSizeChange={event => {
-                setState({ height: event.nativeEvent.contentSize.height })
+                setState({ height: event.nativeEvent.contentSize.height +40})
               }}
               // onSubmitEditing={() => {
               //   navigation.navigate('ReportingDone')
