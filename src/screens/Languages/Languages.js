@@ -16,6 +16,7 @@ const { width, height } = Dimensions.get('screen')
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
 export const Languages = ({ navigation }) => {
   const [select, setSelect] = useState()
   // useEffect(() => {
@@ -56,7 +57,17 @@ export const Languages = ({ navigation }) => {
 
   const selectLanguage = () => {
     console.log('slected', select)
-    getUserData('click')
+    if (select) {
+      getUserData('click')
+    } else {
+      ToastMessage('Please Select any Language', null, 'error')
+    }
+
+    // if (select) {
+    //   alert('selecthvhv')
+    // } else {
+    //   navigation.navigate('SignIn')
+    // }
   }
   return (
     <SafeAreaView
