@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -21,18 +21,33 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ChangePasswordAction } from '../../stores/actions/user.action'
-import { Verify_Otp, New_Password } from '../../utils/mutation'
+import { Verify_Otp, New_Password, CHANGE_PASSWORD } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 export const SettingChangePassword = ({ navigation, route }) => {
   //   const emailFromParam = route?.params?.emailFromParam
   //   console.log('emailFromParam IN CAHNGE PASSS', emailFromParam)
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [userId, setUserId] = useState('')
 
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async () => {
+    const userData = await AsyncStorage.getItem('userData')
+    let data = JSON.parse(userData)
+    setUserId(data?.id)
+
+  }
   const dispatch = useDispatch()
 
-  const [NewPassword, { data, loading, error }] = useMutation(New_Password)
+  const [ChangePassword, { data, loading, error }] = useMutation(CHANGE_PASSWORD)
+  console.log('error data', loading)
+
+
   const changePaswword = () => {
     if (newPassword == '' || confirmPassword == '') {
       ToastMessage('Please fill all fields', null, 'error')
@@ -45,32 +60,31 @@ export const SettingChangePassword = ({ navigation, route }) => {
     } else if (newPassword !== confirmPassword) {
       ToastMessage('Confirm Password does not match', null, 'info')
     } else {
-      // let data = {
-      //   newPassword: state.newPassword,
-      //   confirmPassword: state.confirmPassword
-      // }
-      // dispatch(ChangePasswordAction(data, navigation))
-      NewPassword({
+      ChangePassword({
         variables: {
-          password: confirmPassword,
-          email: emailFromParam
+          changePasswordId: parseInt(userId),
+          currentPassword: oldPassword,
+          newPassword: newPassword
         }
       })
         .then(data => {
-          // console.log('data return', data.data.NewPassword.status)
-          if (data?.data?.NewPassword?.status) {
-            ToastMessage(data?.data?.NewPassword?.message, null, 'success')
-            navigation.push('SignIn')
+          if (data?.data?.changePassword?.status) {
+            ToastMessage(data?.data?.changePassword?.message, null, 'success')
+            navigation.goBack()
           } else {
-            ToastMessage(data?.data?.NewPassword?.message, null, 'error')
+            ToastMessage(data?.data?.changePassword?.message, null, 'error')
           }
         })
         .catch(error => {
-          console.log('error', error)
+          console.log('error', error, {
+            changePasswordId: parseInt(userId),
+            currentPassword: oldPassword,
+            newPassword: newPassword
+          })
           if (error) {
             ToastMessage('Something went wrong', null, 'error')
           } else {
-            ToastMessage(error.data.NewPassword.message, null, 'error')
+            ToastMessage(error.data.changePassword.message, null, 'error')
           }
         })
     }
@@ -172,9 +186,9 @@ export const SettingChangePassword = ({ navigation, route }) => {
             <ActivityIndicator size="large" color="#4A4C50" />
           ) : (
             <Button
-              //   onPress={() => {
-              //     changePaswword()
-              //   }}
+              onPress={() => {
+                changePaswword()
+              }}
               // onPress={() => { navigation.navigate('SignIn') }}
               buttonStyle={{
                 width: '90%',
