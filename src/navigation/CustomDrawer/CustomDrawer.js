@@ -28,13 +28,13 @@ export const CustomDrawer = ({ navigation }) => {
       navigateTo: 'AboutUs'
     },
     {
-      title: 'Settings'
-      // navigateTo: 'Setting'
+      title: 'Settings',
+      navigateTo: 'Settings'
     },
     {
       title: isGuest ? 'SignUp' : 'Logout',
       navigateTo: isGuest ? 'SignUp' : 'SignIn'
-    },
+    }
     // {
     //   title: 'Logout'
     //   // navigateTo: 'SignIn'
