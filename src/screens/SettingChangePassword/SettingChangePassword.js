@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -89,7 +90,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
         })
     }
   }
-
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -200
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -102,6 +103,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -201,6 +203,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

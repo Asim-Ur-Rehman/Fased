@@ -47,14 +47,13 @@ export const SignIn = ({ navigation }) => {
   const dispatch = useDispatch()
   const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
-    setLoader(true)
     if (email == '' || password == '') {
       ToastMessage('Please fill all fields', null, 'error')
       setLoader(false)
     } else {
-      setLoader(false)
       if (loginUser?.error) {
         ToastMessage('Something went wrong', null, 'info')
+        setLoader(false)
       }
       if (loginUser?.data?.loginUser?.status) {
         let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
@@ -64,10 +63,14 @@ export const SignIn = ({ navigation }) => {
         navigation.navigate('AppStackNavigator', {
           screen: 'Home'
         })
-        setEmail('')
-        setPassword('')
+        setTimeout(() => {
+          setEmail('')
+          setPassword('')
+        }, 2000)
+        setLoader(false)
       } else {
         ToastMessage(loginUser?.data?.loginUser?.message, null, 'error')
+        setLoader(false)
       }
     }
   }
@@ -244,6 +247,7 @@ export const SignIn = ({ navigation }) => {
           ) : (
             <Button
               onPress={() => {
+                setLoader(true)
                 signIn()
               }}
               buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
