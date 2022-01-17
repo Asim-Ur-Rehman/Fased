@@ -58,7 +58,13 @@ export const ChangePassword = ({ navigation, route }) => {
         .then(data => {
           // console.log('data return', data.data.NewPassword.status)
           if (data?.data?.NewPassword?.status) {
-            ToastMessage(data?.data?.NewPassword?.message, null, 'success')
+            // ToastMessage(data?.data?.NewPassword?.message, null, 'success')
+            ToastMessage(
+              'the updated password changed successfully',
+              null,
+              'success'
+            )
+
             navigation.push('SignIn')
           } else {
             ToastMessage(data?.data?.NewPassword?.message, null, 'error')

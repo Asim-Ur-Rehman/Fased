@@ -94,7 +94,7 @@ export const Languages = ({ navigation }) => {
         />
       </View>
       <View style={styles.textViewStyle}>
-        <Text style={styles.textStyle}>Select your preffered language</Text>
+        <Text style={styles.textStyle}>Select your prefered language</Text>
       </View>
 
       {Buttons.map((item, i) => {

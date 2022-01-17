@@ -95,7 +95,11 @@ export const ReportIncident = ({ navigation }) => {
     if (floor || enabled) {
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     } else {
-      ToastMessage('floor field should not  be blank.', null, 'error')
+      ToastMessage(
+        'Floor must be selected and cannot be left blank',
+        null,
+        'error'
+      )
     }
   }
 
@@ -232,9 +236,12 @@ export const ReportIncident = ({ navigation }) => {
                     editable={enabled ? false : true}
                     placeholder="11th"
                     placeholderTextColor={theme.textColor.placeholderColor}
-                    keyboardType={Platform.OS == "ios" ? "numbers-and-punctuation" : "number-pad"}
+                    keyboardType={
+                      Platform.OS == 'ios'
+                        ? 'numbers-and-punctuation'
+                        : 'number-pad'
+                    }
                     maxLength={3}
-                  
                     onChangeText={number => {
                       setFloor(number)
                     }}
