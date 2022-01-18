@@ -40,7 +40,7 @@ export const SignUp = ({ navigation }) => {
   const dispatch = useDispatch()
   // const loading = useSelector(state => state.userReducer.isLoading)
   const [addUser, { data, loading, error }] = useMutation(Add_User)
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? -100 : -100
 
   const signUp = () => {
     let value =
@@ -122,10 +122,11 @@ export const SignUp = ({ navigation }) => {
       </View>
 
       <KeyboardAvoidingView
-        behavior="position"
-        keyboardVerticalOffset={keyboardVerticalOffset}>
+        behavior='height'
+        // keyboardVerticalOffset={keyboardVerticalOffset}
+        >
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
+          contentContainerStyle={{ flexGrow: 1 }}
           bounces={false}
           showsVerticalScrollIndicator={false}>
           <View style={styles.InputContainer}>
