@@ -22,9 +22,9 @@ import CategoryComp from '../../components/CategoryCard'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import { Get_Categories } from '../../utils/queries'
-
+import { useIsFocused } from '@react-navigation/native'
 export const ReportIncidentB = ({ navigation, route }) => {
-  const { data, loading, error } = useQuery(Get_Categories)
+  const { data, loading, error, refetch } = useQuery(Get_Categories)
   const [select, setSelect] = useState(
     route.params?.selected ? route.params?.selected : []
   )
@@ -33,6 +33,10 @@ export const ReportIncidentB = ({ navigation, route }) => {
     setSelect(route.params?.selected ? route.params?.selected : [])
   }, [route.params?.selected])
 
+  const isFocused = useIsFocused()
+  useEffect(() => {
+    refetch()
+  }, [isFocused])
   // console.log('data', data.getCategories.data)
 
   const Data = [
