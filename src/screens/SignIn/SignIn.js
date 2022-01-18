@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -180,6 +181,10 @@ export const SignIn = ({ navigation }) => {
           }}
         />
       </View>
+      <KeyboardAvoidingView
+        behavior='height'
+        // keyboardVerticalOffset={keyboardVerticalOffset}
+        >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -328,6 +333,7 @@ export const SignIn = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
