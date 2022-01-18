@@ -78,27 +78,29 @@ export const ForgetPassword = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.ForgetPasswordText}>Forgot Password</Text>
+        <View
+          style={{
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
+
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.ForgetPasswordText}>Forgot Password</Text>
-          <View
-            style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
-        </View>
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
             <Text style={styles.inputLabel}>Email address</Text>

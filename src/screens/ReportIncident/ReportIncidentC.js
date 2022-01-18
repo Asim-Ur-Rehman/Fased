@@ -62,9 +62,27 @@ export const ReportIncidentC = ({ navigation }) => {
   }
 
   const next = () => {
+    // console.log(
+    //   'object',
+
+    //   {
+    //     userId: parseInt(userId),
+    //     categoryId: reportIncidentAllData?.category,
+    //     latitude: reportIncidentLocationFloorData?.latitude,
+    //     longitude: reportIncidentLocationFloorData?.longitude,
+    //     suspectName: reportIncidentAllData?.suspectName,
+    //     costMoney: parseInt(reportIncidentAllData?.amount),
+    //     incidentDate: reportIncidentAllData?.date,
+    //     incidentTime: reportIncidentAllData?.time,
+    //     description: state?.text,
+    //     floor: parseInt(reportIncidentLocationFloorData?.floor)
+    //   }
+    // )
     setLoader(true)
-    // this if check when user doses not select subCategor then we does not send subCategory integer in query
-    if (state.text.length > 0) {
+    if (state.text == undefined) {
+      setLoader(false)
+      ToastMessage("Description field should'nt be empty", null, 'error')
+    } else {
       if (reportIncidentAllData?.subcategory == '0') {
         CreateReportWithoutSubCat({
           variables: {
@@ -138,9 +156,6 @@ export const ReportIncidentC = ({ navigation }) => {
             }
           })
       }
-    } else {
-      setLoader(false)
-      ToastMessage("Description field should'nt be empty", null, 'error')
     }
   }
   return (
@@ -186,7 +201,15 @@ export const ReportIncidentC = ({ navigation }) => {
 
           <View style={styles.textAreaContainer}>
             <TextInput
-              style={[styles.textArea, { height: Math.max(Platform.OS == "android" ? 35 : 35, state.height) }]}
+              style={[
+                styles.textArea,
+                {
+                  height: Math.max(
+                    Platform.OS == 'android' ? 35 : 35,
+                    state.height
+                  )
+                }
+              ]}
               underlineColorAndroid="transparent"
               placeholder="Tell us what happen"
               placeholderTextColor="#8F9BBA"
@@ -202,7 +225,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 setState({ ...state, text: e })
               }}
               onContentSizeChange={event => {
-                setState({ height: event.nativeEvent.contentSize.height +40})
+                setState({ height: event.nativeEvent.contentSize.height + 40 })
               }}
               // onSubmitEditing={() => {
               //   navigation.navigate('ReportingDone')
@@ -290,7 +313,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#F4F7FC',
     padding: 15,
-    color: 'black',
+    color: 'black'
   },
   countText: {
     color: '#8F9BBA',

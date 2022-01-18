@@ -73,7 +73,6 @@ export const NewsCard = ({ navigation }) => {
     setSearch(text)
   }
 
-
   const newsCard = (item, index) => {
     return (
       <TouchableOpacity
@@ -149,7 +148,6 @@ export const NewsCard = ({ navigation }) => {
     )
   }
 
-
   let CatNews = {}
   const catIds = data?.getCategories?.data.map(val => val.Title)
   for (let index = 0; index < catIds.length; index++) {
@@ -165,23 +163,22 @@ export const NewsCard = ({ navigation }) => {
     }
   }
 
-
   const renderContent = () => {
     if (activetab == 'old') {
       var newArr = []
-       if(search) {
-         console.log("SearchNews.data?.searchNews?.data", SearchNews)
+      if (search) {
+        console.log('SearchNews.data?.searchNews?.data', SearchNews)
         newArr = SearchNews.data?.searchNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
           return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
         })
-       }else {
+      } else {
         newArr = OldNews.data?.getNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
           return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
         })
-       }
-       console.log("newArr", newArr)
+      }
+      console.log('newArr', newArr)
       return (
         <>
           <FlatList
@@ -206,18 +203,18 @@ export const NewsCard = ({ navigation }) => {
     }
     if (activetab == 'new') {
       var newArr = []
-       if(search) {
-         console.log("SearchNews.data?.searchNews?.data", SearchNews)
+      if (search) {
+        console.log('SearchNews.data?.searchNews?.data', SearchNews)
         newArr = SearchNews.data?.searchNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-          return !(moment(e.createdAt).isSameOrBefore(oneWeekOlddate))
+          return !moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
         })
-       }else {
+      } else {
         newArr = OldNews.data?.getNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-          return !(moment(e.createdAt).isSameOrBefore(oneWeekOlddate))
+          return !moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
         })
-       }
+      }
       return (
         <>
           <FlatList
@@ -243,7 +240,11 @@ export const NewsCard = ({ navigation }) => {
     if (activetab == 'fav') {
       return (
         <FlatList
-          data={search ? searchFav?.data?.searchFav?.data : favNew?.data?.getFavoriteByUserId?.data}
+          data={
+            search
+              ? searchFav?.data?.searchFav?.data
+              : favNew?.data?.getFavoriteByUserId?.data
+          }
           renderItem={({ item, index }) => {
             return newsCard(item.News, index)
           }}
@@ -295,7 +296,7 @@ export const NewsCard = ({ navigation }) => {
               alignItems: 'center',
               height: height / 2
             }}>
-            <Text>Empty List</Text>
+            <Text>There is no favorite news articales</Text>
           </View>
         )
       }
@@ -373,37 +374,39 @@ export const NewsCard = ({ navigation }) => {
       </LinearGradient>
 
       {/* =========Search Bar view ====== */}
-    {activetab != 'catTab' &&  <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
-        <SearchBar
-          placeholder="Search"
-          placeholderTextColor={'#dcdcdc'}
-          onChangeText={text => updateSearch(text)}
-          value={search}
-          containerStyle={{
-            height: 50,
-            borderRadius: 10,
-            borderWidth: 0,
-            backgroundColor: 'white',
-            borderTopWidth: 0,
-            borderBottomWidth: 0,
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5
-          }}
-          inputContainerStyle={{
-            backgroundColor: 'white',
-            height: 40,
-            borderRadius: 10
-          }}
-          inputStyle={{ fontSize: 16 }}
-          searchIcon={{ size: 28, color: '#dcdcdc' }}
-        />
-      </View>}
+      {activetab != 'catTab' && (
+        <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
+          <SearchBar
+            placeholder="Search"
+            placeholderTextColor={'#dcdcdc'}
+            onChangeText={text => updateSearch(text)}
+            value={search}
+            containerStyle={{
+              height: 50,
+              borderRadius: 10,
+              borderWidth: 0,
+              backgroundColor: 'white',
+              borderTopWidth: 0,
+              borderBottomWidth: 0,
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5
+            }}
+            inputContainerStyle={{
+              backgroundColor: 'white',
+              height: 40,
+              borderRadius: 10
+            }}
+            inputStyle={{ fontSize: 16 }}
+            searchIcon={{ size: 28, color: '#dcdcdc' }}
+          />
+        </View>
+      )}
 
       <ScrollView
         showsVerticalScrollIndicator={false}

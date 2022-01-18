@@ -14,7 +14,8 @@ import {
   Platform,
   PermissionsAndroid,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -75,9 +76,17 @@ export const ReportIncident = ({ navigation }) => {
   ]
 
   const animateToCurrentLocation = () => {
-    Geolocation.getCurrentPosition(info => {
-      mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
-    })
+    Geolocation.getCurrentPosition(
+      info => {
+        mapRef.current.animateToRegion(
+          { ...initialRegion, ...info.coords },
+          2000
+        )
+      },
+      err => {
+        console.log('err', Alert.alert('Permission denied!', err.message))
+      }
+    )
   }
 
   const onRegionChange = region => {
@@ -208,6 +217,7 @@ export const ReportIncident = ({ navigation }) => {
                 <Button
                   image={Images.Pictures.compass}
                   buttonStyle={styles.squareBtn}
+                  onPress={() => animateToCurrentLocation()}
                 />
               </View>
               <View>
