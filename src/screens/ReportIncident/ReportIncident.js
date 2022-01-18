@@ -96,19 +96,33 @@ export const ReportIncident = ({ navigation }) => {
   }
 
   const next = () => {
-    let data = {
-      latitude: initialRegion.latitude,
-      longitude: initialRegion.longitude,
-      floor: floor ? floor : '0'
-    }
-    if (floor || enabled) {
+    let value = /^\+?(0|[1-9]\d*)$/.test(floor)
+    // console.log('value', value)
+
+    if (enabled) {
+      let data = {
+        latitude: initialRegion.latitude,
+        longitude: initialRegion.longitude,
+        floor: '0'
+      }
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     } else {
-      ToastMessage(
-        'Floor must be selected and cannot be left blank',
-        null,
-        'error'
-      )
+      if (floor == '') {
+        ToastMessage(
+          'Floor must be selected and cannot be left blank',
+          null,
+          'error'
+        )
+      } else if (!value) {
+        ToastMessage('Floor should must be in number', null, 'info')
+      } else {
+        let data = {
+          latitude: initialRegion.latitude,
+          longitude: initialRegion.longitude,
+          floor: floor
+        }
+        dispatch(ReportIncidentLocationFloorData(data, navigation))
+      }
     }
   }
 
