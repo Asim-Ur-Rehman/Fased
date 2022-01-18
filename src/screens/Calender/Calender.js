@@ -67,6 +67,7 @@ export const Calender = ({ navigation }) => {
           </View>
           <View style={{ borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}>
             <CalendarPicker
+              maxDate={new Date()}
               onDateChange={e => onDateChange(e, 'startDate')}
               weekdays={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
               todayBackgroundColor="#fff"
@@ -112,6 +113,7 @@ export const Calender = ({ navigation }) => {
           </View>
           <View style={{ borderWidth: 1, borderColor: 'rgba(0, 0, 0, 0.1)' }}>
             <CalendarPicker
+              maxDate={new Date()}
               onDateChange={e => onDateChange(e, 'endDate')}
               weekdays={['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']}
               headerWrapperStyle={false}
@@ -119,7 +121,6 @@ export const Calender = ({ navigation }) => {
               todayTextStyle={{ color: '#000' }}
               selectedDayTextColor="#fff"
               selectedDayStyle={{ backgroundColor: '#760404' }}
-              
               previousComponent={
                 <Feather
                   style={{ left: 280 }}
@@ -164,8 +165,8 @@ export const Calender = ({ navigation }) => {
           onPress={() =>
             navigation.navigate('Home', {
               fromTo: {
-                from: moment(selectedStartDate).format("YYYY-MM-DD"),
-                to: moment(selectedEndDate).format("YYYY-MM-DD")
+                from: moment(selectedStartDate).format('YYYY-MM-DD'),
+                to: moment(selectedEndDate).format('YYYY-MM-DD')
               }
             })
           }>

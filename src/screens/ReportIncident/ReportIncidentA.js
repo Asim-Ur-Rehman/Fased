@@ -23,6 +23,7 @@ import ToggleButton from '../../components/ToggleButton/index'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useDispatch } from 'react-redux'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import moment from 'moment'
 export const ReportIncidentA = ({ navigation, route }) => {
@@ -175,23 +176,55 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
   const next = () => {
     // console.log('data', moment(date).format('YYYY-MM-DD'))
-    let data = {
-      category: category[0].id,
-      subcategory: subcategory ? subcategory[0].id : 0,
-      date: moment(date).format('YYYY-MM-DD'),
-      time: currentTime,
-      suspectName: suspectName ? suspectName : 'Anonymous',
-      amount: amount ? amount : '0'
+
+    let value = /^\+?(0|[1-9]\d*)$/.test(amount)
+
+    // console.log('value', value)
+
+    if (disableAmount) {
+      let data = {
+        category: category[0].id,
+        subcategory: subcategory ? subcategory[0].id : 0,
+        date: moment(date).format('YYYY-MM-DD'),
+        time: currentTime,
+        suspectName: suspectName ? suspectName : 'Anonymous',
+        amount: '0'
+      }
+      console.log('all data', data)
+
+      dispatch(ReportIncidentAllData(data, navigation))
+    } else {
+      if (!value) {
+        ToastMessage('Amount must be greater then 0', null, 'info')
+      } else {
+        let data = {
+          category: category[0].id,
+          subcategory: subcategory ? subcategory[0].id : 0,
+          date: moment(date).format('YYYY-MM-DD'),
+          time: currentTime,
+          suspectName: suspectName ? suspectName : 'Anonymous',
+          amount: amount
+        }
+        console.log('all data', data)
+
+        dispatch(ReportIncidentAllData(data, navigation))
+      }
     }
-    console.log('all data', data)
+    // if (!value) {
+    //   ToastMessage('Amount must be greater then 0', null, 'info')
+    // } else {
+    //   let data = {
+    //     category: category[0].id,
+    //     subcategory: subcategory ? subcategory[0].id : 0,
+    //     date: moment(date).format('YYYY-MM-DD'),
+    //     time: currentTime,
+    //     suspectName: suspectName ? suspectName : 'Anonymous',
+    //     amount: amount ? amount : '0'
+    //   }
+    //   console.log('all data', data)
 
-    dispatch(ReportIncidentAllData(data, navigation))
-    // // console.log('category', category[0].id, subcategory[0].id)
-    // console.log('date', currentTime)
-
-    // // console.log('catogeory ', route.params.category.map((item) => {
-    // //   console.log('item', item.key)
-    // // }))
+    //   // dispatch(ReportIncidentAllData(data, navigation))
+    // }
   }
 
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -280
@@ -202,7 +235,9 @@ export const ReportIncidentA = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           bounces={false}

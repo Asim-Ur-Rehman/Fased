@@ -48,7 +48,7 @@ export const SignIn = ({ navigation }) => {
   const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
   const signIn = () => {
     if (email == '' || password == '') {
-      ToastMessage('Please fill all fields', null, 'error')
+      ToastMessage('Please fill all the fields', null, 'error')
       setLoader(false)
     } else {
       if (loginUser?.error) {
@@ -58,7 +58,9 @@ export const SignIn = ({ navigation }) => {
       if (loginUser?.data?.loginUser?.status) {
         let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
         AsyncStorage.setItem('userData', jsonData)
-        ToastMessage(loginUser?.data?.loginUser?.message, null, 'success')
+        // ToastMessage(loginUser?.data?.loginUser?.message, null, 'success')
+        ToastMessage('Sign In Successfully', null, 'success')
+
         dispatch(SignInAction(loginUser?.data?.loginUser?.data))
         navigation.navigate('AppStackNavigator', {
           screen: 'Home'
@@ -135,18 +137,14 @@ export const SignIn = ({ navigation }) => {
           JSON.stringify(res?.data?.socialMediaLogin?.data)
         )
         dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
-        ToastMessage(
-          'User SignIn Successfully',
-          res?.data?.socialMediaLogin?.message,
-          'success'
-        )
+        ToastMessage(res?.data?.socialMediaLogin?.message, null, 'success')
         navigation.navigate('AppStackNavigator', {
           screen: 'Home'
         })
       })
     } catch (error) {
       console.log('error', error)
-      ToastMessage('error', error, 'error')
+      ToastMessage(error, null, 'error')
     }
   }
 
@@ -164,27 +162,28 @@ export const SignIn = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.signInText}>Sign In</Text>
+        <View
+          style={{
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.signInText}>Sign In</Text>
-          <View
-            style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
-        </View>
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>Email address</Text>

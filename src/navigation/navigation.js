@@ -46,6 +46,7 @@ function MyDrawer() {
         itemStyle: { marginVertical: 8, marginHorizontal: 8 }
       }}
       screenOptions={{
+        swipeEnabled: false,
         headerShown: false,
         drawerStyle: {
           width: '100%'

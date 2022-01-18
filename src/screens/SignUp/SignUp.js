@@ -37,11 +37,10 @@ export const SignUp = ({ navigation }) => {
   const [show, setShow] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 
-
   const dispatch = useDispatch()
   // const loading = useSelector(state => state.userReducer.isLoading)
   const [addUser, { data, loading, error }] = useMutation(Add_User)
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -180
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
   const signUp = () => {
     let value =
@@ -49,13 +48,13 @@ export const SignUp = ({ navigation }) => {
         email
       )
     if (fullName == '' || email == '' || password == '') {
-      ToastMessage('Please fill all fields', null, 'error')
+      ToastMessage('Please fill all the fields', null, 'error')
     } else if (!value) {
-      ToastMessage('Please enter a valid email address', null , 'info')
+      ToastMessage('Please enter a valid email address', null, 'info')
     } else if (password.length <= 8) {
       ToastMessage('Password should be greater than 8 character', null, 'info')
-    } else if(confirmPassword != password) {
-      ToastMessage('Password and confirm not matched', null, 'info')
+    } else if (confirmPassword != password) {
+      ToastMessage('Confirm Password does not match', null, 'info')
     } else {
       addUser({
         variables: {
@@ -70,25 +69,21 @@ export const SignUp = ({ navigation }) => {
             let userData = data?.data?.addUser?.data
             let jsonData = JSON.stringify(userData)
             AsyncStorage.setItem('userData', jsonData)
-            ToastMessage(
-              'SignUp Success',
-              data?.data?.addUser?.message,
-              'success'
-            )
+            ToastMessage(data?.data?.addUser?.message, null, 'success')
 
             navigation.navigate('AppStackNavigator', {
               screen: 'Home'
             })
           } else {
-            ToastMessage('SignUp Error', data?.data?.addUser?.message, 'error')
+            ToastMessage(data?.data?.addUser?.message, null, 'error')
           }
         })
         .catch(error => {
           console.log('error', error)
           if (error) {
-            ToastMessage('SignUp Error', 'Something went wrong', 'info')
+            ToastMessage('Something went wrong', null, 'info')
           } else {
-            ToastMessage('SignUp Error', error?.data?.addUser?.message, 'info')
+            ToastMessage(error?.data?.addUser?.message, null, 'info')
           }
         })
 
@@ -107,6 +102,25 @@ export const SignUp = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
+
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.signUpText}>Sign Up</Text>
+        <View
+          style={{
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
+
       <KeyboardAvoidingView
         behavior="position"
         keyboardVerticalOffset={keyboardVerticalOffset}>
@@ -114,23 +128,6 @@ export const SignUp = ({ navigation }) => {
           contentContainerStyle={{ flexGrow: 1, paddingBottom: 40 }}
           bounces={false}
           showsVerticalScrollIndicator={false}>
-          <View style={styles.logoContainer}>
-            <Image
-              source={Images.Pictures.logo}
-              style={{ width: 105, height: 105 }}
-            />
-          </View>
-          <View style={styles.textView}>
-            <Text style={styles.signUpText}>Sign Up</Text>
-            <View
-              style={{
-                backgroundColor: '#FE0000',
-                width: 21,
-                height: 1,
-                marginTop: 8
-              }}
-            />
-          </View>
           <View style={styles.InputContainer}>
             <View style={{ width: '83%', alignSelf: 'center' }}>
               <Text style={styles.inputLabel}>Full Name</Text>
@@ -164,33 +161,42 @@ export const SignUp = ({ navigation }) => {
             </View>
             <Input
               containerStyle={styles.input}
-              inputStyle={{fontSize: 12}}
-              inputContainerStyle={{borderBottomWidth:0}}
+              inputStyle={{ fontSize: 12 }}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
               placeholder="**** **** ****"
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               secureTextEntry={show ? false : true}
               onChangeText={text => setPassword(text)}
-              rightIcon={<Icon size={15} onPress={() =>  setShow(!show)} name={show ? "eye" : "eye-off"}/>}
+              rightIcon={
+                <Icon
+                  size={15}
+                  onPress={() => setShow(!show)}
+                  name={show ? 'eye' : 'eye-off'}
+                />
+              }
             />
 
-            
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
               <Text style={styles.inputLabel}>Confirm Password</Text>
             </View>
             <Input
               containerStyle={styles.input}
-              inputStyle={{fontSize: 12}}
-              inputContainerStyle={{borderBottomWidth:0}}
+              inputStyle={{ fontSize: 12 }}
+              inputContainerStyle={{ borderBottomWidth: 0 }}
               placeholder="**** **** ****"
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               secureTextEntry={showConfirm ? false : true}
               onChangeText={text => setconfirmPassword(text)}
-              rightIcon={<Icon size={15} onPress={() =>  setShowConfirm(!showConfirm)} name={showConfirm ? "eye" : "eye-off"}/>}
+              rightIcon={
+                <Icon
+                  size={15}
+                  onPress={() => setShowConfirm(!showConfirm)}
+                  name={showConfirm ? 'eye' : 'eye-off'}
+                />
+              }
             />
-
-
           </View>
 
           <View
