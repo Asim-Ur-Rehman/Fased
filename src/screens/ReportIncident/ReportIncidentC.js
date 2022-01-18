@@ -30,10 +30,9 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 
 export const ReportIncidentC = ({ navigation }) => {
   const [loader, setLoader] = useState(false)
-  const [state, setState] = useState({
-    text: '',
-    height: 0
-  })
+  const [textNew, setText] = useState('')
+  const [height, setheight] = useState(0)
+
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -60,7 +59,6 @@ export const ReportIncidentC = ({ navigation }) => {
 
     // console.log('data', data.id)
   }
-
   const next = () => {
     // console.log(
     //   'object',
@@ -74,12 +72,12 @@ export const ReportIncidentC = ({ navigation }) => {
     //     costMoney: parseInt(reportIncidentAllData?.amount),
     //     incidentDate: reportIncidentAllData?.date,
     //     incidentTime: reportIncidentAllData?.time,
-    //     description: state?.text,
+    //     description: textNew,
     //     floor: parseInt(reportIncidentLocationFloorData?.floor)
     //   }
     // )
     setLoader(true)
-    if (state.text == undefined) {
+    if (textNew == '' ||  textNew == undefined) {
       setLoader(false)
       ToastMessage("Description field should'nt be empty", null, 'error')
     } else {
@@ -94,7 +92,7 @@ export const ReportIncidentC = ({ navigation }) => {
             costMoney: parseInt(reportIncidentAllData?.amount),
             incidentDate: reportIncidentAllData?.date,
             incidentTime: reportIncidentAllData?.time,
-            description: state?.text,
+            description: textNew,
             floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
@@ -130,7 +128,7 @@ export const ReportIncidentC = ({ navigation }) => {
             costMoney: parseInt(reportIncidentAllData?.amount),
             incidentDate: reportIncidentAllData?.date,
             incidentTime: reportIncidentAllData?.time,
-            description: state?.text,
+            description: textNew,
             floor: parseInt(reportIncidentLocationFloorData?.floor)
           }
         })
@@ -206,7 +204,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 {
                   height: Math.max(
                     Platform.OS == 'android' ? 35 : 35,
-                    state.height
+                    height
                   )
                 }
               ]}
@@ -221,11 +219,12 @@ export const ReportIncidentC = ({ navigation }) => {
               blurOnSubmit
               returnKeyType="done"
               onChangeText={e => {
-                // setText(e)
-                setState({ ...state, text: e })
+                setText(e)
+                console.log("e", e)
+                // setState({ ...state, text: e })
               }}
               onContentSizeChange={event => {
-                setState({ height: event.nativeEvent.contentSize.height + 40 })
+                setheight(event.nativeEvent.contentSize.height + 40)
               }}
               // onSubmitEditing={() => {
               //   navigation.navigate('ReportingDone')
@@ -250,7 +249,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 justifyContent: 'flex-end',
                 margin: 15
               }}>
-              <Text style={styles.countText}>{state?.text?.length}</Text>
+              <Text style={styles.countText}>{textNew?.length}</Text>
               <Text style={styles.countText}>/1000</Text>
             </View>
           </View>
