@@ -182,157 +182,157 @@ export const SignIn = ({ navigation }) => {
         />
       </View>
       <KeyboardAvoidingView
-        behavior='height'
+        behavior="height"
         // keyboardVerticalOffset={keyboardVerticalOffset}
-        >
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        bounces={false}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.InputContainer}>
-          <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>Email address</Text>
-          </View>
-          <TextInput
-            value={email}
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="Eg namaemail@emailkamu.com"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            onChangeText={text => setEmail(text)}
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Password</Text>
-          </View>
-
-          <TextInput
-            value={password}
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => setPassword(text)}
-          />
-        </View>
-
-        <View style={styles.checkboxContainer}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <CheckBox
-              checkBoxColor="#9CA3AF"
-              checkedCheckBoxColor="#BE0000"
-              style={{ alignSelf: 'center' }}
-              onClick={() => setChecked(!checked)}
-              isChecked={checked}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.InputContainer}>
+            <View style={{ width: '83%', alignSelf: 'center' }}>
+              <Text style={styles.inputLabel}>Email address</Text>
+            </View>
+            <TextInput
+              value={email}
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="Eg namaemail@emailkamu.com"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={text => setEmail(text)}
             />
-            <Text style={styles.label}>Remember me</Text>
+
+            <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
+              <Text style={styles.inputLabel}>Password</Text>
+            </View>
+
+            <TextInput
+              value={password}
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => setPassword(text)}
+            />
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ForgetPassword')
-            }}
-            activeOpacity={0.7}
-            style={{}}>
-            <Text style={styles.label}>Forgot Password?</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            paddingVertical: 20
-          }}>
-          {loader ? (
-            <ActivityIndicator size="large" color="#4A4C50" />
-          ) : (
-            <Button
+
+          <View style={styles.checkboxContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <CheckBox
+                checkBoxColor="#9CA3AF"
+                checkedCheckBoxColor="#BE0000"
+                style={{ alignSelf: 'center' }}
+                onClick={() => setChecked(!checked)}
+                isChecked={checked}
+              />
+              <Text style={styles.label}>Remember me</Text>
+            </View>
+            <TouchableOpacity
               onPress={() => {
-                setLoader(true)
-                signIn()
+                navigation.navigate('ForgetPassword')
               }}
-              buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-              title="Sign In"
-            />
-          )}
-        </View>
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text
+              activeOpacity={0.7}
+              style={{}}>
+              <Text style={styles.label}>Forgot Password?</Text>
+            </TouchableOpacity>
+          </View>
+          <View
             style={{
-              color: '#252529',
-              fontSize: 13,
-              fontFamily: 'Inter-Regular'
+              paddingVertical: 20
             }}>
-            Or sign in with social account
-          </Text>
-        </View>
-
-        <View style={styles.socialIconContainer}>
-          <TouchableOpacity
-            onPress={fbLogin}
-            activeOpacity={0.7}
-            style={styles.fbImg}>
-            <MaterialIcon name="facebook" size={32} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
-            <MaterialIcon name="twitter" size={28} color="#fff" />
-          </TouchableOpacity>
-          <LinkedInModal
-            ref={linkedRef}
-            clientID="78dauvk4h579n4"
-            clientSecret="Z02I7Pk9v8Q9DSEo"
-            renderButton={() => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    // linkedRef.current.open()
-                  }}
-                  activeOpacity={0.7}
-                  style={styles.InImg}>
-                  <Icon name="linkedin" size={25} color="#fff" />
-                </TouchableOpacity>
-              )
-            }}
-            redirectUri="https://www.appstirr.com/"
-            onSuccess={linkedLogin}
-          />
-        </View>
-
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 20,
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-          <Text
-            style={{
-              color: '#252529',
-              fontSize: 13,
-              fontFamily: 'Inter-Regular'
-            }}>
-            Don’t have an account?
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('SignUp')
-            }}
-            activeOpacity={0.7}>
+            {loader ? (
+              <ActivityIndicator size="large" color="#4A4C50" />
+            ) : (
+              <Button
+                onPress={() => {
+                  setLoader(true)
+                  signIn()
+                }}
+                buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
+                title="Sign In"
+              />
+            )}
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Text
               style={{
-                color: '#BE0000',
+                color: '#252529',
                 fontSize: 13,
-                fontFamily: 'Inter-Medium',
-                marginLeft: 3
+                fontFamily: 'Inter-Regular'
               }}>
-              Sign Up Here
+              Or sign in with social account
             </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+          </View>
+
+          <View style={styles.socialIconContainer}>
+            <TouchableOpacity
+              onPress={fbLogin}
+              activeOpacity={0.7}
+              style={styles.fbImg}>
+              <MaterialIcon name="facebook" size={32} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.7} style={styles.TwitterImg}>
+              <MaterialIcon name="twitter" size={28} color="#fff" />
+            </TouchableOpacity>
+            <LinkedInModal
+              ref={linkedRef}
+              clientID="78dauvk4h579n4"
+              clientSecret="Z02I7Pk9v8Q9DSEo"
+              renderButton={() => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      // linkedRef.current.open()
+                    }}
+                    activeOpacity={0.7}
+                    style={styles.InImg}>
+                    <Icon name="linkedin" size={25} color="#fff" />
+                  </TouchableOpacity>
+                )
+              }}
+              redirectUri="https://www.appstirr.com/"
+              onSuccess={linkedLogin}
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              padding: 20,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+            <Text
+              style={{
+                color: '#252529',
+                fontSize: 13,
+                fontFamily: 'Inter-Regular'
+              }}>
+              Don’t have an account?
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignUp')
+              }}
+              activeOpacity={0.7}>
+              <Text
+                style={{
+                  color: '#BE0000',
+                  fontSize: 13,
+                  fontFamily: 'Inter-Medium',
+                  marginLeft: 3
+                }}>
+                Sign Up Here
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

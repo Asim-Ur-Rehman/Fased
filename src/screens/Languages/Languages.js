@@ -60,7 +60,7 @@ export const Languages = ({ navigation }) => {
     if (select) {
       getUserData('click')
     } else {
-      ToastMessage('Please Select any Language', null, 'error')
+      ToastMessage('Please select any language', null, 'error')
     }
 
     // if (select) {
@@ -94,7 +94,7 @@ export const Languages = ({ navigation }) => {
         />
       </View>
       <View style={styles.textViewStyle}>
-        <Text style={styles.textStyle}>Select your prefered language</Text>
+        <Text style={styles.textStyle}>Select your preferred language</Text>
       </View>
 
       {Buttons.map((item, i) => {

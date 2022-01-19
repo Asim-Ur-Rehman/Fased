@@ -7,7 +7,8 @@ import {
   Image,
   TextInput,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -93,88 +94,94 @@ export const ChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        bounces={false}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.ChangePasswordText}>Change Password</Text>
-          <View
-            style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
-        </View>
-        <View style={styles.InputContainer}>
-          <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>New Password</Text>
-          </View>
 
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => {
-              setNewPassword(text)
-            }}
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Confirm Password</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => {
-              setConfirmPassword(text)
-            }}
-          />
-        </View>
-
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.ChangePasswordText}>Change Password</Text>
         <View
           style={{
-            // alignItems: 'center',
-            // justifyContent: 'center',
-            paddingVertical: 20
-          }}>
-          {loading ? (
-            <ActivityIndicator size="large" color="#4A4C50" />
-          ) : (
-            <Button
-              onPress={() => {
-                changePaswword()
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
+      <KeyboardAvoidingView
+        behavior="height"
+        // keyboardVerticalOffset={keyboardVerticalOffset}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.InputContainer}>
+            <View style={{ width: '83%', alignSelf: 'center' }}>
+              <Text style={styles.inputLabel}>New Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setNewPassword(text)
               }}
-              // onPress={() => { navigation.navigate('SignIn') }}
-              buttonStyle={{
-                width: '90%',
-                height: 48,
-                alignSelf: 'center',
-                marginTop: 10
-              }}
-              title="Submit"
             />
-          )}
-        </View>
-      </ScrollView>
+
+            <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
+              <Text style={styles.inputLabel}>Confirm Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setConfirmPassword(text)
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              // alignItems: 'center',
+              // justifyContent: 'center',
+              paddingVertical: 20
+            }}>
+            {loading ? (
+              <ActivityIndicator size="large" color="#4A4C50" />
+            ) : (
+              <Button
+                onPress={() => {
+                  changePaswword()
+                }}
+                // onPress={() => { navigation.navigate('SignIn') }}
+                buttonStyle={{
+                  width: '90%',
+                  height: 48,
+                  alignSelf: 'center',
+                  marginTop: 10
+                }}
+                title="Submit"
+              />
+            )}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

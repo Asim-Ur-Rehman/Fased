@@ -92,7 +92,7 @@ export const FlagReport = ({ navigation, route }) => {
 
   const [userData, setUserData] = useState(null)
   const onDone = () => {
-    if (reason || text) {
+    if (others) {
       CreateFlagReport({
         variables: others
           ? {
@@ -108,7 +108,7 @@ export const FlagReport = ({ navigation, route }) => {
       })
         .then(res => {
           // navigation.navigate('Home')
-          setModalVisible(false)
+          setModalVisible(false), setothers(false)
         })
         .catch(err => {
           console.log(
@@ -129,7 +129,45 @@ export const FlagReport = ({ navigation, route }) => {
           )
         })
     } else {
-      alert('Please define any reason')
+      if (reason) {
+        CreateFlagReport({
+          variables: others
+            ? {
+                userId: parseFloat(userData?.id),
+                reasonId: 0,
+                reason: text
+              }
+            : {
+                userId: parseFloat(userData?.id),
+                reasonId: reason.id,
+                reason: reason.reason
+              }
+        })
+          .then(res => {
+            // navigation.navigate('Home')
+            setModalVisible(false)
+          })
+          .catch(err => {
+            console.log(
+              'err',
+              err,
+              'err condition',
+              others
+                ? {
+                    userId: parseFloat(userData?.id),
+                    reasonId: 0,
+                    reason: text
+                  }
+                : {
+                    userId: parseFloat(userData?.id),
+                    reasonId: reason.id,
+                    reason: reason.reason
+                  }
+            )
+          })
+      } else {
+        alert('Please select any reason')
+      }
     }
   }
 
@@ -322,6 +360,7 @@ export const FlagReport = ({ navigation, route }) => {
         <Modal
           animationType="fade"
           // onDismiss={() => setModalVisible(!modalVisible)}
+
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -405,7 +444,9 @@ export const FlagReport = ({ navigation, route }) => {
 
                 {!others && (
                   <TouchableOpacity
-                    onPress={() => setothers(!others)}
+                    onPress={() => {
+                      setothers(!others)
+                    }}
                     activeOpacity={0.7}
                     style={{
                       flexDirection: 'row',

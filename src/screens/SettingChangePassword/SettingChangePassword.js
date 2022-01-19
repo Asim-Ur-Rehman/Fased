@@ -41,13 +41,12 @@ export const SettingChangePassword = ({ navigation, route }) => {
     const userData = await AsyncStorage.getItem('userData')
     let data = JSON.parse(userData)
     setUserId(data?.id)
-
   }
   const dispatch = useDispatch()
 
-  const [ChangePassword, { data, loading, error }] = useMutation(CHANGE_PASSWORD)
+  const [ChangePassword, { data, loading, error }] =
+    useMutation(CHANGE_PASSWORD)
   console.log('error data', loading)
-
 
   const changePaswword = () => {
     if (newPassword == '' || confirmPassword == '') {
@@ -103,106 +102,110 @@ export const SettingChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        bounces={false}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.logoContainer}>
-          <Image
-            source={Images.Pictures.logo}
-            style={{ width: 105, height: 105 }}
-          />
-        </View>
-        <View style={styles.textView}>
-          <Text style={styles.ChangePasswordText}>Change Password</Text>
-          <View
-            style={{
-              backgroundColor: '#FE0000',
-              width: 21,
-              height: 1,
-              marginTop: 8
-            }}
-          />
-        </View>
-        <View style={styles.InputContainer}>
-          <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>Current Password</Text>
-          </View>
 
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => {
-              setOldPassword(text)
-            }}
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>New Password</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => {
-              setNewPassword(text)
-            }}
-          />
-
-          <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Confirm Password</Text>
-          </View>
-
-          <TextInput
-            style={styles.input}
-            // onChangeText={onChangeNumber}
-            // value={'123456789012'}
-            placeholder="**** **** ****"
-            placeholderTextColor="#9CA3AF"
-            keyboardType="default"
-            secureTextEntry={true}
-            onChangeText={text => {
-              setConfirmPassword(text)
-            }}
-          />
-        </View>
-
+      <View style={styles.logoContainer}>
+        <Image
+          source={Images.Pictures.logo}
+          style={{ width: 105, height: 105 }}
+        />
+      </View>
+      <View style={styles.textView}>
+        <Text style={styles.ChangePasswordText}>Change Password</Text>
         <View
           style={{
-            // alignItems: 'center',
-            // justifyContent: 'center',
-            paddingVertical: 20
-          }}>
-          {loading ? (
-            <ActivityIndicator size="large" color="#4A4C50" />
-          ) : (
-            <Button
-              onPress={() => {
-                changePaswword()
+            backgroundColor: '#FE0000',
+            width: 21,
+            height: 1,
+            marginTop: 8
+          }}
+        />
+      </View>
+      <KeyboardAvoidingView
+        behavior="height"
+        // keyboardVerticalOffset={keyboardVerticalOffset}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          bounces={false}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.InputContainer}>
+            <View style={{ width: '83%', alignSelf: 'center' }}>
+              <Text style={styles.inputLabel}>Current Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setOldPassword(text)
               }}
-              // onPress={() => { navigation.navigate('SignIn') }}
-              buttonStyle={{
-                width: '90%',
-                height: 48,
-                alignSelf: 'center',
-                marginTop: 10
-              }}
-              title="Submit"
             />
-          )}
-        </View>
-      </ScrollView>
+
+            <View style={{ width: '83%', alignSelf: 'center' }}>
+              <Text style={styles.inputLabel}>New Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setNewPassword(text)
+              }}
+            />
+
+            <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
+              <Text style={styles.inputLabel}>Confirm Password</Text>
+            </View>
+
+            <TextInput
+              style={styles.input}
+              // onChangeText={onChangeNumber}
+              // value={'123456789012'}
+              placeholder="**** **** ****"
+              placeholderTextColor="#9CA3AF"
+              keyboardType="default"
+              secureTextEntry={true}
+              onChangeText={text => {
+                setConfirmPassword(text)
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              // alignItems: 'center',
+              // justifyContent: 'center',
+              paddingVertical: 20
+            }}>
+            {loading ? (
+              <ActivityIndicator size="large" color="#4A4C50" />
+            ) : (
+              <Button
+                onPress={() => {
+                  changePaswword()
+                }}
+                // onPress={() => { navigation.navigate('SignIn') }}
+                buttonStyle={{
+                  width: '90%',
+                  height: 48,
+                  alignSelf: 'center',
+                  marginTop: 10
+                }}
+                title="Submit"
+              />
+            )}
+          </View>
+        </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )

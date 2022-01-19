@@ -75,7 +75,8 @@ export const SignUp = ({ navigation }) => {
               screen: 'Home'
             })
           } else {
-            ToastMessage(data?.data?.addUser?.message, null, 'error')
+            // ToastMessage(data?.data?.addUser?.message, null, 'error')
+            ToastMessage('Email already exists', null, 'error')
           }
         })
         .catch(error => {
@@ -122,9 +123,9 @@ export const SignUp = ({ navigation }) => {
       </View>
 
       <KeyboardAvoidingView
-        behavior='height'
+        behavior="height"
         // keyboardVerticalOffset={keyboardVerticalOffset}
-        >
+      >
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           bounces={false}

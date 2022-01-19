@@ -92,25 +92,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   card: {
-    paddingHorizontal:10,
-    paddingVertical:10,
-    borderRadius:8,
-    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 8,
+    // flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-},
-text:{
-    textAlign:"center",
-    color:"#9CA3AF",
-    fontSize:20,
-    fontFamily:"Oswald-Medium"
-
-},
-text1:{
-    textAlign:"center",
-    fontSize:16,
-    paddingVertical:10,
+    justifyContent: 'center',
+    marginTop: 40
+  },
+  text: {
+    textAlign: 'center',
+    color: '#9CA3AF',
+    fontSize: 20,
+    fontFamily: 'Oswald-Medium'
+  },
+  text1: {
+    textAlign: 'center',
+    fontSize: 16,
+    paddingVertical: 10,
     // color:"#85796d",
-    fontFamily:"Oswald-Regular"
-}
+    fontFamily: 'Oswald-Regular'
+  }
 })

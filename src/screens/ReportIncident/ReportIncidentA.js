@@ -335,7 +335,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Choose sub category
+                Choose sub-category
               </Text>
               <TouchableOpacity
                 onPress={() => {

@@ -32,8 +32,8 @@ export const CustomDrawer = ({ navigation }) => {
       navigateTo: 'Settings'
     },
     {
-      title: isGuest ? 'SignUp' : 'Logout',
-      navigateTo: isGuest ? 'SignUp' : 'SignIn'
+      title: isGuest ? 'Sign Up' : 'Logout',
+      navigateTo: isGuest ? 'Sign Up' : 'Sign In'
     }
     // {
     //   title: 'Logout'
