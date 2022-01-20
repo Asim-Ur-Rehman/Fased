@@ -60,7 +60,7 @@ export const SignIn = ({ navigation }) => {
         let jsonData = JSON.stringify(loginUser?.data?.loginUser?.data)
         AsyncStorage.setItem('userData', jsonData)
         // ToastMessage(loginUser?.data?.loginUser?.message, null, 'success')
-        ToastMessage('Sign In Successfully', null, 'success')
+        ToastMessage('Signed In Successfully', null, 'success')
 
         dispatch(SignInAction(loginUser?.data?.loginUser?.data))
         navigation.navigate('AppStackNavigator', {
@@ -163,32 +163,28 @@ export const SignIn = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-
-      <View style={styles.logoContainer}>
-        <Image
-          source={Images.Pictures.logo}
-          style={{ width: 105, height: 105 }}
-        />
-      </View>
-      <View style={styles.textView}>
-        <Text style={styles.signInText}>Sign In</Text>
-        <View
-          style={{
-            backgroundColor: '#FE0000',
-            width: 21,
-            height: 1,
-            marginTop: 8
-          }}
-        />
-      </View>
-      <KeyboardAvoidingView
-        behavior='height'
-        // keyboardVerticalOffset={keyboardVerticalOffset}
-        >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
+        <View style={styles.logoContainer}>
+          <Image
+            source={Images.Pictures.logo}
+            style={{ width: 105, height: 105 }}
+          />
+        </View>
+        <View style={styles.textView}>
+          <Text style={styles.signInText}>Sign In</Text>
+          <View
+            style={{
+              backgroundColor: '#FE0000',
+              width: 21,
+              height: 1,
+              marginTop: 8
+            }}
+          />
+        </View>
+
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>Email address</Text>
@@ -333,7 +329,6 @@ export const SignIn = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

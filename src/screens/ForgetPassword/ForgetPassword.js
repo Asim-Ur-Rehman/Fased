@@ -47,7 +47,9 @@ export const ForgetPassword = ({ navigation }) => {
         .then(data => {
           // console.log('data return', data.data.forgotPassword.status)
           if (data?.data?.forgotPassword?.status) {
-            ToastMessage(data?.data?.forgotPassword?.message, null, 'success')
+            // ToastMessage(data?.data?.forgotPassword?.message, null, 'success')
+            ToastMessage('Otp sent to your email address', null, 'success')
+
             navigation.navigate('Otp', {
               emailFromParam: email
             })

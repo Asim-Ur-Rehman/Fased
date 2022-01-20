@@ -77,9 +77,9 @@ export const ReportIncidentC = ({ navigation }) => {
     //   }
     // )
     setLoader(true)
-    if (textNew == '' ||  textNew == undefined) {
+    if (textNew == '' || textNew == undefined) {
       setLoader(false)
-      ToastMessage("Description field should'nt be empty", null, 'error')
+      ToastMessage("Description field shouldn't be empty", null, 'error')
     } else {
       if (reportIncidentAllData?.subcategory == '0') {
         CreateReportWithoutSubCat({
@@ -202,10 +202,7 @@ export const ReportIncidentC = ({ navigation }) => {
               style={[
                 styles.textArea,
                 {
-                  height: Math.max(
-                    Platform.OS == 'android' ? 35 : 35,
-                    height
-                  )
+                  height: Math.max(Platform.OS == 'android' ? 35 : 35, height)
                 }
               ]}
               underlineColorAndroid="transparent"
@@ -220,7 +217,7 @@ export const ReportIncidentC = ({ navigation }) => {
               returnKeyType="done"
               onChangeText={e => {
                 setText(e)
-                console.log("e", e)
+                console.log('e', e)
                 // setState({ ...state, text: e })
               }}
               onContentSizeChange={event => {

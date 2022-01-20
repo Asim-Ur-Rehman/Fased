@@ -41,13 +41,12 @@ export const SettingChangePassword = ({ navigation, route }) => {
     const userData = await AsyncStorage.getItem('userData')
     let data = JSON.parse(userData)
     setUserId(data?.id)
-
   }
   const dispatch = useDispatch()
 
-  const [ChangePassword, { data, loading, error }] = useMutation(CHANGE_PASSWORD)
+  const [ChangePassword, { data, loading, error }] =
+    useMutation(CHANGE_PASSWORD)
   console.log('error data', loading)
-
 
   const changePaswword = () => {
     if (newPassword == '' || confirmPassword == '') {
@@ -103,7 +102,10 @@ export const SettingChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={keyboardVerticalOffset}>
+      {/* <KeyboardAvoidingView
+        behavior="height"
+        // keyboardVerticalOffset={keyboardVerticalOffset}
+      > */}
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -125,6 +127,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
             }}
           />
         </View>
+
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
             <Text style={styles.inputLabel}>Current Password</Text>
@@ -203,7 +206,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
     </SafeAreaView>
   )
 }

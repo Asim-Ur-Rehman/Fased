@@ -194,7 +194,7 @@ export const NewsCard = ({ navigation }) => {
                   alignItems: 'center',
                   height: height / 2
                 }}>
-                <Text>Empty List</Text>
+                <Text>There is no old news articles</Text>
               </View>
             }
           />
@@ -230,7 +230,7 @@ export const NewsCard = ({ navigation }) => {
                   alignItems: 'center',
                   height: height / 2
                 }}>
-                <Text>Empty List</Text>
+                <Text>There is no new news articles</Text>
               </View>
             }
           />
@@ -256,7 +256,7 @@ export const NewsCard = ({ navigation }) => {
                 alignItems: 'center',
                 height: height / 2
               }}>
-              <Text>Empty List</Text>
+              <Text>There is no favorite news articles</Text>
             </View>
           }
         />
@@ -296,7 +296,7 @@ export const NewsCard = ({ navigation }) => {
               alignItems: 'center',
               height: height / 2
             }}>
-            <Text>There is no favorite news articales</Text>
+            <Text>There is no categories</Text>
           </View>
         )
       }
