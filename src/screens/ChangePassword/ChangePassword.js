@@ -82,6 +82,8 @@ export const ChangePassword = ({ navigation, route }) => {
     }
   }
 
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -200
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -94,10 +96,9 @@ export const ChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      {/* <KeyboardAvoidingView
-        behavior="height"
-        // keyboardVerticalOffset={keyboardVerticalOffset}
-      > */}
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -181,7 +182,7 @@ export const ChangePassword = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

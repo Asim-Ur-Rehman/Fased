@@ -102,10 +102,9 @@ export const SettingChangePassword = ({ navigation, route }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      {/* <KeyboardAvoidingView
-        behavior="height"
-        // keyboardVerticalOffset={keyboardVerticalOffset}
-      > */}
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         bounces={false}
@@ -206,7 +205,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           )}
         </View>
       </ScrollView>
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

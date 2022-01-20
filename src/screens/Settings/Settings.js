@@ -15,6 +15,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 import Button from '../../components/Button'
+import { useSelector } from 'react-redux'
 
 const { width, height } = Dimensions.get('screen')
 export const Settings = ({ navigation }) => {
@@ -39,6 +40,8 @@ export const Settings = ({ navigation }) => {
       reason: 'Spanish'
     }
   ]
+
+  const isGuest = useSelector(state => state.userReducer.isGuest)
 
   const onDone = () => {}
 
@@ -95,7 +98,8 @@ export const Settings = ({ navigation }) => {
         </View>
       </LinearGradient>
 
-      <TouchableOpacity
+     {!isGuest
+      && <TouchableOpacity
         onPress={() => {
           navigation.navigate('SettingChangePassword')
         }}
@@ -107,7 +111,7 @@ export const Settings = ({ navigation }) => {
         <View>
           <Entypo name="chevron-right" color="#9CA3AF" size={25} />
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
