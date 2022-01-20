@@ -8,7 +8,8 @@ import {
   TextInput,
   StatusBar,
   KeyboardAvoidingView,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -40,7 +41,7 @@ export const SignUp = ({ navigation }) => {
   const dispatch = useDispatch()
   // const loading = useSelector(state => state.userReducer.isLoading)
   const [addUser, { data, loading, error }] = useMutation(Add_User)
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -10
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -280
 
   const signUp = () => {
     let value =
@@ -103,11 +104,11 @@ export const SignUp = ({ navigation }) => {
         translucent={true}
         barStyle={'dark-content'}
       />
-      {/* <KeyboardAvoidingView
-        behavior="height"
-        keyboardVerticalOffset={keyboardVerticalOffset}> */}
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={keyboardVerticalOffset}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ flexGrow: 1, paddingBottom: Platform.OS == "ios" ? 0 : 40 }}
         bounces={false}
         showsVerticalScrollIndicator={false}>
         <View style={styles.logoContainer}>
@@ -214,7 +215,7 @@ export const SignUp = ({ navigation }) => {
           )}
         </View>
       </ScrollView>
-      {/* </KeyboardAvoidingView> */}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
