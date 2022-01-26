@@ -44,7 +44,7 @@ export const ReportIncident = ({ navigation }) => {
   const [visible, setVisible] = useState(false)
   const [floor, setFloor] = useState(0)
   const mapRef = useRef(null)
-  const [enabled, setEnabled] = useState(false)
+  const [enabled, setEnabled] = useState(true)
 
   const dispatch = useDispatch()
   const onSelectSwitch = index => {
@@ -105,6 +105,7 @@ export const ReportIncident = ({ navigation }) => {
         longitude: initialRegion.longitude,
         floor: '0'
       }
+      // console.log('data', data)
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     } else {
       if (floor == '') {
@@ -121,6 +122,7 @@ export const ReportIncident = ({ navigation }) => {
           longitude: initialRegion.longitude,
           floor: floor
         }
+        // console.log('data', data)
         dispatch(ReportIncidentLocationFloorData(data, navigation))
       }
     }
@@ -249,13 +251,16 @@ export const ReportIncident = ({ navigation }) => {
               <View style={styles.textAndToggleViewStyle}>
                 <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={2}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
               <View style={styles.textAndToggleViewStyle2}>
                 <Text style={styles.footerRowTextStyle}>Floor</Text>
-                {!enabled ? (
+                {console.log('enables====', enabled)}
+                {enabled ? (
+                  <Text>Ground floor</Text>
+                ) : (
                   <TextInput
                     editable={enabled ? false : true}
                     placeholder="11th"
@@ -281,8 +286,6 @@ export const ReportIncident = ({ navigation }) => {
                       color: 'black'
                     }}
                   />
-                ) : (
-                  <Text>Ground floor</Text>
                 )}
               </View>
             </View>

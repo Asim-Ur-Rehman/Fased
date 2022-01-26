@@ -77,84 +77,84 @@ export const ReportIncidentC = ({ navigation }) => {
     //   }
     // )
     setLoader(true)
-    if (textNew == '' || textNew == undefined) {
-      setLoader(false)
-      ToastMessage("Description field shouldn't be empty", null, 'error')
+    // if (textNew == '' || textNew == undefined) {
+    //   setLoader(false)
+    //   ToastMessage("Description field shouldn't be empty", null, 'error')
+    // } else {
+    if (reportIncidentAllData?.subcategory == '0') {
+      CreateReportWithoutSubCat({
+        variables: {
+          userId: parseInt(userId),
+          categoryId: reportIncidentAllData?.category,
+          latitude: reportIncidentLocationFloorData?.latitude,
+          longitude: reportIncidentLocationFloorData?.longitude,
+          suspectName: reportIncidentAllData?.suspectName,
+          costMoney: parseInt(reportIncidentAllData?.amount),
+          incidentDate: reportIncidentAllData?.date,
+          incidentTime: reportIncidentAllData?.time,
+          description: textNew ? textNew : '',
+          floor: parseInt(reportIncidentLocationFloorData?.floor)
+        }
+      })
+        .then(data => {
+          if (data?.data?.CreateReport?.status) {
+            ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+            setLoader(false)
+            navigation.navigate('ReportingDone')
+          } else {
+            setLoader(false)
+            ToastMessage(data?.data?.CreateReport?.message, null, 'error')
+          }
+        })
+        .catch(error => {
+          console.log('error', error)
+          if (error) {
+            setLoader(false)
+            ToastMessage('Something went wrong', null, 'error')
+          } else {
+            setLoader(false)
+            ToastMessage(error?.data?.CreateReport?.message, null, 'error')
+          }
+        })
     } else {
-      if (reportIncidentAllData?.subcategory == '0') {
-        CreateReportWithoutSubCat({
-          variables: {
-            userId: parseInt(userId),
-            categoryId: reportIncidentAllData?.category,
-            latitude: reportIncidentLocationFloorData?.latitude,
-            longitude: reportIncidentLocationFloorData?.longitude,
-            suspectName: reportIncidentAllData?.suspectName,
-            costMoney: parseInt(reportIncidentAllData?.amount),
-            incidentDate: reportIncidentAllData?.date,
-            incidentTime: reportIncidentAllData?.time,
-            description: textNew,
-            floor: parseInt(reportIncidentLocationFloorData?.floor)
+      CreateReport({
+        variables: {
+          userId: parseInt(userId),
+          categoryId: reportIncidentAllData?.category,
+          subCategory: reportIncidentAllData?.subcategory,
+          latitude: reportIncidentLocationFloorData?.latitude,
+          longitude: reportIncidentLocationFloorData?.longitude,
+          suspectName: reportIncidentAllData?.suspectName,
+          costMoney: parseInt(reportIncidentAllData?.amount),
+          incidentDate: reportIncidentAllData?.date,
+          incidentTime: reportIncidentAllData?.time,
+          description: textNew ? textNew : '',
+          floor: parseInt(reportIncidentLocationFloorData?.floor)
+        }
+      })
+        .then(data => {
+          // console.log('data return', data)
+          if (data?.data?.CreateReport?.status) {
+            ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+            setLoader(false)
+            navigation.navigate('ReportingDone')
+          } else {
+            setLoader(false)
+            ToastMessage(data?.data?.CreateReport?.message, null, 'error')
           }
         })
-          .then(data => {
-            if (data?.data?.CreateReport?.status) {
-              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
-              setLoader(false)
-              navigation.navigate('ReportingDone')
-            } else {
-              setLoader(false)
-              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
-            }
-          })
-          .catch(error => {
-            console.log('error', error)
-            if (error) {
-              setLoader(false)
-              ToastMessage('Something went wrong', null, 'error')
-            } else {
-              setLoader(false)
-              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
-            }
-          })
-      } else {
-        CreateReport({
-          variables: {
-            userId: parseInt(userId),
-            categoryId: reportIncidentAllData?.category,
-            subCategory: reportIncidentAllData?.subcategory,
-            latitude: reportIncidentLocationFloorData?.latitude,
-            longitude: reportIncidentLocationFloorData?.longitude,
-            suspectName: reportIncidentAllData?.suspectName,
-            costMoney: parseInt(reportIncidentAllData?.amount),
-            incidentDate: reportIncidentAllData?.date,
-            incidentTime: reportIncidentAllData?.time,
-            description: textNew,
-            floor: parseInt(reportIncidentLocationFloorData?.floor)
+        .catch(error => {
+          console.log('error', error)
+          if (error) {
+            setLoader(false)
+            ToastMessage('Something went wrong', null, 'error')
+          } else {
+            setLoader(false)
+            ToastMessage(error?.data?.CreateReport?.message, null, 'error')
           }
         })
-          .then(data => {
-            // console.log('data return', data)
-            if (data?.data?.CreateReport?.status) {
-              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
-              setLoader(false)
-              navigation.navigate('ReportingDone')
-            } else {
-              setLoader(false)
-              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
-            }
-          })
-          .catch(error => {
-            console.log('error', error)
-            if (error) {
-              setLoader(false)
-              ToastMessage('Something went wrong', null, 'error')
-            } else {
-              setLoader(false)
-              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
-            }
-          })
-      }
     }
+    // }
   }
   return (
     <SafeAreaView style={styles.mainContainer}>
