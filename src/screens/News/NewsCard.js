@@ -422,27 +422,25 @@ export const NewsCard = ({ navigation }) => {
           }}>
           {/* RENDER CONTENT */}
           {renderContent()}
-
-          <View
-            style={{
-              marginVertical: 10
-            }}>
-            <Button
-              onPress={() => {
-                navigation.navigate('Home')
-              }}
-              linearColor1={'#9CA3AF'}
-              linearColor2={'#4A4C50'}
-              title={'Done'}
-              buttonStyle={{
-                width: '90%',
-                alignSelf: 'center'
-              }}
-            />
-          </View>
         </View>
       </ScrollView>
-
+      <View
+        style={{
+          marginVertical: 10
+        }}>
+        <Button
+          onPress={() => {
+            navigation.navigate('Home')
+          }}
+          linearColor1={'#9CA3AF'}
+          linearColor2={'#4A4C50'}
+          title={'Done'}
+          buttonStyle={{
+            width: '90%',
+            alignSelf: 'center'
+          }}
+        />
+      </View>
       <View>
         <BannerAd
           style={{ width: '100%' }}
