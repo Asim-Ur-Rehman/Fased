@@ -14,7 +14,7 @@ import {
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
 import MapView from 'react-native-map-clustering'
-import { Marker } from 'react-native-maps'
+import { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { VictoryPie } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Button from '../../components/Button'
@@ -28,7 +28,7 @@ import {
   Get_Reports
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
-import { distance, getSimplifyArr } from '../../utils/helper'
+import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation';
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob';
 import { useIsFocused } from '@react-navigation/native'
@@ -305,6 +305,7 @@ export const Home = (props) => {
         <MapView
           initialRegion={INITIAL_REGION}
           style={{ height: '72%' }}
+          provider={PROVIDER_GOOGLE} 
           radius={40}
           ref={mapRef}
           animationEnabled={false}
@@ -339,8 +340,8 @@ export const Home = (props) => {
                     radius={20}
                     innerRadius={30}
                     labels={({ datum }) => ``}
-                    data={[...new Set([...reports.map(e => e.data.Category.BackgroundColor)])].map(e => {
-                      return { x: 1, y: 3 }
+                    data={getColorRatioArr(reports)?.map(e => {
+                      return { x: 1, y: e }
                     })}
                   />
                   <TouchableOpacity
@@ -372,11 +373,37 @@ export const Home = (props) => {
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
-                <Image
-                  source={require('../../assets/images/user.png')}
-                  style={{ width: 50, height: 50 }}
-                  resizeMode={'contain'}
+               <VictoryPie
+                  colorScale={
+                    // item.Category.BackgroundColor
+                    [...new Set([item.Category.BackgroundColor])]
+                  }
+                  padAngle={({ datum }) => datum.y}
+                  radius={20}
+                  innerRadius={30}
+                  labels={({ datum }) => ``}
+                  data={
+                    // item.Category.BackgroundColor
+                    [
+                      ...new Set([
+                        // ...item.map(e => console.log('e========', e))
+                        item.Category.BackgroundColor
+                      ])
+                    ].map(e => {
+                      return { x: 1, y: 3 }
+                    })
+                  }
                 />
+                <TouchableOpacity
+                  // onPress={onPress}
+                  style={{
+                    position: 'absolute',
+                    bottom: '45%',
+                    left: '49%',
+                    top: '48%'
+                  }}>
+                  <Text style={{ color: 'blue' }}>1</Text>
+                </TouchableOpacity>
               </Marker>
             )
           })}
