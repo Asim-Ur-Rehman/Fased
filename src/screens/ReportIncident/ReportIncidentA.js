@@ -27,10 +27,10 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import moment from 'moment'
 export const ReportIncidentA = ({ navigation, route }) => {
-  const [disableDate, setDisableDate] = useState(false)
-  const [disableTime, setDisableTime] = useState(false)
-  const [disableName, setDisableName] = useState(false)
-  const [disableAmount, setDisableAmount] = useState(false)
+  const [disableDate, setDisableDate] = useState(true)
+  const [disableTime, setDisableTime] = useState(true)
+  const [disableName, setDisableName] = useState(true)
+  const [disableAmount, setDisableAmount] = useState(true)
 
   const [show, setShow] = useState(false)
   const [mode, setMode] = useState('time')
@@ -177,39 +177,39 @@ export const ReportIncidentA = ({ navigation, route }) => {
   const next = () => {
     // console.log('data', moment(date).format('YYYY-MM-DD'))
 
-    let value = /^\+?(0|[1-9]\d*)$/.test(amount)
+    // let value = /^\+?(0|[1-9]\d*)$/.test(amount)
 
-    // console.log('value', value)
+    // // console.log('value', value)
 
-    if (disableAmount) {
-      let data = {
-        category: category[0].id,
-        subcategory: subcategory ? subcategory[0].id : 0,
-        date: moment(date).format('YYYY-MM-DD'),
-        time: currentTime,
-        suspectName: suspectName ? suspectName : 'Anonymous',
-        amount: '0'
-      }
-      console.log('all data', data)
+    // if (disableAmount) {
+    // let data = {
+    //   category: category[0].id,
+    //   subcategory: subcategory ? subcategory[0].id : 0,
+    //   date: moment(date).format('YYYY-MM-DD'),
+    //   time: currentTime,
+    //   suspectName: suspectName ? suspectName : 'Anonymous',
+    //   amount: '0'
+    // }
+    // console.log('all data', data)
 
-      dispatch(ReportIncidentAllData(data, navigation))
-    } else {
-      if (!value) {
-        ToastMessage('Amount must be greater then 0', null, 'info')
-      } else {
-        let data = {
-          category: category[0].id,
-          subcategory: subcategory ? subcategory[0].id : 0,
-          date: moment(date).format('YYYY-MM-DD'),
-          time: currentTime,
-          suspectName: suspectName ? suspectName : 'Anonymous',
-          amount: amount
-        }
-        console.log('all data', data)
+    //   // dispatch(ReportIncidentAllData(data, navigation))
+    // } else {
+    //   if (!value) {
+    //     ToastMessage('Amount must be greater then 0', null, 'info')
+    //   } else {
+    //     let data = {
+    //       category: category[0].id,
+    //       subcategory: subcategory ? subcategory[0].id : 0,
+    //       date: moment(date).format('YYYY-MM-DD'),
+    //       time: currentTime,
+    //       suspectName: suspectName ? suspectName : 'Anonymous',
+    //       amount: amount
+    //     }
+    //     console.log('all data', data)
 
-        dispatch(ReportIncidentAllData(data, navigation))
-      }
-    }
+    //     // dispatch(ReportIncidentAllData(data, navigation))
+    //   }
+    // }
     // if (!value) {
     //   ToastMessage('Amount must be greater then 0', null, 'info')
     // } else {
@@ -225,6 +225,17 @@ export const ReportIncidentA = ({ navigation, route }) => {
 
     //   // dispatch(ReportIncidentAllData(data, navigation))
     // }
+
+    let data = {
+      category: category[0].id,
+      subcategory: subcategory ? subcategory[0].id : 0,
+      date: moment(date).format('YYYY-MM-DD'),
+      time: currentTime,
+      suspectName: suspectName ? suspectName : 'Anonymous',
+      amount: '0'
+    }
+    console.log('all data', data)
+    dispatch(ReportIncidentAllData(data, navigation))
   }
 
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -280
@@ -386,7 +397,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Today
                 </Text>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={2}
                   onSelectSwitch={index => onToggleSwitch(index, 'date')}
                 />
               </View>
@@ -440,7 +451,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Now
                 </Text>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={2}
                   onSelectSwitch={index => onToggleSwitch(index, 'time')}
                 />
               </View>
@@ -522,7 +533,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Don’t know
                 </Text>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={2}
                   onSelectSwitch={index => onToggleSwitch(index, 'suspectName')}
                 />
               </View>
@@ -567,7 +578,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   No
                 </Text>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={2}
                   onSelectSwitch={index => onToggleSwitch(index, 'amount')}
                 />
               </View>

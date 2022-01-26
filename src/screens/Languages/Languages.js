@@ -56,18 +56,13 @@ export const Languages = ({ navigation }) => {
   ]
 
   const selectLanguage = () => {
-    console.log('slected', select)
-    if (select) {
-      getUserData('click')
-    } else {
-      ToastMessage('Please select any language', null, 'error')
-    }
-
+    // console.log('slected', select)
     // if (select) {
-    //   alert('selecthvhv')
+    //   getUserData('click')
     // } else {
-    //   navigation.navigate('SignIn')
+    //   ToastMessage('Please select any language', null, 'error')
     // }
+    getUserData('click')
   }
   return (
     <SafeAreaView
@@ -106,14 +101,17 @@ export const Languages = ({ navigation }) => {
             }}>
             <Button
               onPress={() => {
-                setSelect(item)
+                // setSelect(item)
+                selectLanguage()
               }}
-              linearColor1={
-                select?.title == item?.title ? '#FE0000' : '#9CA3AF'
-              }
-              linearColor2={
-                select?.title == item?.title ? '#680000' : '#4A4C50'
-              }
+              // linearColor1={
+              //   select?.title == item?.title ? '#FE0000' : '#9CA3AF'
+              // }
+              // linearColor2={
+              //   select?.title == item?.title ? '#680000' : '#4A4C50'
+              // }
+              linearColor1={i == 1 ? '#FE0000' : '#9CA3AF'}
+              linearColor2={i == 1 ? '#680000' : '#9CA3AF'}
               title={item.title}
               buttonStyle={{
                 width: '90%',
@@ -124,7 +122,7 @@ export const Languages = ({ navigation }) => {
         )
       })}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           selectLanguage()
         }}
@@ -148,7 +146,7 @@ export const Languages = ({ navigation }) => {
           Next
         </Text>
         <AntDesign name="arrowright" color="#000000" size={24} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   )
 }
