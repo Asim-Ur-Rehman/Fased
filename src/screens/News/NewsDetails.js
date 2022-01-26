@@ -154,7 +154,7 @@ export const NewsDetails = ({ navigation, route }) => {
                     onPress: () => null,
                     style: 'cancel'
                   },
-                  { text: 'Ok', onPress: () => navigation.navigate('SignUp') }
+                  { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
                 ])
               } else {
                 addToFav()

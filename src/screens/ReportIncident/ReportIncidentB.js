@@ -97,6 +97,11 @@ export const ReportIncidentB = ({ navigation, route }) => {
 
   const onSelect = item => {
     setSelect([item])
+    let type = route.params?.type ? route.params?.type : 'category'
+    navigation.navigate('ReportIncidentA', {
+      [type]: [item],
+      [type == 'category' ? 'subcategory' : 'category']: route.params?.alternate
+    })
   }
 
   return (
@@ -202,7 +207,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
             style={{
               marginVertical: 15
             }}>
-            <Button
+            {/* <Button
               onPress={() => {
                 if (select.length > 0) {
                   let type = route.params?.type
@@ -224,7 +229,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                 width: '90%',
                 alignSelf: 'center'
               }}
-            />
+            /> */}
           </View>
         </View>
       </ScrollView>

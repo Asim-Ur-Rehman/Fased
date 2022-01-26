@@ -32,7 +32,7 @@ export const ReportIncidentC = ({ navigation }) => {
   const [loader, setLoader] = useState(false)
   const [textNew, setText] = useState('')
   const [height, setheight] = useState(0)
-
+  const isGuest = useSelector(state => state.userReducer.isGuest)
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -84,7 +84,7 @@ export const ReportIncidentC = ({ navigation }) => {
     if (reportIncidentAllData?.subcategory == '0') {
       CreateReportWithoutSubCat({
         variables: {
-          userId: parseInt(userId),
+          userId: isGuest ? 0 : parseInt(userId),
           categoryId: reportIncidentAllData?.category,
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
@@ -119,7 +119,7 @@ export const ReportIncidentC = ({ navigation }) => {
     } else {
       CreateReport({
         variables: {
-          userId: parseInt(userId),
+          userId: isGuest ? 0 : parseInt(userId),
           categoryId: reportIncidentAllData?.category,
           subCategory: reportIncidentAllData?.subcategory,
           latitude: reportIncidentLocationFloorData?.latitude,

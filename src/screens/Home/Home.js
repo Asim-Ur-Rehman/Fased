@@ -29,13 +29,13 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
-import Geolocation from '@react-native-community/geolocation';
-import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob';
+import Geolocation from '@react-native-community/geolocation'
+import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 
 let reportsData = []
 
-export const Home = (props) => {
+export const Home = props => {
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
   const [selected, setSelected] = useState(
@@ -51,29 +51,28 @@ export const Home = (props) => {
   // const isFocuesd = useIsFocused()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
+      'hardwareBackPress',
       backAction
-    );
+    )
 
-    return () => backHandler.remove();
-  }, []);
+    return () => backHandler.remove()
+  }, [])
 
   const backAction = () => {
-    if(navigation.isFocused()) {
-      Alert.alert("Hold on!", "Are you sure you want to go back?", [
+    if (navigation.isFocused()) {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
         {
-          text: "Cancel",
+          text: 'Cancel',
           onPress: () => null,
-          style: "cancel"
+          style: 'cancel'
         },
-        { text: "YES", onPress: () => BackHandler.exitApp() }
-      ]);
-      return true;
-    }else {
+        { text: 'YES', onPress: () => BackHandler.exitApp() }
+      ])
+      return true
+    } else {
       return false
     }
-  };
-
+  }
 
   if (selected.length > 0) {
     const results = data?.getCategories?.data.filter(
@@ -92,11 +91,10 @@ export const Home = (props) => {
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
     const query = useQuery(Get_Reports)
-    query.refetch();
+    query.refetch()
     reportsData = query?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
-
 
   const mapRef = useRef(null)
 
@@ -112,19 +110,24 @@ export const Home = (props) => {
   useEffect(() => {
     setUpdate(!forUpdate)
   }, [isFocused])
-  
+
   useEffect(() => {
     setSelected(route.params?.selected ? route.params?.selected : [])
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
   }, [route.params])
 
   const animateToCurrentLocation = () => {
-    Geolocation.getCurrentPosition(info => {
-        mapRef.current.animateToRegion({...INITIAL_REGION, ...info.coords}, 2000)
-    }, err => {
-      console.log("err", Alert.alert("Permission denied!",err.message))
-    });
-
+    Geolocation.getCurrentPosition(
+      info => {
+        mapRef.current.animateToRegion(
+          { ...INITIAL_REGION, ...info.coords },
+          2000
+        )
+      },
+      err => {
+        console.log('err', Alert.alert('Permission denied!', err.message))
+      }
+    )
   }
 
   const getRotationAngle = () => {
@@ -139,8 +142,7 @@ export const Home = (props) => {
     return (Math.atan2(yDiff, xDiff) * 180.0) / Math.PI
   }
 
- 
-  const onClusterPress=(e)=>{
+  const onClusterPress = e => {
     e.stopPropagation()
   }
 
@@ -305,13 +307,13 @@ export const Home = (props) => {
         <MapView
           initialRegion={INITIAL_REGION}
           style={{ height: '72%' }}
-          provider={PROVIDER_GOOGLE} 
+          provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
-            const reports =  getSimplifyArr(data)
+            const reports = getSimplifyArr(data)
             const points = properties.point_count
             return (
               <Marker
@@ -322,11 +324,15 @@ export const Home = (props) => {
                 }}
                 // onPress={(e) => onClusterPress(e, id)}
                 // onPress={() => alert(id)}
-                onPress={() =>  navigation.navigate('Reports', {reports: reports, geometry: {
-                  longitude: geometry.coordinates[0],
-                  latitude: geometry.coordinates[1]
-                }})}
-                >
+                onPress={() =>
+                  navigation.navigate('Reports', {
+                    reports: reports,
+                    geometry: {
+                      longitude: geometry.coordinates[0],
+                      latitude: geometry.coordinates[1]
+                    }
+                  })
+                }>
                 <View
                   style={
                     {
@@ -335,7 +341,11 @@ export const Home = (props) => {
                     }
                   }>
                   <VictoryPie
-                    colorScale={[...new Set([...reports.map(e => e.data.Category.BackgroundColor)])]}
+                    colorScale={[
+                      ...new Set([
+                        ...reports.map(e => e.data.Category.BackgroundColor)
+                      ])
+                    ]}
                     padAngle={({ datum }) => datum.y}
                     radius={20}
                     innerRadius={30}
@@ -366,14 +376,19 @@ export const Home = (props) => {
                   latitude: item.latitude,
                   longitude: item.longitude
                 }}
-                onPress={() =>  navigation.navigate('Reports', {reports: [{data: item}], geometry: {
-                  latitude: item.latitude,
-                  longitude: item.longitude
-                }})}
+                onPress={() =>
+                  navigation.navigate('Reports', {
+                    reports: [{ data: item }],
+                    geometry: {
+                      latitude: item.latitude,
+                      longitude: item.longitude
+                    }
+                  })
+                }
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
-               <VictoryPie
+                <VictoryPie
                   colorScale={
                     // item.Category.BackgroundColor
                     [...new Set([item.Category.BackgroundColor])]
@@ -430,29 +445,30 @@ export const Home = (props) => {
           <Button
             title="Report"
             onPress={() => {
-              if (isGuest) {
-                Alert.alert("Alert", "You have to Sign Up for this action", [
-                  {
-                    text: "Cancel",
-                    onPress: () => null,
-                    style: "cancel"
-                  },
-                  { text: "Ok", onPress: () => navigation.navigate('SignUp') }
-                ]);
-              } else {
-                navigation.navigate('ReportIncident')
-              }
+              navigation.navigate('ReportIncident')
+              // if (isGuest) {
+              //   Alert.alert('Alert', 'You have to Sign Up for this action', [
+              //     {
+              //       text: 'Cancel',
+              //       onPress: () => null,
+              //       style: 'cancel'
+              //     },
+              //     { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+              //   ])
+              // } else {
+              //   navigation.navigate('ReportIncident')
+              // }
             }}
           />
         </View>
       </View>
 
       <View>
-      <BannerAd
-      style={{width: '100%'}}
-        size={BannerAdSize.FULL_BANNER}
-        unitId={TestIds.BANNER}
-      />
+        <BannerAd
+          style={{ width: '100%' }}
+          size={BannerAdSize.FULL_BANNER}
+          unitId={TestIds.BANNER}
+        />
       </View>
     </View>
   )
