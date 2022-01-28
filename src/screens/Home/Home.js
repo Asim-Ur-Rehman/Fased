@@ -307,7 +307,7 @@ export const Home = props => {
         <MapView
           initialRegion={INITIAL_REGION}
           style={{ height: '72%' }}
-          provider={PROVIDER_GOOGLE}
+          // provider={PROVIDER_GOOGLE} 
           radius={40}
           ref={mapRef}
           animationEnabled={false}
