@@ -49,7 +49,7 @@ export const getSimplifyArr = arr => {
   var resultantArray = []
   recurrsion(arr)
   function recurrsion(arr) {
-    for (let index = 0; index < arr.length; index++) {
+    for (let index = 0; index < arr?.length; index++) {
       if (Object.prototype.toString.call(arr[index]) == '[object Object]') {
         resultantArray.push(arr[index])
       } else {

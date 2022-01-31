@@ -31,9 +31,13 @@ import LinkedInModal from 'react-native-linkedin'
 import { SOCIAL_LOGIN } from '../../utils/mutation'
 import { getApi } from '../../api/fakeApiUser'
 import { useDispatch } from 'react-redux'
-import { SignInAction } from '../../stores/actions/user.action'
+import { SignInAction, continueAsGuest } from '../../stores/actions/user.action'
+
+import Recaptcha from 'react-native-recaptcha-that-works'
 
 export const SignIn = ({ navigation }) => {
+  const recaptcha = useRef()
+
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -149,6 +153,21 @@ export const SignIn = ({ navigation }) => {
     }
   }
 
+  const guestUserLogin = () => {
+    recaptcha.current.open()
+  }
+  const onVerify = token => {
+    dispatch(continueAsGuest())
+    navigation.navigate('AppStackNavigator')
+    // console.log('success!', token)
+  }
+  const onExpire = () => {
+    ToastMessage('Captcha expired', null, 'error')
+    console.log('expired!')
+  }
+  const onError = () => {
+    ToastMessage('Captcha error', null, 'error')
+  }
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -156,6 +175,12 @@ export const SignIn = ({ navigation }) => {
         guestUser={true}
         onPress={() => {
           navigation.navigate('Languages')
+        }}
+        onPressGuset={() => {
+          // dispatch(continueAsGuest())
+          // navigation.navigate('AppStackNavigator')
+          // alert('donehyugyu')
+          guestUserLogin()
         }}
       />
       <StatusBar
@@ -327,6 +352,18 @@ export const SignIn = ({ navigation }) => {
               Sign Up Here
             </Text>
           </TouchableOpacity>
+        </View>
+
+        <View>
+          <Recaptcha
+            ref={recaptcha}
+            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
+            baseUrl="https://fased-admin.herokuapp.com"
+            onVerify={onVerify}
+            onExpire={onExpire}
+            onError={onError}
+            size="normal"
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
