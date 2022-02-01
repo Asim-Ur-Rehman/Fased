@@ -69,7 +69,7 @@ export const Home = props => {
         console.log('err', Alert.alert('Permission denied!', err.message))
       }
     )
-    
+
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction
@@ -117,7 +117,6 @@ export const Home = props => {
   const reports = reportsData ? reportsData : []
 
   const mapRef = useRef(null)
-
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
 
@@ -320,9 +319,13 @@ export const Home = props => {
         </View>
 
         <MapView
+          // showsCompass={false}
+          // showScale={false}
+          // showsIndoors={false}
+          showsUserLocation={true}
           initialRegion={initialRegion}
-          style={{ height: Platform.OS == "ios" ? '81%' : '84%'}}
-          // provider={PROVIDER_GOOGLE} 
+          style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
+          // provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
@@ -470,26 +473,26 @@ export const Home = props => {
         </View>
       </View>
 
-        <View style={styles.reportBtn}>
-          <Button
-            title="Report"
-            onPress={() => {
-              navigation.navigate('ReportIncident')
-              // if (isGuest) {
-              //   Alert.alert('Alert', 'You have to Sign Up for this action', [
-              //     {
-              //       text: 'Cancel',
-              //       onPress: () => null,
-              //       style: 'cancel'
-              //     },
-              //     { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
-              //   ])
-              // } else {
-              //   navigation.navigate('ReportIncident')
-              // }
-            }}
-          />
-        </View>
+      <View style={styles.reportBtn}>
+        <Button
+          title="Report"
+          onPress={() => {
+            navigation.navigate('ReportIncident')
+            // if (isGuest) {
+            //   Alert.alert('Alert', 'You have to Sign Up for this action', [
+            //     {
+            //       text: 'Cancel',
+            //       onPress: () => null,
+            //       style: 'cancel'
+            //     },
+            //     { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+            //   ])
+            // } else {
+            //   navigation.navigate('ReportIncident')
+            // }
+          }}
+        />
+      </View>
 
       <View>
         <BannerAd
@@ -614,5 +617,5 @@ const styles = StyleSheet.create({
     height: 120
   },
   squareBtn: { height: 50, width: 50, borderRadius: 10 },
-  reportBtn: { alignSelf: 'center', paddingVertical: 20}
+  reportBtn: { alignSelf: 'center', paddingVertical: 20 }
 })
