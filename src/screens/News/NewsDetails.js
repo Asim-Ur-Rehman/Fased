@@ -25,6 +25,7 @@ import { getUserData } from '../../utils/helper'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
 import { useSelector } from 'react-redux'
+import WebView from 'react-native-webview'
 
 export const NewsDetails = ({ navigation, route }) => {
   useEffect(() => {
@@ -234,7 +235,12 @@ export const NewsDetails = ({ navigation, route }) => {
                 // top: 10,
                 // bottom: 15
               }}>
-              <Text style={styles.ContentTextStyle}>{description}</Text>
+              {/* <Text style={styles.ContentTextStyle}>{description}</Text> */}
+              <WebView
+                originWhitelist={['*']}
+                source={{ html: description }}
+                style={styles.ContentTextStyle}
+              />
             </CustomScrollView>
           </View>
         </View>
@@ -340,13 +346,16 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   ContentTextStyle: {
-    fontSize: 12,
-    fontFamily: 'Rubik-Regular',
-    color: '#383838',
-    textAlign: 'left',
-    padding: 10,
-    // marginVertical: 10,
-    lineHeight: 15,
-    letterSpacing: 0.8
+    // fontSize: 12,
+    // fontFamily: 'Rubik-Regular',
+    // color: '#383838',
+    // textAlign: 'left',
+    // padding: 10,
+    // // marginVertical: 10,
+    // lineHeight: 15,
+    // letterSpacing: 0.8
+    flex: 1,
+    padding: 16,
+    paddingTop: 100,
   }
 })

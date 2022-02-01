@@ -15,7 +15,12 @@ import LinearGradient from 'react-native-linear-gradient'
 import { useDispatch } from 'react-redux'
 import { continueAsGuest } from '../../stores/actions/user.action'
 
-export const AuthHeader = ({ guestUser, onPress = () => {}, navigation }) => {
+export const AuthHeader = ({
+  guestUser,
+  onPress = () => {},
+  navigation,
+  onPressGuset = () => {}
+}) => {
   const dispatch = useDispatch()
   return (
     <View
@@ -32,10 +37,11 @@ export const AuthHeader = ({ guestUser, onPress = () => {}, navigation }) => {
 
       {guestUser && (
         <TouchableOpacity
-          onPress={() => {
-            dispatch(continueAsGuest())
-            navigation.navigate('AppStackNavigator')
-          }}
+          onPress={onPressGuset}
+          // onPress={() => {
+          // dispatch(continueAsGuest())
+          // navigation.navigate('AppStackNavigator')
+          // }}
           activeOpacity={0.7}>
           <LinearGradient
             style={{
