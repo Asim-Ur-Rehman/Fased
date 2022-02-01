@@ -345,7 +345,7 @@ export const SignIn = ({ navigation }) => {
             <Text
               style={{
                 color: '#BE0000',
-                fontSize: 13,
+                fontSize: 16,
                 fontFamily: 'Inter-Medium',
                 marginLeft: 3
               }}>

@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../constants/images'
 import { Get_Categories } from '../../utils/queries'
 const { width, height } = Dimensions.get('screen')
+import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 export const Reports = ({ navigation, route }) => {
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
@@ -315,7 +316,18 @@ export const Reports = ({ navigation, route }) => {
         </LinearGradient>
 
         <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
-          <ScrollView horizontal={true}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={true}
+            persistentScrollbar={true}>
+            {/* <CustomScrollView
+            contentContainerStyle={{ paddingBottom: 20 }}
+            ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
+            indicatorStyle={{
+              backgroundColor: '#DF0707',
+              borderRadius: 3,
+              width: 5
+            }}> */}
             <View>
               <View style={styles.tableHeader}>
                 {[
@@ -359,6 +371,7 @@ export const Reports = ({ navigation, route }) => {
                 </View>
               )}
             </View>
+            {/* </CustomScrollView> */}
           </ScrollView>
         </ScrollView>
         {/* <TouchableOpacity
