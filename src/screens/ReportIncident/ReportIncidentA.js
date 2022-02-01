@@ -366,7 +366,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     color: '#33333370',
                     paddingHorizontal: 20
                   }}>
-                  Select category
+                  Select sub-category
                 </Text>
                 <View>
                   <Icon

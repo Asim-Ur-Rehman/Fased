@@ -9,7 +9,8 @@ import {
   BackHandler,
   SafeAreaView,
   ScrollView,
-  Alert
+  Alert,
+  Platform
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -41,6 +42,12 @@ export const Home = props => {
   const [selected, setSelected] = useState(
     route.params?.selected ? route.params?.selected : []
   )
+  const [initialRegion, setinitialRegion] = useState({
+    latitude: 52.5,
+    longitude: 19.2,
+    latitudeDelta: 0.02,
+    longitudeDelta: 0.01
+  })
 
   const [fromTo, setFromTo] = useState(
     route.params?.fromTo ? route.params?.fromTo : null
@@ -50,6 +57,19 @@ export const Home = props => {
   const News = useQuery(Get_News)
   // const isFocuesd = useIsFocused()
   useEffect(() => {
+    Geolocation.getCurrentPosition(
+      info => {
+        mapRef.current.animateToRegion(
+          { ...initialRegion, ...info.coords },
+          2000
+        )
+        setinitialRegion({ ...initialRegion, ...info.coords })
+      },
+      err => {
+        console.log('err', Alert.alert('Permission denied!', err.message))
+      }
+    )
+    
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction
@@ -98,14 +118,9 @@ export const Home = props => {
 
   const mapRef = useRef(null)
 
-  const INITIAL_REGION = {
-    latitude: 52.5,
-    longitude: 19.2,
-    latitudeDelta: 1,
-    longitudeDelta: 1
-  }
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
+
   const isFocused = useIsFocused()
   useEffect(() => {
     setUpdate(!forUpdate)
@@ -120,7 +135,7 @@ export const Home = props => {
     Geolocation.getCurrentPosition(
       info => {
         mapRef.current.animateToRegion(
-          { ...INITIAL_REGION, ...info.coords },
+          { ...initialRegion, ...info.coords },
           2000
         )
       },
@@ -131,8 +146,8 @@ export const Home = props => {
   }
 
   const getRotationAngle = () => {
-    const x1 = INITIAL_REGION.latitude
-    const y1 = INITIAL_REGION.longitude
+    const x1 = initialRegion.latitude
+    const y1 = initialRegion.longitude
     const x2 = 0
     const y2 = 1
 
@@ -305,9 +320,9 @@ export const Home = props => {
         </View>
 
         <MapView
-          initialRegion={INITIAL_REGION}
-          style={{ height: '72%' }}
-          provider={PROVIDER_GOOGLE}
+          initialRegion={initialRegion}
+          style={{ height: Platform.OS == "ios" ? '81%' : '84%'}}
+          // provider={PROVIDER_GOOGLE} 
           radius={40}
           ref={mapRef}
           animationEnabled={false}
@@ -441,6 +456,8 @@ export const Home = props => {
             />
           </View>
         </View>
+      </View>
+
         <View style={styles.reportBtn}>
           <Button
             title="Report"
@@ -461,7 +478,6 @@ export const Home = props => {
             }}
           />
         </View>
-      </View>
 
       <View>
         <BannerAd
@@ -547,7 +563,8 @@ const styles = StyleSheet.create({
   date: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 20
+    paddingVertical: 10,
+    alignItems: 'center'
     // height: '8%'
   },
   logo1: {
@@ -574,8 +591,9 @@ const styles = StyleSheet.create({
 
   mapActionsContainer: {
     position: 'absolute',
-    bottom: 100,
-    width: '100%',
+    bottom: 140,
+    width: '20%',
+    right: 0,
     paddingHorizontal: 20
   },
   verticalBtnContainer: {
@@ -584,5 +602,5 @@ const styles = StyleSheet.create({
     height: 120
   },
   squareBtn: { height: 50, width: 50, borderRadius: 10 },
-  reportBtn: { alignSelf: 'center', top: 20 }
+  reportBtn: { alignSelf: 'center', paddingVertical: 20}
 })

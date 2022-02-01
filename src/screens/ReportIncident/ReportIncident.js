@@ -23,7 +23,7 @@ import Button from '../../components/Button'
 const { width, height } = Dimensions.get('screen')
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import MapView, { Marker } from 'react-native-maps'
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 
 import Feather from 'react-native-vector-icons/Feather'
 import ToggleButton from '../../components/ToggleButton/index'
@@ -57,12 +57,17 @@ export const ReportIncident = ({ navigation }) => {
   const [initialRegion, setinitialRegion] = useState({
     latitude: 52.5,
     longitude: 19.2,
-    latitudeDelta: 1,
-    longitudeDelta: 1
+    latitudeDelta: 0.02,
+    longitudeDelta: 0.01
   })
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
+      mapRef.current.animateToRegion(
+        { ...initialRegion, ...info.coords },
+        2000
+      )
       setLocation({ ...location, ...info.coords })
+      setinitialRegion({ ...initialRegion, ...info.coords })
     })
   }, [])
   const allMarkers = [
@@ -90,6 +95,7 @@ export const ReportIncident = ({ navigation }) => {
   }
 
   const onRegionChange = region => {
+    console.log("region", region)
     setinitialRegion(region)
 
     // set
@@ -207,6 +213,8 @@ export const ReportIncident = ({ navigation }) => {
               initialRegion={initialRegion}
               style={{ height: '80%' }}
               onRegionChangeComplete={onRegionChange}
+              onPress={(e) => onRegionChange({ ...initialRegion, ...e?.nativeEvent?.coordinate })}
+              // provider={PROVIDER_GOOGLE}
               ref={mapRef}>
               {allMarkers.map((item, i) => {
                 return (
@@ -344,8 +352,9 @@ const styles = StyleSheet.create({
   mapActionsContainer: {
     position: 'absolute',
     bottom: height * 0.25,
-    width: '100%',
-    paddingHorizontal: 20
+    width: '20%',
+    right: 0,
+    paddingHorizontal: 20,
   },
   verticalBtnContainer: {
     justifyContent: 'space-between',
@@ -392,7 +401,7 @@ const styles = StyleSheet.create({
   markerFixed: {
     left: '50%',
     marginLeft: -24,
-    marginTop: -48,
+    marginTop: -88,
     position: 'absolute',
     top: '50%',
     zIndex: 1
