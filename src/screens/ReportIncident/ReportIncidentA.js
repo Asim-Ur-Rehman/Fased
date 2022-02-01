@@ -250,7 +250,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
         behavior="position"
         keyboardVerticalOffset={keyboardVerticalOffset}>
         <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }}
           bounces={false}
           showsVerticalScrollIndicator={false}>
           <View style={styles.headerContainer}>
@@ -397,17 +397,17 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Today
                 </Text>
                 <ToggleButton
-                  selectionMode={2}
+                  selectionMode={disableDate ? 2 : 1}
                   onSelectSwitch={index => onToggleSwitch(index, 'date')}
                 />
               </View>
             </View>
             <TouchableOpacity
-              disabled={disableDate}
+              // disabled={disableDate}
               activeOpacity={0.8}
               onPress={() => {
                 setMode('date')
-                setShow(true)
+                setShow(true), setDisableDate(false)
               }}
               style={styles.fieldView2}>
               <Text
@@ -451,17 +451,18 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Now
                 </Text>
                 <ToggleButton
-                  selectionMode={2}
+                  selectionMode={disableTime ? 2 : 1}
                   onSelectSwitch={index => onToggleSwitch(index, 'time')}
                 />
               </View>
             </View>
             <TouchableOpacity
-              disabled={disableTime}
+              // disabled={disableTime}
               activeOpacity={0.8}
               onPress={() => {
                 setMode('time')
                 setShow(true)
+                setDisableTime(false)
               }}
               style={styles.fieldView}>
               <Text
@@ -533,12 +534,15 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   Don’t know
                 </Text>
                 <ToggleButton
-                  selectionMode={2}
+                  selectionMode={disableName ? 2 : 1}
                   onSelectSwitch={index => onToggleSwitch(index, 'suspectName')}
                 />
               </View>
             </View>
-            <View style={styles.fieldView2}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setDisableName(false)}
+              style={styles.fieldView2}>
               <TextInput
                 editable={!disableName}
                 style={{
@@ -558,7 +562,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 keyboardType="default"
                 maxLength={30}
               />
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View
@@ -578,12 +582,15 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   No
                 </Text>
                 <ToggleButton
-                  selectionMode={2}
+                  selectionMode={disableAmount ? 2 : 1}
                   onSelectSwitch={index => onToggleSwitch(index, 'amount')}
                 />
               </View>
             </View>
-            <View style={styles.fieldView}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => setDisableAmount(false)}
+              style={styles.fieldView}>
               <TextInput
                 editable={!disableAmount}
                 style={{
@@ -611,23 +618,22 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 }}>
                 USD
               </Text>
-            </View>
-          </View>
-
-          <View style={{ marginVertical: 15 }}>
-            <Button
-              onPress={() => {
-                next()
-              }}
-              // onPress={() => {
-              //   navigation.navigate('ReportIncidentC')
-              // }}
-              buttonStyle={{ width: '90%', alignSelf: 'center' }}
-              title="Next"
-            />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      <View style={{ marginVertical: 15, bottom: Platform.OS == "ios" ? 5 : 0, width: '100%', position: 'absolute' }}>
+        <Button
+          onPress={() => {
+            next()
+          }}
+          // onPress={() => {
+          //   navigation.navigate('ReportIncidentC')
+          // }}
+          buttonStyle={{ width: '90%', alignSelf: 'center' }}
+          title="Next"
+        />
+      </View>
     </SafeAreaView>
   )
 }
