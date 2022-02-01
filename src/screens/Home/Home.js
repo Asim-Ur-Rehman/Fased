@@ -373,9 +373,15 @@ export const Home = props => {
                     // onPress={onPress}
                     style={{
                       position: 'absolute',
-                      bottom: '45%',
-                      left: '49%',
-                      top: '48%'
+                      // bottom: '45%',
+                      left: '45%',
+                      top: '45%',
+                      backgroundColor: 'white',
+                      width: 40,
+                      height: 40,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: 30
                     }}>
                     <Text style={{ color: 'blue' }}>{points}</Text>
                   </TouchableOpacity>
@@ -428,9 +434,15 @@ export const Home = props => {
                   // onPress={onPress}
                   style={{
                     position: 'absolute',
-                    bottom: '45%',
-                    left: '49%',
-                    top: '48%'
+                    // bottom: '45%',
+                    left: '45%',
+                    top: '45%',
+                    backgroundColor: 'white',
+                    width: 40,
+                    height: 40,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: 30
                   }}>
                   <Text style={{ color: 'blue' }}>1</Text>
                 </TouchableOpacity>

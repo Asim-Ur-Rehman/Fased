@@ -26,15 +26,12 @@ const ToggleButton = ({
   return (
     <TouchableOpacity
       onPress={() => updatedSwitchData(getSelectionMode == 1 ? 2 : 1)}
-      activeOpacity={.9}
-    >
+      activeOpacity={0.9}>
       <LinearGradient
         colors={
-          getSelectionMode == 1
-            ? ['#E0E5F2', '#E0E5F2']
-            : ['#FE0000', '#680000']
+          selectionMode == 1 ? ['#E0E5F2', '#E0E5F2'] : ['#FE0000', '#680000']
         }
-        start={{ x: .55, y: 0 }}
+        start={{ x: 0.55, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={{
           width: 36,
@@ -50,17 +47,17 @@ const ToggleButton = ({
             height: 14,
             width: 14,
             borderRadius: 7,
-            backgroundColor: getSelectionMode == 1 ? '#fff' : 'transparent'
+            backgroundColor: selectionMode == 1 ? '#fff' : 'transparent'
           }}
           // onPress={() => updatedSwitchData(1)}
-          ></View>
+        ></View>
 
         <View
           style={{
             height: 14,
             width: 14,
             borderRadius: 7,
-            backgroundColor: getSelectionMode == 2 ? '#fff' : 'transparent'
+            backgroundColor: selectionMode == 2 ? '#fff' : 'transparent'
           }}
           // onPress={() => updatedSwitchData(2)}
         ></View>

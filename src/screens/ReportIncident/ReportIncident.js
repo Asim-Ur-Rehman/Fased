@@ -62,10 +62,7 @@ export const ReportIncident = ({ navigation }) => {
   })
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
-      mapRef.current.animateToRegion(
-        { ...initialRegion, ...info.coords },
-        2000
-      )
+      mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
       setLocation({ ...location, ...info.coords })
       setinitialRegion({ ...initialRegion, ...info.coords })
     })
@@ -95,7 +92,7 @@ export const ReportIncident = ({ navigation }) => {
   }
 
   const onRegionChange = region => {
-    console.log("region", region)
+    console.log('region', region)
     setinitialRegion(region)
 
     // set
@@ -213,7 +210,12 @@ export const ReportIncident = ({ navigation }) => {
               initialRegion={initialRegion}
               style={{ height: '80%' }}
               onRegionChangeComplete={onRegionChange}
-              onPress={(e) => onRegionChange({ ...initialRegion, ...e?.nativeEvent?.coordinate })}
+              onPress={e =>
+                onRegionChange({
+                  ...initialRegion,
+                  ...e?.nativeEvent?.coordinate
+                })
+              }
               // provider={PROVIDER_GOOGLE}
               ref={mapRef}>
               {allMarkers.map((item, i) => {
@@ -259,7 +261,7 @@ export const ReportIncident = ({ navigation }) => {
               <View style={styles.textAndToggleViewStyle}>
                 <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
                 <ToggleButton
-                  selectionMode={2}
+                  selectionMode={enabled ? 2 : 1}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
@@ -267,7 +269,11 @@ export const ReportIncident = ({ navigation }) => {
                 <Text style={styles.footerRowTextStyle}>Floor</Text>
                 {console.log('enables====', enabled)}
                 {enabled ? (
-                  <Text>Ground floor</Text>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => setEnabled(false)}>
+                    <Text>Ground floor</Text>
+                  </TouchableOpacity>
                 ) : (
                   <TextInput
                     editable={enabled ? false : true}
@@ -354,7 +360,7 @@ const styles = StyleSheet.create({
     bottom: height * 0.25,
     width: '20%',
     right: 0,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
   },
   verticalBtnContainer: {
     justifyContent: 'space-between',

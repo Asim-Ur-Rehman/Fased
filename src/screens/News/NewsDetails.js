@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from 'react'
+import React, { Children, useEffect, useRef, useState } from 'react'
 import {
   View,
   Text,
@@ -10,7 +10,8 @@ import {
   Alert,
   Modal,
   Pressable,
-  Share
+  Share,
+  Linking
 } from 'react-native'
 
 import { Dimensions } from 'react-native'
@@ -47,6 +48,8 @@ export const NewsDetails = ({ navigation, route }) => {
   const [newsData, setnewsData] = useState(
     route.params?.newsData ? route.params?.newsData : null
   )
+
+  const webview = useRef(null)
 
   const PROP = [
     {
@@ -221,7 +224,7 @@ export const NewsDetails = ({ navigation, route }) => {
             </Text>
           </View>
           <View style={{ height: height / 1.65 }}>
-            <CustomScrollView
+            {/* <CustomScrollView
               contentContainerStyle={{ paddingBottom: 20 }}
               ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
               indicatorStyle={{
@@ -234,14 +237,35 @@ export const NewsDetails = ({ navigation, route }) => {
                 // marginBottom: 15
                 // top: 10,
                 // bottom: 15
-              }}>
+              }}> */}
               {/* <Text style={styles.ContentTextStyle}>{description}</Text> */}
               <WebView
+                ref={webview}
+                showsVerticalScrollIndicator={true}
+                showsHorizontalScrollIndicator={true}
                 originWhitelist={['*']}
-                source={{ html: description }}
+                source={{ html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></head><body>${description}</body></html>` }}
                 style={styles.ContentTextStyle}
+                onNavigationStateChange={(event) => {
+                    console.log("event event", event, event.url.slice(0, 4) == "http")
+                    if(event.url.slice(0, 4) == "http") {
+                        webview.current.stopLoading();
+                        Linking.openURL(event.url);
+                    }
+                }}
+                onShouldStartLoadWithRequest={event => {
+                  const {url, navigationType} = event;
+                  if(url.slice(0, 4) == "http") {
+                    console.log("asd")
+                    webview.current.stopLoading();
+                    return true;
+                  }else {
+                    return true
+                  }
+                
+                }}
               />
-            </CustomScrollView>
+            {/* </CustomScrollView> */}
           </View>
         </View>
         <View>
@@ -357,5 +381,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 100,
+    backgroundColor: 'transparent'
   }
 })
