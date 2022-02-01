@@ -79,3 +79,25 @@ export const getColorRatioArr = reports => {
   }
   return resultantArray
 }
+
+export const sortArray = (arr, key, type) => {
+  var resultantArray = arr?.sort((a, b) => {
+    switch (type) {
+      case 'string':
+        return a?.data[key].toString().localeCompare(b?.data[key].toString(), 'en', {ignorePunctuation: true})
+      case 'category':
+        console.log("a?.data?.Category[key]", a?.data?.Category[key])
+        return  (a?.data?.Category[key] > b?.data?.Category[key]) ? 1 : ((b?.data?.Category[key] > a?.data?.Category[key]) ? -1 : 0)
+      case 'date':
+        return  new Date(...a?.data?.createdAt?.split('/')?.reverse()) - new Date(...b?.data?.createdAt?.split('/')?.reverse())
+      case 'int':
+        return  a?.data[key].toString().localeCompare(b?.data[key].toString(), undefined, {numeric: true})
+      default:
+        return arr
+        break;
+    }
+    // return a?.data[key].toString().localeCompare(b?.data[key].toString())
+  })
+  // console.log("sortArray", resultantArray, arr)
+  return resultantArray
+}

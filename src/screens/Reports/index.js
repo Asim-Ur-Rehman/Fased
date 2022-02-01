@@ -14,6 +14,7 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Images } from '../../constants/images'
+import { sortArray } from '../../utils/helper'
 import { Get_Categories } from '../../utils/queries'
 const { width, height } = Dimensions.get('screen')
 export const Reports = ({ navigation, route }) => {
@@ -22,6 +23,8 @@ export const Reports = ({ navigation, route }) => {
   )
   const [address, setAddress] = useState('')
   const [isFilter, setisFilter] = useState(false)
+  const [filterItem, setfilterItem] = useState(null)
+
   useEffect(() => {
     setreports(route.params?.reports ? route.params?.reports : [])
     fetch(
@@ -61,16 +64,13 @@ export const Reports = ({ navigation, route }) => {
   var arr = []
   var categories = []
   if (!isFilter) {
+    // setfilterItem(null)
     for (var title in CatNews) {
       arr.push(CatNews[title].data)
       categories.push(CatNews[title].CatName)
     }
   } else {
-    let sortedArr = reports.sort(
-      (a, b) =>
-        new Date(...a.data.createdAt.split('/').reverse()) -
-        new Date(...b.data.createdAt.split('/').reverse())
-    )
+    let sortedArr = sortArray(reports, filterItem?.key, filterItem?.type)
     arr = sortedArr.reverse()
   }
 
@@ -319,19 +319,30 @@ export const Reports = ({ navigation, route }) => {
             <View>
               <View style={styles.tableHeader}>
                 {[
-                  'Initials',
-                  'Floor',
-                  'Category',
-                  'Value',
-                  'What happened',
-                  'date'
+                  {title: 'Initials', key: 'SuspectName', type: 'string'},
+                  {title: 'Floor', key: 'floor', type: 'int'},
+                  {title: 'Category', key: 'Title', type: 'category'},
+                  {title: 'Value', key: 'CostMoney', type: 'int'},
+                  {title: 'What happened', key: 'Description', type: 'string'},
+                  {title: 'Date', key: 'createdAt', type: 'date'},
                 ].map((value, index) => {
                   return (
                     <>
                       <View
                         key={index}
-                        style={{ width: index == 4 ? width / 2 : width / 4 }}>
-                        <Text style={styles.th}>{value}</Text>
+                        style={{ width: index == 4 ? width / 2 : width / 4, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={styles.th}>{value?.title}</Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            setfilterItem(value)
+                            setisFilter(true)
+                          }}
+                          style={styles.swapIcon}>
+                          <Image
+                            source={Images.Pictures.swapIcon}
+                            style={{ tintColor: filterItem?.title == value?.title ? 'red' : '#000' }}
+                          />
+                        </TouchableOpacity>
                       </View>
                       <View
                         style={{
@@ -399,7 +410,7 @@ const styles = StyleSheet.create({
     width: '35%',
     alignSelf: 'flex-start'
   },
-  swapIcon: { padding: 10, borderRadius: 8, backgroundColor: '#4A4D5080' },
+  swapIcon: { right: 10, top: 15 },
   headerRow2Text1: {
     fontSize: 20,
     color: '#FFFFFF',
