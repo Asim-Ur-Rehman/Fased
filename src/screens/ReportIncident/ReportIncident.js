@@ -207,6 +207,7 @@ export const ReportIncident = ({ navigation }) => {
           </View>
           <View style={{}}>
             <MapView
+              // showsUserLocation={true}
               initialRegion={initialRegion}
               style={{ height: '80%' }}
               onRegionChangeComplete={onRegionChange}

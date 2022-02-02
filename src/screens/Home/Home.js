@@ -322,7 +322,7 @@ export const Home = props => {
           // showsCompass={false}
           // showScale={false}
           // showsIndoors={false}
-          showsUserLocation={true}
+          // showsUserLocation={true}
           initialRegion={initialRegion}
           style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
           // provider={PROVIDER_GOOGLE}
