@@ -263,7 +263,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 //   navigation.navigate('ReportingDone')
                 // }}
                 buttonStyle={{ width: '90%', alignSelf: 'center' }}
-                title="Next"
+                title="Done"
               />
             )}
           </View>

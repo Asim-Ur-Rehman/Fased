@@ -207,6 +207,11 @@ export const ReportIncident = ({ navigation }) => {
           </View>
           <View style={{}}>
             <MapView
+              showsCompass={true}
+              showScale={true}
+              showsIndoors={true}
+              showsUserLocation={true}
+              compassOffset={{ x: -(width - 60), y: 0 }}
               initialRegion={initialRegion}
               style={{ height: '80%' }}
               onRegionChangeComplete={onRegionChange}
@@ -239,20 +244,23 @@ export const ReportIncident = ({ navigation }) => {
           </View>
           <View style={styles.mapActionsContainer}>
             <View style={styles.verticalBtnContainer}>
-              <View>
+              {/* <View>
                 <Button
                   image={Images.Pictures.compass}
                   buttonStyle={styles.squareBtn}
                   onPress={() => animateToCurrentLocation()}
                 />
-              </View>
-              <View>
+              </View> */}
+               {Platform.OS == 'ios' && (<View>
                 <Button
                   image={Images.Pictures.currentLocIcon}
+                  linearColor1="#fff"
+                  linearColor2="#fff"
+                  imageStyle={{ tintColor: '#616161' }}
                   buttonStyle={styles.squareBtn}
                   onPress={() => animateToCurrentLocation()}
                 />
-              </View>
+              </View>)}
             </View>
           </View>
 
@@ -357,7 +365,7 @@ const styles = StyleSheet.create({
 
   mapActionsContainer: {
     position: 'absolute',
-    bottom: height * 0.25,
+    top: height/11,
     width: '20%',
     right: 0,
     paddingHorizontal: 20
@@ -367,7 +375,20 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     height: 120
   },
-  squareBtn: { height: 50, width: 50, borderRadius: 10 },
+  squareBtn: {
+    height: 35,
+    width: 35,
+    borderRadius: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    opacity: 0.7
+  },
   reportBtn: { alignSelf: 'center', top: 20 },
 
   footerViewStyle: {
