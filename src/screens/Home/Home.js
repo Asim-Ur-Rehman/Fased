@@ -10,7 +10,8 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
-  Platform
+  Platform,
+  Dimensions
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { theme } from '../../constants/theme'
@@ -35,6 +36,8 @@ import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 
 let reportsData = []
+const { width, height } = Dimensions.get('screen')
+
 
 export const Home = props => {
   const { navigation, route, state } = props
@@ -69,7 +72,7 @@ export const Home = props => {
         console.log('err', Alert.alert('Permission denied!', err.message))
       }
     )
-    
+
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction
@@ -117,7 +120,6 @@ export const Home = props => {
   const reports = reportsData ? reportsData : []
 
   const mapRef = useRef(null)
-
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
 
@@ -320,9 +322,14 @@ export const Home = props => {
         </View>
 
         <MapView
+          showsCompass={true}
+          showScale={true}
+          showsIndoors={true}
+          showsUserLocation={true}
+          compassOffset={{ x: -(width - 60), y: 0 }}
           initialRegion={initialRegion}
-          style={{ height: Platform.OS == "ios" ? '81%' : '84%'}}
-          // provider={PROVIDER_GOOGLE} 
+          style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
+          // provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
@@ -453,43 +460,36 @@ export const Home = props => {
       </SafeAreaView>
       <View style={styles.mapActionsContainer}>
         <View style={styles.verticalBtnContainer}>
-          <View>
+          {/* <View>
             <Button
               image={Images.Pictures.compass}
               buttonStyle={styles.squareBtn}
               onPress={() => animateToCurrentLocation()}
             />
-          </View>
-          <View>
-            <Button
-              image={Images.Pictures.currentLocIcon}
-              buttonStyle={styles.squareBtn}
-              onPress={() => animateToCurrentLocation()}
-            />
-          </View>
+          </View> */}
+          {Platform.OS == 'ios' && (
+            <View>
+              <Button
+                image={Images.Pictures.currentLocIcon}
+                linearColor1="#fff"
+                linearColor2="#fff"
+                imageStyle={{ tintColor: '#616161' }}
+                buttonStyle={styles.squareBtn}
+                onPress={() => animateToCurrentLocation()}
+              />
+            </View>
+          )}
         </View>
       </View>
 
-        <View style={styles.reportBtn}>
-          <Button
-            title="Report"
-            onPress={() => {
-              navigation.navigate('ReportIncident')
-              // if (isGuest) {
-              //   Alert.alert('Alert', 'You have to Sign Up for this action', [
-              //     {
-              //       text: 'Cancel',
-              //       onPress: () => null,
-              //       style: 'cancel'
-              //     },
-              //     { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
-              //   ])
-              // } else {
-              //   navigation.navigate('ReportIncident')
-              // }
-            }}
-          />
-        </View>
+      <View style={styles.reportBtn}>
+        <Button
+          title="Report"
+          onPress={() => {
+            navigation.navigate('ReportIncident')
+          }}
+        />
+      </View>
 
       <View>
         <BannerAd
@@ -603,7 +603,7 @@ const styles = StyleSheet.create({
 
   mapActionsContainer: {
     position: 'absolute',
-    bottom: 140,
+    top: height/3,
     width: '20%',
     right: 0,
     paddingHorizontal: 20
@@ -613,6 +613,19 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     height: 120
   },
-  squareBtn: { height: 50, width: 50, borderRadius: 10 },
-  reportBtn: { alignSelf: 'center', paddingVertical: 20}
+  squareBtn: {
+    height: 35,
+    width: 35,
+    borderRadius: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    opacity: 0.7
+  },
+  reportBtn: { alignSelf: 'center', paddingVertical: 20 }
 })

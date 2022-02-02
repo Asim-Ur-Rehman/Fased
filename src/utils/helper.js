@@ -84,10 +84,9 @@ export const sortArray = (arr, key, type) => {
   var resultantArray = arr?.sort((a, b) => {
     switch (type) {
       case 'string':
-        return a?.data[key].toString().localeCompare(b?.data[key].toString(), 'en', {ignorePunctuation: true})
+        return b?.data[key].toString().localeCompare(a?.data[key].toString(), 'en', {ignorePunctuation: true})
       case 'category':
-        console.log("a?.data?.Category[key]", a?.data?.Category[key])
-        return  (a?.data?.Category[key] > b?.data?.Category[key]) ? 1 : ((b?.data?.Category[key] > a?.data?.Category[key]) ? -1 : 0)
+        return  b?.data?.Category[key].toString().localeCompare(a?.data?.Category[key].toString(), 'en', {ignorePunctuation: true})
       case 'date':
         return  new Date(...a?.data?.createdAt?.split('/')?.reverse()) - new Date(...b?.data?.createdAt?.split('/')?.reverse())
       case 'int':

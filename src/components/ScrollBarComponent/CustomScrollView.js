@@ -12,19 +12,13 @@ import {
 } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
-export const CustomScrollView = (
-  {
-    indicatorStyle = { },
-    ScrollBarStyle = { },
-    scrollContainer = { },
-    contentContainerStyle = { },
-    children
-  }
-) => {
-
-
-
-
+export const CustomScrollView = ({
+  indicatorStyle = {},
+  ScrollBarStyle = {},
+  scrollContainer = {},
+  contentContainerStyle = {},
+  children
+}) => {
   const [completeScrollBarHeight, setCompleteScrollBarHeight] = useState(1)
   const [visibleScrollBarHeight, setVisibleScrollBarHeight] = useState(0)
   const scrollIndicator = useRef(new Animated.Value(0)).current
@@ -74,16 +68,17 @@ export const CustomScrollView = (
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         style={styles.petItemListContainer}>
-            {children}
+        {children}
       </ScrollView>
       <View style={[styles.ScrollBarStyle, ScrollBarStyle]}>
         <Animated.View
           style={[
-            styles.indicatorStyle, indicatorStyle,
+            styles.indicatorStyle,
+            indicatorStyle,
             {
               // height:  "50%",
-              height:  scrollIndicatorSize,
-              transform: [{ translateY: scrollIndicatorPosition }],
+              height: scrollIndicatorSize,
+              transform: [{ translateY: scrollIndicatorPosition }]
             }
           ]}
         />
@@ -95,21 +90,21 @@ export const CustomScrollView = (
 const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
-    width: '100%', 
+    width: '100%'
   },
   petItemListContainer: {
     width: '100%'
   },
-  indicatorStyle: { 
-    backgroundColor:"silver",  
+  indicatorStyle: {
+    backgroundColor: 'silver',
     borderRadius: 5,
-    width: 6,
+    width: 6
   },
- ScrollBarStyle: {
+  ScrollBarStyle: {
     backgroundColor: 'orange',
     height: '100%',
-    width: 12,
-  },
+    width: 12
+  }
   // ContentTextStyle: {
   //   fontSize: 12,
   //   fontFamily:"Rubik-Regular",
