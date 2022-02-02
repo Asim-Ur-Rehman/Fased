@@ -48,15 +48,17 @@ export const CustomScrollView = ({
 
   const onLayout = ({
     nativeEvent: {
-      layout: { height }
+      layout: { width }
     }
   }) => {
-    setVisibleScrollBarHeight(height)
+    setVisibleScrollBarHeight(width)
   }
 
   return (
     <View style={[styles.scrollContainer, scrollContainer]}>
       <ScrollView
+        showsHorizontalScrollIndicator={true}
+        horizontal={true}
         nestedScrollEnabled={true}
         contentContainerStyle={contentContainerStyle}
         onContentSizeChange={onContentSizeChange}
@@ -77,7 +79,7 @@ export const CustomScrollView = ({
             indicatorStyle,
             {
               // height:  "50%",
-              height: scrollIndicatorSize,
+              width: scrollIndicatorSize,
               transform: [{ translateY: scrollIndicatorPosition }]
             }
           ]}

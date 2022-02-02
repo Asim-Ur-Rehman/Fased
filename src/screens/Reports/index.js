@@ -291,7 +291,7 @@ export const Reports = ({ navigation, route }) => {
                 </Text>
               </View>
             </View>
-{/* 
+            {/*
             <TouchableOpacity
               onPress={() => setisFilter(!isFilter)}
               style={styles.swapIcon}>
@@ -316,33 +316,41 @@ export const Reports = ({ navigation, route }) => {
         </LinearGradient>
 
         <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
-          {/* <ScrollView
+          <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={true}
-            persistentScrollbar={true}> */}
-          <CustomScrollView
+            persistentScrollbar={true}>
+            {/* <CustomScrollView
             contentContainerStyle={{ paddingBottom: 20 }}
-            ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 14 }}
+            ScrollBarStyle={{ backgroundColor: '#FDEBEB', width: 10 }}
             indicatorStyle={{
               backgroundColor: '#DF0707',
               borderRadius: 3,
               width: 5
-            }}>
+            }}> */}
             <View>
               <View style={styles.tableHeader}>
                 {[
-                  {title: 'Initials', key: 'SuspectName', type: 'string'},
-                  {title: 'Floor', key: 'floor', type: 'int'},
-                  {title: 'Category', key: 'Title', type: 'category'},
-                  {title: 'Value', key: 'CostMoney', type: 'int'},
-                  {title: 'What happened', key: 'Description', type: 'string'},
-                  {title: 'Date', key: 'createdAt', type: 'date'},
+                  { title: 'Initials', key: 'SuspectName', type: 'string' },
+                  { title: 'Floor', key: 'floor', type: 'int' },
+                  { title: 'Category', key: 'Title', type: 'category' },
+                  { title: 'Value', key: 'CostMoney', type: 'int' },
+                  {
+                    title: 'What happened',
+                    key: 'Description',
+                    type: 'string'
+                  },
+                  { title: 'Date', key: 'createdAt', type: 'date' }
                 ].map((value, index) => {
                   return (
                     <>
                       <View
                         key={index}
-                        style={{ width: index == 4 ? width / 2 : width / 4, flexDirection: 'row', justifyContent: 'space-between' }}>
+                        style={{
+                          width: index == 4 ? width / 2 : width / 4,
+                          flexDirection: 'row',
+                          justifyContent: 'space-between'
+                        }}>
                         <Text style={styles.th}>{value?.title}</Text>
                         <TouchableOpacity
                           onPress={() => {
@@ -352,7 +360,7 @@ export const Reports = ({ navigation, route }) => {
                           style={styles.swapIcon}>
                           <Image
                             source={Images.Pictures.swapIcon}
-                            style={{ tintColor:  '#000' }} //filterItem?.title == value?.title ? 'red' :
+                            style={{ tintColor: '#000' }} //filterItem?.title == value?.title ? 'red' :
                           />
                         </TouchableOpacity>
                       </View>
@@ -382,8 +390,8 @@ export const Reports = ({ navigation, route }) => {
                 </View>
               )}
             </View>
-          </CustomScrollView>
-          {/* </ScrollView> */}
+            {/* </CustomScrollView> */}
+          </ScrollView>
         </ScrollView>
         {/* <TouchableOpacity
           style={styles.showMoreBtn}
