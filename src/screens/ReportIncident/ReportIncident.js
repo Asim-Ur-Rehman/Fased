@@ -251,16 +251,18 @@ export const ReportIncident = ({ navigation }) => {
                   onPress={() => animateToCurrentLocation()}
                 />
               </View> */}
-               {Platform.OS == 'ios' && (<View>
-                <Button
-                  image={Images.Pictures.currentLocIcon}
-                  linearColor1="#fff"
-                  linearColor2="#fff"
-                  imageStyle={{ tintColor: '#616161' }}
-                  buttonStyle={styles.squareBtn}
-                  onPress={() => animateToCurrentLocation()}
-                />
-              </View>)}
+              {Platform.OS == 'ios' && (
+                <View>
+                  <Button
+                    image={Images.Pictures.currentLocIcon}
+                    linearColor1="#fff"
+                    linearColor2="#fff"
+                    imageStyle={{ tintColor: '#616161' }}
+                    buttonStyle={styles.squareBtn}
+                    onPress={() => animateToCurrentLocation()}
+                  />
+                </View>
+              )}
             </View>
           </View>
 
@@ -365,7 +367,7 @@ const styles = StyleSheet.create({
 
   mapActionsContainer: {
     position: 'absolute',
-    top: height/11,
+    top: height / 11,
     width: '20%',
     right: 0,
     paddingHorizontal: 20

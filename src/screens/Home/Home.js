@@ -38,7 +38,6 @@ import { useIsFocused } from '@react-navigation/native'
 let reportsData = []
 const { width, height } = Dimensions.get('screen')
 
-
 export const Home = props => {
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
@@ -603,7 +602,7 @@ const styles = StyleSheet.create({
 
   mapActionsContainer: {
     position: 'absolute',
-    top: height/3,
+    top: height / 3,
     width: '20%',
     right: 0,
     paddingHorizontal: 20
