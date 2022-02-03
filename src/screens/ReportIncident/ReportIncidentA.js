@@ -8,7 +8,8 @@ import {
   TextInput,
   StatusBar,
   Platform,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from 'react-native'
 import { Images } from '../../constants/images'
 import { Dimensions } from 'react-native'
@@ -350,11 +351,12 @@ export const ReportIncidentA = ({ navigation, route }) => {
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('ReportIncidentB', {
-                    type: 'subcategory',
-                    alternate: category,
-                    selected: []
-                  })
+                  // navigation.navigate('ReportIncidentB', {
+                  //   type: 'subcategory',
+                  //   alternate: category,
+                  //   selected: []
+                  // })
+                  Alert.alert("Alert", "there is no sub category")
                 }}
                 activeOpacity={0.8}
                 style={styles.fieldView}>
