@@ -81,6 +81,7 @@ export const NewsCard = ({ navigation }) => {
             title: item?.Title,
             tagline: item?.Tagline,
             description: item?.Description,
+            createdAt: item?.createdAt,
             newsData: item
           })
         }}
@@ -141,6 +142,16 @@ export const NewsCard = ({ navigation }) => {
                 lineHeight: 12
               }}>
               {item.Tagline}
+            </Text>
+            <Text
+              style={{
+                fontSize: 11,
+                fontFamily: 'Rubik-Regular',
+                color: 'black',
+                lineHeight: 12,
+                paddingVertical: 10
+              }}>
+              {item.createdAt}
             </Text>
           </View>
         </View>

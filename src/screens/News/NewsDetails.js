@@ -42,6 +42,9 @@ export const NewsDetails = ({ navigation, route }) => {
   const [tagline, setTagline] = useState(
     route.params?.tagline ? route.params?.tagline : 'TAGLINE'
   )
+  const [createdAt, setcreatedAt] = useState(
+    route.params?.createdAt ? route.params?.createdAt : 'xxxx-xx-xx'
+  )
   const [description, setdescription] = useState(
     route.params?.description ? route.params?.description : 'DESCRIPTION'
   )
@@ -221,6 +224,16 @@ export const NewsDetails = ({ navigation, route }) => {
                 paddingHorizontal: 50
               }}>
               {tagline}
+            </Text>
+            <Text
+              style={{
+                fontSize: 11,
+                fontFamily: 'Rubik-Regular',
+                color: 'black',
+                lineHeight: 12,
+                paddingVertical: 10
+              }}>
+              {createdAt}
             </Text>
           </View>
           <View style={{ height: height / 1.65 }}>
