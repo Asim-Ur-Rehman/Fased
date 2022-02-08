@@ -114,34 +114,6 @@ export const Reports = ({ navigation, route }) => {
                     .toUpperCase()}
                 </Text>
               </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.floor}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    color: value.data.Category.BackgroundColor,
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.Category.Title}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  ${value.data.CostMoney}
-                </Text>
-              </View>
               <View style={{ width: width / 2, alignItems: 'center' }}>
                 <Text
                   numberOfLines={1}
@@ -158,9 +130,40 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
+                  {value.data.floor}
+                </Text>
+              </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  ${value.data.CostMoney}
+                </Text>
+              </View>
+               
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
                   {value.data.createdAt}
                 </Text>
               </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    color: value.data.Category.BackgroundColor,
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.Category.Title}
+                </Text>
+              </View>
+         
+        
             </TouchableOpacity>
           )
         })}
@@ -189,65 +192,66 @@ export const Reports = ({ navigation, route }) => {
             }
           ]
         ]}>
-        <View style={{ width: width / 5, alignItems: 'center' }}>
-          <Text
-            style={{
-              fontFamily: 'Rubik-Medium',
-              fontSize: 13
-            }}>
-            {value?.data?.SuspectName.split(' ')
-              .map(n => n[0])
-              .join('')
-              .toUpperCase()}
-          </Text>
-        </View>
-        <View style={{ width: width / 5, alignItems: 'center' }}>
-          <Text
-            style={{
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
-            }}>
-            {value.data.floor}
-          </Text>
-        </View>
-        <View style={{ width: width / 5, alignItems: 'center' }}>
-          <Text
-            style={{
-              color: value.data.Category.BackgroundColor,
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
-            }}>
-            {value.data.Category.Title}
-          </Text>
-        </View>
-        <View style={{ width: width / 5, alignItems: 'center' }}>
-          <Text
-            style={{
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
-            }}>
-            ${value.data.CostMoney}
-          </Text>
-        </View>
-        <View style={{ width: width / 2, alignItems: 'center' }}>
-          <Text
-            numberOfLines={1}
-            style={{
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
-            }}>
-            {value.data.Description}
-          </Text>
-        </View>
-        <View style={{ width: width / 5, alignItems: 'center' }}>
-          <Text
-            style={{
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
-            }}>
-            {value.data.createdAt}
-          </Text>
-        </View>
+     <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Medium',
+                    fontSize: 13
+                  }}>
+                  {value?.data?.SuspectName.split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()}
+                </Text>
+              </View>
+              <View style={{ width: width / 2, alignItems: 'center' }}>
+                <Text
+                  numberOfLines={1}
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.Description}
+                </Text>
+              </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.floor}
+                </Text>
+              </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  ${value.data.CostMoney}
+                </Text>
+              </View>
+               
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.createdAt}
+                </Text>
+              </View>
+              <View style={{ width: width / 5, alignItems: 'center' }}>
+                <Text
+                  style={{
+                    color: value.data.Category.BackgroundColor,
+                    fontFamily: 'Rubik-Regular',
+                    fontSize: 13
+                  }}>
+                  {value.data.Category.Title}
+                </Text>
+              </View>
       </TouchableOpacity>
     )
   }
@@ -329,22 +333,25 @@ export const Reports = ({ navigation, route }) => {
               <View style={styles.tableHeader}>
                 {[
                   { title: 'Initials', key: 'SuspectName', type: 'string' },
-                  { title: 'Floor', key: 'floor', type: 'int' },
-                  { title: 'Category', key: 'Title', type: 'category' },
-                  { title: 'Value', key: 'CostMoney', type: 'int' },
                   {
                     title: 'What happened',
                     key: 'Description',
                     type: 'string'
                   },
-                  { title: 'Date', key: 'createdAt', type: 'date' }
+                  { title: 'Floor', key: 'floor', type: 'int' },
+                  { title: 'Value', key: 'CostMoney', type: 'int' },
+                  { title: 'Date', key: 'createdAt', type: 'date' },
+                  { title: 'Category', key: 'Title', type: 'category' },
+              
+             
+            
                 ].map((value, index) => {
                   return (
                     <>
                       <View
                         key={index}
                         style={{
-                          width: index == 4 ? width / 2 : width / 4,
+                          width: index == 1 ? width / 2.2 : width / 4,
                           flexDirection: 'row',
                           justifyContent: 'space-between'
                         }}>
