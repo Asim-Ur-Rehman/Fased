@@ -178,7 +178,6 @@ export const NewsCard = ({ navigation }) => {
     if (activetab == 'old') {
       var newArr = []
       if (search) {
-        console.log('SearchNews.data?.searchNews?.data', SearchNews)
         newArr = SearchNews.data?.searchNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
           return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
@@ -189,7 +188,6 @@ export const NewsCard = ({ navigation }) => {
           return moment(e.createdAt).isSameOrBefore(oneWeekOlddate)
         })
       }
-      console.log('newArr', newArr)
       return (
         <>
           <FlatList
@@ -215,7 +213,6 @@ export const NewsCard = ({ navigation }) => {
     if (activetab == 'new') {
       var newArr = []
       if (search) {
-        console.log('SearchNews.data?.searchNews?.data', SearchNews)
         newArr = SearchNews.data?.searchNews?.data?.filter(e => {
           const oneWeekOlddate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
           return !moment(e.createdAt).isSameOrBefore(oneWeekOlddate)

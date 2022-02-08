@@ -31,7 +31,6 @@ export const Languages = ({ navigation }) => {
     let userData = await AsyncStorage.getItem('userData')
     let data = JSON.parse(userData)
     let checkForUser = data && Object.keys(data).length > 0
-    console.log('check in lang', checkForUser)
     if (checkForUser) {
       navigation.navigate('AppStackNavigator')
     }

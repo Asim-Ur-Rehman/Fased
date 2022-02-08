@@ -225,7 +225,6 @@ export const Categories = ({ navigation }) => {
               onPress={e => onSelect(e)}
               onChange={arr => {
                 setSelect(e => [...arr])
-                console.log('onchange', arr.length)
               }}
               data={data && data?.getCategories?.data}
               targetKey={'id'}

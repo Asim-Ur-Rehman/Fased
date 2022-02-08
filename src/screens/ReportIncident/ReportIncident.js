@@ -92,7 +92,6 @@ export const ReportIncident = ({ navigation }) => {
   }
 
   const onRegionChange = region => {
-    console.log('region', region)
     setinitialRegion(region)
 
     // set
@@ -213,6 +212,7 @@ export const ReportIncident = ({ navigation }) => {
               showsUserLocation={true}
               compassOffset={{ x: -(width - 60), y: 0 }}
               initialRegion={initialRegion}
+              provider={PROVIDER_GOOGLE}
               style={{ height: '80%' }}
               onRegionChangeComplete={onRegionChange}
               onPress={e =>
@@ -277,7 +277,6 @@ export const ReportIncident = ({ navigation }) => {
               </View>
               <View style={styles.textAndToggleViewStyle2}>
                 <Text style={styles.footerRowTextStyle}>Floor</Text>
-                {console.log('enables====', enabled)}
                 {enabled ? (
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -369,7 +368,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: height / 11,
     width: '20%',
-    right: 0,
+    left: 0,
     paddingHorizontal: 20
   },
   verticalBtnContainer: {

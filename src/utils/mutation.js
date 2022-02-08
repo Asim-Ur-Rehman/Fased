@@ -175,8 +175,8 @@ export const SOCIAL_LOGIN = gql`
 `
 
 export const FLAG_REPORT = gql`
-  mutation CreateFlagReport($userId: Int!, $reasonId: Int!, $reason: String!) {
-    CreateFlagReport(userId: $userId, reasonId: $reasonId, reason: $reason) {
+  mutation CreateFlagReport($reason: String!, $reasonId: Int!, $userId: Int!, $reportId: Int!) {
+  CreateFlagReport(reason: $reason, reasonId: $reasonId, userId: $userId, reportId: $reportId) { 
       status
       message
     }

@@ -35,6 +35,9 @@ import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 import Recaptcha from 'react-native-recaptcha-that-works'
+import PieChart from 'react-native-pie-chart'
+const series = [123, 321, 123, 789, 537]
+const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
 let reportsData = []
 const { width, height } = Dimensions.get('screen')
 
@@ -343,10 +346,10 @@ export const Home = props => {
           showScale={true}
           showsIndoors={true}
           showsUserLocation={true}
-          compassOffset={{ x: -(width - 60), y: 0 }}
+          compassOffset={{ x: -100, y: 10/ 3 }}
           initialRegion={initialRegion}
           style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
-          // provider={PROVIDER_GOOGLE}
+          provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
           animationEnabled={false}
@@ -361,8 +364,6 @@ export const Home = props => {
                   longitude: geometry.coordinates[0],
                   latitude: geometry.coordinates[1]
                 }}
-                // onPress={(e) => onClusterPress(e, id)}
-                // onPress={() => alert(id)}
                 onPress={() =>
                   navigation.navigate('Reports', {
                     reports: reports,
@@ -372,34 +373,42 @@ export const Home = props => {
                     }
                   })
                 }>
-                <View
-                  style={
-                    {
-                      // width: 80,
-                      // height: 80,
-                    }
-                  }>
-                  <VictoryPie
-                    colorScale={[
-                      ...new Set([
-                        ...reports.map(e => e.data.Category.BackgroundColor)
-                      ])
-                    ]}
-                    padAngle={({ datum }) => datum.y}
-                    radius={20}
-                    innerRadius={30}
-                    labels={({ datum }) => ``}
-                    data={getColorRatioArr(reports)?.map(e => {
-                      return { x: 1, y: e }
-                    })}
-                  />
+                <View>
+                  {Platform.OS == 'android' ? (
+                    <VictoryPie
+                      colorScale={[
+                        ...new Set([
+                          ...reports.map(e => e.data.Category.BackgroundColor)
+                        ])
+                      ]}
+                      padAngle={({ datum }) => 0}
+                      radius={20}
+                      innerRadius={27}
+                      labels={({ datum }) => ``}
+                      data={getColorRatioArr(reports)?.map(e => {
+                        return { x: 1, y: e }
+                      })}
+                    />
+                  ) : (
+                    <PieChart
+                      widthAndHeight={65}
+                      series={getColorRatioArr(reports)?.map(e => {
+                        return e
+                      })}
+                      sliceColor={[
+                        ...new Set([
+                          ...reports.map(e => e.data.Category.BackgroundColor)
+                        ])
+                      ]}
+                      doughnut
+                      coverRadius={0.78}
+                    />
+                  )}
                   <TouchableOpacity
-                    // onPress={onPress}
                     style={{
                       position: 'absolute',
-                      // bottom: '45%',
-                      left: '45%',
-                      top: '45%',
+                      left: Platform.OS == "ios" ? '20%' : "45%",
+                      top:  Platform.OS == "ios" ? '20%' : "45%",
                       backgroundColor: 'white',
                       width: 40,
                       height: 40,
@@ -433,34 +442,49 @@ export const Home = props => {
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
-                <VictoryPie
-                  colorScale={
-                    // item.Category.BackgroundColor
-                    [...new Set([item.Category.BackgroundColor])]
-                  }
-                  padAngle={({ datum }) => datum.y}
-                  radius={20}
-                  innerRadius={30}
-                  labels={({ datum }) => ``}
-                  data={
-                    // item.Category.BackgroundColor
-                    [
+                {Platform.OS == 'ios' ? (
+                  <PieChart
+                    widthAndHeight={65}
+                    series={[
                       ...new Set([
                         // ...item.map(e => console.log('e========', e))
                         item.Category.BackgroundColor
                       ])
                     ].map(e => {
-                      return { x: 1, y: 3 }
-                    })
-                  }
-                />
+                      return e
+                    })}
+                    sliceColor={[...new Set([item.Category.BackgroundColor])]}
+                    doughnut
+                    coverRadius={0.78}
+                  />
+                ) : (
+                  <VictoryPie
+                    colorScale={
+                      // item.Category.BackgroundColor
+                      [...new Set([item.Category.BackgroundColor])]
+                    }
+                    padAngle={({ datum }) => 0}
+                    radius={30}
+                    innerRadius={10}
+                    labels={({ datum }) => ``}
+                    data={
+                      // item.Category.BackgroundColor
+                      [
+                        ...new Set([
+                          // ...item.map(e => console.log('e========', e))
+                          item.Category.BackgroundColor
+                        ])
+                      ].map(e => {
+                        return { x: 1, y: 3 }
+                      })
+                    }
+                  />
+                )}
                 <TouchableOpacity
-                  // onPress={onPress}
                   style={{
                     position: 'absolute',
-                    // bottom: '45%',
-                    left: '45%',
-                    top: '45%',
+                    left: Platform.OS == "ios" ? '20%' : "45%",
+                    top:  Platform.OS == "ios" ? '20%' : "45%",
                     backgroundColor: 'white',
                     width: 40,
                     height: 40,
@@ -477,20 +501,13 @@ export const Home = props => {
       </SafeAreaView>
       <View style={styles.mapActionsContainer}>
         <View style={styles.verticalBtnContainer}>
-          {/* <View>
-            <Button
-              image={Images.Pictures.compass}
-              buttonStyle={styles.squareBtn}
-              onPress={() => animateToCurrentLocation()}
-            />
-          </View> */}
           {Platform.OS == 'ios' && (
             <View>
               <Button
                 image={Images.Pictures.currentLocIcon}
                 linearColor1="#fff"
                 linearColor2="#fff"
-                imageStyle={{ tintColor: '#616161' }}
+                imageStyle={{ tintColor: '#000' }}
                 buttonStyle={styles.squareBtn}
                 onPress={() => animateToCurrentLocation()}
               />
@@ -634,7 +651,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: height / 3,
     width: '20%',
-    right: 0,
+    left: 0,
     paddingHorizontal: 20
   },
   verticalBtnContainer: {

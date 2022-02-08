@@ -50,7 +50,6 @@ export const Otp = ({ navigation, route }) => {
         }
       })
       .catch(error => {
-        console.log('error', error)
         ToastMessage(error.data.OtpVerify_Email.message, null, 'error')
       })
     // let OtpData = {
