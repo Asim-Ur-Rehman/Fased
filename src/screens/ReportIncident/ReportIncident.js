@@ -428,8 +428,8 @@ const styles = StyleSheet.create({
   },
   markerFixed: {
     left: '50%',
-    marginLeft: -24,
-    marginTop: -88,
+    marginLeft: -30,
+    marginTop: -120,
     position: 'absolute',
     top: '50%',
     zIndex: 1

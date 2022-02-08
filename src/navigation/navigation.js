@@ -32,6 +32,8 @@ import { NewsDetails } from '../screens/News/NewsDetails'
 import { AboutUs } from '../screens/AboutUs'
 import { Settings } from '../screens/Settings/Settings'
 import { SettingChangePassword } from '../screens/SettingChangePassword/SettingChangePassword'
+import { SignInAction } from '../stores/actions/user.action'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
@@ -71,6 +73,7 @@ function AuthStackNavigator() {
         headerShown: false
       }}
       initialRouteName="Languages">
+
       <AuthStack.Screen name="Languages" component={Languages} />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
@@ -107,23 +110,21 @@ function AppStackNavigator() {
 }
 
 const MainNavigation = () => {
-  // const [state, setState] = useState({
-  //   userData: {}
-  // })
+  const [state, setState] = useState(null)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    getUserData()
+  }, [])
 
-  // useEffect(() => {
-  //   getUserData()
-  // }, [])
+  const getUserData = async () => {
+    let userData = await AsyncStorage.getItem('userData')
+    let data = JSON.parse(userData)
+    dispatch(SignInAction(data))
+    setState(data)
+  }
 
-  // const getUserData = async () => {
-  //   let userData = await AsyncStorage.getItem('userData')
-  //   let data = JSON.parse(userData)
-  //   console.log('userData in navigation', navigation)
-  //   setState({
-  //     ...state, userData: data
-  //   })
-
-  // }
+  const userData = useSelector(state => state.userReducer.users)
+  console.log('userData userData', userData, state)
   // console.log('userdata from state', Boolean(Object.keys(state.userData).length > 0))
   return (
     <NavigationContainer
@@ -132,16 +133,19 @@ const MainNavigation = () => {
         screenOptions={{ headerShown: false }}
         // initialRouteName={Object.keys(state.userData).length > 0 ? 'AppStackNavigator' : 'AuthStackNavigator'}
       >
-        <Stack.Screen
-          name="AuthStackNavigator"
-          options={{ headerShown: false }}
-          component={AuthStackNavigator}
-        />
-        <Stack.Screen
-          name="AppStackNavigator"
-          options={{ headerShown: false }}
-          component={AppStackNavigator}
-        />
+        {!userData ? (
+          <Stack.Screen
+            name="AuthStackNavigator"
+            options={{ headerShown: false }}
+            component={AuthStackNavigator}
+          />
+        ) : (
+          <Stack.Screen
+            name="AppStackNavigator"
+            options={{ headerShown: false }}
+            component={AppStackNavigator}
+          />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   )
