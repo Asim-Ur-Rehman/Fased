@@ -54,7 +54,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
       // route.params?.category ? route.params?.category : null
     } else {
       setCategory(category => {
-        console.log('category useEFfect', category)
         return category ? category : null
       })
     }
@@ -77,7 +76,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
   }
 
   const onToggleSwitch = (index, key) => {
-    console.log('index', index, key)
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
     switch (key) {
       case 'date':
@@ -235,7 +233,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
       suspectName: suspectName ? suspectName : 'Anonymous',
       amount: '0'
     }
-    console.log('all data', data)
     dispatch(ReportIncidentAllData(data, navigation))
   }
 

@@ -77,10 +77,10 @@ export const ReportIncidentC = ({ navigation }) => {
     //   }
     // )
     setLoader(true)
-    // if (textNew == '' || textNew == undefined) {
-    //   setLoader(false)
-    //   ToastMessage("Description field shouldn't be empty", null, 'error')
-    // } else {
+    if (textNew == '' || textNew == undefined) {
+      setLoader(false)
+      ToastMessage("Description field shouldn't be empty", null, 'error')
+    } else {
     if (reportIncidentAllData?.subcategory == '0') {
       CreateReportWithoutSubCat({
         variables: {
@@ -107,7 +107,6 @@ export const ReportIncidentC = ({ navigation }) => {
           }
         })
         .catch(error => {
-          console.log('error', error)
           if (error) {
             setLoader(false)
             ToastMessage('Something went wrong', null, 'error')
@@ -154,7 +153,7 @@ export const ReportIncidentC = ({ navigation }) => {
           }
         })
     }
-    // }
+    }
   }
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -217,7 +216,6 @@ export const ReportIncidentC = ({ navigation }) => {
               returnKeyType="done"
               onChangeText={e => {
                 setText(e)
-                console.log('e', e)
                 // setState({ ...state, text: e })
               }}
               onContentSizeChange={event => {

@@ -260,7 +260,6 @@ export const NewsDetails = ({ navigation, route }) => {
                 source={{ html: `<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></head><body>${description}</body></html>` }}
                 style={styles.ContentTextStyle}
                 onNavigationStateChange={(event) => {
-                    console.log("event event", event, event.url.slice(0, 4) == "http")
                     if(event.url.slice(0, 4) == "http") {
                         webview.current.stopLoading();
                         Linking.openURL(event.url);
@@ -269,7 +268,6 @@ export const NewsDetails = ({ navigation, route }) => {
                 onShouldStartLoadWithRequest={event => {
                   const {url, navigationType} = event;
                   if(url.slice(0, 4) == "http") {
-                    console.log("asd")
                     webview.current.stopLoading();
                     return true;
                   }else {

@@ -163,7 +163,6 @@ export const SignIn = ({ navigation }) => {
   }
   const onExpire = () => {
     ToastMessage('Captcha expired', null, 'error')
-    console.log('expired!')
   }
   const onError = () => {
     ToastMessage('Captcha error', null, 'error')

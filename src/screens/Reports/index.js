@@ -32,10 +32,7 @@ export const Reports = ({ navigation, route }) => {
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${route.params?.geometry?.latitude},${route.params?.geometry?.longitude}&key=AIzaSyCRqapKfPvsVTyk4XyYtsN3Fz413Iixz_w`
     ).then(res =>
       res.json().then(address => {
-        console.log(
-          'Address0',
-          setAddress(address.results[0].formatted_address)
-        )
+        setAddress(address?.results[0]?.formatted_address)
       })
     )
   }, [route.params])
