@@ -71,10 +71,11 @@ export const SignUp = ({ navigation }) => {
             let jsonData = JSON.stringify(userData)
             AsyncStorage.setItem('userData', jsonData)
             ToastMessage(data?.data?.addUser?.message, null, 'success')
+            dispatch(SignUpAction(data?.data?.addUser?.data))
 
-            navigation.navigate('AppStackNavigator', {
-              screen: 'Home'
-            })
+            // navigation.navigate('AppStackNavigator', {
+            //   screen: 'Home'
+            // })
           } else {
             // ToastMessage(data?.data?.addUser?.message, null, 'error')
             ToastMessage('Email already exists', null, 'error')

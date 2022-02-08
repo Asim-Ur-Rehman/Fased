@@ -67,9 +67,9 @@ export const SignIn = ({ navigation }) => {
         ToastMessage('Signed In Successfully', null, 'success')
 
         dispatch(SignInAction(loginUser?.data?.loginUser?.data))
-        navigation.navigate('AppStackNavigator', {
-          screen: 'Home'
-        })
+        // navigation.navigate('AppStackNavigator', {
+        //   screen: 'Home'
+        // })
         setTimeout(() => {
           setEmail('')
           setPassword('')
@@ -176,8 +176,10 @@ export const SignIn = ({ navigation }) => {
           navigation.navigate('Languages')
         }}
         onPressGuset={() => {
-          dispatch(continueAsGuest())
-          navigation.navigate('AppStackNavigator')
+          dispatch(continueAsGuest({
+            guestUserLogin:'guesUserLogin'
+          }))
+          // navigation.navigate('AppStackNavigator')
           // alert('donehyugyu')
           // guestUserLogin()
         }}

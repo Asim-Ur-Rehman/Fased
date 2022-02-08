@@ -45,7 +45,7 @@ export const SignUpAction = (userData, navigation) => {
   return dispatch => {
     dispatch({ type: SIGNUP })
 
-    // dispatch({ type: SIGNUP_SUCCESS, payload: data });
+    dispatch({ type: SIGNUP_SUCCESS, payload: userData });
     // navigation.navigate('AppStackNavigator')
   }
 }
@@ -107,8 +107,9 @@ export const ReportIncidentAllData = (data, navigation) => {
   }
 }
 
-export const continueAsGuest = () => {
+export const continueAsGuest = (data) => {
+  console.log('data of guest', data)
   return dispatch => {
-    dispatch({ type: CONT_AS_GUEST})
+    dispatch({ type: CONT_AS_GUEST,payload:data })
   }
 }

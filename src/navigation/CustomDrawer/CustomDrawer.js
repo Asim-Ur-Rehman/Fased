@@ -47,9 +47,9 @@ export const CustomDrawer = ({ navigation }) => {
       dispatch(dispatchh => {
         dispatchh({ type: LOGOUT })
       })
-      // navigation.navigate('AuthStackNavigator', {
-      //   screen: 'SignIn'
-      // })
+      navigation.navigate('AuthStackNavigator', {
+        screen: 'SignIn'
+      })
       return true
     } catch (exception) {
       return false

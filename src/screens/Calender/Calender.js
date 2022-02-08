@@ -104,8 +104,9 @@ export const Calender = ({ navigation }) => {
               <Text style={styles.text1}>Today</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
-                  selectionMode={1}
+                  selectionMode={untilToday == 2 ? 2 :1}
                   onSelectSwitch={e => {
+                 
                     setSelectedEndDate(new Date())
                     setUntilToday(e)
                   }}

@@ -61,10 +61,11 @@ export const userReducer = (state = initialState, action) => {
         reportIncidentAllData: payload
       }
     case CONT_AS_GUEST:
-      // console.log('reportIncidentAllData', payload)
+      console.log('guest in reducer', payload)
       return {
         ...state,
-        isGuest: true
+        isGuest: true,
+        users:payload
       }
     case LOGOUT:
       return {
