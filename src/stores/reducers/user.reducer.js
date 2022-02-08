@@ -5,11 +5,12 @@ import {
   LOGIN_SUCCESS,
   REPORT_INCIDENT_LOCATION_FLOOR_DATA,
   REPORT_INCIDENT_ALL_DATA,
-  CONT_AS_GUEST
+  CONT_AS_GUEST,
+  LOGOUT
 } from '../actions/actionType'
 
 const initialState = {
-  users: [],
+  users: null,
   isGuest: false,
   isLoading: false,
   reportIncidentLocationFloorData: {},
@@ -60,11 +61,16 @@ export const userReducer = (state = initialState, action) => {
         reportIncidentAllData: payload
       }
     case CONT_AS_GUEST:
-        // console.log('reportIncidentAllData', payload)
-        return {
-          ...state,
-          isGuest: true
-        }
+      // console.log('reportIncidentAllData', payload)
+      return {
+        ...state,
+        isGuest: true
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        users: null
+      }
 
     default:
       return state
