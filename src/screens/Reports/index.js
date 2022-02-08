@@ -355,7 +355,7 @@ export const Reports = ({ navigation, route }) => {
                         <TouchableOpacity
                           onPress={() => {
                             setfilterItem(value)
-                            setisFilter(true)
+                            setisFilter(!isFilter)
                           }}
                           style={styles.swapIcon}>
                           <Image
