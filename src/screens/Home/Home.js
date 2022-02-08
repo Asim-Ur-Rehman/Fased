@@ -34,11 +34,12 @@ import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
-
+import Recaptcha from 'react-native-recaptcha-that-works'
 let reportsData = []
 const { width, height } = Dimensions.get('screen')
 
 export const Home = props => {
+  const recaptcha = useRef()
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
   const [selected, setSelected] = useState(
@@ -161,6 +162,23 @@ export const Home = props => {
   const onClusterPress = e => {
     e.stopPropagation()
   }
+
+  const guestUserReport = () => {
+    recaptcha.current.open()
+  }
+  const onVerify = token => {
+    navigation.navigate('ReportIncident')
+    // console.log('success!', token)
+  }
+  const onExpire = () => {
+    ToastMessage('Captcha expired', null, 'error')
+    console.log('expired!')
+  }
+  const onError = () => {
+    ToastMessage('Captcha error', null, 'error')
+  }
+
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -485,6 +503,8 @@ export const Home = props => {
         <Button
           title="Report"
           onPress={() => {
+
+            isGuest ? guestUserReport() :
             navigation.navigate('ReportIncident')
           }}
         />
@@ -497,6 +517,16 @@ export const Home = props => {
           unitId={TestIds.BANNER}
         />
       </View>
+
+      <Recaptcha
+            ref={recaptcha}
+            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
+            baseUrl="https://fased-admin.herokuapp.com"
+            onVerify={onVerify}
+            onExpire={onExpire}
+            onError={onError}
+            size="normal"
+          />
     </View>
   )
 }
