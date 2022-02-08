@@ -53,9 +53,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>FasedApp needs location access</string>
+	<string>FasedApp needs location access to show reports on map</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>FasedApp needs location access to show reports on map</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Bold.ttf</string>

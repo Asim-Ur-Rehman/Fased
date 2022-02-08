@@ -28,6 +28,7 @@ import { FLAG_REPORT } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import { GET_REASONS } from '../../utils/queries'
 import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
+import { useSelector } from 'react-redux'
 export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
@@ -43,40 +44,8 @@ export const FlagReport = ({ navigation, route }) => {
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
   }, [route.params])
-  const PROP = [
-    {
-      key: 'Button-1',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-2',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-3',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-4',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-5',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-6',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-7',
-      text: 'Default Sharing Selection'
-    },
-    {
-      key: 'Button-8',
-      text: 'Default Sharing Selection'
-    }
-  ]
+  
+  const isGuest = useSelector(state => state.userReducer.isGuest)
 
   const [CreateFlagReport] = useMutation(FLAG_REPORT)
   useEffect(() => {
@@ -93,17 +62,20 @@ export const FlagReport = ({ navigation, route }) => {
   const [userData, setUserData] = useState(null)
   const onDone = () => {
     if (others) {
+      console.log("others")
       CreateFlagReport({
         variables: others
           ? {
               userId: parseFloat(userData?.id),
               reasonId: 0,
-              reason: text
+              reason: text,
+              reportId: data?.id
             }
           : {
               userId: parseFloat(userData?.id),
               reasonId: reason.id,
-              reason: reason.reason
+              reason: reason.reason,
+              reportId: data?.id
             }
       })
         .then(res => {
@@ -114,33 +86,29 @@ export const FlagReport = ({ navigation, route }) => {
           console.log(
             'err',
             err,
-            'err condition',
-            others
-              ? {
-                  userId: parseFloat(userData?.id),
-                  reasonId: 0,
-                  reason: text
-                }
-              : {
-                  userId: parseFloat(userData?.id),
-                  reasonId: reason.id,
-                  reason: reason.reason
-                }
           )
         })
     } else {
+      console.log("other lese", reason, others, {
+        userId: parseFloat(userData?.id),
+        reasonId: reason.id,
+        reason: reason.reason,
+        reportId: data?.id
+      }   )
       if (reason) {
         CreateFlagReport({
           variables: others
             ? {
                 userId: parseFloat(userData?.id),
                 reasonId: 0,
-                reason: text
+                reason: text,
+                reportId: data?.id
               }
             : {
                 userId: parseFloat(userData?.id),
                 reasonId: reason.id,
-                reason: reason.reason
+                reason: reason.reason,
+                reportId: data?.id
               }
         })
           .then(res => {
@@ -151,18 +119,6 @@ export const FlagReport = ({ navigation, route }) => {
             console.log(
               'err',
               err,
-              'err condition',
-              others
-                ? {
-                    userId: parseFloat(userData?.id),
-                    reasonId: 0,
-                    reason: text
-                  }
-                : {
-                    userId: parseFloat(userData?.id),
-                    reasonId: reason.id,
-                    reason: reason.reason
-                  }
             )
           })
       } else {
@@ -353,7 +309,19 @@ export const FlagReport = ({ navigation, route }) => {
 
         <View>
           <Button
-            onPress={() => setModalVisible(true)}
+            onPress={() => {
+              if (isGuest) {
+                Alert.alert('Alert', 'You have to Sign Up for this action', [
+                  {
+                    text: 'Cancel',
+                    onPress: () => null,
+                    style: 'cancel'
+                  },
+                  { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+                ])
+              } else {
+                setModalVisible(true)
+              }}}
             buttonStyle={{
               top: -25,
               bottom: 0,

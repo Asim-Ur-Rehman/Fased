@@ -46,7 +46,6 @@ export const SettingChangePassword = ({ navigation, route }) => {
 
   const [ChangePassword, { data, loading, error }] =
     useMutation(CHANGE_PASSWORD)
-  console.log('error data', loading)
 
   const changePaswword = () => {
     if (newPassword == '' || confirmPassword == '') {
