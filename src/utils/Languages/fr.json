@@ -1,0 +1,124 @@
+{
+    "translation": {
+      "Sign In ": "================Sign In Translation    only for comments==============",
+  
+      "Continue As Guest User": "Continuer en tant qu'utilisateur invité",
+      "Sign In": "S'identifier",
+      "Email address": "Adresse e-mail",
+      "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+      "Password": "Mot de passe",
+      "Remember me": "Souviens-toi de moi",
+      "Forgot Password": "Mot de passe oublié",
+      "Or sign in with social account": "Ou connectez-vous avec un compte social",
+      "Don’t have an account?": "Vous n'avez pas de compte ?",
+      "Sign Up Here": "Inscrivez-vous ici",
+  
+      "SignUP": "================Sign Up Translation only for comments==============",
+  
+      "Sign Up": "S'inscrire",
+      "Full Name": "Nom complet",
+      "Enter your full name": "Entrez votre nom complet",
+    
+  
+      "ForGot Password": "================ForGot Password Translation only for comments==============",
+  
+      "A message will be sent to your email address with further instructions": "Un message sera envoyé à votre adresse e-mail avec des instructions supplémentaires",
+      "Recover Password": "Récupérer mot de passe",
+  
+      "OTP": "================OTP Translation only for comments==============",
+  
+      "Verify OTP": "Vérifier OTP",
+      "OTP will expired in": "OTP expirera dans",
+      "Resend OTP": "Renvoyer OTP",
+  
+      "Change PPassword": "================Change  Password Translation only for comments==============",
+  
+      "Change Password": "Changer le mot de passe",
+      "New Password": "nouveau mot de passe",
+      "Confirm Password": "Confirmez le mot de passe",
+      "Submit": "Soumettre",
+  
+      "Drawer Data": "================Drawer Data Translation only for comments==============",
+  
+      "Home": "Accueil",
+      "About Us": "À propos de nous",
+      "Settings": "Réglages",
+      "LogOut": "Se déconnecter",
+      "Change Langauge":"Changer de langue",
+  
+      "Home Screen": "================Home Screen Translation only for comments=================",
+  
+      "News": "Des nouvelles",
+      "Read more": "Lire la suite",
+      "Categories": "Catégories",
+      "Map Search":"Recherche par carte",
+      "From": "À partir de",
+      "From start": "Dès le début",
+      "To": "À",
+      "Till today": "Jusqu'à aujourd'hui",
+      "Report": "Reportage",
+      "You have to Sign Up for this action": "Vous devez vous inscrire pour cette action",
+  
+      "Filter Categories": "================Filter Categories Translation only for comments=================",
+  
+      "Done": "Fait",
+      "Selected Categories": "Catégories sélectionnées",
+      "Select Categories": "Sélectionnez les catégories",
+  
+      "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
+  
+      "Report Incident": "Signaler un incident",
+      "Where did it happen?": "Où cela s'est-il passé?",
+      "Ground Floor": "Rez-de-chaussée",
+      "Floor": "Étage",
+      "11th": "11ème",
+      "Next": "suivant",
+      "Choose Category": "Choisissez la catégorie",
+      "Select category": "Choisir une catégorie",
+      "Choose Sub Category": "Choisissez la sous-catégorie",
+      "Date": "Date",
+      "Today": "Aujourd'hui",
+      "Choose date": "Choisissez la date",
+      "Time": "Temps",
+      "Now": "À présent",
+      "Choose time": "Choisissez l'heure",
+      "Suspect Name": "Nom du suspect",
+      "Don’t Know": "Je ne sais pas",
+      "Enter name": "Entrez le nom",
+      "Did This Cost You Money?": "Cela vous a-t-il coûté de l'argent ?",
+      "No": "Non",
+      "Amount": "Montant",
+      "Tell us what happen": "Dites-nous ce qui s'est passé",
+      "Thanks for Reporting us": "Merci de nous avoir signalé",
+      "About your Incident": "À propos de votre incident",
+  
+      "All Reports": "===================== All Reports Translation only for comments ====================== ",
+  
+      "Reports": "Rapports",
+      "Initials": "Initiales",
+      "Category": "Catégorie",
+      "Value": "Valeur",
+      "What happened": "Qu'est-ce qui s'est passé",
+      "date": "date",
+      "Show More": "Montre plus",
+      "Flag": "Drapeau",
+  
+      "News  screen": "================News screen Translation only for comments=================",
+  
+      "Old": "Vieux",
+      "New": "Nouveau",
+      "Search": "Chercher",
+      "News Details": "Détails de l'actualité",
+      "Share": "Partager",
+  
+  
+  
+  
+  
+  
+      "About us screen": "================about us screen Translation only for comments=================",
+  
+      "AboutUsDescription":"Une initiative individuelle et autofinancée visant à éradiquer la corruption"
+    }
+  }
+  

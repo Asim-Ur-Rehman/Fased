@@ -193,6 +193,7 @@ export const ReportIncident = ({ navigation }) => {
                   placeholder="Where did it happen?"
                   placeholderTextColor={theme.textColor.placeholderColor}
                   onPressIn={() => setVisible(true)}
+                  
                 />
               </View>
             </View>
