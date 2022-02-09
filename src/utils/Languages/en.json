@@ -18,6 +18,7 @@
     "Sign Up": "Sign Up",
     "Full Name": "Full Name",
     "Enter your full name": "Enter your full name",
+  
 
     "ForGot Password": "================ForGot Password Translation only for comments==============",
 
@@ -43,12 +44,14 @@
     "About Us": "About Us",
     "Settings": "Settings",
     "LogOut": "LogOut",
+    "Change Langauge":"Change Langauge",
 
     "Home Screen": "================Home Screen Translation only for comments=================",
 
     "News": "News",
     "Read more": " Read more",
     "Categories": "Categories",
+    "Map Search":"Map Search",
     "From": "From",
     "From start": "From start",
     "To": "To",
@@ -106,6 +109,15 @@
     "New": "New",
     "Search": "Search",
     "News Details": "News Details",
-    "Share": "Share"
+    "Share": "Share",
+
+
+
+
+
+
+    "About us screen": "================about us screen Translation only for comments=================",
+
+    "AboutUsDescription":"An individual and self-financed initiative aiming to eradicate corruption"
   }
 }
