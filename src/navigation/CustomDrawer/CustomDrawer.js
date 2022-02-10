@@ -10,14 +10,15 @@ import {
   StatusBar
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Images } from '../../constants/images'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LOGOUT } from '../../stores/actions/actionType'
 
 export const CustomDrawer = ({ navigation }) => {
   const [active, setActive] = useState('')
   const isGuest = useSelector(state => state.userReducer.isGuest)
-
+  const dispatch = useDispatch()
   const Data = [
     {
       title: 'Home',
@@ -43,6 +44,12 @@ export const CustomDrawer = ({ navigation }) => {
   const removeUser = async () => {
     try {
       await AsyncStorage.clear()
+      dispatch(dispatchh => {
+        dispatchh({ type: LOGOUT })
+      })
+      navigation.navigate('AuthStackNavigator', {
+        screen: 'SignIn'
+      })
       return true
     } catch (exception) {
       return false
@@ -85,9 +92,6 @@ export const CustomDrawer = ({ navigation }) => {
                   if (i == 3) {
                     // AsyncStorage.removeItem('userData')
                     removeUser()
-                    navigation.navigate('AuthStackNavigator', {
-                      screen: 'SignIn'
-                    })
                   } else {
                     item.navigateTo && navigation.navigate(item.navigateTo)
                   }

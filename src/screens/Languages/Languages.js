@@ -23,21 +23,21 @@ export const Languages = ({ navigation }) => {
   //     navigation.navigate('AppStackNavigator')
   // }, [])
 
-  useEffect(() => {
-    getUserData()
-  }, [])
+  // useEffect(() => {
+  //   getUserData()
+  // }, [])
 
-  const getUserData = async e => {
-    let userData = await AsyncStorage.getItem('userData')
-    let data = JSON.parse(userData)
-    let checkForUser = data && Object.keys(data).length > 0
-    if (checkForUser) {
-      navigation.navigate('AppStackNavigator')
-    }
-    if (e && !checkForUser) {
-      navigation.navigate('SignIn')
-    }
-  }
+  // const getUserData = async e => {
+  //   let userData = await AsyncStorage.getItem('userData')
+  //   let data = JSON.parse(userData)
+  //   let checkForUser = data && Object.keys(data).length > 0
+  //   if (checkForUser) {
+  //     navigation.navigate('AppStackNavigator')
+  //   }
+  //   if (e && !checkForUser) {
+  //     navigation.navigate('SignIn')
+  //   }
+  // }
 
   const Buttons = [
     {
@@ -61,7 +61,8 @@ export const Languages = ({ navigation }) => {
     // } else {
     //   ToastMessage('Please select any language', null, 'error')
     // }
-    getUserData('click')
+    // getUserData('click')
+    navigation.navigate('SignIn')
   }
   return (
     <SafeAreaView

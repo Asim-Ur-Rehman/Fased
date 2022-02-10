@@ -81,9 +81,9 @@ export const SignIn = ({ navigation }) => {
         ToastMessage('Signed In Successfully', null, 'success')
 
         dispatch(SignInAction(loginUser?.data?.loginUser?.data))
-        navigation.navigate('AppStackNavigator', {
-          screen: 'Home'
-        })
+        // navigation.navigate('AppStackNavigator', {
+        //   screen: 'Home'
+        // })
         setTimeout(() => {
           setEmail('')
           setPassword('')
@@ -193,10 +193,12 @@ export const SignIn = ({ navigation }) => {
           navigation.navigate('Languages')
         }}
         onPressGuset={() => {
-          // dispatch(continueAsGuest())
+          dispatch(continueAsGuest({
+            guestUserLogin:'guesUserLogin'
+          }))
           // navigation.navigate('AppStackNavigator')
           // alert('donehyugyu')
-          guestUserLogin()
+          // guestUserLogin()
         }}
       />
       <StatusBar
@@ -371,15 +373,7 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View>
-          <Recaptcha
-            ref={recaptcha}
-            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
-            baseUrl="https://fased-admin.herokuapp.com"
-            onVerify={onVerify}
-            onExpire={onExpire}
-            onError={onError}
-            size="normal"
-          />
+     
         </View>
       </ScrollView>
     </SafeAreaView>

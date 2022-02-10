@@ -19,6 +19,7 @@ import MapView from 'react-native-map-clustering'
 import { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { VictoryPie } from 'victory-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import Feather from 'react-native-vector-icons/Feather'
 import Button from '../../components/Button'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
@@ -30,10 +31,12 @@ import {
   Get_Reports
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
+import { renderSearchLocation } from '../ReportIncident/locationModal'
 import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
+import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
 import messaging from '@react-native-firebase/messaging';
 
@@ -43,8 +46,11 @@ let reportsData = []
 const { width, height } = Dimensions.get('screen')
 
 export const Home = props => {
+  const recaptcha = useRef()
+  
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [selected, setSelected] = useState(
     route.params?.selected ? route.params?.selected : []
   )
@@ -170,10 +176,32 @@ export const Home = props => {
     e.stopPropagation()
   }
 
+  const guestUserReport = () => {
+    recaptcha.current.open()
+  }
+  const onVerify = token => {
+    navigation.navigate('ReportIncident')
+    // console.log('success!', token)
+  }
+  const onExpire = () => {
+    ToastMessage('Captcha expired', null, 'error')
+    console.log('expired!')
+  }
+  const onError = () => {
+    ToastMessage('Captcha error', null, 'error')
+  }
+
+  const onDone = e => {
+    setVisible(!visible)
+    setinitialRegion({ ...initialRegion, ...e })
+    mapRef.current.animateToRegion({ ...initialRegion, ...e }, 2000)
+  }
+
   return (
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
       <SafeAreaView style={{ flex: 1 }}>
+      {renderSearchLocation(visible, onDone)}
         <View style={styles.header}>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -276,11 +304,36 @@ export const Home = props => {
         </View>
 
         <View style={styles.date}>
+
+        <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() =>setVisible(true)}
+            style={{    flexDirection: 'row',
+            width: '25%',
+            justifyContent: 'space-around'}}>
+
+            <Feather name="map-pin" size={17} color="#8E97A6" />
+            <Text
+              style={{
+                color: '#8E97A6',
+                fontFamily: 'Lexend-Regular',
+                fontSize: 11
+              }}>
+        Map Search
+            </Text>
+          </TouchableOpacity>
+
+          <View style={{ width: 1, height: 19, backgroundColor: '#C4C4C4' }} />
+
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Calender')}
-            style={styles.dateContainer}>
-            <Icon name="date-range" size={17} color="#8E97A6" />
+            style={{   flexDirection: 'row',
+            width: '25%',
+            justifyContent: 'space-around'}}>
+            <Icon name="date-range" size={17} color="#8E97A6"  style={{
+              paddingRight:20
+            }}/>
             <Text
               style={{
                 color: '#8E97A6',
@@ -298,7 +351,7 @@ export const Home = props => {
             onPress={() => navigation.navigate('Calender')}
             style={{
               flexDirection: 'row',
-              width: '40%',
+              width: '25%',
               justifyContent: 'space-around'
             }}>
             <Icon name="date-range" size={17} color="#8E97A6" />
@@ -507,6 +560,8 @@ export const Home = props => {
         <Button
           title="Report"
           onPress={() => {
+
+            isGuest ? guestUserReport() :
             navigation.navigate('ReportIncident')
           }}
         />
@@ -519,6 +574,16 @@ export const Home = props => {
           unitId={TestIds.BANNER}
         />
       </View>
+
+      <Recaptcha
+            ref={recaptcha}
+            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
+            baseUrl="https://fased-admin.herokuapp.com"
+            onVerify={onVerify}
+            onExpire={onExpire}
+            onError={onError}
+            size="normal"
+          />
     </View>
   )
 }

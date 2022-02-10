@@ -1,0 +1,127 @@
+{
+    "translation": {
+      "Sign In ": "================Sign In Translation    only for comments==============",
+  
+      "Continue As Guest User": "أكمل كضيف",
+      "Sign In": "تسجيل الدخول ",
+      "Email address": "عنوان البريد الإلكتروني",
+      "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+      "Password": "كلمة السر ",
+      "Remember me": "تذكرنى",
+      "Forgot Password": "هل نسيت كلمة السر",
+      "Or sign in with social account": "Or سجل عن طريق",
+      "Don’t have an account?": "لا تملك حساب",
+      "Sign Up Here": "أنشئ حساب من هنا",
+  
+      "SignUP": "================Sign Up Translation only for comments==============",
+  
+      "Sign Up": "أنشئ حساب",
+      "Full Name": "الإسم بالكامل",
+      "Enter your full name": "عنوان البريد الائلكتروني",
+  
+      "ForGot Password": "================ForGot Password Translation only for comments==============",
+  
+      "A message will be sent to your email address with further instructions": "سيتم إرسال رسالة إلى عنوان بريدك الإلكتروني مع مزيد من التعليمات",
+      "Recover Password": "إستعادة كلمة المرور",
+  
+      "OTP": "================OTP Translation only for comments==============",
+  
+      "Verify OTP": "تحقق من OTP",
+      "OTP will expired in": "ستنتهي صلاحية OTP في",
+      "Resend OTP": "إعادة إرسال OTP",
+  
+      "Change PPassword": "================Change  Password Translation only for comments==============",
+  
+      "Change Password": "تغيير اللغة",
+      "New Password": "كلمة السر الجديدة",
+      "Confirm Password": "تأكيد كلمة المرور",
+      "Submit": "إرسال",
+  
+      "Drawer Data": "================Drawer Data Translation only for comments==============",
+  
+      "Home": "الرئيسسة",
+      "About Us": "من نحن",
+      "Settings": "الإعدادات",
+      "LogOut": "تسجيل الخروج",
+      "Change Langauge":"تغيير اللغة",
+  
+      "Home Screen": "================Home Screen Translation only for comments=================",
+  
+      "News": "أخبار",
+      "Read more": " اقرأ أكثر",
+      "Categories": "أنواع الفساد",
+      "Map Search":"البحث على الخريطة",
+      "From": "من",
+      "From start": "من البداية ",
+      "To": "إلى",
+      "Till today": "حتى اليوم",
+      "Report": "نقل",
+      "You have to Sign Up for this action": "يجب عليك التسجيل لهذا الإجراء",
+  
+      "Filter Categories": "================Filter Categories Translation only for comments=================",
+  
+      "Done": "فعله",
+      "Selected Categories": "أختار نوع الفساد ",
+      "Select Categories": "أختار نوع الفساد ",
+  
+      "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
+  
+      "Report Incident": "بلغ عن فاسد",
+      "Where did it happen?": "مكان الواقعة",
+      "Ground Floor": "مستوى الطابق الأرضي",
+      "Floor": "الطابق",
+      "11th": "11th",
+      "Next": "التالي",
+      "Choose Category": "اختر الفئة",
+      "Select category": "أختار نوع الفساد ",
+      "Choose Sub Category": "هل هناك نوع محدد",
+      "Date": "التاريخ",
+      "Today": "اليوم",
+      "Choose date": "اختر موعدا",
+      "Time": "الوقت",
+      "Now": "الآن",
+      "Choose time": "اختر الوقت",
+      "Suspect Name": "إسم الفاسد",
+      "Don’t Know": "لا تعرف",
+      "Enter name": "أدخل الاسم",
+      "Did This Cost You Money?": "هل يمكن تقييم الأضرار ماديا ",
+      "No": "رقم",
+      "Amount": "مقدار",
+      "Tell us what happen": "إحكيلنا تفاصيل الواقعة لكن بدون ذكر أسماء",
+      "Thanks for Reporting us": "شكرا لإبلاغنا",
+      "About your Incident": "حول الحادث الخاص بك",
+  
+      "All Reports": "===================== All Reports Translation only for comments ====================== ",
+  
+      "Reports": "التقارير",
+      "Initials": "الأحرف الأولى",
+      "Category": "فئة",
+      "Value": "قيمة",
+      "What happened": "ماذا حدث",
+      "date": "التاريخ",
+      "Show More": "أظهر المزيد",
+      "Flag": "علم",
+  
+      "News  screen": "================News screen Translation only for comments=================",
+  
+      "Old": "عمر او قديم",
+      "New": "جديد",
+      "Search": "بحث",
+      "News Details": "تفاصيل الخبر",
+      "Share": "شارك",
+
+
+
+
+
+
+      "About us screen": "================about us screen Translation only for comments=================",
+
+      "AboutUsDescription":"مبادرة ذاتية التمويل تهدف إلى القضاء على الفساد"
+
+
+
+
+    }
+  }
+  

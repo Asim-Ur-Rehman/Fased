@@ -62,23 +62,10 @@ export const AboutUs = ({ navigation }) => {
       <View style={styles.card}>
         {/* <Text style={styles.text}>About App</Text> */}
         <Text style={styles.text1}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat
+        An individual and self-financed initiative aiming to eradicate corruption		
         </Text>
         <Text style={styles.text1}>
-          There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected
-          humour, or randomised words which don't look even slightly believable.
-          If you are going to use a passage of Lorem Ipsum, you need to be sure
-          there isn't anything embarrassing hidden in the middle of text. All
-          the Lorem Ipsum generators on the Internet tend to repeat predefined
-          chunks as necessary, making this the first true generator on the
-          Internet. It uses a dictionary of over 200 Latin words, combined with
-          a handful of model sentence structures, to generate Lorem Ipsum which
-          looks reasonable. The generated Lorem Ipsum is therefore always free
-          from repetition, injected humour, or non-characteristic words etc.
+       Contact : fased@gmail.com
         </Text>
       </View>
     </View>
@@ -93,7 +80,7 @@ const styles = StyleSheet.create({
   },
   card: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: '30%',
     borderRadius: 8,
     // flex: 1,
     alignItems: 'center',
