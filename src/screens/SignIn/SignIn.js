@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   View,
   Text,
@@ -34,24 +34,38 @@ import { useDispatch } from 'react-redux'
 import { SignInAction, continueAsGuest } from '../../stores/actions/user.action'
 
 import Recaptcha from 'react-native-recaptcha-that-works'
+import { getFcmToken } from '../../utils/helper'
 
 export const SignIn = ({ navigation }) => {
-  const recaptcha = useRef()
 
+  useEffect(() => {
+    getFcmToken()
+    .then(token => {
+      setfcmToken(token)
+    })
+  }, [])
+
+  const recaptcha = useRef()
+  
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
+  const [fcmToken, setfcmToken] = useState('')
   const [password, setPassword] = useState('')
   const [loader, setLoader] = useState(false)
   const linkedRef = useRef(null)
+
   const loginUser = useQuery(Login_User, {
     variables: {
       email: email,
-      password: password
+      password: password,
+      fcmToken: fcmToken
     }
   })
   const dispatch = useDispatch()
   const [socialMediaLogin, { data, loading, error }] = useMutation(SOCIAL_LOGIN)
-  const signIn = () => {
+  console.log("fcmToken", fcmToken)
+  const signIn = async () => {
+
     if (email == '' || password == '') {
       ToastMessage('Please fill all the fields', null, 'error')
       setLoader(false)
@@ -96,7 +110,8 @@ export const SignIn = ({ navigation }) => {
                   providerId: currentProfile.userID,
                   registrationType: 'facebook',
                   name: currentProfile.name,
-                  email: currentProfile.email ? currentProfile.email : undefined
+                  email: currentProfile.email ? currentProfile.email : undefined,
+                  fcmToken: fcmToken
                 }
               }).then(res => {
                 AsyncStorage.setItem(
@@ -134,7 +149,8 @@ export const SignIn = ({ navigation }) => {
           name:
             userData?.data?.localizedFirstName +
             userData?.data?.localizedLastName,
-          email: undefined
+          email: undefined,
+          fcmToken: fcmToken
         }
       }).then(res => {
         AsyncStorage.setItem(
@@ -167,6 +183,7 @@ export const SignIn = ({ navigation }) => {
   const onError = () => {
     ToastMessage('Captcha error', null, 'error')
   }
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader

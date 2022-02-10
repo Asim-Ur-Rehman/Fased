@@ -16,7 +16,10 @@ import {
 } from '@apollo/client'
 import { persistCache } from 'apollo3-cache-persist'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Settings } from 'react-native-fbsdk-next';
+import messaging from '@react-native-firebase/messaging'
+import { Settings } from 'react-native-fbsdk-next'
+import { NotificationPermission } from './utils/helper'
+import * as NavigationService from './navigation/navigationService'
 // const cache = new InMemoryCache()
 
 const client = new ApolloClient({
@@ -26,17 +29,46 @@ const client = new ApolloClient({
 
 // Setting the facebook app id using setAppID
 // Remember to set CFBundleURLSchemes in Info.plist on iOS if needed
-Settings.setAppID('1553192515049980');
-Settings.initializeSDK();
+Settings.setAppID('1553192515049980')
+Settings.initializeSDK()
 
 const App = ({ navigation }) => {
-  // const [loadingCache, setLoadingCache] = useState(true)
   useEffect(() => {
     // persistCache({
     //   cache,
     //   storage: AsyncStorage
     // }).then(() => setLoadingCache(false))
-
+    console.log('navigation')
+    NotificationPermission()
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      if (remoteMessage) {
+        const Newsdata = JSON.parse(remoteMessage?.data?.data)
+        NavigationService.navigate(remoteMessage?.data?.screen, {
+          title: Newsdata?.Title,
+          tagline: Newsdata?.Tagline,
+          description: Newsdata?.Description,
+          createdAt: Newsdata?.createdAt,
+          newsData: Newsdata
+        })
+      }
+    })
+    // Check whether an initial notification is available
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage) {
+          setTimeout(() => {
+            const Newsdata = JSON.parse(remoteMessage?.data?.data)
+            NavigationService.navigate(remoteMessage?.data?.screen, {
+              title: Newsdata?.Title,
+              tagline: Newsdata?.Tagline,
+              description: Newsdata?.Description,
+              createdAt: Newsdata?.createdAt,
+              newsData: Newsdata
+            })
+          }, 2000)
+        }
+      })
     setTimeout(
       () => {
         SplashScreen.hide()

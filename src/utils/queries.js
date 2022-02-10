@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const Login_User = gql`
-  query LoginUser($email: String, $password: String) {
-    loginUser(email: $email, password: $password) {
+  query LoginUser($email: String, $password: String, $fcmToken: String) {
+    loginUser(email: $email, password: $password, fcmToken: $fcmToken) {
       status
       message
       data {

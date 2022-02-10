@@ -151,12 +151,14 @@ export const SOCIAL_LOGIN = gql`
     $registrationType: String!
     $name: String
     $email: String
+    $fcmToken: String
   ) {
     socialMediaLogin(
       providerId: $providerId
       registrationType: $registrationType
       name: $name
       email: $email
+      fcmToken: $fcmToken
     ) {
       status
       message
@@ -175,8 +177,18 @@ export const SOCIAL_LOGIN = gql`
 `
 
 export const FLAG_REPORT = gql`
-  mutation CreateFlagReport($reason: String!, $reasonId: Int!, $userId: Int!, $reportId: Int!) {
-  CreateFlagReport(reason: $reason, reasonId: $reasonId, userId: $userId, reportId: $reportId) { 
+  mutation CreateFlagReport(
+    $reason: String!
+    $reasonId: Int!
+    $userId: Int!
+    $reportId: Int!
+  ) {
+    CreateFlagReport(
+      reason: $reason
+      reasonId: $reasonId
+      userId: $userId
+      reportId: $reportId
+    ) {
       status
       message
     }
