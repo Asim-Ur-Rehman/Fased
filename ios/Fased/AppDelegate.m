@@ -6,6 +6,7 @@
 #import "RNSplashScreen.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h> // <- Add This Import
 #import <GoogleMaps/GoogleMaps.h>
+#import <Firebase.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -30,6 +31,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [FIRApp configure];
   [FBSDKApplicationDelegate.sharedInstance initializeSDK];
   [GMSServices provideAPIKey:@"AIzaSyBTNtoDj9Z6V8d3zDdCVFz4LvEemFwG4Zw"];
 #ifdef FB_SONARKIT_ENABLED

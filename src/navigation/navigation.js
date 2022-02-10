@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme, createNavigationContainerRef } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -32,6 +32,7 @@ import { NewsDetails } from '../screens/News/NewsDetails'
 import { AboutUs } from '../screens/AboutUs'
 import { Settings } from '../screens/Settings/Settings'
 import { SettingChangePassword } from '../screens/SettingChangePassword/SettingChangePassword'
+import { navigationRef } from './navigationService'
 import { SignInAction } from '../stores/actions/user.action'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -39,6 +40,8 @@ const Stack = createStackNavigator()
 const AuthStack = createStackNavigator()
 const AppStack = createStackNavigator()
 const Drawer = createDrawerNavigator()
+
+
 
 function MyDrawer() {
   return (
@@ -128,6 +131,7 @@ const MainNavigation = () => {
   // console.log('userdata from state', Boolean(Object.keys(state.userData).length > 0))
   return (
     <NavigationContainer
+      ref={navigationRef}
       theme={{ ...DefaultTheme, colors: { background: '#fff' } }}>
       <Stack.Navigator
         screenOptions={{ headerShown: false }}

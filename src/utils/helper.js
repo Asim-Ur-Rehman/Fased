@@ -1,4 +1,5 @@
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import messaging from '@react-native-firebase/messaging';
 
 export const getUserData = async () => {
   const userData = await AsyncStorageLib.getItem('userData')
@@ -99,4 +100,28 @@ export const sortArray = (arr, key, type) => {
   })
   // console.log("sortArray", resultantArray, arr)
   return resultantArray
+}
+
+export async function NotificationPermission () {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    console.log('Authorization status:', authStatus);
+    return true
+  }else {
+    console.log("authStatus authStatus", authStatus)
+    return false
+  }
+}
+
+export async function getFcmToken () {
+  try {
+    const token = await messaging().getToken()
+    return token
+  } catch (error) {
+    console.log("error fcmToken", error)
+  }
 }

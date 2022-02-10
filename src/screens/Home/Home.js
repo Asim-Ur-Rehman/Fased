@@ -38,6 +38,8 @@ import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
+import messaging from '@react-native-firebase/messaging';
+
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
 let reportsData = []
@@ -58,6 +60,10 @@ export const Home = props => {
     latitudeDelta: 0.02,
     longitudeDelta: 0.01
   })
+
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Message handled in the background! Home.JS', remoteMessage);
+  });
 
   const [fromTo, setFromTo] = useState(
     route.params?.fromTo ? route.params?.fromTo : null

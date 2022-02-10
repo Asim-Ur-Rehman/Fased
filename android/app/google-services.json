@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061827617539",
+    "project_id": "fased-01",
+    "storage_bucket": "fased-01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061827617539:android:ac6d801569c11da2b87f36",
+        "android_client_info": {
+          "package_name": "com.appstirr.fased"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061827617539-e452ptah00cddujhicn9qkqte0jkclk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFZyXQSoDyrPeOaty9I_q1PlePhzl9JeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061827617539-e452ptah00cddujhicn9qkqte0jkclk1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
