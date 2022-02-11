@@ -124,6 +124,7 @@ export const Home = props => {
     const data = useQuery(FILTER_BY_DATE, {
       variables: fromTo
     })
+    console.log("data FILTER_BY_DATE", data, data?.data?.filterReportsByDate?.data, fromTo)
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
     const query = useQuery(Get_Reports)
@@ -236,7 +237,7 @@ export const Home = props => {
                     })
                   }}>
                   <Text numberOfLines={2} style={styles.headerText}>
-                    {News?.data?.getNews?.data[0]?.Description}
+                    {News?.data?.getNews?.data[0]?.Tagline}
                     <Text style={[styles.read, { marginRight: 10 }]}>
                       {' '}
                       Read more
@@ -713,5 +714,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     opacity: 0.7
   },
-  reportBtn: { alignSelf: 'center', paddingVertical: 20 }
+  reportBtn: { alignSelf: 'center', paddingVertical: 20 },
+  ContentTextStyle: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 100,
+    backgroundColor: 'transparent'
+  }
 })

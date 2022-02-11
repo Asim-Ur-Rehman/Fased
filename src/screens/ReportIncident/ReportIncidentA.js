@@ -27,6 +27,8 @@ import { useDispatch } from 'react-redux'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import moment from 'moment'
+import { GET_SUBCATE_BY_CATID } from '../../utils/queries'
+import { useQuery } from '@apollo/client'
 export const ReportIncidentA = ({ navigation, route }) => {
   const [disableDate, setDisableDate] = useState(true)
   const [disableTime, setDisableTime] = useState(true)
@@ -44,14 +46,26 @@ export const ReportIncidentA = ({ navigation, route }) => {
   const [subcategory, setsubCategory] = useState(
     route.params?.subcategory ? route.params?.subcategory : null
   )
+
+  const [SubCat, setSubCat] = useState(null)
   const [suspectName, setSuspectName] = useState('')
   const [amount, setAmount] = useState()
+
+  const { data, loading, error, refetch } = useQuery(GET_SUBCATE_BY_CATID, {
+    variables: {
+      categoryId: category ? category[0]?.id : 0
+    }
+  })
+
+  console.log(
+    'data?.getSubCategoryByCatId?.data?.map((value => value.Title))',
+    data?.getSubCategoryByCatId?.data?.map(value => value.Title)
+  )
 
   const dispatch = useDispatch()
   useEffect(() => {
     if (route.params?.category) {
       setCategory(route.params?.category)
-      // route.params?.category ? route.params?.category : null
     } else {
       setCategory(category => {
         return category ? category : null
@@ -59,7 +73,6 @@ export const ReportIncidentA = ({ navigation, route }) => {
     }
   }, [route.params?.category])
 
-  // console.log('report Incident ===', route.params)
   const onChange = date => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
@@ -174,66 +187,15 @@ export const ReportIncidentA = ({ navigation, route }) => {
   }
 
   const next = () => {
-    // console.log('data', moment(date).format('YYYY-MM-DD'))
-
-    // let value = /^\+?(0|[1-9]\d*)$/.test(amount)
-
-    // // console.log('value', value)
-
-    // if (disableAmount) {
-    // let data = {
-    //   category: category[0].id,
-    //   subcategory: subcategory ? subcategory[0].id : 0,
-    //   date: moment(date).format('YYYY-MM-DD'),
-    //   time: currentTime,
-    //   suspectName: suspectName ? suspectName : 'Anonymous',
-    //   amount: '0'
-    // }
-    // console.log('all data', data)
-
-    //   // dispatch(ReportIncidentAllData(data, navigation))
-    // } else {
-    //   if (!value) {
-    //     ToastMessage('Amount must be greater then 0', null, 'info')
-    //   } else {
-    //     let data = {
-    //       category: category[0].id,
-    //       subcategory: subcategory ? subcategory[0].id : 0,
-    //       date: moment(date).format('YYYY-MM-DD'),
-    //       time: currentTime,
-    //       suspectName: suspectName ? suspectName : 'Anonymous',
-    //       amount: amount
-    //     }
-    //     console.log('all data', data)
-
-    //     // dispatch(ReportIncidentAllData(data, navigation))
-    //   }
-    // }
-    // if (!value) {
-    //   ToastMessage('Amount must be greater then 0', null, 'info')
-    // } else {
-    //   let data = {
-    //     category: category[0].id,
-    //     subcategory: subcategory ? subcategory[0].id : 0,
-    //     date: moment(date).format('YYYY-MM-DD'),
-    //     time: currentTime,
-    //     suspectName: suspectName ? suspectName : 'Anonymous',
-    //     amount: amount ? amount : '0'
-    //   }
-    //   console.log('all data', data)
-
-    //   // dispatch(ReportIncidentAllData(data, navigation))
-    // }
-
-    let data = {
+    let Objdata = {
       category: category[0].id,
-      subcategory: subcategory ? subcategory[0].id : 0,
+      subcategory: SubCat ? data?.getSubCategoryByCatId?.data[SubCat]?.id : '0',
       date: moment(date).format('YYYY-MM-DD'),
       time: currentTime,
       suspectName: suspectName ? suspectName : 'Anonymous',
-      amount: '0'
+      amount: amount ? amount : '0'
     }
-    dispatch(ReportIncidentAllData(data, navigation))
+    dispatch(ReportIncidentAllData(Objdata, navigation))
   }
 
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : -280
@@ -341,42 +303,70 @@ export const ReportIncidentA = ({ navigation, route }) => {
               item={subcategory}
             />
           ) : (
-            <View
-              style={{ width: '90%', alignSelf: 'center', marginVertical: 18 }}>
-              <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Choose sub-category
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  // navigation.navigate('ReportIncidentB', {
-                  //   type: 'subcategory',
-                  //   alternate: category,
-                  //   selected: []
-                  // })
-                  Alert.alert("Alert", "there is no sub category")
-                }}
-                activeOpacity={0.8}
-                style={styles.fieldView}>
-                <Text
+            <>
+              {data?.getSubCategoryByCatId?.data?.map(value => value.Title) && (
+                <View
                   style={{
                     width: '90%',
-                    fontSize: 14,
-                    fontFamily: 'Rubik-Regular',
-                    color: '#33333370',
-                    paddingHorizontal: 20
+                    alignSelf: 'center',
+                    marginVertical: 18
                   }}>
-                  Select sub-category
-                </Text>
-                <View>
-                  <Icon
-                    name="chevron-down"
-                    color="#33333330"
-                    size={22}
-                    style={{ paddingRight: 15 }}
-                  />
+                  <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
+                    Choose sub-category
+                  </Text>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles.fieldView}>
+                    <View
+                      style={{
+                        height: '50%'
+                      }}>
+                      <ModalDropdown
+                        renderRightComponent={() => (
+                          <Icon
+                            name={'down'}
+                            type={'AntDesign'}
+                            style={{ fontSize: 13, color: '#FFF' }}
+                          />
+                        )}
+                        style={{
+                          width: '100%',
+                          borderWidth: 1,
+                          borderColor: 'transparent',
+                          backgroundColor: 'transparent',
+                          justifyContent: 'center',
+                          paddingLeft: 15,
+                          borderRadius: 5
+                        }}
+                        defaultValue="Choose Sub-Category"
+                        textStyle={{
+                          width: '90%',
+                          fontSize: 14,
+                          fontFamily: 'Rubik-Regular',
+                          color: '#33333370'
+                        }}
+                        dropdownTextHighlightStyle={{ color: '#000' }}
+                        dropdownStyle={{
+                          height: 130,
+                          width: '90%',
+                          marginLeft: -16,
+                          marginTop: Platform.OS == 'ios' ? 17 : -17
+                        }}
+                        dropdownTextStyle={{
+                          fontSize: 15,
+                          paddingLeft: 10,
+                          fontWeight: 'bold'
+                        }}
+                        options={data?.getSubCategoryByCatId?.data?.map(
+                          value => value.Title
+                        )}
+                        onSelect={(index, value) => setSubCat(index)}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
-              </TouchableOpacity>
-            </View>
+              )}
+            </>
           )}
 
           <View
@@ -621,7 +611,13 @@ export const ReportIncidentA = ({ navigation, route }) => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-      <View style={{ marginVertical: 15, bottom: Platform.OS == "ios" ? 5 : 0, width: '100%', position: 'absolute' }}>
+      <View
+        style={{
+          marginVertical: 15,
+          bottom: Platform.OS == 'ios' ? 5 : 0,
+          width: '100%',
+          position: 'absolute'
+        }}>
         <Button
           onPress={() => {
             next()

@@ -60,6 +60,19 @@ export const ReportIncidentC = ({ navigation }) => {
     // console.log('data', data.id)
   }
   const next = () => {
+    console.log("DATA DATA", {
+      userId: isGuest ? 0 : parseInt(userId),
+      categoryId: reportIncidentAllData?.category,
+      subCategoryId: reportIncidentAllData?.subcategory,
+      latitude: reportIncidentLocationFloorData?.latitude,
+      longitude: reportIncidentLocationFloorData?.longitude,
+      suspectName: reportIncidentAllData?.suspectName,
+      costMoney: parseInt(reportIncidentAllData?.amount),
+      incidentDate: reportIncidentAllData?.date,
+      incidentTime: reportIncidentAllData?.time,
+      description: textNew ? textNew : '',
+      floor: parseInt(reportIncidentLocationFloorData?.floor)
+    })
     // console.log(
     //   'object',
 
@@ -120,7 +133,7 @@ export const ReportIncidentC = ({ navigation }) => {
         variables: {
           userId: isGuest ? 0 : parseInt(userId),
           categoryId: reportIncidentAllData?.category,
-          subCategory: reportIncidentAllData?.subcategory,
+          subCategoryId: reportIncidentAllData?.subcategory,
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
           suspectName: reportIncidentAllData?.suspectName,

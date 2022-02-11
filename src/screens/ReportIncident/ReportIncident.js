@@ -430,7 +430,7 @@ const styles = StyleSheet.create({
   markerFixed: {
     left: '50%',
     marginLeft: -30,
-    marginTop: -120,
+    marginTop: Platform.OS == "ios" ? -120 : -135,
     position: 'absolute',
     top: '50%',
     zIndex: 1

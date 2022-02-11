@@ -18,9 +18,10 @@ import LinearGradient from 'react-native-linear-gradient'
 import moment from 'moment'
 const INITIAL_DATE = '2020-02-02'
 export const Calender = ({ navigation }) => {
-  const [always ,setAlways]=useState(true)
+  const [always, setAlways] = useState(true)
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
+    setAlways(!always)
   }
   const [untilToday, setUntilToday] = useState(false)
   const startDate = selectedStartDate ? selectedStartDate.toString() : ''
@@ -61,7 +62,7 @@ export const Calender = ({ navigation }) => {
               <Text style={styles.text1}>Always</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
-                  selectionMode={always ? 2 :1}
+                  selectionMode={always ? 2 : 1}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
@@ -104,9 +105,8 @@ export const Calender = ({ navigation }) => {
               <Text style={styles.text1}>Today</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
-                  selectionMode={untilToday == 2 ? 2 :1}
+                  selectionMode={untilToday == 2 ? 2 : 1}
                   onSelectSwitch={e => {
-                 
                     setSelectedEndDate(new Date())
                     setUntilToday(e)
                   }}
