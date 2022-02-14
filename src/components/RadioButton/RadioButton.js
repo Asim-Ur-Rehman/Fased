@@ -2,8 +2,12 @@ import React, { Component, useState } from 'react'
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
-export const CustomRadioButton = ({ PROP = [], onChange = e => {} }) => {
-  const [value, setValue] = useState(null)
+export const CustomRadioButton = ({ 
+  PROP = [], 
+  onChange = e => {}, 
+  defaultValue = null  
+}) => {
+  const [value, setValue] = useState(defaultValue)
 
   return (
     <View

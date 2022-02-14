@@ -331,7 +331,7 @@ export const Home = props => {
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Calender')}
             style={{   flexDirection: 'row',
-            width: '25%',
+            width: '30%',
             justifyContent: 'space-around'}}>
             <Icon name="date-range" size={17} color="#8E97A6"  style={{
               paddingRight:20
@@ -353,7 +353,7 @@ export const Home = props => {
             onPress={() => navigation.navigate('Calender')}
             style={{
               flexDirection: 'row',
-              width: '25%',
+              width: '30%',
               justifyContent: 'space-around'
             }}>
             <Icon name="date-range" size={17} color="#8E97A6" />

@@ -354,7 +354,7 @@ export const Reports = ({ navigation, route }) => {
                       <View
                         key={index}
                         style={{
-                          width: index == 1 ? width / 2.2 : width / 4,
+                          width: index == 1 ? width / 2.2 : width / 3.7,
                           flexDirection: 'row',
                           justifyContent: 'space-between'
                         }}>

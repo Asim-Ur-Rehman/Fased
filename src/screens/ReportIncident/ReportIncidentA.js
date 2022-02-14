@@ -562,7 +562,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                {t('Did_This_Cost_You_Money')}
+                {t('Did_This_Cost_You_Money?')}
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text

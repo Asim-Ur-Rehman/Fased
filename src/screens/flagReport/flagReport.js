@@ -28,7 +28,9 @@ import { FLAG_REPORT } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import { GET_REASONS } from '../../utils/queries'
 import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import { LOGOUT } from '../../stores/actions/actionType'
 export const FlagReport = ({ navigation, route }) => {
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
@@ -124,6 +126,23 @@ export const FlagReport = ({ navigation, route }) => {
       } else {
         alert('Please select any reason')
       }
+    }
+  }
+  const dispatch = useDispatch()
+
+  const removeUser = async () => {
+    try {
+      await AsyncStorageLib.clear()
+      dispatch(dispatchh => {
+        dispatchh({ type: LOGOUT })
+      })
+      navigation.navigate('AuthStackNavigator', {
+        screen: 'SignIn'
+      })
+      return true
+    } catch (exception) {
+      console.log("error", exception)
+      return false
     }
   }
 
@@ -317,7 +336,7 @@ export const FlagReport = ({ navigation, route }) => {
                     onPress: () => null,
                     style: 'cancel'
                   },
-                  { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+                  { text: 'Ok', onPress: () => removeUser() }
                 ])
               } else {
                 setModalVisible(true)

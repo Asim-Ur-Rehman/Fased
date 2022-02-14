@@ -23,6 +23,7 @@ export const Settings = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [reason, setreason] = useState(null)
   const { t, i18n } = useTranslation();
+  const selectedLanguageCode = i18n.language;
   const PROP = [
     {
       id: '1',
@@ -172,7 +173,7 @@ export const Settings = ({ navigation }) => {
 
               <View style={{ marginTop: 15 }}>
                 <View style={{ width: '100%' }}>
-                  <CustomRadioButton PROP={PROP} onChange={e => setreason(e)} />
+                  <CustomRadioButton defaultValue={PROP.filter(e => e.code == selectedLanguageCode)[0]?.id}  PROP={PROP} onChange={e => setreason(e)} />
                 </View>
               </View>
             </LinearGradient>
