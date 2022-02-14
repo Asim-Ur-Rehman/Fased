@@ -24,8 +24,10 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { ChangePasswordAction } from '../../stores/actions/user.action'
 import { Verify_Otp, New_Password } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 export const ChangePassword = ({ navigation, route }) => {
   const emailFromParam = route?.params?.emailFromParam
+  const { t } = useTranslation()
   console.log('emailFromParam IN CAHNGE PASSS', emailFromParam)
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -110,7 +112,7 @@ export const ChangePassword = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.ChangePasswordText}>Change Password</Text>
+          <Text style={styles.ChangePasswordText}>{t('Change_Password')}</Text>
           <View
             style={{
               backgroundColor: '#FE0000',
@@ -123,7 +125,7 @@ export const ChangePassword = ({ navigation, route }) => {
 
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>New Password</Text>
+            <Text style={styles.inputLabel}>{t('New_Password')}</Text>
           </View>
 
           <TextInput
@@ -140,7 +142,7 @@ export const ChangePassword = ({ navigation, route }) => {
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Confirm Password</Text>
+            <Text style={styles.inputLabel}>{t('Confirm_Password')}</Text>
           </View>
 
           <TextInput
@@ -177,7 +179,7 @@ export const ChangePassword = ({ navigation, route }) => {
                 alignSelf: 'center',
                 marginTop: 10
               }}
-              title="Submit"
+              title={t('Submit')}
             />
           )}
         </View>

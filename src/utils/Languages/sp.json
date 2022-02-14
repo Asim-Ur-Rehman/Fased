@@ -2,95 +2,96 @@
     "translation": {
       "Sign In ": "================Sign In Translation    only for comments==============",
   
-      "Continue As Guest User": "Continuar como usuario invitado",
-      "Sign In": "Iniciar sesión",
-      "Email address": "Dirección de correo electrónico",
-      "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+      "Continue_As_Guest_User": "Continuar como usuario invitado",
+      "Sign_In": "Iniciar sesión",
+      "Email_address": "Dirección de correo electrónico",
+      "eg_namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
       "Password": "Contraseña",
-      "Remember me": "Recuérdame",
-      "Forgot Password": "Has olvidado tu contraseña",
-      "Or sign in with social account": "O inicia sesión con una cuenta social",
-      "Don’t have an account?": "¿No tienes una cuenta?",
-      "Sign Up Here": "Registrate aquí",
+      "Remember_me": "Recuérdame",
+      "Forgot_Password": "Has olvidado tu contraseña",
+      "Or_sign_in_with_social_account": "O inicia sesión con una cuenta social",
+      "Dont_have_an_account?": "¿No tienes una cuenta?",
+      "Sign_Up_Here": "Registrate aquí",
   
       "SignUP": "================Sign Up Translation only for comments==============",
   
-      "Sign Up": "Inscribirse",
-      "Full Name": "Nombre completo",
-      "Enter your full name": "Ingresa tu nombre completo",
+      "Sign_Up": "Inscribirse",
+      "Full_Name": "Nombre completo",
+      "Enter_your_full_name": "Ingresa tu nombre completo",
     
   
       "ForGot Password": "================ForGot Password Translation only for comments==============",
   
-      "A message will be sent to your email address with further instructions": "Se enviará un mensaje a su dirección de correo electrónico con más instrucciones.",
-      "Recover Password": "Recuperar contraseña",
+      "message_sent_to_email": "Se enviará un mensaje a su dirección de correo electrónico con más instrucciones.",
+      "Recover_Password": "Recuperar contraseña",
   
       "OTP": "================OTP Translation only for comments==============",
   
-      "Verify OTP": "Verificar OTP",
-      "OTP will expired in": "OTP caducará en",
-      "Resend OTP": "Reenviar OTP",
+      "Verify_OTP": "Verificar OTP",
+      "OTP_will_expired_in": "OTP caducará en",
+      "Resend_OTP": "Reenviar OTP",
   
       "Change PPassword": "================Change  Password Translation only for comments==============",
   
-      "Change Password": "Cambia la contraseña",
-      "New Password": "Nueva contraseña",
-      "Confirm Password": "Confirmar contraseña",
+      "Change_Password": "Cambia la contraseña",
+      "New_Password": "Nueva contraseña",
+      "Confirm_Password": "Confirmar contraseña",
+      "current_password": "contraseña actual",
       "Submit": "Entregar",
   
       "Drawer Data": "================Drawer Data Translation only for comments==============",
   
       "Home": "Casa",
-      "About Us": "Sobre nosotros",
+      "About_Us": "Sobre nosotros",
       "Settings": "Ajustes",
       "LogOut": "Cerrar sesión",
-      "Change Langauge":"Cambiar idioma",
+      "Change_Langauge":"Cambiar idioma",
   
       "Home Screen": "================Home Screen Translation only for comments=================",
   
       "News": "Noticias",
-      "Read more": " Lee mas",
+      "Read_more": " Lee mas",
       "Categories": "Categorías",
-      "Map Search":"Búsqueda en mapa",
+      "Map_Search":"Búsqueda en mapa",
       "From": "Desde",
-      "From start": "Desde el principio",
+      "From_start": "Desde el principio",
       "To": "A",
-      "Till today": "Hasta hoy",
+      "Till_today": "Hasta hoy",
       "Report": "Reporte",
-      "You have to Sign Up for this action": "Tienes que Registrarte para esta acción",
+      "You_have_to_signup": "Tienes que Registrarte para esta acción",
   
       "Filter Categories": "================Filter Categories Translation only for comments=================",
   
       "Done": "Hecho",
-      "Selected Categories": "Categorías seleccionadas",
-      "Select Categories": "Seleccionar categorías",
+      "Selected_Categories": "Categorías seleccionadas",
+      "Select_Categories": "Seleccionar categorías",
   
       "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
   
-      "Report Incident": "Reportar incidente",
-      "Where did it happen?": "¿Dónde ocurrió?",
-      "Ground Floor": "Planta baja",
+      "Report_Incident": "Reportar incidente",
+      "Where_did_it_happen?": "¿Dónde ocurrió?",
+      "Ground_Floor": "Planta baja",
       "Floor": "Piso",
       "11th": "11th",
       "Next": "Próximo",
-      "Choose Category": "Elegir la categoría",
-      "Select category": "Selecciona una categoría",
-      "Choose Sub Category": "Elija subcategoría",
+      "Choose_Category": "Elegir la categoría",
+      "Select_category": "Selecciona una categoría",
+      "Choose_Sub_Category": "Elija subcategoría",
       "Date": "Fecha",
       "Today": "Hoy dia",
-      "Choose date": "Choose date",
+      "Choose_date": "Choose date",
       "Time": "Hora",
       "Now": "Now",
-      "Choose time": "elegir hora",
-      "Suspect Name": "Nombre del sospechoso",
-      "Don’t Know": "no sé",
-      "Enter name": "Ingrese su nombre",
-      "Did This Cost You Money?": "¿Esto le costó dinero?",
+      "Choose_time": "elegir hora",
+      "Suspect_Name": "Nombre del sospechoso",
+      "Dont_Know": "no sé",
+      "Enter_name": "Ingrese su nombre",
+      "Did_This_Cost_You_Money?": "¿Esto le costó dinero?",
       "No": "No",
       "Amount": "Monto",
-      "Tell us what happen": "Cuéntanos qué pasa",
-      "Thanks for Reporting us": "Gracias por reportarnos",
-      "About your Incident": "Acerca de su incidente",
+      "Tell_us_what_happen": "Cuéntanos qué pasa",
+      "Thanks_for_Reporting_us": "Gracias por reportarnos",
+      "About_your_Incident": "Acerca de su incidente",
   
       "All Reports": "===================== All Reports Translation only for comments ====================== ",
   
@@ -98,9 +99,9 @@
       "Initials": "Iniciales",
       "Category": "Categoría",
       "Value": "Valor",
-      "What happened": "Qué pasó",
+      "What_happened": "Qué pasó",
       "date": "fecha",
-      "Show More": "Mostrar más",
+      "Show_More": "Mostrar más",
       "Flag": "Bandera",
   
       "News  screen": "================News screen Translation only for comments=================",
@@ -108,7 +109,7 @@
       "Old": "Viejo",
       "New": "Nuevo",
       "Search": "Búsqueda",
-      "News Details": "Detalles de noticias",
+      "News_Details": "Detalles de noticias",
       "Share": "Cuota",
   
   
@@ -118,7 +119,13 @@
   
       "About us screen": "================about us screen Translation only for comments=================",
   
-      "AboutUsDescription":"Una iniciativa individual y autofinanciada para erradicar la corrupción"
+      "AboutUsDescription":"Una iniciativa individual y autofinanciada para erradicar la corrupción",
+
+
+      "CalendarScreen": "================Calendar Screen============",
+      "always":  "Siempre",
+      "until": "Hasta",
+      "reset": "Reiniciar"
     }
   }
   

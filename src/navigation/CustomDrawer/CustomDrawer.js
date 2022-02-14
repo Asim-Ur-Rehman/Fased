@@ -14,26 +14,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Images } from '../../constants/images'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { LOGOUT } from '../../stores/actions/actionType'
+import { useTranslation } from 'react-i18next'
 
 export const CustomDrawer = ({ navigation }) => {
+  const { t } = useTranslation()
   const [active, setActive] = useState('')
   const isGuest = useSelector(state => state.userReducer.isGuest)
   const dispatch = useDispatch()
   const Data = [
     {
-      title: 'Home',
+      title: t('Home'),
       navigateTo: 'Home'
     },
     {
-      title: 'About Us',
+      title: t('About_Us'),
       navigateTo: 'AboutUs'
     },
     {
-      title: 'Settings',
+      title: t('Settings'),
       navigateTo: 'Settings'
     },
     {
-      title: isGuest ? 'Sign Up' : 'Logout',
+      title: isGuest ? t('Sign_Up') : t('LogOut'),
       navigateTo: isGuest ? 'Sign Up' : 'Sign In'
     }
     // {

@@ -39,6 +39,7 @@ import { useIsFocused } from '@react-navigation/native'
 import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
 import messaging from '@react-native-firebase/messaging';
+import { useTranslation } from 'react-i18next'
 
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
@@ -47,7 +48,7 @@ const { width, height } = Dimensions.get('screen')
 
 export const Home = props => {
   const recaptcha = useRef()
-  
+  const { t } = useTranslation()
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -221,7 +222,7 @@ export const Home = props => {
                     fontFamily: 'Rubik-Medium',
                     color: '#ffffff'
                   }}>
-                  NEWS
+                  {t('News')}
                 </Text>
               </TouchableOpacity>
               {News?.data?.getNews?.data[0] && (
@@ -240,7 +241,7 @@ export const Home = props => {
                     {News?.data?.getNews?.data[0]?.Tagline}
                     <Text style={[styles.read, { marginRight: 10 }]}>
                       {' '}
-                      Read more
+                      {t('Read_more')}
                     </Text>
                   </Text>
                 </TouchableOpacity>
@@ -254,7 +255,7 @@ export const Home = props => {
           <View style={{ width: '30%' }}>
             <Button
               onPress={() => navigation.navigate('Categories')}
-              title="Categories"
+              title={t('Categories')}
               buttonStyle={{ height: 85, borderRadius: 4, width: '100%' }}
             />
           </View>
@@ -320,7 +321,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-        Map Search
+        {t('Map_Search')}
             </Text>
           </TouchableOpacity>
 
@@ -341,7 +342,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-              From : {fromTo?.from ? fromTo?.from : 'From start'}
+              {t('From')} : {fromTo?.from ? fromTo?.from : t('From_start')}
             </Text>
           </TouchableOpacity>
 
@@ -362,7 +363,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-              To : {fromTo?.to ? fromTo?.to : 'Till today'}
+              {t('To')} : {fromTo?.to ? fromTo?.to : t('Till_today')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -559,7 +560,7 @@ export const Home = props => {
 
       <View style={styles.reportBtn}>
         <Button
-          title="Report"
+          title={t('Report')}
           onPress={() => {
 
             isGuest ? guestUserReport() :

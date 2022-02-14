@@ -17,8 +17,11 @@ import { AuthHeader } from '../../components/AuthHeader/AuthHeader'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useTranslation } from 'react-i18next';
 export const Languages = ({ navigation }) => {
   const [select, setSelect] = useState()
+  const { t, i18n } = useTranslation();
+  const selectedLanguageCode = i18n.language;
   // useEffect(() => {
   //     navigation.navigate('AppStackNavigator')
   // }, [])
@@ -38,23 +41,15 @@ export const Languages = ({ navigation }) => {
   //     navigation.navigate('SignIn')
   //   }
   // }
-
+  console.log("selectedLanguageCode", selectedLanguageCode)
   const Buttons = [
-    {
-      title: 'Arabic'
-    },
-    {
-      title: 'English'
-    },
-    {
-      title: 'French'
-    },
-    {
-      title: 'Spanish'
-    }
+    { code: 'ar', label: 'Arabic' },
+    { code: 'en', label: 'English' },
+    { code: 'fr', label: 'French' },
+    { code: 'sp', label: 'Spanish' },
   ]
 
-  const selectLanguage = () => {
+  const selectLanguage = (item) => {
     // console.log('slected', select)
     // if (select) {
     //   getUserData('click')
@@ -62,6 +57,7 @@ export const Languages = ({ navigation }) => {
     //   ToastMessage('Please select any language', null, 'error')
     // }
     // getUserData('click')
+    i18n.changeLanguage(item?.code);
     navigation.navigate('SignIn')
   }
   return (
@@ -102,7 +98,7 @@ export const Languages = ({ navigation }) => {
             <Button
               onPress={() => {
                 // setSelect(item)
-                selectLanguage()
+                selectLanguage(item)
               }}
               // linearColor1={
               //   select?.title == item?.title ? '#FE0000' : '#9CA3AF'
@@ -110,9 +106,9 @@ export const Languages = ({ navigation }) => {
               // linearColor2={
               //   select?.title == item?.title ? '#680000' : '#4A4C50'
               // }
-              linearColor1={i == 1 ? '#FE0000' : '#9CA3AF'}
-              linearColor2={i == 1 ? '#680000' : '#9CA3AF'}
-              title={item.title}
+              linearColor1={item?.code == selectedLanguageCode ? '#FE0000' : '#9CA3AF'}
+              linearColor2={item?.code == selectedLanguageCode ? '#680000' : '#9CA3AF'}
+              title={item.label}
               buttonStyle={{
                 width: '90%',
                 alignSelf: 'center'

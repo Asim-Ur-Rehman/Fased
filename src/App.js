@@ -20,6 +20,7 @@ import messaging from '@react-native-firebase/messaging'
 import { Settings } from 'react-native-fbsdk-next'
 import { NotificationPermission } from './utils/helper'
 import * as NavigationService from './navigation/navigationService'
+import './utils/Languages/IMLocalize';
 // const cache = new InMemoryCache()
 
 const client = new ApolloClient({

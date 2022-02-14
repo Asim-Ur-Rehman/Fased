@@ -16,8 +16,11 @@ import Calendar from 'react-native-calendars'
 import Feather from 'react-native-vector-icons/Feather'
 import LinearGradient from 'react-native-linear-gradient'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 const INITIAL_DATE = '2020-02-02'
+
 export const Calender = ({ navigation }) => {
+  const { t } = useTranslation()
   const [always, setAlways] = useState(true)
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
@@ -57,9 +60,9 @@ export const Calender = ({ navigation }) => {
             paddingHorizontal: 20
           }}>
           <View style={styles.form}>
-            <Text style={styles.text1}>From</Text>
+            <Text style={styles.text1}>{t('From')}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text1}>Always</Text>
+              <Text style={styles.text1}>{t('always')}</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
                   selectionMode={always ? 2 : 1}
@@ -100,9 +103,9 @@ export const Calender = ({ navigation }) => {
             paddingHorizontal: 20
           }}>
           <View style={styles.form}>
-            <Text style={styles.text1}>Until</Text>
+            <Text style={styles.text1}>{t('until')}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text1}>Today</Text>
+              <Text style={styles.text1}>{t('Today')}</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
                   selectionMode={untilToday == 2 ? 2 : 1}
@@ -161,7 +164,7 @@ export const Calender = ({ navigation }) => {
           paddingVertical: 20
         }}>
         <TouchableOpacity onPress={() => onReset()} style={styles.btn1}>
-          <Text style={styles.reset}>Reset</Text>
+          <Text style={styles.reset}>{t('reset')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -178,7 +181,7 @@ export const Calender = ({ navigation }) => {
             colors={['#4A4C50', '#9CA3AF']}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: 0 }}>
-            <Text style={styles.done}>Done</Text>
+            <Text style={styles.done}>{t('Done')}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>

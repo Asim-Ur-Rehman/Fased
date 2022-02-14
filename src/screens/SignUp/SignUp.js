@@ -29,7 +29,10 @@ import { Add_User } from '../../utils/mutation'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Input } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Feather'
+import { useTranslation } from 'react-i18next'
+
 export const SignUp = ({ navigation }) => {
+  const { t } = useTranslation()
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -122,7 +125,7 @@ export const SignUp = ({ navigation }) => {
             />
           </View>
           <View style={styles.textView}>
-            <Text style={styles.signUpText}>Sign Up</Text>
+            <Text style={styles.signUpText}>{t('Sign_Up')}</Text>
             <View
               style={{
                 backgroundColor: '#FE0000',
@@ -135,21 +138,21 @@ export const SignUp = ({ navigation }) => {
 
           <View style={styles.InputContainer}>
             <View style={{ width: '83%', alignSelf: 'center' }}>
-              <Text style={styles.inputLabel}>Full Name</Text>
+              <Text style={styles.inputLabel}>{t('Full_Name')}</Text>
             </View>
 
             <TextInput
               style={styles.input}
               // onChangeText={onChangeNumber}
               // value={'123456789012'}
-              placeholder="Enter your full name"
+              placeholder={t('Enter_your_full_name')}
               placeholderTextColor="#9CA3AF"
               keyboardType="default"
               onChangeText={text => setFullName(text)}
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-              <Text style={styles.inputLabel}>Email address</Text>
+              <Text style={styles.inputLabel}>{t('Email_address')}</Text>
             </View>
 
             <TextInput
@@ -162,7 +165,7 @@ export const SignUp = ({ navigation }) => {
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-              <Text style={styles.inputLabel}>Password</Text>
+              <Text style={styles.inputLabel}>{t('Password')}</Text>
             </View>
             <Input
               containerStyle={styles.input}
@@ -183,7 +186,7 @@ export const SignUp = ({ navigation }) => {
             />
 
             <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-              <Text style={styles.inputLabel}>Confirm Password</Text>
+              <Text style={styles.inputLabel}>{t('Confirm_Password')}</Text>
             </View>
             <Input
               containerStyle={styles.input}
@@ -214,7 +217,7 @@ export const SignUp = ({ navigation }) => {
               <Button
                 onPress={() => signUp()}
                 buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-                title="Sign Up"
+                title={t('Sign_Up')}
               />
             )}
           </View>

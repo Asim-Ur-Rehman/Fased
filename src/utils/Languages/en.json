@@ -2,122 +2,122 @@
   "translation": {
     "Sign In ": "================Sign In Translation    only for comments==============",
 
-    "Continue As Guest User": "Continue As Guest User",
-    "Sign In": "Sign In",
-    "Email address": "Email address",
-    "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+    "Continue_As_Guest_User": "Continue As Guest User",
+    "Sign_In": "Sign In",
+    "Email_address": "Email address",
+    "eg_namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
     "Password": "Password",
-    "Remember me": "Remember me",
-    "Forgot Password": "Forgot Password",
-    "Or sign in with social account": "Or sign in with social account",
-    "Don’t have an account?": "Don’t have an account?",
-    "Sign Up Here": "Sign Up Here",
+    "Remember_me": "Remember me",
+    "Forgot_Password": "Forgot Password",
+    "Or_sign_in_with_social_account": "Or sign in with social account",
+    "Dont_have_an_account?": "Don’t have an account?",
+    "Sign_Up_Here": "Sign Up Here",
+
 
     "SignUP": "================Sign Up Translation only for comments==============",
+    "Sign_Up": "Sign Up",
+    "Full_Name": "Full Name",
+    "Enter_your_full_name": "Enter your full name",
 
-    "Sign Up": "Sign Up",
-    "Full Name": "Full Name",
-    "Enter your full name": "Enter your full name",
   
-
-    "ForGot Password": "================ForGot Password Translation only for comments==============",
-
-    "A message will be sent to your email address with further instructions": "A message will be sent to your email address with further instructions",
-    "Recover Password": "Recover Password",
+    "ForGot password": "================ForGot Password Translation only for comments==============",
+    "message_sent_to_email": "A message will be sent to your email address with further instructions",
+    "Recover_Password": "Recover Password",
 
     "OTP": "================OTP Translation only for comments==============",
-
-    "Verify OTP": "Verify OTP",
-    "OTP will expired in": "OTP will expired in",
-    "Resend OTP": "Resend OTP",
+    "Verify_OTP": "Verify OTP",
+    "OTP_will_expired_in": "OTP will expired in",
+    "Resend_OTP": "Resend OTP",
 
     "Change PPassword": "================Change  Password Translation only for comments==============",
-
-    "Change Password": "Change Password",
-    "New Password": "New Password",
-    "Confirm Password": "Confirm Password",
+    "Change_Password": "Change Password",
+    "New_Password": "New Password",
+    "Confirm_Password": "Confirm Password",
+    "current_password": "Current Password",
     "Submit": "Submit",
 
     "Drawer Data": "================Drawer Data Translation only for comments==============",
-
     "Home": "Home",
-    "About Us": "About Us",
+    "About_Us": "About Us",
     "Settings": "Settings",
     "LogOut": "LogOut",
-    "Change Langauge":"Change Langauge",
+    "Change_Langauge":"Change Langauge",
+
 
     "Home Screen": "================Home Screen Translation only for comments=================",
-
     "News": "News",
-    "Read more": " Read more",
+    "Read_more": " Read more",
     "Categories": "Categories",
-    "Map Search":"Map Search",
+    "Map_Search":"Map Search",
     "From": "From",
-    "From start": "From start",
+    "From_start": "From start",
     "To": "To",
-    "Till today": "Till today",
+    "Till_today": "Till today",
     "Report": "Report",
-    "You have to Sign Up for this action": "You have to Sign Up for this action",
+    "You_have_to_signup": "You have to Sign Up for this action",
+
 
     "Filter Categories": "================Filter Categories Translation only for comments=================",
-
     "Done": "Done",
-    "Selected Categories": "Selected Categories",
-    "Select Categories": "Select Categories",
+    "Selected_Categories": "Selected Categories",
+    "Select_Categories": "Select Categories",
+
 
     "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
-
-    "Report Incident": "Report Incident",
-    "Where did it happen?": "Where did it happen?",
-    "Ground Floor": "Ground Floor",
+    "Report_Incident": "Report Incident",
+    "Where_did_it_happen?": "Where did it happen?",
+    "Ground_Floor": "Ground Floor",
     "Floor": "Floor",
     "11th": "11th",
     "Next": "Next",
-    "Choose Category": "Choose Category",
-    "Select category": "Select category",
-    "Choose Sub Category": "Choose Sub Category",
+    "Choose_Category": "Choose Category",
+    "Select_category": "Select category",
+    "Choose_Sub_Category": "Choose Sub-Category",
     "Date": "Date",
     "Today": "Today",
-    "Choose date": "Choose date",
+    "Choose_date": "Choose date",
     "Time": "Time",
     "Now": "Now",
-    "Choose time": "Choose time",
-    "Suspect Name": "Suspect Name",
-    "Don’t Know": "Don’t Know",
-    "Enter name": "Enter name",
-    "Did This Cost You Money?": "Did This Cost You Money?",
-    "No": "No",
+    "Choose_time": "Choose time",
+    "Suspect_Name": "Suspect's Name",
+    "Dont_Know": "Don’t Know",
+    "Enter_name": "Enter name",
+    "Did_This_Cost_You_Money?": "Did This Cost You Money?",
+    "No": "No", 
     "Amount": "Amount",
-    "Tell us what happen": "Tell us what happen",
-    "Thanks for Reporting us": "Thanks for Reporting us",
-    "About your Incident": "About your Incident",
+    "Tell_us_what_happen": "Tell us what happen",
+    "Thanks_for_Reporting_us": "Thanks for Reporting us",
+    "About_your_Incident": "About your Incident",
+
+
 
     "All Reports": "===================== All Reports Translation only for comments ====================== ",
-
     "Reports": "Reports",
     "Initials": "Initials",
     "Category": "Category",
     "Value": "Value",
-    "What happened": "What happened",
+    "What_happened": "What happened",
     "date": "date",
-    "Show More": "Show More",
+    "Show_More": "Show More",
     "Flag": "Flag",
 
-    "News  screen": "================News screen Translation only for comments=================",
 
+    "News  screen": "================News screen Translation only for comments=================",
     "Old": "Old",
     "New": "New",
     "Search": "Search",
-    "News Details": "News Details",
+    "News_Details": "News Details",
     "Share": "Share",
 
 
 
-
-
-
     "About us screen": "================about us screen Translation only for comments=================",
+    "AboutUsDescription":"An individual and self-financed initiative aiming to eradicate corruption",
 
-    "AboutUsDescription":"An individual and self-financed initiative aiming to eradicate corruption"
+    "CalendarScreen": "================Calendar Screen============",
+    "always": "Always",
+    "until": "Until",
+    "reset": "Reset"
+
   }
 }

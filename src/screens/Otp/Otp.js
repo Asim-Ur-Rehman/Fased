@@ -23,8 +23,11 @@ import OTPInputView from '@twotalltotems/react-native-otp-input'
 import CountDown from 'react-native-countdown-component'
 import { Verify_Otp, Forgot_Password } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
+
 export const Otp = ({ navigation, route }) => {
   const emailFromParam = route?.params?.emailFromParam
+  const { t } = useTranslation()
   const [buttonClick, setButtonClicked] = useState(false)
   const [timer, setTimer] = useState(120)
   const dispatch = useDispatch()
@@ -78,7 +81,7 @@ export const Otp = ({ navigation, route }) => {
                 // textAlign: 'center'
                 color: '#A8AEB9'
               }}>
-              OTP will expired in
+              {t('OTP_will_expired_in')}
             </Text>
             <CountDown
               until={timer}
@@ -145,7 +148,7 @@ export const Otp = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.ForgetPasswordText}>Verify OTP</Text>
+          <Text style={styles.ForgetPasswordText}>{t('Verify_OTP')}</Text>
           <View
             style={{
               backgroundColor: '#FE0000',
@@ -196,7 +199,7 @@ export const Otp = ({ navigation, route }) => {
               alignSelf: 'center',
               marginTop: 10
             }}
-            title="Resend OTP"
+            title={t('Resend_OTP')}
           />
         </View>
       </ScrollView>

@@ -18,7 +18,10 @@ import { sortArray } from '../../utils/helper'
 import { Get_Categories } from '../../utils/queries'
 const { width, height } = Dimensions.get('screen')
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollViewHorizontal'
+import { useTranslation } from 'react-i18next'
+
 export const Reports = ({ navigation, route }) => {
+  const { t } = useTranslation()
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
   )
@@ -288,7 +291,7 @@ export const Reports = ({ navigation, route }) => {
                     color: '#FFFFFF',
                     fontFamily: 'Rubik-Medium'
                   }}>
-                  Reports
+                  {t('Reports')}
                 </Text>
               </View>
             </View>

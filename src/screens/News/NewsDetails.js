@@ -27,8 +27,10 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import WebView from 'react-native-webview'
+import { useTranslation } from 'react-i18next'
 
 export const NewsDetails = ({ navigation, route }) => {
+  const {t} = useTranslation()
   useEffect(() => {
     getUserData().then(res => {
       setUserData(res)
@@ -174,10 +176,10 @@ export const NewsDetails = ({ navigation, route }) => {
             />
           </TouchableOpacity>
           <View>
-            <Text style={styles.headerLabel}>News Details</Text>
+            <Text style={styles.headerLabel}>{t('News_Details')}</Text>
           </View>
           <TouchableOpacity onPress={() => onShare()} activeOpacity={0.7}>
-            <Text style={styles.headerLabel}>Share</Text>
+            <Text style={styles.headerLabel}>{t('Share')}</Text>
           </TouchableOpacity>
         </View>
       </LinearGradient>
@@ -288,7 +290,7 @@ export const NewsDetails = ({ navigation, route }) => {
               alignSelf: 'center',
               width: '80%'
             }}
-            title="Done"
+            title={t('Done')}
           />
         </View>
       </View>

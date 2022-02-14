@@ -32,8 +32,10 @@ import { ReportIncidentLocationFloorData } from '../../stores/actions/user.actio
 import { renderSearchLocation } from './locationModal'
 import Geolocation from '@react-native-community/geolocation'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useTranslation } from 'react-i18next'
 
 export const ReportIncident = ({ navigation }) => {
+  const { t } = useTranslation()
   const [location, setLocation] = useState({
     latitude: 51.6,
     longitude: 18.0,
@@ -48,7 +50,7 @@ export const ReportIncident = ({ navigation }) => {
 
   const dispatch = useDispatch()
   const onSelectSwitch = index => {
-    if (index == 2) {
+    if (index == 2 || !enabled) {
       setEnabled(true)
     } else {
       setEnabled(false)
@@ -158,7 +160,7 @@ export const ReportIncident = ({ navigation }) => {
               navigation.goBack()
             }}
           />
-          <Text style={styles.reportTextStyle}>Report Incident</Text>
+          <Text style={styles.reportTextStyle}>{t('Report_Incident')}</Text>
         </View>
         {/* <Text style={styles.dateTextStyle}>01 - 03</Text> */}
       </View>
@@ -190,7 +192,7 @@ export const ReportIncident = ({ navigation }) => {
               </View>
               <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
                 <TextInput
-                  placeholder="Where did it happen?"
+                  placeholder={t('Where_did_it_happen')}
                   placeholderTextColor={theme.textColor.placeholderColor}
                   onPressIn={() => setVisible(true)}
                   
@@ -270,24 +272,24 @@ export const ReportIncident = ({ navigation }) => {
           <View style={styles.footerViewStyle}>
             <View style={styles.footerRowViewStyle}>
               <View style={styles.textAndToggleViewStyle}>
-                <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
+                <Text style={styles.footerRowTextStyle}>{t('Ground_Floor')}</Text>
                 <ToggleButton
                   selectionMode={enabled ? 2 : 1}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
               <View style={styles.textAndToggleViewStyle2}>
-                <Text style={styles.footerRowTextStyle}>Floor</Text>
+                <Text style={styles.footerRowTextStyle}>{t('Floor')}</Text>
                 {enabled ? (
                   <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => setEnabled(false)}>
-                    <Text>Ground floor</Text>
+                    <Text>{t('Ground_Floor')}</Text>
                   </TouchableOpacity>
                 ) : (
                   <TextInput
                     editable={enabled ? false : true}
-                    placeholder="11th"
+                    placeholder={t('11th')}
                     placeholderTextColor={theme.textColor.placeholderColor}
                     keyboardType={
                       Platform.OS == 'ios'
@@ -319,7 +321,7 @@ export const ReportIncident = ({ navigation }) => {
                   next()
                 }}
                 buttonStyle={{ width: '85%', alignSelf: 'center' }}
-                title="Next"
+                title={t('Next')}
               />
             </View>
           </View>

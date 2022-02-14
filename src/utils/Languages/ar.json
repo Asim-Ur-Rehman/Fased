@@ -2,94 +2,95 @@
     "translation": {
       "Sign In ": "================Sign In Translation    only for comments==============",
   
-      "Continue As Guest User": "أكمل كضيف",
-      "Sign In": "تسجيل الدخول ",
-      "Email address": "عنوان البريد الإلكتروني",
-      "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+      "Continue_As_Guest_User": "أكمل كضيف",
+      "Sign_In": "تسجيل الدخول ",
+      "Email_address": "عنوان البريد الإلكتروني",
+      "eg_namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
       "Password": "كلمة السر ",
-      "Remember me": "تذكرنى",
-      "Forgot Password": "هل نسيت كلمة السر",
-      "Or sign in with social account": "Or سجل عن طريق",
-      "Don’t have an account?": "لا تملك حساب",
-      "Sign Up Here": "أنشئ حساب من هنا",
+      "Remember_me": "تذكرنى",
+      "Forgot_Password": "هل نسيت كلمة السر",
+      "Or_sign_in_with_social_account": "Or سجل عن طريق",
+      "Dont_have_an_account?": "لا تملك حساب",
+      "Sign_Up_Here": "أنشئ حساب من هنا",
   
       "SignUP": "================Sign Up Translation only for comments==============",
   
-      "Sign Up": "أنشئ حساب",
-      "Full Name": "الإسم بالكامل",
-      "Enter your full name": "عنوان البريد الائلكتروني",
+      "Sign_Up": "أنشئ حساب",
+      "Full_Name": "الإسم بالكامل",
+      "Enter_your_full_name": "عنوان البريد الائلكتروني",
   
       "ForGot Password": "================ForGot Password Translation only for comments==============",
   
-      "A message will be sent to your email address with further instructions": "سيتم إرسال رسالة إلى عنوان بريدك الإلكتروني مع مزيد من التعليمات",
-      "Recover Password": "إستعادة كلمة المرور",
+      "message_sent_to_email": "سيتم إرسال رسالة إلى عنوان بريدك الإلكتروني مع مزيد من التعليمات",
+      "Recover_Password": "إستعادة كلمة المرور",
   
       "OTP": "================OTP Translation only for comments==============",
   
-      "Verify OTP": "تحقق من OTP",
-      "OTP will expired in": "ستنتهي صلاحية OTP في",
-      "Resend OTP": "إعادة إرسال OTP",
+      "Verify_OTP": "تحقق من OTP",
+      "OTP_will_expired_in": "ستنتهي صلاحية OTP في",
+      "Resend_OTP": "إعادة إرسال OTP",
   
       "Change PPassword": "================Change  Password Translation only for comments==============",
   
-      "Change Password": "تغيير اللغة",
-      "New Password": "كلمة السر الجديدة",
-      "Confirm Password": "تأكيد كلمة المرور",
+      "Change_Password": "تغيير اللغة",
+      "New_Password": "كلمة السر الجديدة",
+      "Confirm_Password": "تأكيد كلمة المرور",
+      "current_password": "كلمة المرور الحالية",
       "Submit": "إرسال",
   
       "Drawer Data": "================Drawer Data Translation only for comments==============",
   
       "Home": "الرئيسسة",
-      "About Us": "من نحن",
+      "About_Us": "من نحن",
       "Settings": "الإعدادات",
       "LogOut": "تسجيل الخروج",
-      "Change Langauge":"تغيير اللغة",
+      "Change_Langauge":"تغيير اللغة",
   
       "Home Screen": "================Home Screen Translation only for comments=================",
   
       "News": "أخبار",
-      "Read more": " اقرأ أكثر",
+      "Read_more": " اقرأ أكثر",
       "Categories": "أنواع الفساد",
-      "Map Search":"البحث على الخريطة",
+      "Map_Search":"البحث على الخريطة",
       "From": "من",
-      "From start": "من البداية ",
+      "From_start": "من البداية ",
       "To": "إلى",
-      "Till today": "حتى اليوم",
+      "Till_today": "حتى اليوم",
       "Report": "نقل",
-      "You have to Sign Up for this action": "يجب عليك التسجيل لهذا الإجراء",
+      "You_have_to_signup": "يجب عليك التسجيل لهذا الإجراء",
   
       "Filter Categories": "================Filter Categories Translation only for comments=================",
   
       "Done": "فعله",
-      "Selected Categories": "أختار نوع الفساد ",
-      "Select Categories": "أختار نوع الفساد ",
+      "Selected_Categories": "أختار نوع الفساد ",
+      "Select_Categories": "أختار نوع الفساد ",
   
       "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
   
-      "Report Incident": "بلغ عن فاسد",
-      "Where did it happen?": "مكان الواقعة",
-      "Ground Floor": "مستوى الطابق الأرضي",
+      "Report_Incident": "بلغ عن فاسد",
+      "Where_did_it_happen?": "مكان الواقعة",
+      "Ground_Floor": "مستوى الطابق الأرضي",
       "Floor": "الطابق",
       "11th": "11th",
       "Next": "التالي",
-      "Choose Category": "اختر الفئة",
-      "Select category": "أختار نوع الفساد ",
-      "Choose Sub Category": "هل هناك نوع محدد",
+      "Choose_Category": "اختر الفئة",
+      "Select_category": "أختار نوع الفساد ",
+      "Choose_Sub_Category": "هل هناك نوع محدد",
       "Date": "التاريخ",
       "Today": "اليوم",
-      "Choose date": "اختر موعدا",
+      "Choose_date": "اختر موعدا",
       "Time": "الوقت",
       "Now": "الآن",
-      "Choose time": "اختر الوقت",
-      "Suspect Name": "إسم الفاسد",
-      "Don’t Know": "لا تعرف",
-      "Enter name": "أدخل الاسم",
-      "Did This Cost You Money?": "هل يمكن تقييم الأضرار ماديا ",
+      "Choose_time": "اختر الوقت",
+      "Suspect_Name": "إسم الفاسد",
+      "Dont_Know": "لا تعرف",
+      "Enter_name": "أدخل الاسم",
+      "Did_This_Cost_You_Money?": "هل يمكن تقييم الأضرار ماديا ",
       "No": "رقم",
       "Amount": "مقدار",
-      "Tell us what happen": "إحكيلنا تفاصيل الواقعة لكن بدون ذكر أسماء",
-      "Thanks for Reporting us": "شكرا لإبلاغنا",
-      "About your Incident": "حول الحادث الخاص بك",
+      "Tell_us_what_happen": "إحكيلنا تفاصيل الواقعة لكن بدون ذكر أسماء",
+      "Thanks_for_Reporting_us": "شكرا لإبلاغنا",
+      "About_your_Incident": "حول الحادث الخاص بك",
   
       "All Reports": "===================== All Reports Translation only for comments ====================== ",
   
@@ -97,9 +98,9 @@
       "Initials": "الأحرف الأولى",
       "Category": "فئة",
       "Value": "قيمة",
-      "What happened": "ماذا حدث",
+      "What_happened": "ماذا حدث",
       "date": "التاريخ",
-      "Show More": "أظهر المزيد",
+      "Show_More": "أظهر المزيد",
       "Flag": "علم",
   
       "News  screen": "================News screen Translation only for comments=================",
@@ -107,7 +108,7 @@
       "Old": "عمر او قديم",
       "New": "جديد",
       "Search": "بحث",
-      "News Details": "تفاصيل الخبر",
+      "News_Details": "تفاصيل الخبر",
       "Share": "شارك",
 
 
@@ -117,10 +118,12 @@
 
       "About us screen": "================about us screen Translation only for comments=================",
 
-      "AboutUsDescription":"مبادرة ذاتية التمويل تهدف إلى القضاء على الفساد"
+      "AboutUsDescription":"مبادرة ذاتية التمويل تهدف إلى القضاء على الفساد",
 
-
-
+      "CalendarScreen": "================Calendar Screen============",
+      "always":  "دائما",
+      "until": "حتى",
+      "reset": "إعادة ضبط"
 
     }
   }

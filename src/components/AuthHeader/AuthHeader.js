@@ -14,6 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import LinearGradient from 'react-native-linear-gradient'
 import { useDispatch } from 'react-redux'
 import { continueAsGuest } from '../../stores/actions/user.action'
+import { useTranslation } from 'react-i18next';
 
 export const AuthHeader = ({
   guestUser,
@@ -21,6 +22,7 @@ export const AuthHeader = ({
   navigation,
   onPressGuset = () => {}
 }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch()
   return (
     <View
@@ -61,7 +63,7 @@ export const AuthHeader = ({
                 fontFamily: 'Inter-Medium',
                 color: theme.textColor.whiteText
               }}>
-              Continue as Guest User
+              {t('Continue_As_Guest_User')}
             </Text>
           </LinearGradient>
         </TouchableOpacity>

@@ -3,9 +3,10 @@ import { Dimensions, StatusBar, StyleSheet, Text, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { theme } from '../../constants/theme'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-
+import { useTranslation } from 'react-i18next'
 const { width, height } = Dimensions.get('screen')
 export const AboutUs = ({ navigation }) => {
+  const { t } = useTranslation()
   return (
     <View
       style={{
@@ -62,7 +63,7 @@ export const AboutUs = ({ navigation }) => {
       <View style={styles.card}>
         {/* <Text style={styles.text}>About App</Text> */}
         <Text style={styles.text1}>
-        An individual and self-financed initiative aiming to eradicate corruption		
+        {t('AboutUsDescription')}
         </Text>
         <Text style={styles.text1}>
        Contact : fased@gmail.com

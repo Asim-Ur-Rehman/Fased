@@ -27,8 +27,10 @@ import {
 import { useMutation, useLazyQuery } from '@apollo/client'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useTranslation } from 'react-i18next'
 
 export const ReportIncidentC = ({ navigation }) => {
+  const { t } = useTranslation()
   const [loader, setLoader] = useState(false)
   const [textNew, setText] = useState('')
   const [height, setheight] = useState(0)
@@ -195,7 +197,7 @@ export const ReportIncidentC = ({ navigation }) => {
                   navigation.goBack()
                 }}
               />
-              <Text style={styles.headerLabel}>Report Incident</Text>
+              <Text style={styles.headerLabel}>{t('Report_Incident')}</Text>
             </View>
             <View style={{ width: '20%', alignItems: 'flex-end' }}>
               <Text
@@ -218,7 +220,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 }
               ]}
               underlineColorAndroid="transparent"
-              placeholder="Tell us what happen"
+              placeholder={t('Tell_us_what_happen')}
               placeholderTextColor="#8F9BBA"
               numberOfLines={10}
               multiline={true}
@@ -274,7 +276,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 //   navigation.navigate('ReportingDone')
                 // }}
                 buttonStyle={{ width: '90%', alignSelf: 'center' }}
-                title="Done"
+                title={t('Done')}
               />
             )}
           </View>

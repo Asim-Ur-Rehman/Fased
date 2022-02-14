@@ -16,28 +16,33 @@ import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollView'
 import Button from '../../components/Button'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next';
 
 const { width, height } = Dimensions.get('screen')
 export const Settings = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [reason, setreason] = useState(null)
-
+  const { t, i18n } = useTranslation();
   const PROP = [
     {
       id: '1',
-      reason: 'Arabic'
+      reason: 'Arabic',
+      code : 'ar'
     },
     {
       id: '2',
-      reason: 'English'
+      reason: 'English',
+      code : 'en'
     },
     {
       id: '3',
-      reason: 'French'
+      reason: 'French',
+      code : 'fr'
     },
     {
       id: '4',
-      reason: 'Spanish'
+      reason: 'Spanish',
+      code : 'sp'
     }
   ]
 
@@ -92,7 +97,7 @@ export const Settings = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: theme.textColor.whiteText
               }}>
-              Settings
+              {t('Settings')}
             </Text>
           </View>
         </View>
@@ -106,7 +111,7 @@ export const Settings = ({ navigation }) => {
         activeOpacity={0.7}
         style={styles.checkboxContainer}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={styles.label}>Change Password</Text>
+          <Text style={styles.label}>{t('Change_Password')}</Text>
         </View>
         <View>
           <Entypo name="chevron-right" color="#9CA3AF" size={25} />
@@ -118,7 +123,7 @@ export const Settings = ({ navigation }) => {
         activeOpacity={0.7}
         style={styles.checkboxContainer}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={styles.label}>Change Language</Text>
+          <Text style={styles.label}>{t('Change_Langauge')}</Text>
         </View>
         <View>
           <Entypo name="chevron-right" color="#9CA3AF" size={25} />
@@ -174,6 +179,7 @@ export const Settings = ({ navigation }) => {
             <View>
               <Button
                 onPress={() => {
+                  i18n.changeLanguage(reason?.code);
                   setModalVisible(false)
                   // onDone()
                 }}

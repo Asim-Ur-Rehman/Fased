@@ -29,7 +29,10 @@ import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import moment from 'moment'
 import { GET_SUBCATE_BY_CATID } from '../../utils/queries'
 import { useQuery } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 export const ReportIncidentA = ({ navigation, route }) => {
+  const { t } =  useTranslation()
+
   const [disableDate, setDisableDate] = useState(true)
   const [disableTime, setDisableTime] = useState(true)
   const [disableName, setDisableName] = useState(true)
@@ -92,19 +95,19 @@ export const ReportIncidentA = ({ navigation, route }) => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
     switch (key) {
       case 'date':
-        index === 2 ? setDisableDate(true) : setDisableDate(false)
+        (index === 2 || !disableDate) ? setDisableDate(true) : setDisableDate(false)
         setDate(new Date().toDateString())
         break
       case 'time':
-        index === 2 ? setDisableTime(true) : setDisableTime(false)
+        (index === 2 || !disableTime) ? setDisableTime(true) : setDisableTime(false)
         setCurrentTime(new Date().toString().substring(16, 21))
         break
 
       case 'suspectName':
-        index === 2 ? setDisableName(true) : setDisableName(false)
+        (index === 2 || !disableName) ? setDisableName(true) : setDisableName(false)
         break
       case 'amount':
-        index === 2 ? setDisableAmount(true) : setDisableAmount(false)
+        (index === 2 || !disableAmount) ? setDisableAmount(true) : setDisableAmount(false)
         break
     }
   }
@@ -228,7 +231,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   navigation.goBack()
                 }}
               />
-              <Text style={styles.headerLabel}>Report Incident</Text>
+              <Text style={styles.headerLabel}>{t('Report_Incident')}</Text>
             </View>
             <View style={{ width: '20%', alignItems: 'flex-end' }}>
               <Text
@@ -257,7 +260,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ width: '90%', alignSelf: 'center', marginVertical: 20 }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Choose category
+                {t('Choose_Category')}
               </Text>
               <TouchableOpacity
                 onPress={() => {
@@ -277,7 +280,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     color: '#33333370',
                     paddingHorizontal: 20
                   }}>
-                  Select category
+                  {t('Select_category')}
                 </Text>
                 <View>
                   <Icon
@@ -312,7 +315,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     marginVertical: 18
                   }}>
                   <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                    Choose sub-category
+                    {t('Choose_Sub_Category')}
                   </Text>
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -338,7 +341,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           paddingLeft: 15,
                           borderRadius: 5
                         }}
-                        defaultValue="Choose Sub-Category"
+                        defaultValue={t('Choose_Sub_Category')}
                         textStyle={{
                           width: '90%',
                           fontSize: 14,
@@ -374,7 +377,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Date
+                {t('Date')}
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -383,7 +386,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     fontFamily: 'Rubik-SemiBold',
                     marginRight: 12
                   }}>
-                  Today
+                  {t('Today')}
                 </Text>
                 <ToggleButton
                   selectionMode={disableDate ? 2 : 1}
@@ -428,7 +431,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Time
+                {t('Time')}
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -437,7 +440,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     fontFamily: 'Rubik-SemiBold',
                     marginRight: 12
                   }}>
-                  Now
+                  {t('Now')}
                 </Text>
                 <ToggleButton
                   selectionMode={disableTime ? 2 : 1}
@@ -511,7 +514,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Suspect's Name
+                {t('Suspect_Name')}
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -520,7 +523,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     fontFamily: 'Rubik-SemiBold',
                     marginRight: 12
                   }}>
-                  Don’t know
+                  {t('Dont_Know')}
                 </Text>
                 <ToggleButton
                   selectionMode={disableName ? 2 : 1}
@@ -546,7 +549,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 }}
                 // onChangeText={onChangeNumber}
                 // value={'123456789012'}
-                placeholder="Enter name"
+                placeholder={t('Enter_name')}
                 placeholderTextColor="#33333370"
                 keyboardType="default"
                 maxLength={30}
@@ -559,7 +562,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
             <View
               style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
-                Did this cost you money?
+                {t('Did_This_Cost_You_Money')}
               </Text>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text
@@ -568,7 +571,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     fontFamily: 'Rubik-SemiBold',
                     marginRight: 12
                   }}>
-                  No
+                  {t('No')}
                 </Text>
                 <ToggleButton
                   selectionMode={disableAmount ? 2 : 1}
@@ -594,7 +597,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 }}
                 // onChangeText={onChangeNumber}
                 // value={'123456789012'}
-                placeholder="Amount"
+                placeholder={t('Amount')}
                 placeholderTextColor="#33333370"
                 keyboardType="number-pad"
                 maxLength={6}
@@ -626,7 +629,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
           //   navigation.navigate('ReportIncidentC')
           // }}
           buttonStyle={{ width: '90%', alignSelf: 'center' }}
-          title="Next"
+          title={t('Next')}
         />
       </View>
     </SafeAreaView>

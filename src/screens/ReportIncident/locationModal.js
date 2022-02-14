@@ -4,9 +4,11 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { theme } from '../../constants/theme'
 const GOOGLE_PLACES_API_KEY = 'AIzaSyCRqapKfPvsVTyk4XyYtsN3Fz413Iixz_w'
 import Feather from 'react-native-vector-icons/Feather'
+import { useTranslation } from 'react-i18next'
 
 export const renderSearchLocation = (visible, toggleModal) => {
   // console.log(navigator.geolocation)
+  const { t } = useTranslation()
   const ref = useRef()
   useEffect(() => {
     ref.current?.focus()
@@ -50,7 +52,7 @@ export const renderSearchLocation = (visible, toggleModal) => {
           </View>
           <GooglePlacesAutocomplete
             ref={ref}
-            placeholder="Where did it happen?"
+            placeholder={t('Where_did_it_happen?')}
             predefinedPlacesAlwaysVisible={true}
             autoFocus={true}
             onPress={(data, details = null) => {

@@ -25,9 +25,12 @@ import { ChangePasswordAction } from '../../stores/actions/user.action'
 import { Verify_Otp, New_Password, CHANGE_PASSWORD } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useTranslation } from 'react-i18next'
+
 export const SettingChangePassword = ({ navigation, route }) => {
   //   const emailFromParam = route?.params?.emailFromParam
   //   console.log('emailFromParam IN CAHNGE PASSS', emailFromParam)
+  const { t } = useTranslation()
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -115,7 +118,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.ChangePasswordText}>Change Password</Text>
+          <Text style={styles.ChangePasswordText}>{t('Change_Password')}</Text>
           <View
             style={{
               backgroundColor: '#FE0000',
@@ -128,7 +131,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
 
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>Current Password</Text>
+            <Text style={styles.inputLabel}>{t('current_password')}</Text>
           </View>
 
           <TextInput
@@ -145,7 +148,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           />
 
           <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>New Password</Text>
+            <Text style={styles.inputLabel}>{t('New_Password')}</Text>
           </View>
 
           <TextInput
@@ -162,7 +165,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Confirm Password</Text>
+            <Text style={styles.inputLabel}>{t('Confirm_Password')}</Text>
           </View>
 
           <TextInput
@@ -199,7 +202,7 @@ export const SettingChangePassword = ({ navigation, route }) => {
                 alignSelf: 'center',
                 marginTop: 10
               }}
-              title="Submit"
+              title={t('Submit')}
             />
           )}
         </View>
