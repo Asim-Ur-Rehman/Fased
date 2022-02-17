@@ -121,6 +121,7 @@ export const Home = props => {
       }
     })
     reportsData = filterReports?.data?.filterReports?.data
+    console.log("data FILTER_CATEGORIES", filterReports, [...results.map(e => e.id)])
   } else if (fromTo) {
     const data = useQuery(FILTER_BY_DATE, {
       variables: fromTo

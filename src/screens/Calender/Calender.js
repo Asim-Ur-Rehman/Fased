@@ -7,7 +7,8 @@ import {
   StyleSheet,
   FlatList,
   StatusBar,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native'
 import { theme } from '../../constants/theme'
 import ToggleButton from '../../components/ToggleButton/index'
@@ -83,16 +84,18 @@ export const Calender = ({ navigation }) => {
               selectedDayStyle={{ backgroundColor: '#760404' }}
               previousComponent={
                 <Feather
-                  style={{ left: 280 }}
+                  style={{ marginHorizontal: 10 }}
                   name="chevron-left"
                   size={28}
                   color="#333333"
                 />
               }
               nextComponent={
-                <Feather name="chevron-right" size={28} color="#333333" />
+                <Feather 
+                style={{ right: 10 }}
+                name="chevron-right" size={28} color="#333333" />
               }
-              monthYearHeaderWrapperStyle={{ right: 100 }}
+              monthYearHeaderWrapperStyle={{ right: 90 }}
               initialDate={selectedStartDate}
             />
           </View>
@@ -129,7 +132,7 @@ export const Calender = ({ navigation }) => {
               selectedDayStyle={{ backgroundColor: '#760404' }}
               previousComponent={
                 <Feather
-                  style={{ left: 280 }}
+                  style={{ marginHorizontal: 10 }}
                   name="chevron-left"
                   size={28}
                   // color="#760404"
@@ -137,9 +140,11 @@ export const Calender = ({ navigation }) => {
               }
               previousContainer
               nextComponent={
-                <Feather name="chevron-right" size={28} color="#333333" />
+                <Feather
+                style={{ right: 10 }}
+                name="chevron-right" size={28} color="#333333" />
               }
-              monthYearHeaderWrapperStyle={{ right: 100 }}
+              monthYearHeaderWrapperStyle={{ right: 85, alignItems: 'flex-start' }}
               initialDate={selectedEndDate}
             />
           </View>
@@ -149,8 +154,8 @@ export const Calender = ({ navigation }) => {
             style={{
               position: 'absolute',
               width: '100%',
-              height: '45%',
-              top: '59%',
+              height: '40%',
+              top: Platform.OS == "ios" ? '61.2%' : '61.2%',
               backgroundColor: '#C4C4C450',
               alignSelf: 'center'
             }}></View>
