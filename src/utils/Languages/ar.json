@@ -32,7 +32,7 @@
   
       "Change PPassword": "================Change  Password Translation only for comments==============",
   
-      "Change_Password": "تغيير اللغة",
+      "Change_Password": "تغيير كلمة السر",
       "New_Password": "كلمة السر الجديدة",
       "Confirm_Password": "تأكيد كلمة المرور",
       "current_password": "كلمة المرور الحالية",
@@ -61,7 +61,7 @@
   
       "Filter Categories": "================Filter Categories Translation only for comments=================",
   
-      "Done": "فعله",
+      "Done": "تم",
       "Selected_Categories": "أختار نوع الفساد ",
       "Select_Categories": "أختار نوع الفساد ",
   

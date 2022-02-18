@@ -82,7 +82,7 @@ export const ChangePasswordAction = (data, navigation) => {
 }
 
 export const ReportIncidentLocationFloorData = (data, navigation) => {
-  // console.log('REPORT_INCIDENT_LOCATION_FLOOR_DATA', data)
+  console.log('REPORT_INCIDENT_LOCATION_FLOOR_DATA', data)
   return dispatch => {
     dispatch({ type: REPORT_INCIDENT_LOCATION_FLOOR_DATA, payload: data })
     navigation.navigate('ReportIncidentB')

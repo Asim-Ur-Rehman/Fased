@@ -125,3 +125,20 @@ export async function getFcmToken () {
     console.log("error fcmToken", error)
   }
 }
+
+export const arToEnNumber = (value) => {
+    // Declare Number Arrays in different locales
+    var arabicNumbers  = ["١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩", "٠"],
+    persianNumbers = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"], 
+    englishNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+    var str = ""
+    if (!value) {
+        return;
+    }
+    for (var i = 0, numbersLen = englishNumbers.length; i < numbersLen; i++) {
+        value = value?.toString().replace(new RegExp(persianNumbers[i], "g"), englishNumbers[i])
+         .replace(new RegExp(arabicNumbers[i], "g"), englishNumbers[i]);
+    }
+    str = value;
+    return str;
+}

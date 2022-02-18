@@ -33,6 +33,7 @@ import { renderSearchLocation } from './locationModal'
 import Geolocation from '@react-native-community/geolocation'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useTranslation } from 'react-i18next'
+import { arToEnNumber } from '../../utils/helper'
 
 export const ReportIncident = ({ navigation }) => {
   const { t } = useTranslation()
@@ -79,9 +80,26 @@ export const ReportIncident = ({ navigation }) => {
     }
   ]
 
+
+  // useEffect(() => {
+  //   const watchId = Geolocation.watchPosition(
+  //     pos => {
+  //       console.log("POSITION", pos)
+  //       mapRef.current.animateToRegion(
+  //         { ...initialRegion, ...pos?.coords },
+  //         2000
+  //       )
+  //     },
+  //     e => setError(e.message)
+  //   );
+  //   return () => Geolocation.clearWatch(watchId);
+  // }, []);
+
+
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(
       info => {
+        setinitialRegion({ ...initialRegion, ...info.coords })
         mapRef.current.animateToRegion(
           { ...initialRegion, ...info.coords },
           2000
@@ -100,7 +118,7 @@ export const ReportIncident = ({ navigation }) => {
   }
 
   const next = () => {
-    let value = /^\+?(0|[1-9]\d*)$/.test(floor)
+    let value = /^\+?(0|[1-9]\d*)$/.test(arToEnNumber(floor))
     // console.log('value', value)
 
     if (enabled) {
@@ -109,7 +127,7 @@ export const ReportIncident = ({ navigation }) => {
         longitude: initialRegion.longitude,
         floor: '0'
       }
-      // console.log('data', data)
+      console.log('data', data)
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     } else {
       if (floor == '') {
@@ -192,7 +210,7 @@ export const ReportIncident = ({ navigation }) => {
               </View>
               <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
                 <TextInput
-                  placeholder={t('Where_did_it_happen')}
+                  placeholder={t('Where_did_it_happen?')}
                   placeholderTextColor={theme.textColor.placeholderColor}
                   onPressIn={() => setVisible(true)}
                   

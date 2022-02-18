@@ -32,7 +32,7 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { renderSearchLocation } from '../ReportIncident/locationModal'
-import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
+import { arToEnNumber, distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
@@ -74,6 +74,7 @@ export const Home = props => {
   const News = useQuery(Get_News)
   // const isFocuesd = useIsFocused()
   useEffect(() => {
+    //returns: 345
     Geolocation.getCurrentPosition(
       info => {
         mapRef.current.animateToRegion(
@@ -121,12 +122,10 @@ export const Home = props => {
       }
     })
     reportsData = filterReports?.data?.filterReports?.data
-    console.log("data FILTER_CATEGORIES", filterReports, [...results.map(e => e.id)])
   } else if (fromTo) {
     const data = useQuery(FILTER_BY_DATE, {
       variables: fromTo
     })
-    console.log("data FILTER_BY_DATE", data, data?.data?.filterReportsByDate?.data, fromTo)
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
     const query = useQuery(Get_Reports)
@@ -138,7 +137,6 @@ export const Home = props => {
   const mapRef = useRef(null)
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
-
   const isFocused = useIsFocused()
   useEffect(() => {
     setUpdate(!forUpdate)
@@ -148,6 +146,20 @@ export const Home = props => {
     setSelected(route.params?.selected ? route.params?.selected : [])
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
   }, [route.params])
+
+  // useEffect(() => {
+  //   const watchId = Geolocation.watchPosition(
+  //     pos => {
+  //       console.log("POSITION", pos)
+  //       mapRef.current.animateToRegion(
+  //         { ...initialRegion, ...pos?.coords },
+  //         2000
+  //       )
+  //     },
+  //     e => setError(e.message)
+  //   );
+  //   return () => Geolocation.clearWatch(watchId);
+  // }, []);
 
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(

@@ -111,7 +111,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Medium',
                     fontSize: 13
                   }}>
-                  {value?.data?.SuspectName.split(' ')
+                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
                     .map(n => n[0])
                     .join('')
                     .toUpperCase()}
@@ -201,7 +201,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Medium',
                     fontSize: 13
                   }}>
-                  {value?.data?.SuspectName.split(' ')
+                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
                     .map(n => n[0])
                     .join('')
                     .toUpperCase()}

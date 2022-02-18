@@ -193,12 +193,10 @@ export const FlagReport = ({ navigation, route }) => {
 
             <View>
               <Text style={styles.headerLabel}>
-                {/* {data.SuspectName} */}
-
-                {data?.SuspectName.split(' ')
-                  .map(n => n[0])
-                  .join('')
-                  .toUpperCase()}
+                {data?.SuspectName == "Anonymous" ? '-' : data?.SuspectName.split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()}
               </Text>
               <Text
                 style={{

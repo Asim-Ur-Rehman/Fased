@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   View,
   Text,
@@ -50,7 +50,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
     route.params?.subcategory ? route.params?.subcategory : null
   )
 
-  const [SubCat, setSubCat] = useState(null)
+  // const [SubCat, setSubCat] = useState(data?.getSubCategoryByCatId?.data)
   const [suspectName, setSuspectName] = useState('')
   const [amount, setAmount] = useState()
 
@@ -60,10 +60,15 @@ export const ReportIncidentA = ({ navigation, route }) => {
     }
   })
 
-  console.log(
-    'data?.getSubCategoryByCatId?.data?.map((value => value.Title))',
-    data?.getSubCategoryByCatId?.data?.map(value => value.Title)
-  )
+  const [SubCat, setSubCat] = useState(data?.getSubCategoryByCatId?.data?.length > 0 ? 0 : null)
+  const dropdownRef = useRef(null)
+  useEffect(() => {
+    if(SubCat == null) {
+      dropdownRef?.current?.select(data?.getSubCategoryByCatId?.data?.length)
+      setSubCat(data?.getSubCategoryByCatId?.data?.length > 0 ? 0 : null)
+    }
+  }, [data?.getSubCategoryByCatId?.data])
+
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -192,7 +197,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
   const next = () => {
     let Objdata = {
       category: category[0].id,
-      subcategory: SubCat ? data?.getSubCategoryByCatId?.data[SubCat]?.id : '0',
+      subcategory: SubCat != null ? data?.getSubCategoryByCatId?.data[SubCat]?.id : '0',
       date: moment(date).format('YYYY-MM-DD'),
       time: currentTime,
       suspectName: suspectName ? suspectName : 'Anonymous',
@@ -325,6 +330,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
                         height: '50%'
                       }}>
                       <ModalDropdown
+                        ref={dropdownRef}
+                        // defaultIndex={SubCat}
                         renderRightComponent={() => (
                           <Icon
                             name={'down'}
@@ -341,7 +348,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           paddingLeft: 15,
                           borderRadius: 5
                         }}
-                        defaultValue={t('Choose_Sub_Category')}
+                        defaultValue={data?.getSubCategoryByCatId?.data[SubCat]?.Title}
                         textStyle={{
                           width: '90%',
                           fontSize: 14,

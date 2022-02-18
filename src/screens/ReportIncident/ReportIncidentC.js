@@ -28,13 +28,16 @@ import { useMutation, useLazyQuery } from '@apollo/client'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useTranslation } from 'react-i18next'
+import { arToEnNumber } from '../../utils/helper'
 
 export const ReportIncidentC = ({ navigation }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [loader, setLoader] = useState(false)
   const [textNew, setText] = useState('')
   const [height, setheight] = useState(0)
   const isGuest = useSelector(state => state.userReducer.isGuest)
+  const selectedLanguageCode = i18n.language;
+
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -61,20 +64,24 @@ export const ReportIncidentC = ({ navigation }) => {
 
     // console.log('data', data.id)
   }
+
+
+  
   const next = () => {
-    console.log("DATA DATA", {
-      userId: isGuest ? 0 : parseInt(userId),
-      categoryId: reportIncidentAllData?.category,
-      subCategoryId: reportIncidentAllData?.subcategory,
-      latitude: reportIncidentLocationFloorData?.latitude,
-      longitude: reportIncidentLocationFloorData?.longitude,
-      suspectName: reportIncidentAllData?.suspectName,
-      costMoney: reportIncidentAllData?.amount?.toString(),
-      incidentDate: reportIncidentAllData?.date,
-      incidentTime: reportIncidentAllData?.time,
-      description: textNew ? textNew : '',
-      floor: parseInt(reportIncidentLocationFloorData?.floor)
-    })
+    // console.log("DATA DATA", {
+    //   userId: isGuest ? 0 : parseInt(userId),
+    //   categoryId: reportIncidentAllData?.category,
+    //   subCategoryId: reportIncidentAllData?.subcategory,
+    //   latitude: reportIncidentLocationFloorData?.latitude,
+    //   longitude: reportIncidentLocationFloorData?.longitude,
+    //   suspectName: reportIncidentAllData?.suspectName,
+    //   costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
+    //   incidentDate: reportIncidentAllData?.date,
+    //   incidentTime: reportIncidentAllData?.time,
+    //   description: textNew ? textNew : '',
+    //   floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
+    // }, arToEnNumber(reportIncidentLocationFloorData?.floor), reportIncidentLocationFloorData )
+    
     // console.log(
     //   'object',
 
@@ -104,11 +111,11 @@ export const ReportIncidentC = ({ navigation }) => {
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
           suspectName: reportIncidentAllData?.suspectName,
-          costMoney: reportIncidentAllData?.amount?.toString(),
+          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
           incidentDate: reportIncidentAllData?.date,
           incidentTime: reportIncidentAllData?.time,
           description: textNew ? textNew : '',
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
+          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
         }
       })
         .then(data => {
@@ -139,11 +146,11 @@ export const ReportIncidentC = ({ navigation }) => {
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
           suspectName: reportIncidentAllData?.suspectName,
-          costMoney: reportIncidentAllData?.amount?.toString(),
+          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
           incidentDate: reportIncidentAllData?.date,
           incidentTime: reportIncidentAllData?.time,
           description: textNew ? textNew : '',
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
+          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
         }
       })
         .then(data => {
