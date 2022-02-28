@@ -31,8 +31,8 @@ import { GET_SUBCATE_BY_CATID } from '../../utils/queries'
 import { useQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 export const ReportIncidentA = ({ navigation, route }) => {
-  const { t } =  useTranslation()
-
+  const { t, i18n } =  useTranslation()
+  const selectedLanguageCode = i18n.language;
   const [disableDate, setDisableDate] = useState(true)
   const [disableTime, setDisableTime] = useState(true)
   const [disableName, setDisableName] = useState(true)
@@ -176,7 +176,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 color: '#ffff',
                 paddingBottom: 5
               }}>
-              {item[0].Title}
+              {item[0]?.Title && JSON.parse(item[0]?.Title)[selectedLanguageCode]}
             </Text>
             <Text
               numberOfLines={2}
@@ -348,7 +348,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           paddingLeft: 15,
                           borderRadius: 5
                         }}
-                        defaultValue={data?.getSubCategoryByCatId?.data[SubCat]?.Title}
+                        defaultValue={data?.getSubCategoryByCatId?.data[SubCat]?.Title ? JSON.parse(data?.getSubCategoryByCatId?.data[SubCat]?.Title)[selectedLanguageCode] : "general"}
                         textStyle={{
                           width: '90%',
                           fontSize: 14,
@@ -368,7 +368,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           fontWeight: 'bold'
                         }}
                         options={data?.getSubCategoryByCatId?.data?.map(
-                          value => value.Title
+                          value => value?.Title ? JSON.parse(value?.Title)[selectedLanguageCode] : "value"
                         )}
                         onSelect={(index, value) => setSubCat(index)}
                       />

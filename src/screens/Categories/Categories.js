@@ -26,11 +26,12 @@ import { useIsFocused } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 
 export const Categories = ({ navigation }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { data, loading, error, refetch } = useQuery(Get_Categories)
   const [select, setSelect] = useState([])
   const [click, setClick] = useState(true)
 
+  const selectedLanguageCode = i18n.language;
   // const [state, setstate] = useState({
   //     select: []
   // })

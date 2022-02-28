@@ -8,7 +8,7 @@ import {
   FlatList,
   BackHandler,
   SafeAreaView,
-  ScrollView,
+  ActivityIndicator,
   Alert,
   Platform,
   Dimensions
@@ -32,23 +32,29 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { renderSearchLocation } from '../ReportIncident/locationModal'
-import { arToEnNumber, distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
+import {
+  arToEnNumber,
+  distance,
+  getColorRatioArr,
+  getSimplifyArr
+} from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
-import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging'
 import { useTranslation } from 'react-i18next'
 
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
 let reportsData = []
+let loader = false
 const { width, height } = Dimensions.get('screen')
 
 export const Home = props => {
   const recaptcha = useRef()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -62,9 +68,11 @@ export const Home = props => {
     longitudeDelta: 0.01
   })
 
+  const selectedLanguageCode = i18n.language;
+
   messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background! Home.JS', remoteMessage);
-  });
+    console.log('Message handled in the background! Home.JS', remoteMessage)
+  })
 
   const [fromTo, setFromTo] = useState(
     route.params?.fromTo ? route.params?.fromTo : null
@@ -121,15 +129,20 @@ export const Home = props => {
         showIds: [...results.map(e => e.id)]
       }
     })
+    loader = filterReports?.loading
     reportsData = filterReports?.data?.filterReports?.data
   } else if (fromTo) {
     const data = useQuery(FILTER_BY_DATE, {
       variables: fromTo
     })
+
+    loader = data?.loading
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
     const query = useQuery(Get_Reports)
     query.refetch()
+
+    loader = query?.loading
     reportsData = query?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
@@ -216,7 +229,7 @@ export const Home = props => {
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
       <SafeAreaView style={{ flex: 1 }}>
-      {renderSearchLocation(visible, onDone)}
+        {renderSearchLocation(visible, onDone)}
         <View style={styles.header}>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -288,6 +301,7 @@ export const Home = props => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item, index }) => {
                 const isSelect = selected.findIndex(e => e.Title == item.Title)
+                console.log("{item.Title}", typeof item.Title == "string" && JSON.parse(item.Title)[selectedLanguageCode])
                 return (
                   <View
                     style={[
@@ -309,24 +323,39 @@ export const Home = props => {
                         fontFamily: 'Rubik-Regular',
                         fontSize: 11
                       }}>
-                      {item.Title}
+                      {typeof item.Title == "string" && JSON.parse(item.Title)[selectedLanguageCode]}
                     </Text>
                   </View>
                 )
               }}
+              ListEmptyComponent={
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 80.5
+                  }}>
+                  {loading ? (
+                    <ActivityIndicator color={'#8E97A6'} />
+                  ) : (
+                    <Text>{t('Empty_Cat')}</Text>
+                  )}
+                </View>
+              }
             />
           </View>
         </View>
 
         <View style={styles.date}>
-
-        <TouchableOpacity
+          <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() =>setVisible(true)}
-            style={{    flexDirection: 'row',
-            width: '25%',
-            justifyContent: 'space-around'}}>
-
+            onPress={() => setVisible(true)}
+            style={{
+              flexDirection: 'row',
+              width: '25%',
+              justifyContent: 'space-around'
+            }}>
             <Feather name="map-pin" size={17} color="#8E97A6" />
             <Text
               style={{
@@ -334,7 +363,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-        {t('Map_Search')}
+              {t('Map_Search')}
             </Text>
           </TouchableOpacity>
 
@@ -343,12 +372,19 @@ export const Home = props => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => navigation.navigate('Calender')}
-            style={{   flexDirection: 'row',
-            width: '30%',
-            justifyContent: 'space-around'}}>
-            <Icon name="date-range" size={17} color="#8E97A6"  style={{
-              paddingRight:20
-            }}/>
+            style={{
+              flexDirection: 'row',
+              width: '30%',
+              justifyContent: 'space-around'
+            }}>
+            <Icon
+              name="date-range"
+              size={17}
+              color="#8E97A6"
+              style={{
+                paddingRight: 20
+              }}
+            />
             <Text
               style={{
                 color: '#8E97A6',
@@ -401,7 +437,7 @@ export const Home = props => {
           showScale={true}
           showsIndoors={true}
           showsUserLocation={true}
-          compassOffset={{ x: -100, y: 10/ 3 }}
+          compassOffset={{ x: -100, y: 10 / 3 }}
           initialRegion={initialRegion}
           style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
           provider={PROVIDER_GOOGLE}
@@ -462,8 +498,8 @@ export const Home = props => {
                   <TouchableOpacity
                     style={{
                       position: 'absolute',
-                      left: Platform.OS == "ios" ? '20%' : "45%",
-                      top:  Platform.OS == "ios" ? '20%' : "45%",
+                      left: Platform.OS == 'ios' ? '20%' : '45%',
+                      top: Platform.OS == 'ios' ? '20%' : '45%',
                       backgroundColor: 'white',
                       width: 40,
                       height: 40,
@@ -538,8 +574,8 @@ export const Home = props => {
                 <TouchableOpacity
                   style={{
                     position: 'absolute',
-                    left: Platform.OS == "ios" ? '20%' : "45%",
-                    top:  Platform.OS == "ios" ? '20%' : "45%",
+                    left: Platform.OS == 'ios' ? '20%' : '45%',
+                    top: Platform.OS == 'ios' ? '20%' : '45%',
                     backgroundColor: 'white',
                     width: 40,
                     height: 40,
@@ -553,6 +589,19 @@ export const Home = props => {
             )
           })}
         </MapView>
+
+        {loader && (
+          <View
+            style={{
+              height: 50,
+              width: 50,
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              position: 'absolute', top: height/2, left: width/2.2, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'
+            }}>
+            <ActivityIndicator color={'#8E97A6'} />
+          </View>
+        )}
       </SafeAreaView>
       <View style={styles.mapActionsContainer}>
         <View style={styles.verticalBtnContainer}>
@@ -575,9 +624,7 @@ export const Home = props => {
         <Button
           title={t('Report')}
           onPress={() => {
-
-            isGuest ? guestUserReport() :
-            navigation.navigate('ReportIncident')
+            isGuest ? guestUserReport() : navigation.navigate('ReportIncident')
           }}
         />
       </View>
@@ -591,14 +638,14 @@ export const Home = props => {
       </View>
 
       <Recaptcha
-            ref={recaptcha}
-            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
-            baseUrl="https://fased-admin.herokuapp.com"
-            onVerify={onVerify}
-            onExpire={onExpire}
-            onError={onError}
-            size="normal"
-          />
+        ref={recaptcha}
+        siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
+        baseUrl="https://fased-admin.herokuapp.com"
+        onVerify={onVerify}
+        onExpire={onExpire}
+        onError={onError}
+        size="normal"
+      />
     </View>
   )
 }

@@ -117,9 +117,10 @@ export const ReportIncident = ({ navigation }) => {
     // set
   }
 
+    console.log('initialRegion', initialRegion)
+
   const next = () => {
     let value = /^\+?(0|[1-9]\d*)$/.test(arToEnNumber(floor))
-    // console.log('value', value)
 
     if (enabled) {
       let data = {

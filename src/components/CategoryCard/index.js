@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   View,
   Text,
@@ -21,8 +22,9 @@ export default function CategoryComp({
   disabled = []
 }) {
   const [click, setClick] = useState(true)
+  const { i18n } = useTranslation()
   // const [selected, setSelected] = useState([])
-
+  const selectedLanguageCode = i18n.language;
   useEffect(() => {
     onChange(selected)
   }, [selected.length])
@@ -106,7 +108,7 @@ export default function CategoryComp({
                       marginBottom: 3,
                       color: isSelected ? '#fff' : item.BackgroundColor
                     }}>
-                    {item.Title}
+                    {typeof item.Title == "string" && JSON.parse(item.Title)[selectedLanguageCode]}
                   </Text>
                   <Text
                     numberOfLines={2}
