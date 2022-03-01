@@ -45,6 +45,7 @@ import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
 import messaging from '@react-native-firebase/messaging'
 import { useTranslation } from 'react-i18next'
+import CustomPie from '../../components/Pie'
 
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
@@ -68,7 +69,7 @@ export const Home = props => {
     longitudeDelta: 0.01
   })
 
-  const selectedLanguageCode = i18n.language;
+  const selectedLanguageCode = i18n.language
 
   messaging().setBackgroundMessageHandler(async remoteMessage => {
     console.log('Message handled in the background! Home.JS', remoteMessage)
@@ -301,7 +302,11 @@ export const Home = props => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item, index }) => {
                 const isSelect = selected.findIndex(e => e.Title == item.Title)
-                console.log("{item.Title}", typeof item.Title == "string" && JSON.parse(item.Title)[selectedLanguageCode])
+                console.log(
+                  '{item.Title}',
+                  typeof item.Title == 'string' &&
+                    JSON.parse(item.Title)[selectedLanguageCode]
+                )
                 return (
                   <View
                     style={[
@@ -323,7 +328,8 @@ export const Home = props => {
                         fontFamily: 'Rubik-Regular',
                         fontSize: 11
                       }}>
-                      {typeof item.Title == "string" && JSON.parse(item.Title)[selectedLanguageCode]}
+                      {typeof item.Title == 'string' &&
+                        JSON.parse(item.Title)[selectedLanguageCode]}
                     </Text>
                   </View>
                 )
@@ -448,6 +454,7 @@ export const Home = props => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports = getSimplifyArr(data)
             const points = properties.point_count
+           
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -465,55 +472,17 @@ export const Home = props => {
                   })
                 }>
                 <View>
-                  {Platform.OS == 'android' ? (
-                    <VictoryPie
-                      colorScale={[
-                        ...new Set([
-                          ...reports.map(e => e.data.Category.BackgroundColor)
-                        ])
-                      ]}
-                      padAngle={({ datum }) => 0}
-                      radius={20}
-                      innerRadius={27}
-                      labels={({ datum }) => ``}
-                      data={getColorRatioArr(reports)?.map(e => {
-                        return { x: 1, y: e }
-                      })}
-                    />
-                  ) : (
-                    <PieChart
-                      widthAndHeight={65}
-                      series={getColorRatioArr(reports)?.map(e => {
-                        return e
-                      })}
-                      sliceColor={[
-                        ...new Set([
-                          ...reports.map(e => e.data.Category.BackgroundColor)
-                        ])
-                      ]}
-                      doughnut
-                      coverRadius={0.78}
-                    />
-                  )}
-                  <TouchableOpacity
-                    style={{
-                      position: 'absolute',
-                      left: Platform.OS == 'ios' ? '20%' : '45%',
-                      top: Platform.OS == 'ios' ? '20%' : '45%',
-                      backgroundColor: 'white',
-                      width: 40,
-                      height: 40,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: 30
-                    }}>
-                    <Text style={{ color: 'blue' }}>{points}</Text>
-                  </TouchableOpacity>
+                  <CustomPie
+                    data={[
+                      ...reports.map(e => e.data.Category.BackgroundColor)
+                  ].sort()}
+                  />
                 </View>
               </Marker>
             )
           }}>
           {reports.map((item, i) => {
+            console.log("[item.Category.BackgroundColor]", [...[item.Category.BackgroundColor]])
             return (
               <Marker
                 key={i}
@@ -533,58 +502,9 @@ export const Home = props => {
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
-                {Platform.OS == 'ios' ? (
-                  <PieChart
-                    widthAndHeight={65}
-                    series={[
-                      ...new Set([
-                        // ...item.map(e => console.log('e========', e))
-                        item.Category.BackgroundColor
-                      ])
-                    ].map(e => {
-                      return e
-                    })}
-                    sliceColor={[...new Set([item.Category.BackgroundColor])]}
-                    doughnut
-                    coverRadius={0.78}
+               <CustomPie
+                    data={[...new Set([item.Category.BackgroundColor])]}
                   />
-                ) : (
-                  <VictoryPie
-                    colorScale={
-                      // item.Category.BackgroundColor
-                      [...new Set([item.Category.BackgroundColor])]
-                    }
-                    padAngle={({ datum }) => 0}
-                    radius={30}
-                    innerRadius={10}
-                    labels={({ datum }) => ``}
-                    data={
-                      // item.Category.BackgroundColor
-                      [
-                        ...new Set([
-                          // ...item.map(e => console.log('e========', e))
-                          item.Category.BackgroundColor
-                        ])
-                      ].map(e => {
-                        return { x: 1, y: 3 }
-                      })
-                    }
-                  />
-                )}
-                <TouchableOpacity
-                  style={{
-                    position: 'absolute',
-                    left: Platform.OS == 'ios' ? '20%' : '45%',
-                    top: Platform.OS == 'ios' ? '20%' : '45%',
-                    backgroundColor: 'white',
-                    width: 40,
-                    height: 40,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 30
-                  }}>
-                  <Text style={{ color: 'blue' }}>1</Text>
-                </TouchableOpacity>
               </Marker>
             )
           })}
@@ -597,7 +517,13 @@ export const Home = props => {
               width: 50,
               backgroundColor: '#fff',
               borderRadius: 10,
-              position: 'absolute', top: height/2, left: width/2.2, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'
+              position: 'absolute',
+              top: height / 2,
+              left: width / 2.2,
+              right: 0,
+              bottom: 0,
+              justifyContent: 'center',
+              alignItems: 'center'
             }}>
             <ActivityIndicator color={'#8E97A6'} />
           </View>

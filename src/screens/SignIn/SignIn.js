@@ -328,7 +328,7 @@ export const SignIn = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // linkedRef.current.open()
+                    linkedRef.current.open()
                   }}
                   activeOpacity={0.7}
                   style={styles.InImg}>

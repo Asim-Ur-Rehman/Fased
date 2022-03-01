@@ -122,7 +122,8 @@ export default function CategoryComp({
                     {/* {item.Description.length > 3
                       ? item.Description.substring(0, 100).concat('...')
                       : item.Description} */}
-                    {item.Description}
+                    {typeof item?.Description == "string" && JSON.parse(item?.Description)[selectedLanguageCode]}
+                    {/* {item.Description} */}
                   </Text>
                 </View>
               </View>

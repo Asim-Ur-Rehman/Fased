@@ -21,7 +21,8 @@ import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScro
 import { useTranslation } from 'react-i18next'
 
 export const Reports = ({ navigation, route }) => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language;
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
   )
@@ -162,7 +163,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.Category.Title}
+                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
                 </Text>
               </View>
          
@@ -252,7 +253,8 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.Category.Title}
+                  {/* {value.data.Category.Title} */}
+                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
                 </Text>
               </View>
       </TouchableOpacity>
