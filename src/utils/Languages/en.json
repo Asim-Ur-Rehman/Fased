@@ -118,7 +118,7 @@
     "CalendarScreen": "================Calendar Screen============",
     "always": "Always",
     "until": "Until",
-    "reset": "Reset"
-
+    "reset": "Reset",
+    "flag": "Flag"
   }
 }

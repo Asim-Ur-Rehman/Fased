@@ -126,7 +126,8 @@
       "CalendarScreen": "================Calendar Screen============",
       "always":  "Siempre",
       "until": "Hasta",
-      "reset": "Reiniciar"
+      "reset": "Reiniciar",
+      "flag": "bandera"
     }
   }
   

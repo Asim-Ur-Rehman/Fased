@@ -31,7 +31,10 @@ import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
 import { useDispatch, useSelector } from 'react-redux'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { LOGOUT } from '../../stores/actions/actionType'
+import { useTranslation } from 'react-i18next'
 export const FlagReport = ({ navigation, route }) => {
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language;
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
   const [others, setothers] = useState(false)
@@ -75,7 +78,7 @@ export const FlagReport = ({ navigation, route }) => {
             }
           : {
               userId: parseFloat(userData?.id),
-              reasonId: reason.id,
+              reasonId: reason?.id,
               reason: reason.reason,
               reportId: data?.id
             }
@@ -91,12 +94,6 @@ export const FlagReport = ({ navigation, route }) => {
           )
         })
     } else {
-      console.log("other lese", reason, others, {
-        userId: parseFloat(userData?.id),
-        reasonId: reason.id,
-        reason: reason.reason,
-        reportId: data?.id
-      }   )
       if (reason) {
         CreateFlagReport({
           variables: others
@@ -108,7 +105,7 @@ export const FlagReport = ({ navigation, route }) => {
               }
             : {
                 userId: parseFloat(userData?.id),
-                reasonId: reason.id,
+                reasonId: reason?.id,
                 reason: reason.reason,
                 reportId: data?.id
               }
@@ -296,18 +293,8 @@ export const FlagReport = ({ navigation, route }) => {
                 fontFamily: 'Rubik-Medium',
                 color: '#fff'
               }}>
-              {data.Category.Title}
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                fontFamily: 'Rubik-Regular',
-                color: '#fff',
-                marginTop: 6,
-                textAlign: 'center',
-                paddingHorizontal: 50
-              }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+              {/* {data.Category.Title} */}
+              {typeof data?.Category?.Title == "string" && JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
             </Text>
           </View>
           <View style={{ height: height / 1.82 }}>
@@ -345,7 +332,7 @@ export const FlagReport = ({ navigation, route }) => {
               alignSelf: 'center',
               width: '80%'
             }}
-            title="Flag"
+            title={t('flag')}
           />
         </View>
 
@@ -386,7 +373,7 @@ export const FlagReport = ({ navigation, route }) => {
                       color: '#DF0707',
                       marginTop: 10
                     }}>
-                    {data.Category.Title}
+                    {typeof data?.Category?.Title == "string" && JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
                   </Text>
                 </View>
 
@@ -480,7 +467,7 @@ export const FlagReport = ({ navigation, route }) => {
                     width: 275,
                     marginBottom: 35
                   }}
-                  title="Done"
+                  title={t("Done")}
                 />
               </View>
             </View>

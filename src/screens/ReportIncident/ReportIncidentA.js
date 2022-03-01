@@ -186,7 +186,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 color: '#fff',
                 lineHeight: 12
               }}>
-              {item[0].Description}
+              {/* {item[0].Description} */}
+              {typeof item[0]?.Description == "string" && JSON.parse(item[0]?.Description)[selectedLanguageCode]}
             </Text>
           </View>
         </View>

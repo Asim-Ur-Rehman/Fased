@@ -304,7 +304,7 @@ export const NewsCard = ({ navigation }) => {
               flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-              height: height / 2
+              height: height/1.4
             }}>
             <Text>There is no categories</Text>
           </View>

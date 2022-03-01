@@ -124,7 +124,8 @@
       "CalendarScreen": "================Calendar Screen============",
       "always":  "دائما",
       "until": "حتى",
-      "reset": "إعادة ضبط"
+      "reset": "إعادة ضبط",
+      "flag": "علم"
 
     }
   }
