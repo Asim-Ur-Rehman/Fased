@@ -355,6 +355,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                     <Picker
                         mode="dropdown"
                         selectedValue={SubCatVal}
+                        style={{color: '#33333370'}}
                         onValueChange={(itemValue, itemIndex) => {
                           console.log("itemIndex", itemIndex)
                           setSubCatVal(itemValue)
@@ -363,6 +364,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                         {data?.getSubCategoryByCatId?.data?.map(value => {
                           return (
                             <Picker.Item
+                              style={{color: '#33333370'}}
                               label={
                                 value?.Title
                                   ? JSON.parse(value?.Title)[
