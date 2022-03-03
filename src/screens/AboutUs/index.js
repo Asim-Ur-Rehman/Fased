@@ -54,7 +54,7 @@ export const AboutUs = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: theme.textColor.whiteText
               }}>
-              About Us
+              {t('About_Us')}
             </Text>
           </View>
         </View>

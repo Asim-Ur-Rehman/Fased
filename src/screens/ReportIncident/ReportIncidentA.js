@@ -30,9 +30,11 @@ import moment from 'moment'
 import { GET_SUBCATE_BY_CATID } from '../../utils/queries'
 import { useQuery } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
+import { Picker } from '@react-native-picker/picker'
+
 export const ReportIncidentA = ({ navigation, route }) => {
-  const { t, i18n } =  useTranslation()
-  const selectedLanguageCode = i18n.language;
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language
   const [disableDate, setDisableDate] = useState(true)
   const [disableTime, setDisableTime] = useState(true)
   const [disableName, setDisableName] = useState(true)
@@ -60,15 +62,24 @@ export const ReportIncidentA = ({ navigation, route }) => {
     }
   })
 
-  const [SubCat, setSubCat] = useState(data?.getSubCategoryByCatId?.data?.length > 0 ? 0 : null)
+  const [SubCat, setSubCat] = useState(
+    data?.getSubCategoryByCatId?.data?.length > 0 ? 0 : null
+  )
+
+  const [SubCatVal, setSubCatVal] = useState('')
   const dropdownRef = useRef(null)
+
+  // useEffect(() => {
+  //   setSubCatVal(data?.getSubCategoryByCatId?.data[SubCat]
+  //     ?.Title)
+  // }, [SubCat])
+
   useEffect(() => {
-    if(SubCat == null) {
+    if (SubCat == null) {
       dropdownRef?.current?.select(data?.getSubCategoryByCatId?.data?.length)
       setSubCat(data?.getSubCategoryByCatId?.data?.length > 0 ? 0 : null)
     }
   }, [data?.getSubCategoryByCatId?.data])
-
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -100,19 +111,27 @@ export const ReportIncidentA = ({ navigation, route }) => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
     switch (key) {
       case 'date':
-        (index === 2 || !disableDate) ? setDisableDate(true) : setDisableDate(false)
+        index === 2 || !disableDate
+          ? setDisableDate(true)
+          : setDisableDate(false)
         setDate(new Date().toDateString())
         break
       case 'time':
-        (index === 2 || !disableTime) ? setDisableTime(true) : setDisableTime(false)
+        index === 2 || !disableTime
+          ? setDisableTime(true)
+          : setDisableTime(false)
         setCurrentTime(new Date().toString().substring(16, 21))
         break
 
       case 'suspectName':
-        (index === 2 || !disableName) ? setDisableName(true) : setDisableName(false)
+        index === 2 || !disableName
+          ? setDisableName(true)
+          : setDisableName(false)
         break
       case 'amount':
-        (index === 2 || !disableAmount) ? setDisableAmount(true) : setDisableAmount(false)
+        index === 2 || !disableAmount
+          ? setDisableAmount(true)
+          : setDisableAmount(false)
         break
     }
   }
@@ -176,7 +195,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 color: '#ffff',
                 paddingBottom: 5
               }}>
-              {item[0]?.Title && JSON.parse(item[0]?.Title)[selectedLanguageCode]}
+              {item[0]?.Title &&
+                JSON.parse(item[0]?.Title)[selectedLanguageCode]}
             </Text>
             <Text
               numberOfLines={2}
@@ -187,7 +207,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 lineHeight: 12
               }}>
               {/* {item[0].Description} */}
-              {typeof item[0]?.Description == "string" && JSON.parse(item[0]?.Description)[selectedLanguageCode]}
+              {typeof item[0]?.Description == 'string' &&
+                JSON.parse(item[0]?.Description)[selectedLanguageCode]}
             </Text>
           </View>
         </View>
@@ -198,7 +219,8 @@ export const ReportIncidentA = ({ navigation, route }) => {
   const next = () => {
     let Objdata = {
       category: category[0].id,
-      subcategory: SubCat != null ? data?.getSubCategoryByCatId?.data[SubCat]?.id : '0',
+      subcategory:
+        SubCat != null ? data?.getSubCategoryByCatId?.data[SubCat]?.id : '0',
       date: moment(date).format('YYYY-MM-DD'),
       time: currentTime,
       suspectName: suspectName ? suspectName : 'Anonymous',
@@ -323,16 +345,43 @@ export const ReportIncidentA = ({ navigation, route }) => {
                   <Text style={{ fontSize: 11, fontFamily: 'Rubik-SemiBold' }}>
                     {t('Choose_Sub_Category')}
                   </Text>
-                  <TouchableOpacity
+
+                  {Platform.OS == "android" && <View style={{
+                     borderWidth: 1,
+                     borderRadius: 7,
+                     borderColor: '#33333330',
+                     top: 10
+                  }}>
+                    <Picker
+                        mode="dropdown"
+                        selectedValue={SubCatVal}
+                        onValueChange={(itemValue, itemIndex) => {
+                          console.log("itemIndex", itemIndex)
+                          setSubCatVal(itemValue)
+                          setSubCat(itemIndex)
+                        }}>
+                        {data?.getSubCategoryByCatId?.data?.map(value => {
+                          return (
+                            <Picker.Item
+                              label={
+                                value?.Title
+                                  ? JSON.parse(value?.Title)[
+                                      selectedLanguageCode
+                                    ]
+                                  : 'value'
+                              }
+                              value={value?.Title}
+                            />
+                          )
+                        })}
+                    
+                      </Picker>
+                  </View>}
+                 {Platform.OS == "ios" &&  <TouchableOpacity
                     activeOpacity={0.8}
                     style={styles.fieldView}>
-                    <View
-                      style={{
-                        height: '50%'
-                      }}>
                       <ModalDropdown
                         ref={dropdownRef}
-                        // defaultIndex={SubCat}
                         renderRightComponent={() => (
                           <Icon
                             name={'down'}
@@ -349,7 +398,16 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           paddingLeft: 15,
                           borderRadius: 5
                         }}
-                        defaultValue={data?.getSubCategoryByCatId?.data[SubCat]?.Title ? JSON.parse(data?.getSubCategoryByCatId?.data[SubCat]?.Title)[selectedLanguageCode] : "general"}
+                        defaultValue={
+                          data?.getSubCategoryByCatId?.data[SubCat]?.Title
+                            ? `${
+                                JSON.parse(
+                                  data?.getSubCategoryByCatId?.data[SubCat]
+                                    ?.Title
+                                )[selectedLanguageCode]
+                              }`
+                            : 'General'
+                        }
                         textStyle={{
                           width: '90%',
                           fontSize: 14,
@@ -368,13 +426,14 @@ export const ReportIncidentA = ({ navigation, route }) => {
                           paddingLeft: 10,
                           fontWeight: 'bold'
                         }}
-                        options={data?.getSubCategoryByCatId?.data?.map(
-                          value => value?.Title ? JSON.parse(value?.Title)[selectedLanguageCode] : "value"
+                        options={data?.getSubCategoryByCatId?.data?.map(value =>
+                          value?.Title
+                            ? JSON.parse(value?.Title)[selectedLanguageCode]
+                            : 'value'
                         )}
                         onSelect={(index, value) => setSubCat(index)}
                       />
-                    </View>
-                  </TouchableOpacity>
+                  </TouchableOpacity>}
                 </View>
               )}
             </>
