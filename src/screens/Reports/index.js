@@ -147,7 +147,7 @@ export const Reports = ({ navigation, route }) => {
                 </Text>
               </View>
                
-              <View style={{ width: width / 5, alignItems: 'center' }}>
+              <View style={{ width: width / 4, alignItems: 'center' }}>
                 <Text
                   style={{
                     fontFamily: 'Rubik-Regular',
