@@ -1,13 +1,17 @@
 import React, { Component, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 export const CustomRadioButton = ({ 
   PROP = [], 
   onChange = e => {}, 
-  defaultValue = null  
+  defaultValue = null  ,
+  isTranslation = false
 }) => {
   const [value, setValue] = useState(defaultValue)
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language;
 
   return (
     <View
@@ -53,7 +57,8 @@ export const CustomRadioButton = ({
                 </LinearGradient>
               </View>
               <Text numberOfLines={2} style={styles.textStyle}>
-                {res.reason}
+                {isTranslation ? typeof res?.reason == "string" && JSON?.parse(res?.reason)[selectedLanguageCode] : res?.reason}
+                {/* {res.reason} */}
               </Text>
             </TouchableOpacity>
           </View>

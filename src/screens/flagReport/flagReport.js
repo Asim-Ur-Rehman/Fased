@@ -32,9 +32,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import AsyncStorageLib from '@react-native-async-storage/async-storage'
 import { LOGOUT } from '../../stores/actions/actionType'
 import { useTranslation } from 'react-i18next'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+
 export const FlagReport = ({ navigation, route }) => {
   const { t, i18n } = useTranslation()
-  const selectedLanguageCode = i18n.language;
+  const selectedLanguageCode = i18n.language
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
   const [others, setothers] = useState(false)
@@ -49,7 +51,7 @@ export const FlagReport = ({ navigation, route }) => {
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
   }, [route.params])
-  
+
   const isGuest = useSelector(state => state.userReducer.isGuest)
 
   const [CreateFlagReport] = useMutation(FLAG_REPORT)
@@ -67,7 +69,11 @@ export const FlagReport = ({ navigation, route }) => {
   const [userData, setUserData] = useState(null)
   const onDone = () => {
     if (others) {
-      console.log("others")
+      console.log('others') 
+      if (text == '') {
+        alert('Please write the reason')
+        return
+      }
       CreateFlagReport({
         variables: others
           ? {
@@ -85,13 +91,12 @@ export const FlagReport = ({ navigation, route }) => {
       })
         .then(res => {
           // navigation.navigate('Home')
+          console.log('CreateFlagReport res', res)
+          res?.data?.CreateFlagReport?.status ? ToastMessage("Marked as inappropriate report", null, 'success') : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
           setModalVisible(false), setothers(false)
         })
         .catch(err => {
-          console.log(
-            'err',
-            err,
-          )
+          console.log('CreateFlagReport err', err)
         })
     } else {
       if (reason) {
@@ -112,13 +117,13 @@ export const FlagReport = ({ navigation, route }) => {
         })
           .then(res => {
             // navigation.navigate('Home')
+            console.log('CreateFlagReport res', res)
+            res?.data?.CreateFlagReport?.status ? ToastMessage("Marked as inappropriate report", null, 'success') : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
+
             setModalVisible(false)
           })
           .catch(err => {
-            console.log(
-              'err',
-              err,
-            )
+            console.log('CreateFlagReport err', err)
           })
       } else {
         alert('Please select any reason')
@@ -138,7 +143,7 @@ export const FlagReport = ({ navigation, route }) => {
       })
       return true
     } catch (exception) {
-      console.log("error", exception)
+      console.log('error', exception)
       return false
     }
   }
@@ -190,10 +195,12 @@ export const FlagReport = ({ navigation, route }) => {
 
             <View>
               <Text style={styles.headerLabel}>
-                {data?.SuspectName == "Anonymous" ? '-' : data?.SuspectName.split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .toUpperCase()}
+                {data?.SuspectName == 'Anonymous'
+                  ? '-'
+                  : data?.SuspectName.split(' ')
+                      .map(n => n[0])
+                      .join('')
+                      .toUpperCase()}
               </Text>
               <Text
                 style={{
@@ -294,7 +301,8 @@ export const FlagReport = ({ navigation, route }) => {
                 color: '#fff'
               }}>
               {/* {data.Category.Title} */}
-              {typeof data?.Category?.Title == "string" && JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
+              {typeof data?.Category?.Title == 'string' &&
+                JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
             </Text>
           </View>
           <View style={{ height: height / 1.82 }}>
@@ -325,7 +333,8 @@ export const FlagReport = ({ navigation, route }) => {
                 ])
               } else {
                 setModalVisible(true)
-              }}}
+              }
+            }}
             buttonStyle={{
               top: -25,
               bottom: 0,
@@ -373,7 +382,8 @@ export const FlagReport = ({ navigation, route }) => {
                       color: '#DF0707',
                       marginTop: 10
                     }}>
-                    {typeof data?.Category?.Title == "string" && JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
+                    {typeof data?.Category?.Title == 'string' &&
+                      JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
                   </Text>
                 </View>
 
@@ -394,6 +404,7 @@ export const FlagReport = ({ navigation, route }) => {
                       <View style={{ width: '100%' }}>
                         <CustomRadioButton
                           PROP={reasons}
+                          isTranslation
                           onChange={e => setreason(e)}
                         />
                       </View>
@@ -467,7 +478,7 @@ export const FlagReport = ({ navigation, route }) => {
                     width: 275,
                     marginBottom: 35
                   }}
-                  title={t("Done")}
+                  title={t('Done')}
                 />
               </View>
             </View>

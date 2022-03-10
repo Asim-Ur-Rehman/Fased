@@ -35,7 +35,7 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useTranslation } from 'react-i18next'
 import { arToEnNumber } from '../../utils/helper'
 
-export const ReportIncident = ({ navigation }) => {
+export const ReportIncident = ({ navigation, route }) => {
   const { t } = useTranslation()
   const [location, setLocation] = useState({
     latitude: 51.6,
@@ -64,11 +64,17 @@ export const ReportIncident = ({ navigation }) => {
     longitudeDelta: 0.01
   })
   useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
-      setLocation({ ...location, ...info.coords })
-      setinitialRegion({ ...initialRegion, ...info.coords })
-    })
+    if(route?.params?.region) {
+      mapRef.current.animateToRegion({ ...initialRegion, ...route?.params?.region }, 2000)
+      setLocation({ ...location, ...route?.params?.region })
+      setinitialRegion({ ...initialRegion, ...route?.params?.region })
+    }else {
+      Geolocation.getCurrentPosition(info => {
+        mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
+        setLocation({ ...location, ...info.coords })
+        setinitialRegion({ ...initialRegion, ...info.coords })
+      })
+    }
   }, [])
   const allMarkers = [
     {

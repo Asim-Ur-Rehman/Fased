@@ -153,7 +153,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.createdAt}
+                  {value.data?.IncidentDate}
                 </Text>
               </View>
               <View style={{ width: width / 5, alignItems: 'center' }}>

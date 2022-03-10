@@ -161,6 +161,10 @@ export const Home = props => {
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
   }, [route.params])
 
+
+  const onRegionChange = region => {
+    setinitialRegion(region)
+  }
   // useEffect(() => {
   //   const watchId = Geolocation.watchPosition(
   //     pos => {
@@ -209,7 +213,9 @@ export const Home = props => {
     recaptcha.current.open()
   }
   const onVerify = token => {
-    navigation.navigate('ReportIncident')
+    navigation.navigate('ReportIncident', {
+      region: initialRegion
+    })
     // console.log('success!', token)
   }
   const onExpire = () => {
@@ -449,6 +455,7 @@ export const Home = props => {
           provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
+          onRegionChangeComplete={onRegionChange}
           animationEnabled={false}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
@@ -550,7 +557,9 @@ export const Home = props => {
         <Button
           title={t('Report')}
           onPress={() => {
-            isGuest ? guestUserReport() : navigation.navigate('ReportIncident')
+            isGuest ? guestUserReport() : navigation.navigate('ReportIncident', {
+              region: initialRegion
+            })
           }}
         />
       </View>
