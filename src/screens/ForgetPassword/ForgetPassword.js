@@ -23,9 +23,10 @@ import { useDispatch } from 'react-redux'
 import { ForgotPasswordAction } from '../../stores/actions/user.action'
 import { Forgot_Password } from '../../utils/mutation'
 import { useMutation, useLazyQuery } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 export const ForgetPassword = ({ navigation }) => {
   const [email, setEmail] = useState('')
-
+  const { t } =  useTranslation()
   const dispatch = useDispatch()
   const [forgotPassword, { data, loading, error }] =
     useMutation(Forgot_Password)
@@ -88,7 +89,7 @@ export const ForgetPassword = ({ navigation }) => {
         />
       </View>
       <View style={styles.textView}>
-        <Text style={styles.ForgetPasswordText}>Forgot Password</Text>
+        <Text style={styles.ForgetPasswordText}>{t('Forgot_Password')}</Text>
         <View
           style={{
             backgroundColor: '#FE0000',
@@ -105,7 +106,7 @@ export const ForgetPassword = ({ navigation }) => {
         showsVerticalScrollIndicator={false}>
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Email address</Text>
+            <Text style={styles.inputLabel}>{t('Email_address')}</Text>
           </View>
 
           <TextInput
@@ -137,8 +138,7 @@ export const ForgetPassword = ({ navigation }) => {
               lineHeight: 16,
               textAlign: 'center'
             }}>
-            A message will be sent to your email address with further
-            instructions
+            {t('message_sent_to_email')}
           </Text>
         </View>
 
@@ -162,7 +162,7 @@ export const ForgetPassword = ({ navigation }) => {
                 alignSelf: 'center',
                 marginTop: 10
               }}
-              title="Recover Password"
+              title={t('Recover_Password')}
             />
           )}
         </View>

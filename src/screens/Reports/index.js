@@ -18,7 +18,11 @@ import { sortArray } from '../../utils/helper'
 import { Get_Categories } from '../../utils/queries'
 const { width, height } = Dimensions.get('screen')
 import { CustomScrollView } from '../../components/ScrollBarComponent/CustomScrollViewHorizontal'
+import { useTranslation } from 'react-i18next'
+
 export const Reports = ({ navigation, route }) => {
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language;
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
   )
@@ -108,7 +112,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Medium',
                     fontSize: 13
                   }}>
-                  {value?.data?.SuspectName.split(' ')
+                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
                     .map(n => n[0])
                     .join('')
                     .toUpperCase()}
@@ -143,23 +147,23 @@ export const Reports = ({ navigation, route }) => {
                 </Text>
               </View>
                
-              <View style={{ width: width / 5, alignItems: 'center' }}>
+              <View style={{ width: width / 4, alignItems: 'center' }}>
                 <Text
                   style={{
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.createdAt}
+                  {value.data?.IncidentDate}
                 </Text>
               </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
+              <View style={{ width: width / 4.2, alignItems: 'center' }}>
                 <Text
                   style={{
                     color: value.data.Category.BackgroundColor,
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.Category.Title}
+                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
                 </Text>
               </View>
          
@@ -198,7 +202,7 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Medium',
                     fontSize: 13
                   }}>
-                  {value?.data?.SuspectName.split(' ')
+                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
                     .map(n => n[0])
                     .join('')
                     .toUpperCase()}
@@ -249,7 +253,8 @@ export const Reports = ({ navigation, route }) => {
                     fontFamily: 'Rubik-Regular',
                     fontSize: 13
                   }}>
-                  {value.data.Category.Title}
+                  {/* {value.data.Category.Title} */}
+                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
                 </Text>
               </View>
       </TouchableOpacity>
@@ -288,7 +293,7 @@ export const Reports = ({ navigation, route }) => {
                     color: '#FFFFFF',
                     fontFamily: 'Rubik-Medium'
                   }}>
-                  Reports
+                  {t('Reports')}
                 </Text>
               </View>
             </View>
@@ -316,7 +321,7 @@ export const Reports = ({ navigation, route }) => {
           </View>
         </LinearGradient>
 
-        <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 45 }}>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={true}
@@ -351,7 +356,7 @@ export const Reports = ({ navigation, route }) => {
                       <View
                         key={index}
                         style={{
-                          width: index == 1 ? width / 2.2 : width / 4,
+                          width: index == 1 ? width / 2.2 : width / 3.7,
                           flexDirection: 'row',
                           justifyContent: 'space-between'
                         }}>

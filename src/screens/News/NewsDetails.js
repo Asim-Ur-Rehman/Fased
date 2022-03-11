@@ -25,16 +25,21 @@ import { ADD_TO_FAV } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { GET_FAV_NEWS_BY_ID } from '../../utils/queries'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import WebView from 'react-native-webview'
+import { useTranslation } from 'react-i18next'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LOGOUT } from '../../stores/actions/actionType'
 
 export const NewsDetails = ({ navigation, route }) => {
+  const {t} = useTranslation()
   useEffect(() => {
     getUserData().then(res => {
       setUserData(res)
     })
   }, [])
 
+  const dispatch = useDispatch()
   const [userData, setUserData] = useState(null)
   const [title, setTitle] = useState(
     route.params?.title ? route.params?.title : 'TITLE'
@@ -95,6 +100,23 @@ export const NewsDetails = ({ navigation, route }) => {
       userId: parseFloat(userData?.id)
     }
   })
+
+
+  const removeUser = async () => {
+    try {
+      await AsyncStorage.clear()
+      dispatch(dispatchh => {
+        dispatchh({ type: LOGOUT })
+      })
+      navigation.navigate('AuthStackNavigator', {
+        screen: 'SignIn'
+      })
+      return true
+    } catch (exception) {
+      console.log("error", exception)
+      return false
+    }
+  }
 
   const addToFav = async () => {
     // console.log(typeof parseFloat(userData?.id), typeof newsData?.id)
@@ -161,7 +183,7 @@ export const NewsDetails = ({ navigation, route }) => {
                     onPress: () => null,
                     style: 'cancel'
                   },
-                  { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+                  { text: 'Ok', onPress: () => removeUser() }
                 ])
               } else {
                 addToFav()
@@ -174,10 +196,10 @@ export const NewsDetails = ({ navigation, route }) => {
             />
           </TouchableOpacity>
           <View>
-            <Text style={styles.headerLabel}>News Details</Text>
+            <Text style={styles.headerLabel}>{t('News_Details')}</Text>
           </View>
           <TouchableOpacity onPress={() => onShare()} activeOpacity={0.7}>
-            <Text style={styles.headerLabel}>Share</Text>
+            <Text style={styles.headerLabel}>{t('Share')}</Text>
           </TouchableOpacity>
         </View>
       </LinearGradient>
@@ -288,7 +310,7 @@ export const NewsDetails = ({ navigation, route }) => {
               alignSelf: 'center',
               width: '80%'
             }}
-            title="Done"
+            title={t('Done')}
           />
         </View>
       </View>

@@ -23,7 +23,10 @@ import ToastMessage from '../../components/ToastMessage/ToastMessage'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import { Get_Categories } from '../../utils/queries'
 import { useIsFocused } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
+
 export const ReportIncidentB = ({ navigation, route }) => {
+  const { t } = useTranslation()
   const { data, loading, error, refetch } = useQuery(Get_Categories)
   const [select, setSelect] = useState(
     route.params?.selected ? route.params?.selected : []
@@ -149,7 +152,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                 fontFamily: 'Rubik-Medium',
                 color: theme.textColor.whiteText
               }}>
-              Categories
+              {t('Categories')}
             </Text>
           </View>
           {/* <SimpleLineIcons name='options-vertical' color='#FFFFFF' size={18} /> */}
@@ -184,7 +187,7 @@ export const ReportIncidentB = ({ navigation, route }) => {
                 fontFamily: 'Rubik-SemiBold',
                 color: theme.textColor.blackText
               }}>
-              Select Categories
+              {t('Select_category')}
             </Text>
           </View>
 

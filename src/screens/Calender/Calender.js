@@ -7,7 +7,8 @@ import {
   StyleSheet,
   FlatList,
   StatusBar,
-  ScrollView
+  ScrollView,
+  Platform
 } from 'react-native'
 import { theme } from '../../constants/theme'
 import ToggleButton from '../../components/ToggleButton/index'
@@ -16,11 +17,15 @@ import Calendar from 'react-native-calendars'
 import Feather from 'react-native-vector-icons/Feather'
 import LinearGradient from 'react-native-linear-gradient'
 import moment from 'moment'
+import { useTranslation } from 'react-i18next'
 const INITIAL_DATE = '2020-02-02'
+
 export const Calender = ({ navigation }) => {
-  const [always ,setAlways]=useState(true)
+  const { t } = useTranslation()
+  const [always, setAlways] = useState(true)
   const onSelectSwitch = index => {
     // alert(index === 1 ? 'Switch Off' : 'Switch On')
+    setAlways(!always)
   }
   const [untilToday, setUntilToday] = useState(false)
   const startDate = selectedStartDate ? selectedStartDate.toString() : ''
@@ -56,12 +61,12 @@ export const Calender = ({ navigation }) => {
             paddingHorizontal: 20
           }}>
           <View style={styles.form}>
-            <Text style={styles.text1}>From</Text>
+            <Text style={styles.text1}>{t('From')}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text1}>Always</Text>
+              <Text style={styles.text1}>{t('always')}</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
-                  selectionMode={always ? 2 :1}
+                  selectionMode={always ? 2 : 1}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
@@ -79,16 +84,18 @@ export const Calender = ({ navigation }) => {
               selectedDayStyle={{ backgroundColor: '#760404' }}
               previousComponent={
                 <Feather
-                  style={{ left: 280 }}
+                  style={{ marginHorizontal: 10 }}
                   name="chevron-left"
                   size={28}
                   color="#333333"
                 />
               }
               nextComponent={
-                <Feather name="chevron-right" size={28} color="#333333" />
+                <Feather 
+                style={{ right: 10 }}
+                name="chevron-right" size={28} color="#333333" />
               }
-              monthYearHeaderWrapperStyle={{ right: 100 }}
+              monthYearHeaderWrapperStyle={{ right: 90 }}
               initialDate={selectedStartDate}
             />
           </View>
@@ -99,14 +106,13 @@ export const Calender = ({ navigation }) => {
             paddingHorizontal: 20
           }}>
           <View style={styles.form}>
-            <Text style={styles.text1}>Until</Text>
+            <Text style={styles.text1}>{t('until')}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={styles.text1}>Today</Text>
+              <Text style={styles.text1}>{t('Today')}</Text>
               <View style={{ marginLeft: 5 }}>
                 <ToggleButton
-                  selectionMode={untilToday == 2 ? 2 :1}
+                  selectionMode={untilToday == 2 ? 2 : 1}
                   onSelectSwitch={e => {
-                 
                     setSelectedEndDate(new Date())
                     setUntilToday(e)
                   }}
@@ -126,7 +132,7 @@ export const Calender = ({ navigation }) => {
               selectedDayStyle={{ backgroundColor: '#760404' }}
               previousComponent={
                 <Feather
-                  style={{ left: 280 }}
+                  style={{ marginHorizontal: 10 }}
                   name="chevron-left"
                   size={28}
                   // color="#760404"
@@ -134,9 +140,11 @@ export const Calender = ({ navigation }) => {
               }
               previousContainer
               nextComponent={
-                <Feather name="chevron-right" size={28} color="#333333" />
+                <Feather
+                style={{ right: 10 }}
+                name="chevron-right" size={28} color="#333333" />
               }
-              monthYearHeaderWrapperStyle={{ right: 100 }}
+              monthYearHeaderWrapperStyle={{ right: 85, alignItems: 'flex-start' }}
               initialDate={selectedEndDate}
             />
           </View>
@@ -146,8 +154,8 @@ export const Calender = ({ navigation }) => {
             style={{
               position: 'absolute',
               width: '100%',
-              height: '45%',
-              top: '59%',
+              height: '40%',
+              top: Platform.OS == "ios" ? '61.2%' : '61.2%',
               backgroundColor: '#C4C4C450',
               alignSelf: 'center'
             }}></View>
@@ -161,7 +169,7 @@ export const Calender = ({ navigation }) => {
           paddingVertical: 20
         }}>
         <TouchableOpacity onPress={() => onReset()} style={styles.btn1}>
-          <Text style={styles.reset}>Reset</Text>
+          <Text style={styles.reset}>{t('reset')}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -178,7 +186,7 @@ export const Calender = ({ navigation }) => {
             colors={['#4A4C50', '#9CA3AF']}
             start={{ x: 0, y: 1 }}
             end={{ x: 1, y: 0 }}>
-            <Text style={styles.done}>Done</Text>
+            <Text style={styles.done}>{t('Done')}</Text>
           </LinearGradient>
         </TouchableOpacity>
       </View>

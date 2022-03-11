@@ -61,32 +61,8 @@ export const CHANGE_PASSWORD = gql`
 `
 
 export const Create_Report_Incident = gql`
-  mutation CreateReport(
-    $userId: Int
-    $categoryId: Int!
-    $subCategory: Int!
-    $latitude: Float!
-    $longitude: Float!
-    $suspectName: String!
-    $costMoney: Int!
-    $description: String!
-    $floor: Int!
-    $incidentDate: Date!
-    $incidentTime: String!
-  ) {
-    CreateReport(
-      userId: $userId
-      CategoryId: $categoryId
-      SubCategory: $subCategory
-      latitude: $latitude
-      longitude: $longitude
-      SuspectName: $suspectName
-      CostMoney: $costMoney
-      Description: $description
-      floor: $floor
-      IncidentDate: $incidentDate
-      IncidentTime: $incidentTime
-    ) {
+  mutation CreateRepor($categoryId: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $costMoney: Int!, $incidentDate: Date!, $incidentTime: String!, $description: String!, $floor: Int!, $subCategoryId: Int, $userId: Int) {
+  CreateReport(CategoryId: $categoryId, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, CostMoney: $costMoney, IncidentDate: $incidentDate, IncidentTime: $incidentTime, Description: $description, floor: $floor, subCategoryId: $subCategoryId, userId: $userId){
       status
       message
     }

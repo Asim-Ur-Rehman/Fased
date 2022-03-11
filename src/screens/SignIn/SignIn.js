@@ -32,12 +32,13 @@ import { SOCIAL_LOGIN } from '../../utils/mutation'
 import { getApi } from '../../api/fakeApiUser'
 import { useDispatch } from 'react-redux'
 import { SignInAction, continueAsGuest } from '../../stores/actions/user.action'
+import { useTranslation } from 'react-i18next';
 
 import Recaptcha from 'react-native-recaptcha-that-works'
 import { getFcmToken } from '../../utils/helper'
 
 export const SignIn = ({ navigation }) => {
-
+  const { t } = useTranslation();
   useEffect(() => {
     getFcmToken()
     .then(token => {
@@ -217,7 +218,7 @@ export const SignIn = ({ navigation }) => {
           />
         </View>
         <View style={styles.textView}>
-          <Text style={styles.signInText}>Sign In</Text>
+          <Text style={styles.signInText}>{t('Sign_In')}</Text>
           <View
             style={{
               backgroundColor: '#FE0000',
@@ -230,14 +231,14 @@ export const SignIn = ({ navigation }) => {
 
         <View style={styles.InputContainer}>
           <View style={{ width: '83%', alignSelf: 'center' }}>
-            <Text style={styles.inputLabel}>Email address</Text>
+            <Text style={styles.inputLabel}>{t('Email_address')}</Text>
           </View>
           <TextInput
             value={email}
             style={styles.input}
             // onChangeText={onChangeNumber}
             // value={'123456789012'}
-            placeholder="Eg namaemail@emailkamu.com"
+            placeholder={t('eg_namaemail@emailkamu.com')}
             placeholderTextColor="#9CA3AF"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -245,7 +246,7 @@ export const SignIn = ({ navigation }) => {
           />
 
           <View style={{ width: '83%', alignSelf: 'center', marginTop: 8 }}>
-            <Text style={styles.inputLabel}>Password</Text>
+            <Text style={styles.inputLabel}>{t('Password')}</Text>
           </View>
 
           <TextInput
@@ -270,7 +271,7 @@ export const SignIn = ({ navigation }) => {
               onClick={() => setChecked(!checked)}
               isChecked={checked}
             />
-            <Text style={styles.label}>Remember me</Text>
+            <Text style={styles.label}>{t('Remember_me')}</Text>
           </View>
           <TouchableOpacity
             onPress={() => {
@@ -278,7 +279,7 @@ export const SignIn = ({ navigation }) => {
             }}
             activeOpacity={0.7}
             style={{}}>
-            <Text style={styles.label}>Forgot Password?</Text>
+            <Text style={styles.label}>{t('Forgot_Password')}?</Text>
           </TouchableOpacity>
         </View>
         <View
@@ -294,7 +295,7 @@ export const SignIn = ({ navigation }) => {
                 signIn()
               }}
               buttonStyle={{ width: '90%', height: 48, alignSelf: 'center' }}
-              title="Sign In"
+              title={t('Sign_In')}
             />
           )}
         </View>
@@ -305,7 +306,7 @@ export const SignIn = ({ navigation }) => {
               fontSize: 13,
               fontFamily: 'Inter-Regular'
             }}>
-            Or sign in with social account
+            {t('Or_sign_in_with_social_account')}
           </Text>
         </View>
 
@@ -327,7 +328,7 @@ export const SignIn = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // linkedRef.current.open()
+                    linkedRef.current.open()
                   }}
                   activeOpacity={0.7}
                   style={styles.InImg}>
@@ -353,7 +354,7 @@ export const SignIn = ({ navigation }) => {
               fontSize: 13,
               fontFamily: 'Inter-Regular'
             }}>
-            Don’t have an account?
+            {t('Dont_have_an_account?')}
           </Text>
           <TouchableOpacity
             onPress={() => {
@@ -367,7 +368,7 @@ export const SignIn = ({ navigation }) => {
                 fontFamily: 'Inter-Medium',
                 marginLeft: 3
               }}>
-              Sign Up Here
+              {t('Sign_Up_Here')}
             </Text>
           </TouchableOpacity>
         </View>

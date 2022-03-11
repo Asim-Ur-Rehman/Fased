@@ -2,95 +2,97 @@
     "translation": {
       "Sign In ": "================Sign In Translation    only for comments==============",
   
-      "Continue As Guest User": "Continuer en tant qu'utilisateur invité",
-      "Sign In": "S'identifier",
-      "Email address": "Adresse e-mail",
-      "Eg namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
+      "Continue_As_Guest_User": "Continuer en tant qu'utilisateur invité",
+      "Sign_In": "S'identifier",
+      "Email_address": "Adresse e-mail",
+      "eg_namaemail@emailkamu.com": "Eg namaemail@emailkamu.com",
       "Password": "Mot de passe",
-      "Remember me": "Souviens-toi de moi",
-      "Forgot Password": "Mot de passe oublié",
-      "Or sign in with social account": "Ou connectez-vous avec un compte social",
-      "Don’t have an account?": "Vous n'avez pas de compte ?",
-      "Sign Up Here": "Inscrivez-vous ici",
+      "Remember_me": "Souviens-toi de moi",
+      "Forgot_Password": "Mot de passe oublié",
+      "Or_sign_in_with_social_account": "Ou connectez-vous avec un compte social",
+      "Dont_have_an_account?": "Vous n'avez pas de compte ?",
+      "Sign_Up_Here": "Inscrivez-vous ici",
   
       "SignUP": "================Sign Up Translation only for comments==============",
   
-      "Sign Up": "S'inscrire",
-      "Full Name": "Nom complet",
-      "Enter your full name": "Entrez votre nom complet",
+      "Sign_Up": "S'inscrire",
+      "Full_Name": "Nom complet",
+      "Enter_your_full_name": "Entrez votre nom complet",
     
   
       "ForGot Password": "================ForGot Password Translation only for comments==============",
   
-      "A message will be sent to your email address with further instructions": "Un message sera envoyé à votre adresse e-mail avec des instructions supplémentaires",
-      "Recover Password": "Récupérer mot de passe",
+      "message_sent_to_email": "Un message sera envoyé à votre adresse e-mail avec des instructions supplémentaires",
+      "Recover_Password": "Récupérer mot de passe",
   
       "OTP": "================OTP Translation only for comments==============",
   
-      "Verify OTP": "Vérifier OTP",
-      "OTP will expired in": "OTP expirera dans",
-      "Resend OTP": "Renvoyer OTP",
+      "Verify_OTP": "Vérifier OTP",
+      "OTP_will_expired_in": "OTP expirera dans",
+      "Resend_OTP": "Renvoyer OTP",
   
       "Change PPassword": "================Change  Password Translation only for comments==============",
   
-      "Change Password": "Changer le mot de passe",
-      "New Password": "nouveau mot de passe",
-      "Confirm Password": "Confirmez le mot de passe",
+      "Change_Password": "Changer le mot de passe",
+      "New_Password": "nouveau mot de passe",
+      "Confirm_Password": "Confirmez le mot de passe",
+      "current_password": "Mot de passe actuel",
       "Submit": "Soumettre",
   
       "Drawer Data": "================Drawer Data Translation only for comments==============",
   
       "Home": "Accueil",
-      "About Us": "À propos de nous",
+      "About_Us": "À propos de nous",
       "Settings": "Réglages",
       "LogOut": "Se déconnecter",
-      "Change Langauge":"Changer de langue",
+      "Change_Langauge":"Changer de langue",
   
       "Home Screen": "================Home Screen Translation only for comments=================",
   
       "News": "Des nouvelles",
-      "Read more": "Lire la suite",
+      "Read_more": "Lire la suite",
       "Categories": "Catégories",
-      "Map Search":"Recherche par carte",
+      "Map_Search":"Recherche par carte",
       "From": "À partir de",
-      "From start": "Dès le début",
+      "From_start": "Dès le début",
       "To": "À",
-      "Till today": "Jusqu'à aujourd'hui",
+      "Till_today": "Jusqu'à aujourd'hui",
       "Report": "Reportage",
-      "You have to Sign Up for this action": "Vous devez vous inscrire pour cette action",
+      "You_have_to_signup": "Vous devez vous inscrire pour cette action",
+      "Empty_Cat": "catégorie vide",
   
       "Filter Categories": "================Filter Categories Translation only for comments=================",
   
       "Done": "Fait",
-      "Selected Categories": "Catégories sélectionnées",
-      "Select Categories": "Sélectionnez les catégories",
+      "Selected_Categories": "Catégories sélectionnées",
+      "Select_Categories": "Sélectionnez les catégories",
   
       "Report Incident All Flow screen": "================Report Incident All Flow screen Translation only for comments=================",
   
-      "Report Incident": "Signaler un incident",
-      "Where did it happen?": "Où cela s'est-il passé?",
-      "Ground Floor": "Rez-de-chaussée",
+      "Report_Incident": "Signaler un incident",
+      "Where_did_it_happen?": "Où cela s'est-il passé?",
+      "Ground_Floor": "Rez-de-chaussée",
       "Floor": "Étage",
       "11th": "11ème",
       "Next": "suivant",
-      "Choose Category": "Choisissez la catégorie",
-      "Select category": "Choisir une catégorie",
-      "Choose Sub Category": "Choisissez la sous-catégorie",
+      "Choose_Category": "Choisissez la catégorie",
+      "Select_category": "Choisir une catégorie",
+      "Choose_Sub_Category": "Choisissez la sous-catégorie",
       "Date": "Date",
       "Today": "Aujourd'hui",
-      "Choose date": "Choisissez la date",
+      "Choose_date": "Choisissez la date",
       "Time": "Temps",
       "Now": "À présent",
-      "Choose time": "Choisissez l'heure",
-      "Suspect Name": "Nom du suspect",
-      "Don’t Know": "Je ne sais pas",
-      "Enter name": "Entrez le nom",
-      "Did This Cost You Money?": "Cela vous a-t-il coûté de l'argent ?",
+      "Choose_time": "Choisissez l'heure",
+      "Suspect_Name": "Nom du suspect",
+      "Dont_Know": "Je ne sais pas",
+      "Enter_name": "Entrez le nom",
+      "Did_This_Cost_You_Money?": "Cela vous a-t-il coûté de l'argent ?",
       "No": "Non",
       "Amount": "Montant",
-      "Tell us what happen": "Dites-nous ce qui s'est passé",
-      "Thanks for Reporting us": "Merci de nous avoir signalé",
-      "About your Incident": "À propos de votre incident",
+      "Tell_us_what_happen": "Dites-nous ce qui s'est passé",
+      "Thanks_for_Reporting_us": "Merci de nous avoir signalé",
+      "About_your_Incident": "À propos de votre incident",
   
       "All Reports": "===================== All Reports Translation only for comments ====================== ",
   
@@ -98,9 +100,9 @@
       "Initials": "Initiales",
       "Category": "Catégorie",
       "Value": "Valeur",
-      "What happened": "Qu'est-ce qui s'est passé",
+      "What_happened": "Qu'est-ce qui s'est passé",
       "date": "date",
-      "Show More": "Montre plus",
+      "Show_More": "Montre plus",
       "Flag": "Drapeau",
   
       "News  screen": "================News screen Translation only for comments=================",
@@ -108,7 +110,7 @@
       "Old": "Vieux",
       "New": "Nouveau",
       "Search": "Chercher",
-      "News Details": "Détails de l'actualité",
+      "News_Details": "Détails de l'actualité",
       "Share": "Partager",
   
   
@@ -118,7 +120,14 @@
   
       "About us screen": "================about us screen Translation only for comments=================",
   
-      "AboutUsDescription":"Une initiative individuelle et autofinancée visant à éradiquer la corruption"
+      "AboutUsDescription":"Une initiative individuelle et autofinancée visant à éradiquer la corruption",
+
+      "CalendarScreen": "================Calendar Screen============",
+      "always":  "Toujours",
+      "until": "Jusqu'à",
+      "reset": "Réinitialiser",
+      "flag": "drapeau",
+      "cancel": "Annuler"
     }
   }
   

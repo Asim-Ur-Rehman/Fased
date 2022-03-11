@@ -27,12 +27,17 @@ import {
 import { useMutation, useLazyQuery } from '@apollo/client'
 import { ReportIncidentAllData } from '../../stores/actions/user.action'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useTranslation } from 'react-i18next'
+import { arToEnNumber } from '../../utils/helper'
 
 export const ReportIncidentC = ({ navigation }) => {
+  const { t, i18n } = useTranslation()
   const [loader, setLoader] = useState(false)
   const [textNew, setText] = useState('')
   const [height, setheight] = useState(0)
   const isGuest = useSelector(state => state.userReducer.isGuest)
+  const selectedLanguageCode = i18n.language;
+
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
   )
@@ -59,7 +64,24 @@ export const ReportIncidentC = ({ navigation }) => {
 
     // console.log('data', data.id)
   }
+
+
+  
   const next = () => {
+    // console.log("DATA DATA", {
+    //   userId: isGuest ? 0 : parseInt(userId),
+    //   categoryId: reportIncidentAllData?.category,
+    //   subCategoryId: reportIncidentAllData?.subcategory,
+    //   latitude: reportIncidentLocationFloorData?.latitude,
+    //   longitude: reportIncidentLocationFloorData?.longitude,
+    //   suspectName: reportIncidentAllData?.suspectName,
+    //   costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
+    //   incidentDate: reportIncidentAllData?.date,
+    //   incidentTime: reportIncidentAllData?.time,
+    //   description: textNew ? textNew : '',
+    //   floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
+    // }, arToEnNumber(reportIncidentLocationFloorData?.floor), reportIncidentLocationFloorData )
+    
     // console.log(
     //   'object',
 
@@ -89,11 +111,11 @@ export const ReportIncidentC = ({ navigation }) => {
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
           suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(reportIncidentAllData?.amount),
+          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
           incidentDate: reportIncidentAllData?.date,
           incidentTime: reportIncidentAllData?.time,
           description: textNew ? textNew : '',
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
+          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
         }
       })
         .then(data => {
@@ -120,15 +142,15 @@ export const ReportIncidentC = ({ navigation }) => {
         variables: {
           userId: isGuest ? 0 : parseInt(userId),
           categoryId: reportIncidentAllData?.category,
-          subCategory: reportIncidentAllData?.subcategory,
+          subCategoryId: reportIncidentAllData?.subcategory,
           latitude: reportIncidentLocationFloorData?.latitude,
           longitude: reportIncidentLocationFloorData?.longitude,
           suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(reportIncidentAllData?.amount),
+          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
           incidentDate: reportIncidentAllData?.date,
           incidentTime: reportIncidentAllData?.time,
           description: textNew ? textNew : '',
-          floor: parseInt(reportIncidentLocationFloorData?.floor)
+          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
         }
       })
         .then(data => {
@@ -182,7 +204,7 @@ export const ReportIncidentC = ({ navigation }) => {
                   navigation.goBack()
                 }}
               />
-              <Text style={styles.headerLabel}>Report Incident</Text>
+              <Text style={styles.headerLabel}>{t('Report_Incident')}</Text>
             </View>
             <View style={{ width: '20%', alignItems: 'flex-end' }}>
               <Text
@@ -205,7 +227,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 }
               ]}
               underlineColorAndroid="transparent"
-              placeholder="Tell us what happen"
+              placeholder={t('Tell_us_what_happen')}
               placeholderTextColor="#8F9BBA"
               numberOfLines={10}
               multiline={true}
@@ -261,7 +283,7 @@ export const ReportIncidentC = ({ navigation }) => {
                 //   navigation.navigate('ReportingDone')
                 // }}
                 buttonStyle={{ width: '90%', alignSelf: 'center' }}
-                title="Done"
+                title={t('Done')}
               />
             )}
           </View>

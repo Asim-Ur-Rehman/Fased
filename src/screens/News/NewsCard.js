@@ -32,9 +32,11 @@ import { getUserData } from '../../utils/helper'
 import { useIsFocused } from '@react-navigation/native'
 import moment from 'moment'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
+import { useTranslation } from 'react-i18next'
+
 export const NewsCard = ({ navigation }) => {
   const [userData, setUserData] = useState(null)
-
+  const { t } = useTranslation()
   const { data, loading, error } = useQuery(Get_Categories)
   const OldNews = useQuery(Get_News)
   const [search, setSearch] = useState('')
@@ -302,7 +304,7 @@ export const NewsCard = ({ navigation }) => {
               flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
-              height: height / 2
+              height: height/1.4
             }}>
             <Text>There is no categories</Text>
           </View>
@@ -337,7 +339,7 @@ export const NewsCard = ({ navigation }) => {
               style={
                 activetab == 'old' ? styles.textStyle1 : styles.textStyle2
               }>
-              Old
+              {t('Old')}
             </Text>
           </TouchableOpacity>
           <View style={styles.borderView} />
@@ -349,7 +351,7 @@ export const NewsCard = ({ navigation }) => {
               style={
                 activetab == 'new' ? styles.textStyle1 : styles.textStyle2
               }>
-              New
+              {t('New')}
             </Text>
           </TouchableOpacity>
           <View style={styles.borderView} />
@@ -375,7 +377,7 @@ export const NewsCard = ({ navigation }) => {
               style={
                 activetab == 'catTab' ? styles.textStyle1 : styles.textStyle2
               }>
-              Categories
+              {t('Categories')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -385,7 +387,7 @@ export const NewsCard = ({ navigation }) => {
       {activetab != 'catTab' && (
         <View style={{ width: '85%', alignSelf: 'center', marginVertical: 25 }}>
           <SearchBar
-            placeholder="Search"
+            placeholder={t('Search')}
             placeholderTextColor={'#dcdcdc'}
             onChangeText={text => updateSearch(text)}
             value={search}
@@ -442,7 +444,7 @@ export const NewsCard = ({ navigation }) => {
           }}
           linearColor1={'#9CA3AF'}
           linearColor2={'#4A4C50'}
-          title={'Done'}
+          title={t('Done')}
           buttonStyle={{
             width: '90%',
             alignSelf: 'center'

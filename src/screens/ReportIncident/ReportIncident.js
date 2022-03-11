@@ -32,8 +32,11 @@ import { ReportIncidentLocationFloorData } from '../../stores/actions/user.actio
 import { renderSearchLocation } from './locationModal'
 import Geolocation from '@react-native-community/geolocation'
 import ToastMessage from '../../components/ToastMessage/ToastMessage'
+import { useTranslation } from 'react-i18next'
+import { arToEnNumber } from '../../utils/helper'
 
-export const ReportIncident = ({ navigation }) => {
+export const ReportIncident = ({ navigation, route }) => {
+  const { t } = useTranslation()
   const [location, setLocation] = useState({
     latitude: 51.6,
     longitude: 18.0,
@@ -48,7 +51,7 @@ export const ReportIncident = ({ navigation }) => {
 
   const dispatch = useDispatch()
   const onSelectSwitch = index => {
-    if (index == 2) {
+    if (index == 2 || !enabled) {
       setEnabled(true)
     } else {
       setEnabled(false)
@@ -61,11 +64,17 @@ export const ReportIncident = ({ navigation }) => {
     longitudeDelta: 0.01
   })
   useEffect(() => {
-    Geolocation.getCurrentPosition(info => {
-      mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
-      setLocation({ ...location, ...info.coords })
-      setinitialRegion({ ...initialRegion, ...info.coords })
-    })
+    if(route?.params?.region) {
+      mapRef.current.animateToRegion({ ...initialRegion, ...route?.params?.region }, 2000)
+      setLocation({ ...location, ...route?.params?.region })
+      setinitialRegion({ ...initialRegion, ...route?.params?.region })
+    }else {
+      Geolocation.getCurrentPosition(info => {
+        mapRef.current.animateToRegion({ ...initialRegion, ...info.coords }, 2000)
+        setLocation({ ...location, ...info.coords })
+        setinitialRegion({ ...initialRegion, ...info.coords })
+      })
+    }
   }, [])
   const allMarkers = [
     {
@@ -77,9 +86,26 @@ export const ReportIncident = ({ navigation }) => {
     }
   ]
 
+
+  // useEffect(() => {
+  //   const watchId = Geolocation.watchPosition(
+  //     pos => {
+  //       console.log("POSITION", pos)
+  //       mapRef.current.animateToRegion(
+  //         { ...initialRegion, ...pos?.coords },
+  //         2000
+  //       )
+  //     },
+  //     e => setError(e.message)
+  //   );
+  //   return () => Geolocation.clearWatch(watchId);
+  // }, []);
+
+
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(
       info => {
+        setinitialRegion({ ...initialRegion, ...info.coords })
         mapRef.current.animateToRegion(
           { ...initialRegion, ...info.coords },
           2000
@@ -97,9 +123,10 @@ export const ReportIncident = ({ navigation }) => {
     // set
   }
 
+    console.log('initialRegion', initialRegion)
+
   const next = () => {
-    let value = /^\+?(0|[1-9]\d*)$/.test(floor)
-    // console.log('value', value)
+    let value = /^\+?(0|[1-9]\d*)$/.test(arToEnNumber(floor))
 
     if (enabled) {
       let data = {
@@ -107,7 +134,7 @@ export const ReportIncident = ({ navigation }) => {
         longitude: initialRegion.longitude,
         floor: '0'
       }
-      // console.log('data', data)
+      console.log('data', data)
       dispatch(ReportIncidentLocationFloorData(data, navigation))
     } else {
       if (floor == '') {
@@ -158,7 +185,7 @@ export const ReportIncident = ({ navigation }) => {
               navigation.goBack()
             }}
           />
-          <Text style={styles.reportTextStyle}>Report Incident</Text>
+          <Text style={styles.reportTextStyle}>{t('Report_Incident')}</Text>
         </View>
         {/* <Text style={styles.dateTextStyle}>01 - 03</Text> */}
       </View>
@@ -190,7 +217,7 @@ export const ReportIncident = ({ navigation }) => {
               </View>
               <View style={{ marginTop: Platform.OS == 'ios' ? 10 : 0 }}>
                 <TextInput
-                  placeholder="Where did it happen?"
+                  placeholder={t('Where_did_it_happen?')}
                   placeholderTextColor={theme.textColor.placeholderColor}
                   onPressIn={() => setVisible(true)}
                   
@@ -270,24 +297,24 @@ export const ReportIncident = ({ navigation }) => {
           <View style={styles.footerViewStyle}>
             <View style={styles.footerRowViewStyle}>
               <View style={styles.textAndToggleViewStyle}>
-                <Text style={styles.footerRowTextStyle}>Ground Floor</Text>
+                <Text style={styles.footerRowTextStyle}>{t('Ground_Floor')}</Text>
                 <ToggleButton
                   selectionMode={enabled ? 2 : 1}
                   onSelectSwitch={onSelectSwitch}
                 />
               </View>
               <View style={styles.textAndToggleViewStyle2}>
-                <Text style={styles.footerRowTextStyle}>Floor</Text>
+                <Text style={styles.footerRowTextStyle}>{t('Floor')}</Text>
                 {enabled ? (
                   <TouchableOpacity
                     activeOpacity={0.8}
                     onPress={() => setEnabled(false)}>
-                    <Text>Ground floor</Text>
+                    <Text>{t('Ground_Floor')}</Text>
                   </TouchableOpacity>
                 ) : (
                   <TextInput
                     editable={enabled ? false : true}
-                    placeholder="11th"
+                    placeholder={t('11th')}
                     placeholderTextColor={theme.textColor.placeholderColor}
                     keyboardType={
                       Platform.OS == 'ios'
@@ -319,7 +346,7 @@ export const ReportIncident = ({ navigation }) => {
                   next()
                 }}
                 buttonStyle={{ width: '85%', alignSelf: 'center' }}
-                title="Next"
+                title={t('Next')}
               />
             </View>
           </View>
@@ -430,7 +457,7 @@ const styles = StyleSheet.create({
   markerFixed: {
     left: '50%',
     marginLeft: -30,
-    marginTop: -120,
+    marginTop: Platform.OS == "ios" ? -120 : -135,
     position: 'absolute',
     top: '50%',
     zIndex: 1

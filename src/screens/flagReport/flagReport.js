@@ -28,8 +28,15 @@ import { FLAG_REPORT } from '../../utils/mutation'
 import { getUserData } from '../../utils/helper'
 import { GET_REASONS } from '../../utils/queries'
 import { CustomRadioButton } from '../../components/RadioButton/RadioButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import AsyncStorageLib from '@react-native-async-storage/async-storage'
+import { LOGOUT } from '../../stores/actions/actionType'
+import { useTranslation } from 'react-i18next'
+import ToastMessage from '../../components/ToastMessage/ToastMessage'
+
 export const FlagReport = ({ navigation, route }) => {
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language
   const [text, setText] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
   const [others, setothers] = useState(false)
@@ -44,7 +51,7 @@ export const FlagReport = ({ navigation, route }) => {
   useEffect(() => {
     setData(route.params?.data ? route.params?.data : [])
   }, [route.params])
-  
+
   const isGuest = useSelector(state => state.userReducer.isGuest)
 
   const [CreateFlagReport] = useMutation(FLAG_REPORT)
@@ -62,7 +69,11 @@ export const FlagReport = ({ navigation, route }) => {
   const [userData, setUserData] = useState(null)
   const onDone = () => {
     if (others) {
-      console.log("others")
+      console.log('others')
+      if (text == '') {
+        alert('Please write the reason')
+        return
+      }
       CreateFlagReport({
         variables: others
           ? {
@@ -73,28 +84,23 @@ export const FlagReport = ({ navigation, route }) => {
             }
           : {
               userId: parseFloat(userData?.id),
-              reasonId: reason.id,
+              reasonId: reason?.id,
               reason: reason.reason,
               reportId: data?.id
             }
       })
         .then(res => {
           // navigation.navigate('Home')
+          console.log('CreateFlagReport res', res)
+          res?.data?.CreateFlagReport?.status
+            ? ToastMessage('Marked as inappropriate report', null, 'success')
+            : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
           setModalVisible(false), setothers(false)
         })
         .catch(err => {
-          console.log(
-            'err',
-            err,
-          )
+          console.log('CreateFlagReport err', err)
         })
     } else {
-      console.log("other lese", reason, others, {
-        userId: parseFloat(userData?.id),
-        reasonId: reason.id,
-        reason: reason.reason,
-        reportId: data?.id
-      }   )
       if (reason) {
         CreateFlagReport({
           variables: others
@@ -106,24 +112,47 @@ export const FlagReport = ({ navigation, route }) => {
               }
             : {
                 userId: parseFloat(userData?.id),
-                reasonId: reason.id,
+                reasonId: reason?.id,
                 reason: reason.reason,
                 reportId: data?.id
               }
         })
           .then(res => {
             // navigation.navigate('Home')
+            console.log('CreateFlagReport res', res)
+            res?.data?.CreateFlagReport?.status
+              ? ToastMessage('Marked as inappropriate report', null, 'success')
+              : ToastMessage(
+                  res?.data?.CreateFlagReport?.message,
+                  null,
+                  'error'
+                )
+
             setModalVisible(false)
           })
           .catch(err => {
-            console.log(
-              'err',
-              err,
-            )
+            console.log('CreateFlagReport err', err)
           })
       } else {
         alert('Please select any reason')
       }
+    }
+  }
+  const dispatch = useDispatch()
+
+  const removeUser = async () => {
+    try {
+      await AsyncStorageLib.clear()
+      dispatch(dispatchh => {
+        dispatchh({ type: LOGOUT })
+      })
+      navigation.navigate('AuthStackNavigator', {
+        screen: 'SignIn'
+      })
+      return true
+    } catch (exception) {
+      console.log('error', exception)
+      return false
     }
   }
 
@@ -174,12 +203,12 @@ export const FlagReport = ({ navigation, route }) => {
 
             <View>
               <Text style={styles.headerLabel}>
-                {/* {data.SuspectName} */}
-
-                {data?.SuspectName.split(' ')
-                  .map(n => n[0])
-                  .join('')
-                  .toUpperCase()}
+                {data?.SuspectName == 'Anonymous'
+                  ? '-'
+                  : data?.SuspectName.split(' ')
+                      .map(n => n[0])
+                      .join('')
+                      .toUpperCase()}
               </Text>
               <Text
                 style={{
@@ -279,18 +308,9 @@ export const FlagReport = ({ navigation, route }) => {
                 fontFamily: 'Rubik-Medium',
                 color: '#fff'
               }}>
-              {data.Category.Title}
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                fontFamily: 'Rubik-Regular',
-                color: '#fff',
-                marginTop: 6,
-                textAlign: 'center',
-                paddingHorizontal: 50
-              }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque,
+              {/* {data.Category.Title} */}
+              {typeof data?.Category?.Title == 'string' &&
+                JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
             </Text>
           </View>
           <View style={{ height: height / 1.82 }}>
@@ -317,18 +337,19 @@ export const FlagReport = ({ navigation, route }) => {
                     onPress: () => null,
                     style: 'cancel'
                   },
-                  { text: 'Ok', onPress: () => navigation.navigate('SignIn') }
+                  { text: 'Ok', onPress: () => removeUser() }
                 ])
               } else {
                 setModalVisible(true)
-              }}}
+              }
+            }}
             buttonStyle={{
               top: -25,
               bottom: 0,
               alignSelf: 'center',
               width: '80%'
             }}
-            title="Flag"
+            title={t('flag')}
           />
         </View>
 
@@ -360,7 +381,8 @@ export const FlagReport = ({ navigation, route }) => {
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
+                    flexDirection: 'row'
                   }}>
                   <Text
                     style={{
@@ -369,8 +391,26 @@ export const FlagReport = ({ navigation, route }) => {
                       color: '#DF0707',
                       marginTop: 10
                     }}>
-                    {data.Category.Title}
+                    {typeof data?.Category?.Title == 'string' &&
+                      JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
                   </Text>
+
+                  <TouchableOpacity
+                    onPress={() => setModalVisible(!modalVisible)}
+                    activeOpacity={0.7}
+                    style={{
+                      left: width/3.6,
+                      bottom: 20
+                    }}>
+                    <Image
+                      source={Images.Pictures.closeIcon}
+                      style={{
+                        width: 13,
+                        height: 13,
+                        resizeMode: 'contain',
+                      }}
+                    />
+                  </TouchableOpacity>
                 </View>
 
                 {!others ? (
@@ -390,6 +430,7 @@ export const FlagReport = ({ navigation, route }) => {
                       <View style={{ width: '100%' }}>
                         <CustomRadioButton
                           PROP={reasons}
+                          isTranslation
                           onChange={e => setreason(e)}
                         />
                       </View>
@@ -461,10 +502,23 @@ export const FlagReport = ({ navigation, route }) => {
                   buttonStyle={{
                     alignSelf: 'center',
                     width: 275,
-                    marginBottom: 35
+                    marginVertical: 10
                   }}
-                  title="Done"
+                  title={t('Done')}
                 />
+                {/* 
+                <Button
+                  onPress={() => {
+                    setModalVisible(!modalVisible)
+                  }}
+                  buttonStyle={{
+                    alignSelf: 'center',
+                    width: 275,
+                    marginVertical: 10
+
+                  }}
+                  title={t('cancel')}
+                /> */}
               </View>
             </View>
           </View>

@@ -52,64 +52,67 @@ export const Get_News = gql`
 `
 
 export const SEARCH_NEWS = gql`
-query SearchNews($text: String!) {
-  searchNews(text: $text) {
-    status
-    message
-    data {
-      id
-      Image
-      Title
-      Tagline
-      Description
-      createdAt
-      CategoryName
-      CategoryId
-    }
-  }
-}`
-
-export const GET_FAV_NEWS_BY_ID = gql`
-query GetFavoriteByUserId($userId: Int!) {
-  getFavoriteByUserId(userId: $userId) {
-    data {
-      News {
-      createdAt
-      Description
-      Tagline
-      Title
-      Image
-      id
-    }
-    }
-    status
-    message
-  }
-}`
-
-export const SEARCH_FAV = gql`
-query SearchFav($userId: Int!, $text: String!) {
-  searchFav(userId: $userId, text: $text) {
-    status
-    message
-    data {
-      News {
+  query SearchNews($text: String!) {
+    searchNews(text: $text) {
+      status
+      message
+      data {
+        id
+        Image
+        Title
+        Tagline
+        Description
+        createdAt
         CategoryName
         CategoryId
-        createdAt
-        Description
-        Title
-        Image
-        id
-        Tagline
       }
-      createdAt
-      newsId
-      userId
-      id
     }
   }
-}`
+`
+
+export const GET_FAV_NEWS_BY_ID = gql`
+  query GetFavoriteByUserId($userId: Int!) {
+    getFavoriteByUserId(userId: $userId) {
+      data {
+        News {
+          createdAt
+          Description
+          Tagline
+          Title
+          Image
+          id
+        }
+      }
+      status
+      message
+    }
+  }
+`
+
+export const SEARCH_FAV = gql`
+  query SearchFav($userId: Int!, $text: String!) {
+    searchFav(userId: $userId, text: $text) {
+      status
+      message
+      data {
+        News {
+          CategoryName
+          CategoryId
+          createdAt
+          Description
+          Title
+          Image
+          id
+          Tagline
+        }
+        createdAt
+        newsId
+        userId
+        id
+      }
+    }
+  }
+`
 
 export const Get_Reports = gql`
   query Query {
@@ -118,22 +121,22 @@ export const Get_Reports = gql`
       message
       data {
         createdAt
-      Description
-      CostMoney
-      IncidentDate
-      latitude
-      SubCategory
-      longitude
-      userId
-      id
-      CategoryId
-      SuspectName
-      IncidentTime
-      floor
-      Category {
-        BackgroundColor
-        Title
-      }
+        Description
+        CostMoney
+        IncidentDate
+        latitude
+        subCategoryId
+        longitude
+        userId
+        id
+        CategoryId
+        SuspectName
+        IncidentTime
+        floor
+        Category {
+          BackgroundColor
+          Title
+        }
       }
     }
   }
@@ -146,63 +149,80 @@ export const FILTER_CATEGORIES = gql`
       message
       data {
         createdAt
-      Description
-      CostMoney
-      IncidentDate
-      latitude
-      SubCategory
-      longitude
-      userId
-      id
-      CategoryId
-      SuspectName
-      IncidentTime
-      floor
-      Category {
-        BackgroundColor
-        Title
-      }
+        Description
+        CostMoney
+        IncidentDate
+        latitude
+        subCategoryId
+        longitude
+        userId
+        id
+        CategoryId
+        SuspectName
+        IncidentTime
+        floor
+        Category {
+          BackgroundColor
+          Title
+        }
       }
     }
   }
 `
+
 export const FILTER_BY_DATE = gql`
-query FilterReportsByDate($from: Date!, $to: Date!) {
-  filterReportsByDate(from: $from, to: $to) {
-    status
-    message
-    data {
-      createdAt
-      Description
-      CostMoney
-      IncidentDate
-      latitude
-      SubCategory
-      longitude
-      userId
-      id
-      CategoryId
-      SuspectName
-      IncidentTime
-      floor
-      Category {
-        BackgroundColor
-        Title
+  query FilterReportsByDate($from: Date!, $to: Date!) {
+    filterReportsByDate(from: $from, to: $to) {
+      status
+      message
+      data {
+        createdAt
+        Description
+        CostMoney
+        IncidentDate
+        latitude
+        subCategoryId
+        longitude
+        userId
+        id
+        CategoryId
+        SuspectName
+        IncidentTime
+        floor
+        Category {
+          BackgroundColor
+          Title
+        }
       }
     }
   }
-}
 `
 
 export const GET_REASONS = gql`
-query GetFlagReasons {
-  getFlagReasons {
-    status
-    message
-    data {
-      createdAt
-      reason
-      id
+  query GetFlagReasons {
+    getFlagReasons {
+      status
+      message
+      data {
+        createdAt
+        reason
+        id
+      }
     }
   }
-}`
+`
+
+export const GET_SUBCATE_BY_CATID = gql`
+  query GetSubCategoryByCatId($categoryId: Int!) {
+    getSubCategoryByCatId(CategoryId: $categoryId) {
+      status
+      message
+      data {
+        id
+        Title
+        createdAt
+        CategoryId
+      }
+    }
+  }
+`

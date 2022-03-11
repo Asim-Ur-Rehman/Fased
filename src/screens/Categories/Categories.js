@@ -23,11 +23,15 @@ import CategoryComp from '../../components/CategoryCard'
 import { useMutation, useLazyQuery, useQuery } from '@apollo/client'
 import { Get_Categories } from '../../utils/queries'
 import { useIsFocused } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
+
 export const Categories = ({ navigation }) => {
+  const { t, i18n } = useTranslation()
   const { data, loading, error, refetch } = useQuery(Get_Categories)
   const [select, setSelect] = useState([])
   const [click, setClick] = useState(true)
 
+  const selectedLanguageCode = i18n.language;
   // const [state, setstate] = useState({
   //     select: []
   // })
@@ -156,7 +160,7 @@ export const Categories = ({ navigation }) => {
                 fontFamily: 'Rubik-Medium',
                 color: theme.textColor.whiteText
               }}>
-              Categories
+              {t('Categories')}
             </Text>
           </View>
           {select.length > 0 && (
@@ -171,7 +175,7 @@ export const Categories = ({ navigation }) => {
                   fontFamily: 'Rubik-Medium',
                   color: theme.textColor.whiteText
                 }}>
-                Done
+                {t('Done')}
               </Text>
             </TouchableOpacity>
           )}
@@ -206,7 +210,7 @@ export const Categories = ({ navigation }) => {
                 fontFamily: 'Rubik-SemiBold',
                 color: theme.textColor.blackText
               }}>
-              {select.length > 0 ? 'Selected Categories' : 'Select Categories'}
+              {select.length > 0 ? t('Selected_Categories') : t('Select_Categories')}
             </Text>
 
             <Text

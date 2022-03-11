@@ -8,7 +8,7 @@ import {
   FlatList,
   BackHandler,
   SafeAreaView,
-  ScrollView,
+  ActivityIndicator,
   Alert,
   Platform,
   Dimensions
@@ -32,22 +32,30 @@ import {
 } from '../../utils/queries'
 import { useSelector } from 'react-redux'
 import { renderSearchLocation } from '../ReportIncident/locationModal'
-import { distance, getColorRatioArr, getSimplifyArr } from '../../utils/helper'
+import {
+  arToEnNumber,
+  distance,
+  getColorRatioArr,
+  getSimplifyArr
+} from '../../utils/helper'
 import Geolocation from '@react-native-community/geolocation'
 import { BannerAd, BannerAdSize, TestIds } from '@react-native-admob/admob'
 import { useIsFocused } from '@react-navigation/native'
 import Recaptcha from 'react-native-recaptcha-that-works'
 import PieChart from 'react-native-pie-chart'
-import messaging from '@react-native-firebase/messaging';
+import messaging from '@react-native-firebase/messaging'
+import { useTranslation } from 'react-i18next'
+import CustomPie from '../../components/Pie'
 
 const series = [123, 321, 123, 789, 537]
 const sliceColor = ['#F44336', '#2196F3', '#FFEB3B', '#4CAF50', '#FF9800']
 let reportsData = []
+let loader = false
 const { width, height } = Dimensions.get('screen')
 
 export const Home = props => {
   const recaptcha = useRef()
-  
+  const { t, i18n } = useTranslation()
   const { navigation, route, state } = props
   const [forUpdate, setUpdate] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -61,9 +69,11 @@ export const Home = props => {
     longitudeDelta: 0.01
   })
 
+  const selectedLanguageCode = i18n.language
+
   messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background! Home.JS', remoteMessage);
-  });
+    console.log('Message handled in the background! Home.JS', remoteMessage)
+  })
 
   const [fromTo, setFromTo] = useState(
     route.params?.fromTo ? route.params?.fromTo : null
@@ -73,6 +83,7 @@ export const Home = props => {
   const News = useQuery(Get_News)
   // const isFocuesd = useIsFocused()
   useEffect(() => {
+    //returns: 345
     Geolocation.getCurrentPosition(
       info => {
         mapRef.current.animateToRegion(
@@ -119,15 +130,20 @@ export const Home = props => {
         showIds: [...results.map(e => e.id)]
       }
     })
+    loader = filterReports?.loading
     reportsData = filterReports?.data?.filterReports?.data
   } else if (fromTo) {
     const data = useQuery(FILTER_BY_DATE, {
       variables: fromTo
     })
+
+    loader = data?.loading
     reportsData = data?.data?.filterReportsByDate?.data
   } else {
     const query = useQuery(Get_Reports)
     query.refetch()
+
+    loader = query?.loading
     reportsData = query?.data?.getReports?.data
   }
   const reports = reportsData ? reportsData : []
@@ -135,7 +151,6 @@ export const Home = props => {
   const mapRef = useRef(null)
 
   const isGuest = useSelector(state => state.userReducer.isGuest)
-
   const isFocused = useIsFocused()
   useEffect(() => {
     setUpdate(!forUpdate)
@@ -145,6 +160,24 @@ export const Home = props => {
     setSelected(route.params?.selected ? route.params?.selected : [])
     setFromTo(route.params?.fromTo ? route.params?.fromTo : null)
   }, [route.params])
+
+
+  const onRegionChange = region => {
+    setinitialRegion(region)
+  }
+  // useEffect(() => {
+  //   const watchId = Geolocation.watchPosition(
+  //     pos => {
+  //       console.log("POSITION", pos)
+  //       mapRef.current.animateToRegion(
+  //         { ...initialRegion, ...pos?.coords },
+  //         2000
+  //       )
+  //     },
+  //     e => setError(e.message)
+  //   );
+  //   return () => Geolocation.clearWatch(watchId);
+  // }, []);
 
   const animateToCurrentLocation = () => {
     Geolocation.getCurrentPosition(
@@ -180,7 +213,9 @@ export const Home = props => {
     recaptcha.current.open()
   }
   const onVerify = token => {
-    navigation.navigate('ReportIncident')
+    navigation.navigate('ReportIncident', {
+      region: initialRegion
+    })
     // console.log('success!', token)
   }
   const onExpire = () => {
@@ -201,7 +236,7 @@ export const Home = props => {
     <View style={{ flex: 1 }}>
       {/* <StatusBar /> */}
       <SafeAreaView style={{ flex: 1 }}>
-      {renderSearchLocation(visible, onDone)}
+        {renderSearchLocation(visible, onDone)}
         <View style={styles.header}>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -220,7 +255,7 @@ export const Home = props => {
                     fontFamily: 'Rubik-Medium',
                     color: '#ffffff'
                   }}>
-                  NEWS
+                  {t('News')}
                 </Text>
               </TouchableOpacity>
               {News?.data?.getNews?.data[0] && (
@@ -236,10 +271,10 @@ export const Home = props => {
                     })
                   }}>
                   <Text numberOfLines={2} style={styles.headerText}>
-                    {News?.data?.getNews?.data[0]?.Description}
+                    {News?.data?.getNews?.data[0]?.Tagline}
                     <Text style={[styles.read, { marginRight: 10 }]}>
                       {' '}
-                      Read more
+                      {t('Read_more')}
                     </Text>
                   </Text>
                 </TouchableOpacity>
@@ -253,7 +288,7 @@ export const Home = props => {
           <View style={{ width: '30%' }}>
             <Button
               onPress={() => navigation.navigate('Categories')}
-              title="Categories"
+              title={t('Categories')}
               buttonStyle={{ height: 85, borderRadius: 4, width: '100%' }}
             />
           </View>
@@ -273,6 +308,11 @@ export const Home = props => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item, index }) => {
                 const isSelect = selected.findIndex(e => e.Title == item.Title)
+                console.log(
+                  '{item.Title}',
+                  typeof item.Title == 'string' &&
+                    JSON.parse(item.Title)[selectedLanguageCode]
+                )
                 return (
                   <View
                     style={[
@@ -294,24 +334,40 @@ export const Home = props => {
                         fontFamily: 'Rubik-Regular',
                         fontSize: 11
                       }}>
-                      {item.Title}
+                      {typeof item.Title == 'string' &&
+                        JSON.parse(item.Title)[selectedLanguageCode]}
                     </Text>
                   </View>
                 )
               }}
+              ListEmptyComponent={
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 80.5
+                  }}>
+                  {loading ? (
+                    <ActivityIndicator color={'#8E97A6'} />
+                  ) : (
+                    <Text>{t('Empty_Cat')}</Text>
+                  )}
+                </View>
+              }
             />
           </View>
         </View>
 
         <View style={styles.date}>
-
-        <TouchableOpacity
+          <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() =>setVisible(true)}
-            style={{    flexDirection: 'row',
-            width: '25%',
-            justifyContent: 'space-around'}}>
-
+            onPress={() => setVisible(true)}
+            style={{
+              flexDirection: 'row',
+              width: '25%',
+              justifyContent: 'space-around'
+            }}>
             <Feather name="map-pin" size={17} color="#8E97A6" />
             <Text
               style={{
@@ -319,28 +375,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-        Map Search
-            </Text>
-          </TouchableOpacity>
-
-          <View style={{ width: 1, height: 19, backgroundColor: '#C4C4C4' }} />
-
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate('Calender')}
-            style={{   flexDirection: 'row',
-            width: '25%',
-            justifyContent: 'space-around'}}>
-            <Icon name="date-range" size={17} color="#8E97A6"  style={{
-              paddingRight:20
-            }}/>
-            <Text
-              style={{
-                color: '#8E97A6',
-                fontFamily: 'Lexend-Regular',
-                fontSize: 11
-              }}>
-              From : {fromTo?.from ? fromTo?.from : 'From start'}
+              {t('Map_Search')}
             </Text>
           </TouchableOpacity>
 
@@ -351,7 +386,35 @@ export const Home = props => {
             onPress={() => navigation.navigate('Calender')}
             style={{
               flexDirection: 'row',
-              width: '25%',
+              width: '30%',
+              justifyContent: 'space-around'
+            }}>
+            <Icon
+              name="date-range"
+              size={17}
+              color="#8E97A6"
+              style={{
+                paddingRight: 20
+              }}
+            />
+            <Text
+              style={{
+                color: '#8E97A6',
+                fontFamily: 'Lexend-Regular',
+                fontSize: 11
+              }}>
+              {t('From')} : {fromTo?.from ? fromTo?.from : t('From_start')}
+            </Text>
+          </TouchableOpacity>
+
+          <View style={{ width: 1, height: 19, backgroundColor: '#C4C4C4' }} />
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('Calender')}
+            style={{
+              flexDirection: 'row',
+              width: '30%',
               justifyContent: 'space-around'
             }}>
             <Icon name="date-range" size={17} color="#8E97A6" />
@@ -361,7 +424,7 @@ export const Home = props => {
                 fontFamily: 'Lexend-Regular',
                 fontSize: 11
               }}>
-              To : {fromTo?.to ? fromTo?.to : 'Till today'}
+              {t('To')} : {fromTo?.to ? fromTo?.to : t('Till_today')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -386,17 +449,19 @@ export const Home = props => {
           showScale={true}
           showsIndoors={true}
           showsUserLocation={true}
-          compassOffset={{ x: -100, y: 10/ 3 }}
+          compassOffset={{ x: -100, y: 10 / 3 }}
           initialRegion={initialRegion}
           style={{ height: Platform.OS == 'ios' ? '81%' : '84%' }}
           provider={PROVIDER_GOOGLE}
           radius={40}
           ref={mapRef}
+          onRegionChangeComplete={onRegionChange}
           animationEnabled={false}
           renderCluster={cluster => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports = getSimplifyArr(data)
             const points = properties.point_count
+           
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -414,55 +479,17 @@ export const Home = props => {
                   })
                 }>
                 <View>
-                  {Platform.OS == 'android' ? (
-                    <VictoryPie
-                      colorScale={[
-                        ...new Set([
-                          ...reports.map(e => e.data.Category.BackgroundColor)
-                        ])
-                      ]}
-                      padAngle={({ datum }) => 0}
-                      radius={20}
-                      innerRadius={27}
-                      labels={({ datum }) => ``}
-                      data={getColorRatioArr(reports)?.map(e => {
-                        return { x: 1, y: e }
-                      })}
-                    />
-                  ) : (
-                    <PieChart
-                      widthAndHeight={65}
-                      series={getColorRatioArr(reports)?.map(e => {
-                        return e
-                      })}
-                      sliceColor={[
-                        ...new Set([
-                          ...reports.map(e => e.data.Category.BackgroundColor)
-                        ])
-                      ]}
-                      doughnut
-                      coverRadius={0.78}
-                    />
-                  )}
-                  <TouchableOpacity
-                    style={{
-                      position: 'absolute',
-                      left: Platform.OS == "ios" ? '20%' : "45%",
-                      top:  Platform.OS == "ios" ? '20%' : "45%",
-                      backgroundColor: 'white',
-                      width: 40,
-                      height: 40,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      borderRadius: 30
-                    }}>
-                    <Text style={{ color: 'blue' }}>{points}</Text>
-                  </TouchableOpacity>
+                  <CustomPie
+                    data={[
+                      ...reports.map(e => e.data.Category.BackgroundColor)
+                  ].sort()}
+                  />
                 </View>
               </Marker>
             )
           }}>
           {reports.map((item, i) => {
+            console.log("[item.Category.BackgroundColor]", [...[item.Category.BackgroundColor]])
             return (
               <Marker
                 key={i}
@@ -482,62 +509,32 @@ export const Home = props => {
                 data={item}
                 title={item.SuspectName}
                 description={item.Description}>
-                {Platform.OS == 'ios' ? (
-                  <PieChart
-                    widthAndHeight={65}
-                    series={[
-                      ...new Set([
-                        // ...item.map(e => console.log('e========', e))
-                        item.Category.BackgroundColor
-                      ])
-                    ].map(e => {
-                      return e
-                    })}
-                    sliceColor={[...new Set([item.Category.BackgroundColor])]}
-                    doughnut
-                    coverRadius={0.78}
+               <CustomPie
+                    data={[...new Set([item.Category.BackgroundColor])]}
                   />
-                ) : (
-                  <VictoryPie
-                    colorScale={
-                      // item.Category.BackgroundColor
-                      [...new Set([item.Category.BackgroundColor])]
-                    }
-                    padAngle={({ datum }) => 0}
-                    radius={30}
-                    innerRadius={10}
-                    labels={({ datum }) => ``}
-                    data={
-                      // item.Category.BackgroundColor
-                      [
-                        ...new Set([
-                          // ...item.map(e => console.log('e========', e))
-                          item.Category.BackgroundColor
-                        ])
-                      ].map(e => {
-                        return { x: 1, y: 3 }
-                      })
-                    }
-                  />
-                )}
-                <TouchableOpacity
-                  style={{
-                    position: 'absolute',
-                    left: Platform.OS == "ios" ? '20%' : "45%",
-                    top:  Platform.OS == "ios" ? '20%' : "45%",
-                    backgroundColor: 'white',
-                    width: 40,
-                    height: 40,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 30
-                  }}>
-                  <Text style={{ color: 'blue' }}>1</Text>
-                </TouchableOpacity>
               </Marker>
             )
           })}
         </MapView>
+
+        {loader && (
+          <View
+            style={{
+              height: 50,
+              width: 50,
+              backgroundColor: '#fff',
+              borderRadius: 10,
+              position: 'absolute',
+              top: height / 2,
+              left: width / 2.2,
+              right: 0,
+              bottom: 0,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <ActivityIndicator color={'#8E97A6'} />
+          </View>
+        )}
       </SafeAreaView>
       <View style={styles.mapActionsContainer}>
         <View style={styles.verticalBtnContainer}>
@@ -558,11 +555,11 @@ export const Home = props => {
 
       <View style={styles.reportBtn}>
         <Button
-          title="Report"
+          title={t('Report')}
           onPress={() => {
-
-            isGuest ? guestUserReport() :
-            navigation.navigate('ReportIncident')
+            isGuest ? guestUserReport() : navigation.navigate('ReportIncident', {
+              region: initialRegion
+            })
           }}
         />
       </View>
@@ -576,14 +573,14 @@ export const Home = props => {
       </View>
 
       <Recaptcha
-            ref={recaptcha}
-            siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
-            baseUrl="https://fased-admin.herokuapp.com"
-            onVerify={onVerify}
-            onExpire={onExpire}
-            onError={onError}
-            size="normal"
-          />
+        ref={recaptcha}
+        siteKey="6Lffr0seAAAAAIvhfDGUZs7ph3KF2aSi9Wewr3JV"
+        baseUrl="https://fased-admin.herokuapp.com"
+        onVerify={onVerify}
+        onExpire={onExpire}
+        onError={onError}
+        size="normal"
+      />
     </View>
   )
 }
@@ -713,5 +710,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     opacity: 0.7
   },
-  reportBtn: { alignSelf: 'center', paddingVertical: 20 }
+  reportBtn: { alignSelf: 'center', paddingVertical: 20 },
+  ContentTextStyle: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 100,
+    backgroundColor: 'transparent'
+  }
 })
