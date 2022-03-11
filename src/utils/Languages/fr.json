@@ -126,7 +126,8 @@
       "always":  "Toujours",
       "until": "Jusqu'à",
       "reset": "Réinitialiser",
-      "flag": "drapeau"
+      "flag": "drapeau",
+      "cancel": "Annuler"
     }
   }
   

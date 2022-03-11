@@ -7,7 +7,8 @@ import {
   Image,
   Dimensions,
   StyleSheet,
-  StatusBar
+  StatusBar,
+  Platform
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { useDispatch, useSelector } from 'react-redux'
@@ -45,7 +46,11 @@ export const CustomDrawer = ({ navigation }) => {
   ]
   const removeUser = async () => {
     try {
-      await AsyncStorage.clear()
+      if (Platform.OS == 'ios') {
+        await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove)
+      } else {
+        await AsyncStorage.clear()
+      }
       dispatch(dispatchh => {
         dispatchh({ type: LOGOUT })
       })
@@ -54,6 +59,7 @@ export const CustomDrawer = ({ navigation }) => {
       })
       return true
     } catch (exception) {
+      console.log('exception exception', exception)
       return false
     }
   }

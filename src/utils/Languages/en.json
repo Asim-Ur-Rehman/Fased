@@ -119,6 +119,7 @@
     "always": "Always",
     "until": "Until",
     "reset": "Reset",
-    "flag": "Flag"
+    "flag": "Flag",
+    "cancel": "Cancel"
   }
 }

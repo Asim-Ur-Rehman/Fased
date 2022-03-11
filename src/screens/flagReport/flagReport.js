@@ -69,7 +69,7 @@ export const FlagReport = ({ navigation, route }) => {
   const [userData, setUserData] = useState(null)
   const onDone = () => {
     if (others) {
-      console.log('others') 
+      console.log('others')
       if (text == '') {
         alert('Please write the reason')
         return
@@ -92,7 +92,9 @@ export const FlagReport = ({ navigation, route }) => {
         .then(res => {
           // navigation.navigate('Home')
           console.log('CreateFlagReport res', res)
-          res?.data?.CreateFlagReport?.status ? ToastMessage("Marked as inappropriate report", null, 'success') : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
+          res?.data?.CreateFlagReport?.status
+            ? ToastMessage('Marked as inappropriate report', null, 'success')
+            : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
           setModalVisible(false), setothers(false)
         })
         .catch(err => {
@@ -118,7 +120,13 @@ export const FlagReport = ({ navigation, route }) => {
           .then(res => {
             // navigation.navigate('Home')
             console.log('CreateFlagReport res', res)
-            res?.data?.CreateFlagReport?.status ? ToastMessage("Marked as inappropriate report", null, 'success') : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
+            res?.data?.CreateFlagReport?.status
+              ? ToastMessage('Marked as inappropriate report', null, 'success')
+              : ToastMessage(
+                  res?.data?.CreateFlagReport?.message,
+                  null,
+                  'error'
+                )
 
             setModalVisible(false)
           })
@@ -373,7 +381,8 @@ export const FlagReport = ({ navigation, route }) => {
                     width: '100%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: '#ffffff'
+                    backgroundColor: '#ffffff',
+                    flexDirection: 'row'
                   }}>
                   <Text
                     style={{
@@ -385,6 +394,23 @@ export const FlagReport = ({ navigation, route }) => {
                     {typeof data?.Category?.Title == 'string' &&
                       JSON.parse(data?.Category?.Title)[selectedLanguageCode]}
                   </Text>
+
+                  <TouchableOpacity
+                    onPress={() => setModalVisible(!modalVisible)}
+                    activeOpacity={0.7}
+                    style={{
+                      left: width/3.6,
+                      bottom: 20
+                    }}>
+                    <Image
+                      source={Images.Pictures.closeIcon}
+                      style={{
+                        width: 13,
+                        height: 13,
+                        resizeMode: 'contain',
+                      }}
+                    />
+                  </TouchableOpacity>
                 </View>
 
                 {!others ? (
@@ -476,10 +502,23 @@ export const FlagReport = ({ navigation, route }) => {
                   buttonStyle={{
                     alignSelf: 'center',
                     width: 275,
-                    marginBottom: 35
+                    marginVertical: 10
                   }}
                   title={t('Done')}
                 />
+                {/* 
+                <Button
+                  onPress={() => {
+                    setModalVisible(!modalVisible)
+                  }}
+                  buttonStyle={{
+                    alignSelf: 'center',
+                    width: 275,
+                    marginVertical: 10
+
+                  }}
+                  title={t('cancel')}
+                /> */}
               </View>
             </View>
           </View>

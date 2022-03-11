@@ -127,7 +127,9 @@
       "always":  "Siempre",
       "until": "Hasta",
       "reset": "Reiniciar",
-      "flag": "bandera"
+      "flag": "bandera",
+      "cancel": "cancelar"
     }
+
   }
   

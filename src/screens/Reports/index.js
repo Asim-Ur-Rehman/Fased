@@ -156,7 +156,7 @@ export const Reports = ({ navigation, route }) => {
                   {value.data?.IncidentDate}
                 </Text>
               </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
+              <View style={{ width: width / 4.2, alignItems: 'center' }}>
                 <Text
                   style={{
                     color: value.data.Category.BackgroundColor,
@@ -321,7 +321,7 @@ export const Reports = ({ navigation, route }) => {
           </View>
         </LinearGradient>
 
-        <ScrollView contentContainerStyle={{ paddingBottom: 45 }}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 45 }}>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={true}
