@@ -36,7 +36,7 @@ export const ReportIncidentC = ({ navigation }) => {
   const [textNew, setText] = useState('')
   const [height, setheight] = useState(0)
   const isGuest = useSelector(state => state.userReducer.isGuest)
-  const selectedLanguageCode = i18n.language;
+  const selectedLanguageCode = i18n.language
 
   const [CreateReport, { data, loading, error }] = useMutation(
     Create_Report_Incident
@@ -65,8 +65,6 @@ export const ReportIncidentC = ({ navigation }) => {
     // console.log('data', data.id)
   }
 
-
-  
   const next = () => {
     // console.log("DATA DATA", {
     //   userId: isGuest ? 0 : parseInt(userId),
@@ -81,7 +79,7 @@ export const ReportIncidentC = ({ navigation }) => {
     //   description: textNew ? textNew : '',
     //   floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
     // }, arToEnNumber(reportIncidentLocationFloorData?.floor), reportIncidentLocationFloorData )
-    
+
     // console.log(
     //   'object',
 
@@ -103,78 +101,114 @@ export const ReportIncidentC = ({ navigation }) => {
       setLoader(false)
       ToastMessage("Description field shouldn't be empty", null, 'error')
     } else {
-    if (reportIncidentAllData?.subcategory == '0') {
-      CreateReportWithoutSubCat({
-        variables: {
-          userId: isGuest ? 0 : parseInt(userId),
-          categoryId: reportIncidentAllData?.category,
-          latitude: reportIncidentLocationFloorData?.latitude,
-          longitude: reportIncidentLocationFloorData?.longitude,
-          suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
-          incidentDate: reportIncidentAllData?.date,
-          incidentTime: reportIncidentAllData?.time,
-          description: textNew ? textNew : '',
-          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
-        }
-      })
-        .then(data => {
-          if (data?.data?.CreateReport?.status) {
-            ToastMessage(data?.data?.CreateReport?.message, null, 'success')
-            setLoader(false)
-            navigation.navigate('ReportingDone')
-          } else {
-            setLoader(false)
-            ToastMessage(data?.data?.CreateReport?.message, null, 'error')
+      if (reportIncidentAllData?.subcategory == '0') {
+        CreateReportWithoutSubCat({
+          variables: {
+            userId: isGuest ? 0 : parseInt(userId),
+            categoryId: reportIncidentAllData?.category,
+            latitude: reportIncidentLocationFloorData?.latitude,
+            longitude: reportIncidentLocationFloorData?.longitude,
+            suspectName: reportIncidentAllData?.suspectName,
+            costMoney: parseInt(
+              selectedLanguageCode == 'ar'
+                ? arToEnNumber(reportIncidentAllData?.amount)
+                : reportIncidentAllData?.amount
+            ),
+            incidentDate: reportIncidentAllData?.date,
+            incidentTime: reportIncidentAllData?.time,
+            description: textNew ? textNew : '',
+            floor: parseInt(
+              selectedLanguageCode == 'ar'
+                ? arToEnNumber(reportIncidentLocationFloorData?.floor)
+                : reportIncidentLocationFloorData?.floor
+            )
           }
         })
-        .catch(error => {
-          if (error) {
-            setLoader(false)
-            ToastMessage('Something went wrong', null, 'error')
-          } else {
-            setLoader(false)
-            ToastMessage(error?.data?.CreateReport?.message, null, 'error')
+          .then(data => {
+            if (data?.data?.CreateReport?.status) {
+              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+              setLoader(false)
+              navigation.navigate('ReportingDone')
+            } else {
+              setLoader(false)
+              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
+            }
+          })
+          .catch(error => {
+            if (error) {
+              setLoader(false)
+              ToastMessage('Something went wrong', null, 'error')
+            } else {
+              setLoader(false)
+              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
+            }
+          })
+      } else {
+        CreateReport({
+          variables: {
+            userId: isGuest ? 0 : parseInt(userId),
+            categoryId: reportIncidentAllData?.category,
+            subCategoryId: reportIncidentAllData?.subcategory,
+            latitude: reportIncidentLocationFloorData?.latitude,
+            longitude: reportIncidentLocationFloorData?.longitude,
+            suspectName: reportIncidentAllData?.suspectName,
+            costMoney: parseInt(
+              selectedLanguageCode == 'ar'
+                ? arToEnNumber(reportIncidentAllData?.amount)
+                : reportIncidentAllData?.amount
+            ),
+            incidentDate: reportIncidentAllData?.date,
+            incidentTime: reportIncidentAllData?.time,
+            description: textNew ? textNew : '',
+            floor: parseInt(
+              selectedLanguageCode == 'ar'
+                ? arToEnNumber(reportIncidentLocationFloorData?.floor)
+                : reportIncidentLocationFloorData?.floor
+            )
           }
         })
-    } else {
-      CreateReport({
-        variables: {
-          userId: isGuest ? 0 : parseInt(userId),
-          categoryId: reportIncidentAllData?.category,
-          subCategoryId: reportIncidentAllData?.subcategory,
-          latitude: reportIncidentLocationFloorData?.latitude,
-          longitude: reportIncidentLocationFloorData?.longitude,
-          suspectName: reportIncidentAllData?.suspectName,
-          costMoney: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentAllData?.amount)  : reportIncidentAllData?.amount),
-          incidentDate: reportIncidentAllData?.date,
-          incidentTime: reportIncidentAllData?.time,
-          description: textNew ? textNew : '',
-          floor: parseInt(selectedLanguageCode == 'ar' ? arToEnNumber(reportIncidentLocationFloorData?.floor)  : reportIncidentLocationFloorData?.floor)
-        }
-      })
-        .then(data => {
-          // console.log('data return', data)
-          if (data?.data?.CreateReport?.status) {
-            ToastMessage(data?.data?.CreateReport?.message, null, 'success')
-            setLoader(false)
-            navigation.navigate('ReportingDone')
-          } else {
-            setLoader(false)
-            ToastMessage(data?.data?.CreateReport?.message, null, 'error')
-          }
-        })
-        .catch(error => {
-          console.log('error', error)
-          if (error) {
-            setLoader(false)
-            ToastMessage('Something went wrong', null, 'error')
-          } else {
-            setLoader(false)
-            ToastMessage(error?.data?.CreateReport?.message, null, 'error')
-          }
-        })
-    }
+          .then(data => {
+            // console.log('data return', data)
+            if (data?.data?.CreateReport?.status) {
+              ToastMessage(data?.data?.CreateReport?.message, null, 'success')
+              setLoader(false)
+              navigation.navigate('ReportingDone')
+            } else {
+              setLoader(false)
+              ToastMessage(data?.data?.CreateReport?.message, null, 'error')
+            }
+          })
+          .catch(error => {
+            console.log('error', error, {
+              userId: isGuest ? 0 : parseInt(userId),
+              categoryId: reportIncidentAllData?.category,
+              subCategoryId: reportIncidentAllData?.subcategory,
+              latitude: reportIncidentLocationFloorData?.latitude,
+              longitude: reportIncidentLocationFloorData?.longitude,
+              suspectName: reportIncidentAllData?.suspectName,
+              costMoney: parseInt(
+                selectedLanguageCode == 'ar'
+                  ? arToEnNumber(reportIncidentAllData?.amount)
+                  : reportIncidentAllData?.amount
+              ),
+              incidentDate: reportIncidentAllData?.date,
+              incidentTime: reportIncidentAllData?.time,
+              description: textNew ? textNew : '',
+              floor: parseInt(
+                selectedLanguageCode == 'ar'
+                  ? arToEnNumber(reportIncidentLocationFloorData?.floor)
+                  : reportIncidentLocationFloorData?.floor
+              )
+            })
+            if (error) {
+              setLoader(false)
+              ToastMessage('Something went wrong', null, 'error')
+            } else {
+              setLoader(false)
+              ToastMessage(error?.data?.CreateReport?.message, null, 'error')
+            }
+          })
+      }
     }
   }
   return (

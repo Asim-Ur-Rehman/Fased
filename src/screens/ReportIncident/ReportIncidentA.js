@@ -669,7 +669,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                 placeholder={t('Amount')}
                 placeholderTextColor="#33333370"
                 keyboardType="number-pad"
-                maxLength={6}
+                maxLength={12}
               />
               <Text
                 style={{

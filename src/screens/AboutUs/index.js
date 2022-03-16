@@ -66,7 +66,7 @@ export const AboutUs = ({ navigation }) => {
         {t('AboutUsDescription')}
         </Text>
         <Text style={styles.text1}>
-       Contact : fased@gmail.com
+       Contact : contactfased@gmail.com
         </Text>
       </View>
     </View>

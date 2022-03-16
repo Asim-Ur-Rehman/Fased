@@ -61,12 +61,12 @@ export const CHANGE_PASSWORD = gql`
 `
 
 export const Create_Report_Incident = gql`
-  mutation CreateRepor($categoryId: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $costMoney: Int!, $incidentDate: Date!, $incidentTime: String!, $description: String!, $floor: Int!, $subCategoryId: Int, $userId: Int) {
-  CreateReport(CategoryId: $categoryId, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, CostMoney: $costMoney, IncidentDate: $incidentDate, IncidentTime: $incidentTime, Description: $description, floor: $floor, subCategoryId: $subCategoryId, userId: $userId){
-      status
-      message
-    }
+ mutation CreateReport($categoryId: Int!, $latitude: Float!, $longitude: Float!, $suspectName: String!, $incidentDate: Date!, $incidentTime: String!, $description: String!, $floor: Int!, $subCategoryId: Int, $userId: Int, $costMoney: BigInt!) {
+  CreateReport(CategoryId: $categoryId, latitude: $latitude, longitude: $longitude, SuspectName: $suspectName, IncidentDate: $incidentDate, IncidentTime: $incidentTime, Description: $description, floor: $floor, subCategoryId: $subCategoryId, userId: $userId, CostMoney: $costMoney) {
+    status
+    message
   }
+}
 `
 export const Create_Report_Incident_without_SubCat = gql`
   mutation CreateReport(
@@ -75,7 +75,7 @@ export const Create_Report_Incident_without_SubCat = gql`
     $latitude: Float!
     $longitude: Float!
     $suspectName: String!
-    $costMoney: Int!
+    $costMoney: BigInt!
     $description: String!
     $floor: Int!
     $incidentDate: Date!
