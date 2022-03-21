@@ -397,7 +397,7 @@ export const Reports = ({ navigation, route }) => {
                   { title: 'Value', key: 'CostMoney', type: 'int' },
                   { title: 'Date', key: 'createdAt', type: 'date' },
                   { title: 'Category', key: 'Title', type: 'category' },
-                  { title: 'SubCategory', key: 'Title', type: 'category' }
+                  { title: 'Sub-Category', key: 'Title', type: 'category' }
                 ].map((value, index) => {
                   return (
                     <>
@@ -521,7 +521,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#CCFF04',
-    bottom: 0,
-    padding: 15
+    bottom:0,
+    padding: 15,
   }
 })
