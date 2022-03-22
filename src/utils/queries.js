@@ -137,6 +137,12 @@ export const Get_Reports = gql`
           BackgroundColor
           Title
         }
+        SubCategory {
+          createdAt
+          Title
+          id
+          CategoryId
+        }
       }
     }
   }
@@ -165,6 +171,12 @@ export const FILTER_CATEGORIES = gql`
           BackgroundColor
           Title
         }
+        SubCategory {
+        createdAt
+        Title
+        id
+        CategoryId
+      }
       }
     }
   }
@@ -193,6 +205,12 @@ export const FILTER_BY_DATE = gql`
           BackgroundColor
           Title
         }
+        SubCategory {
+        createdAt
+        Title
+        id
+        CategoryId
+      }
       }
     }
   }

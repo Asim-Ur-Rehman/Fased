@@ -22,13 +22,14 @@ import { useTranslation } from 'react-i18next'
 
 export const Reports = ({ navigation, route }) => {
   const { t, i18n } = useTranslation()
-  const selectedLanguageCode = i18n.language;
+  const selectedLanguageCode = i18n.language
   const [reports, setreports] = useState(
     route.params?.reports ? route.params?.reports : []
   )
   const [address, setAddress] = useState('')
   const [isFilter, setisFilter] = useState(false)
   const [filterItem, setfilterItem] = useState(null)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     setreports(route.params?.reports ? route.params?.reports : [])
@@ -67,112 +68,141 @@ export const Reports = ({ navigation, route }) => {
   var categories = []
   if (!isFilter) {
     // setfilterItem(null)
-    for (var title in CatNews) {
-      arr.push(CatNews[title].data)
-      categories.push(CatNews[title].CatName)
-    }
+   
+    // for (var title in CatNews) {
+    //   arr.push(CatNews[title].data)
+    //   categories.push(CatNews[title].CatName)
+    // }
+   
+    arr = sortArray(reports, 'BackgroundColor', 'category')
+    // arr = sortedArr.reverse()
   } else {
     let sortedArr = sortArray(reports, filterItem?.key, filterItem?.type)
     arr = sortedArr.reverse()
   }
 
-  const renderData = (data = []) => {
-    return (
-      <View
-        style={{
-          backgroundColor: data[0].data.Category.BackgroundColor + '14',
-          borderTopWidth: 1,
-          borderBottomWidth: 1,
-          borderTopColor: data[0].data.Category.BackgroundColor,
-          borderBottomColor: data[0].data.Category.BackgroundColor
-        }}>
-        {data.map((value, index) => {
-          return (
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate('FlagReport', {
-                  data: value.data
-                })
-              }
-              activeOpacity={0.9}
-              key={index}
-              style={[
-                styles.tableHeader,
-                [
-                  {
-                    borderBottomWidth: 1,
-                    borderColor: value.data.Category.BackgroundColor + '14',
-                    padding: 10
+  var count = 0
+
+  const renderData = (data = [], as, ind) => {
+    console.log('VALUE COUNT', count, ind)
+    if (count <= page * 10) {
+      return (
+        <View
+          style={{
+            backgroundColor: data[0].data.Category.BackgroundColor + '14',
+            borderTopWidth: 1,
+            borderBottomWidth: 1,
+            borderTopColor: data[0].data.Category.BackgroundColor,
+            borderBottomColor: data[0].data.Category.BackgroundColor
+          }}>
+          {data?.map((value, index) => {
+            count += (index + 1)
+            if (index + ind <= page * 10) {
+              return (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('FlagReport', {
+                      data: value.data
+                    })
                   }
-                ]
-              ]}>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Medium',
-                    fontSize: 13
-                  }}>
-                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .toUpperCase()}
-                </Text>
-              </View>
-              <View style={{ width: width / 2, alignItems: 'center' }}>
-                <Text
-                  numberOfLines={1}
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.Description}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.floor}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  ${value.data.CostMoney}
-                </Text>
-              </View>
-               
-              <View style={{ width: width / 4, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data?.IncidentDate}
-                </Text>
-              </View>
-              <View style={{ width: width / 4.2, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    color: value.data.Category.BackgroundColor,
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
-                </Text>
-              </View>
-         
-        
-            </TouchableOpacity>
-          )
-        })}
-      </View>
-    )
+                  activeOpacity={0.9}
+                  key={index}
+                  style={[
+                    styles.tableHeader,
+                    [
+                      {
+                        borderBottomWidth: 1,
+                        borderColor: value.data.Category.BackgroundColor + '14',
+                        padding: 10
+                      }
+                    ]
+                  ]}>
+                  <View style={{ width: width / 5, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Rubik-Medium',
+                        fontSize: 13
+                      }}>
+                      {value?.data?.SuspectName == 'Anonymous'
+                        ? '-'
+                        : value?.data?.SuspectName.split(' ')
+                            .map(n => n[0])
+                            .join('')
+                            .toUpperCase()}
+                    </Text>
+                  </View>
+                  <View style={{ width: width / 2, alignItems: 'center' }}>
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      {value.data.Description}
+                    </Text>
+                  </View>
+                  <View style={{ width: width / 5, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      {value.data.floor}
+                    </Text>
+                  </View>
+                  <View style={{ width: width / 5, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      ${value.data.CostMoney}
+                    </Text>
+                  </View>
+
+                  <View style={{ width: width / 4, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      {value.data?.IncidentDate}
+                    </Text>
+                  </View>
+                  <View style={{ width: width / 4.2, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        color: value.data.Category.BackgroundColor,
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      {value?.data?.Category?.Title &&
+                        JSON.parse(value?.data?.Category?.Title)[
+                          selectedLanguageCode
+                        ]}
+                    </Text>
+                  </View>
+                  <View style={{ width: width / 4.2, alignItems: 'center' }}>
+                    <Text
+                      style={{
+                        color: value.data.Category.BackgroundColor,
+                        fontFamily: 'Rubik-Regular',
+                        fontSize: 13
+                      }}>
+                      {value?.data?.SubCategory?.Title
+                        ? JSON.parse(value?.data?.SubCategory?.Title)[
+                            selectedLanguageCode
+                          ]
+                        : 'none'}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )
+            }
+          })}
+        </View>
+      )
+    }
   }
 
   const renderFilterByDate = (value, index) => {
@@ -189,77 +219,95 @@ export const Reports = ({ navigation, route }) => {
           styles.tableHeader,
           [
             {
-              borderBottomWidth: 1,
+              borderBottomWidth: .5,
               borderColor: value.data.Category.BackgroundColor,
               backgroundColor: value.data.Category.BackgroundColor + '14',
               padding: 10
             }
           ]
         ]}>
-     <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Medium',
-                    fontSize: 13
-                  }}>
-                  {value?.data?.SuspectName == "Anonymous" ? '-' : value?.data?.SuspectName.split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .toUpperCase()}
-                </Text>
-              </View>
-              <View style={{ width: width / 2, alignItems: 'center' }}>
-                <Text
-                  numberOfLines={1}
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.Description}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.floor}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  ${value.data.CostMoney}
-                </Text>
-              </View>
-               
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {value.data.createdAt}
-                </Text>
-              </View>
-              <View style={{ width: width / 5, alignItems: 'center' }}>
-                <Text
-                  style={{
-                    color: value.data.Category.BackgroundColor,
-                    fontFamily: 'Rubik-Regular',
-                    fontSize: 13
-                  }}>
-                  {/* {value.data.Category.Title} */}
-                  {value?.data?.Category?.Title && JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
-                </Text>
-              </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Medium',
+              fontSize: 13
+            }}>
+            {value?.data?.SuspectName == 'Anonymous'
+              ? '-'
+              : value?.data?.SuspectName.split(' ')
+                  .map(n => n[0])
+                  .join('')
+                  .toUpperCase()}
+          </Text>
+        </View>
+        <View style={{ width: width / 2, alignItems: 'center' }}>
+          <Text
+            numberOfLines={1}
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.Description}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.floor}
+          </Text>
+        </View>
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            ${value.data.CostMoney}
+          </Text>
+        </View>
+
+        <View style={{ width: width / 5, alignItems: 'center' }}>
+          <Text
+            style={{
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value.data.createdAt}
+          </Text>
+        </View>
+        <View style={{ width: width / 4.2, alignItems: 'center' }}>
+          <Text
+            style={{
+              color: value.data.Category.BackgroundColor,
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {/* {value.data.Category.Title} */}
+            {value?.data?.Category?.Title &&
+              JSON.parse(value?.data?.Category?.Title)[selectedLanguageCode]}
+          </Text>
+        </View>
+        <View style={{ width: width / 4.2, alignItems: 'center' }}>
+          <Text
+            style={{
+              color: value.data.Category.BackgroundColor,
+              fontFamily: 'Rubik-Regular',
+              fontSize: 13
+            }}>
+            {value?.data?.SubCategory?.Title
+              ? JSON.parse(value?.data?.SubCategory?.Title)[
+                  selectedLanguageCode
+                ]
+              : 'none'}
+          </Text>
+        </View>
       </TouchableOpacity>
     )
   }
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar
@@ -321,7 +369,9 @@ export const Reports = ({ navigation, route }) => {
           </View>
         </LinearGradient>
 
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 45 }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 45 }}>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={true}
@@ -347,16 +397,14 @@ export const Reports = ({ navigation, route }) => {
                   { title: 'Value', key: 'CostMoney', type: 'int' },
                   { title: 'Date', key: 'createdAt', type: 'date' },
                   { title: 'Category', key: 'Title', type: 'category' },
-              
-             
-            
+                  { title: 'Sub-Category', key: 'Title', type: 'category' }
                 ].map((value, index) => {
                   return (
                     <>
                       <View
                         key={index}
                         style={{
-                          width: index == 1 ? width / 2.2 : width / 3.7,
+                          width: index == 1 ? width / 2.2 : width / 3.2,
                           flexDirection: 'row',
                           justifyContent: 'space-between'
                         }}>
@@ -386,9 +434,18 @@ export const Reports = ({ navigation, route }) => {
                 })}
               </View>
               {!isFilter ? (
-                <View style={{ flex: 1 }}>
+                // <View style={{ flex: 1 }}>
+                //   {arr.map((value, index) => {
+                //     // count += value?.length
+                //     return renderData(value, '#FEDFE3', index)
+                //   })}
+                // </View>
+                
+                  <View>
                   {arr.map((value, index) => {
-                    return renderData(value, '#FEDFE3')
+                    if (index + 1 <= page * 10) {
+                      return renderFilterByDate(value, index)
+                    }
                   })}
                 </View>
               ) : (
@@ -402,20 +459,23 @@ export const Reports = ({ navigation, route }) => {
             {/* </CustomScrollView> */}
           </ScrollView>
         </ScrollView>
-        {/* <TouchableOpacity
-          style={styles.showMoreBtn}
-          activeOpacity={1}
-          onPress={() => {
-            navigation.goBack()
-          }}>
-          <Text
-            style={{
-              fontFamily: 'Rubik-Regular',
-              fontSize: 13
+        {console.log('VALUE', arr, reports)}
+        {reports?.length > 10 && (
+          <TouchableOpacity
+            style={styles.showMoreBtn}
+            activeOpacity={1}
+            onPress={() => {
+              setPage(page + 1)
             }}>
-            Show More
-          </Text>
-        </TouchableOpacity> */}
+            <Text
+              style={{
+                fontFamily: 'Rubik-Regular',
+                fontSize: 13
+              }}>
+              Show More
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   )
@@ -461,7 +521,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#CCFF04',
-    bottom: 0,
-    padding: 15
+    bottom:0,
+    padding: 15,
   }
 })
