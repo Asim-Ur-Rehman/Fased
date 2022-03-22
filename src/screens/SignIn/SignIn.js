@@ -34,7 +34,7 @@ import { getApi } from '../../api/fakeApiUser'
 import { useDispatch } from 'react-redux'
 import { SignInAction, continueAsGuest } from '../../stores/actions/user.action'
 import { useTranslation } from 'react-i18next';
-import { appleAuth,appleAuthAndroid } from '@invertase/react-native-apple-authentication';
+import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authentication';
 import Recaptcha from 'react-native-recaptcha-that-works'
 import { getFcmToken } from '../../utils/helper'
 import { v4 as uuid } from 'uuid'
@@ -42,13 +42,13 @@ export const SignIn = ({ navigation }) => {
   const { t } = useTranslation();
   useEffect(() => {
     getFcmToken()
-    .then(token => {
-      setfcmToken(token)
-    })
+      .then(token => {
+        setfcmToken(token)
+      })
   }, [])
 
   const recaptcha = useRef()
-  
+
   const [checked, setChecked] = useState(false)
   const [email, setEmail] = useState('')
   const [fcmToken, setfcmToken] = useState('')
@@ -189,60 +189,25 @@ export const SignIn = ({ navigation }) => {
   // Apple Login
 
   async function onAppleButtonPress() {
-    console.log('----yyyyy----',appleAuth.isSupported)
-    try {
-      const appleAuthRequestResponse = await appleAuth.performRequest({
-        requestedOperation: appleAuth.Operation.LOGIN,
-        requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-      });
-      
-      console.log("appleAuthRequestResponse", appleAuthRequestResponse)
-      // // Ensure Apple returned a user identityToken
-      // if (!appleAuthRequestResponse.identityToken) {
-      //   throw new Error('Apple Sign-In failed - no identify token returned');
-      // }
-      // // Create a Firebase credential from the response
-      // const { identityToken, nonce } = appleAuthRequestResponse;
-      // const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
-      // // Sign the user in with the credential
-      // return auth().signInWithCredential(appleCredential)
-    } catch (error) {
-      console.log("error", error)
-    }
-  }
-
-  async function onAppleButtonPress() {
-    // Generate secure, random values for state and nonce
-    const rawNonce = uuid();
-    const state = uuid();
-  
-    // Configure the request
-    appleAuthAndroid.configure({
-      // The Service ID you registered with Apple
-      clientId: 'com.example.client-android',
-  
-      // Return URL added to your Apple dev console. We intercept this redirect, but it must still match
-      // the URL you provided to Apple. It can be an empty route on your backend as it's never called.
-      redirectUri: 'https://example.com/auth/callback',
-  
-      // The type of response requested - code, id_token, or both.
-      responseType: appleAuthAndroid.ResponseType.ALL,
-  
-      // The amount of user information requested from Apple.
-      scope: appleAuthAndroid.Scope.ALL,
-  
-      // Random nonce value that will be SHA256 hashed before sending to Apple.
-      nonce: rawNonce,
-  
-      // Unique state value used to prevent CSRF attacks. A UUID will be generated if nothing is provided.
-      state,
+    // performs login request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     });
   
-    // Open the browser window for user sign in
-    const response = await appleAuthAndroid.signIn();
+    // get current authentication state for user
+    // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    console.log('appleAuthRequestResponse', appleAuthRequestResponse)
+    const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+    console.log('credentialState', credentialState)
   
-    // Send the authorization code to your backend for verification
+    // use credentialState response to ensure the user is authenticated
+    if (credentialState === appleAuth.State.AUTHORIZED) {
+      // user is authenticated
+    }
   }
+  
+
   return (
     <SafeAreaView style={styles.mainContainer}>
       <AuthHeader
@@ -253,7 +218,7 @@ export const SignIn = ({ navigation }) => {
         }}
         onPressGuset={() => {
           dispatch(continueAsGuest({
-            guestUserLogin:'guesUserLogin'
+            guestUserLogin: 'guesUserLogin'
           }))
           // navigation.navigate('AppStackNavigator')
           // alert('donehyugyu')
@@ -375,21 +340,13 @@ export const SignIn = ({ navigation }) => {
             style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
           </TouchableOpacity>
-        
-          {appleAuthAndroid.isSupported && (
-                    <TouchableOpacity 
-                    onPress={() => onAppleButtonPress()}
-                    activeOpacity={0.7} 
-                    style={styles.TwitterImg}>
-                      <Entypo name="app-store" size={30}  />
-                    </TouchableOpacity>
-            )}
-                     <TouchableOpacity 
-                    onPress={() => onAppleButtonPress()}
-                    activeOpacity={0.7} 
-                    style={styles.TwitterImg}>
-                      <Entypo name="app-store" size={30}  />
-                    </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => onAppleButtonPress()}
+            activeOpacity={0.7}
+            style={styles.TwitterImg}>
+            <Entypo name="app-store" size={30} />
+          </TouchableOpacity>
           <LinkedInModal
             ref={linkedRef}
             clientID="78dauvk4h579n4"
@@ -444,7 +401,7 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View>
-     
+
         </View>
       </ScrollView>
     </SafeAreaView>
