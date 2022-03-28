@@ -568,7 +568,8 @@ export const Home = props => {
         <BannerAd
           style={{ width: '100%' }}
           size={BannerAdSize.FULL_BANNER}
-          unitId={TestIds.BANNER}
+          unitId={'ca-app-pub-3546267366417804/1585880969'}
+          onAdFailedToLoad={(loadError) => console.log("loadError", loadError)}
         />
       </View>
 

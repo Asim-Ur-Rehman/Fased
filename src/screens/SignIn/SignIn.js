@@ -38,6 +38,9 @@ import { appleAuth, appleAuthAndroid } from '@invertase/react-native-apple-authe
 import Recaptcha from 'react-native-recaptcha-that-works'
 import { getFcmToken } from '../../utils/helper'
 import { v4 as uuid } from 'uuid'
+
+import auth from '@react-native-firebase/auth';
+
 export const SignIn = ({ navigation }) => {
   const { t } = useTranslation();
   useEffect(() => {
@@ -197,13 +200,43 @@ export const SignIn = ({ navigation }) => {
   
     // get current authentication state for user
     // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
-    console.log('appleAuthRequestResponse', appleAuthRequestResponse)
+    // console.log('appleAuthRequestResponse', appleAuthRequestResponse)
     const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
-    console.log('credentialState', credentialState)
+    // console.log('credentialState', credentialState)
   
     // use credentialState response to ensure the user is authenticated
     if (credentialState === appleAuth.State.AUTHORIZED) {
       // user is authenticated
+    }
+
+    const { identityToken, nonce } = appleAuthRequestResponse;
+    const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce);
+  
+    // Sign the user in with the credential
+    try {
+      const result = await auth().signInWithCredential(appleCredential);
+      socialMediaLogin({
+        variables: {
+          providerId: result?.user?.uid,
+          registrationType: 'apple',
+          name: result?.user?.displayName || result?.user?.email,
+          email: result?.user?.email,
+          fcmToken: fcmToken
+        }
+      }).then(res => {
+        AsyncStorage.setItem(
+          'userData',
+          JSON.stringify(res?.data?.socialMediaLogin?.data)
+        )
+        dispatch(SignInAction(res?.data?.socialMediaLogin?.data))
+        ToastMessage(res?.data?.socialMediaLogin?.message, null, 'success')
+        navigation.navigate('AppStackNavigator', {
+          screen: 'Home'
+        })
+      })
+    } catch (error) {
+      console.log('error', error)
+      ToastMessage(error, null, 'error')
     }
   }
   
