@@ -226,6 +226,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
       suspectName: suspectName ? suspectName : 'Anonymous',
       amount: amount ? amount : '0'
     }
+    console.log("Objdata", Objdata)
     dispatch(ReportIncidentAllData(Objdata, navigation))
   }
 

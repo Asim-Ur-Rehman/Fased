@@ -28,7 +28,6 @@ import { useTranslation } from 'react-i18next'
 export const ChangePassword = ({ navigation, route }) => {
   const emailFromParam = route?.params?.emailFromParam
   const { t } = useTranslation()
-  console.log('emailFromParam IN CAHNGE PASSS', emailFromParam)
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 

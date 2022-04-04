@@ -36,7 +36,8 @@ import { useTranslation } from 'react-i18next'
 
 export const NewsCard = ({ navigation }) => {
   const [userData, setUserData] = useState(null)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const selectedLanguageCode = i18n.language;
   const { data, loading, error } = useQuery(Get_Categories)
   const OldNews = useQuery(Get_News)
   const [search, setSearch] = useState('')
@@ -286,7 +287,7 @@ export const NewsCard = ({ navigation }) => {
                   styles.textStyle1,
                   { paddingHorizontal: 25, paddingBottom: 10, fontSize: 20 }
                 ]}>
-                {val[0].CategoryName}
+                {typeof val[0]?.CategoryName == "string" && JSON.parse(val[0]?.CategoryName)[selectedLanguageCode]}
               </Text>
               <FlatList
                 data={val}
@@ -455,7 +456,7 @@ export const NewsCard = ({ navigation }) => {
         <BannerAd
           style={{ width: '100%' }}
           size={BannerAdSize.FULL_BANNER}
-          unitId={TestIds.BANNER}
+          unitId={'ca-app-pub-3546267366417804/1585880969'}
           // ref={bannerRef}
         />
         {/* <Image

@@ -72,7 +72,7 @@ export const Home = props => {
   const selectedLanguageCode = i18n.language
 
   messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('Message handled in the background! Home.JS', remoteMessage)
+    // console.log('Message handled in the background! Home.JS', remoteMessage)
   })
 
   const [fromTo, setFromTo] = useState(
@@ -267,7 +267,8 @@ export const Home = props => {
                       title: News?.data?.getNews?.data[0]?.Title,
                       tagline: News?.data?.getNews?.data[0]?.Tagline,
                       description: News?.data?.getNews?.data[0]?.Description,
-                      newsData: News?.data?.getNews?.data[0]
+                      newsData: News?.data?.getNews?.data[0],
+                      createdAt: News?.data?.getNews?.data[0]?.createdAt,
                     })
                   }}>
                   <Text numberOfLines={2} style={styles.headerText}>
@@ -308,11 +309,6 @@ export const Home = props => {
               showsVerticalScrollIndicator={false}
               renderItem={({ item, index }) => {
                 const isSelect = selected.findIndex(e => e.Title == item.Title)
-                console.log(
-                  '{item.Title}',
-                  typeof item.Title == 'string' &&
-                    JSON.parse(item.Title)[selectedLanguageCode]
-                )
                 return (
                   <View
                     style={[
@@ -461,7 +457,6 @@ export const Home = props => {
             const { id, geometry, onPress, properties, data } = cluster
             const reports = getSimplifyArr(data)
             const points = properties.point_count
-           
             return (
               <Marker
                 key={`cluster-${id}`}
@@ -481,7 +476,9 @@ export const Home = props => {
                 <View>
                   <CustomPie
                     data={[
-                      ...reports.map(e => e.data.Category.BackgroundColor)
+                      ...reports.map(e => {
+                        return e.data.Category.BackgroundColor
+                      })
                   ].sort()}
                   />
                 </View>
@@ -489,7 +486,6 @@ export const Home = props => {
             )
           }}>
           {reports.map((item, i) => {
-            console.log("[item.Category.BackgroundColor]", [...[item.Category.BackgroundColor]])
             return (
               <Marker
                 key={i}

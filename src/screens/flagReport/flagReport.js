@@ -69,7 +69,6 @@ export const FlagReport = ({ navigation, route }) => {
   const [userData, setUserData] = useState(null)
   const onDone = () => {
     if (others) {
-      console.log('others')
       if (text == '') {
         alert('Please write the reason')
         return

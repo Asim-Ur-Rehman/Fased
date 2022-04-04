@@ -11,7 +11,7 @@ const CustomPie = ({
   const expired = 2;
   const nonExpired = 4;
   const total = data?.length;
-
+  console.log("total", total, "data?.length", data)
 //   const data = [];
 
 //   for (let i = 1; i <= expired; i++) {

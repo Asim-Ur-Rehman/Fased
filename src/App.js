@@ -39,7 +39,6 @@ const App = ({ navigation }) => {
     //   cache,
     //   storage: AsyncStorage
     // }).then(() => setLoadingCache(false))
-    console.log('navigation')
     NotificationPermission()
     messaging().onNotificationOpenedApp(remoteMessage => {
       if (remoteMessage) {

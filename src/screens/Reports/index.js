@@ -206,6 +206,7 @@ export const Reports = ({ navigation, route }) => {
   }
 
   const renderFilterByDate = (value, index) => {
+    console.log("renderFilterByDate value", value)
     return (
       <TouchableOpacity
         onPress={() =>
@@ -275,7 +276,7 @@ export const Reports = ({ navigation, route }) => {
               fontFamily: 'Rubik-Regular',
               fontSize: 13
             }}>
-            {value.data.createdAt}
+            {value.data.IncidentDate}
           </Text>
         </View>
         <View style={{ width: width / 4.2, alignItems: 'center' }}>
