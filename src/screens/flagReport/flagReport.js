@@ -326,7 +326,7 @@ export const FlagReport = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View>
+        {/* <View>
           <Button
             onPress={() => {
               if (isGuest) {
@@ -349,8 +349,8 @@ export const FlagReport = ({ navigation, route }) => {
               width: '80%'
             }}
             title={t('flag')}
-          />
-        </View>
+          /> 
+        </View>*/}
 
         <Modal
           animationType="fade"
