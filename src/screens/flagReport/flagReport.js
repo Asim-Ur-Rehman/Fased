@@ -94,7 +94,9 @@ export const FlagReport = ({ navigation, route }) => {
           res?.data?.CreateFlagReport?.status
             ? ToastMessage('Marked as inappropriate report', null, 'success')
             : ToastMessage(res?.data?.CreateFlagReport?.message, null, 'error')
-          setModalVisible(false), setothers(false)
+          setModalVisible(false)
+          setothers(false)
+          setText('')
         })
         .catch(err => {
           console.log('CreateFlagReport err', err)
@@ -126,8 +128,10 @@ export const FlagReport = ({ navigation, route }) => {
                   null,
                   'error'
                 )
-
+            setothers(false)
             setModalVisible(false)
+            setText('')
+
           })
           .catch(err => {
             console.log('CreateFlagReport err', err)
@@ -326,7 +330,7 @@ export const FlagReport = ({ navigation, route }) => {
           </View>
         </View>
 
-        {/* <View>
+        <View>
           <Button
             onPress={() => {
               if (isGuest) {
@@ -339,6 +343,7 @@ export const FlagReport = ({ navigation, route }) => {
                   { text: 'Ok', onPress: () => removeUser() }
                 ])
               } else {
+                setothers(true)
                 setModalVisible(true)
               }
             }}
@@ -349,8 +354,8 @@ export const FlagReport = ({ navigation, route }) => {
               width: '80%'
             }}
             title={t('flag')}
-          /> 
-        </View>*/}
+          />
+        </View>
 
         <Modal
           animationType="fade"
@@ -360,6 +365,7 @@ export const FlagReport = ({ navigation, route }) => {
           visible={modalVisible}
           onRequestClose={() => {
             // Alert.alert("Modal has been closed.");
+            setothers(false)
             setModalVisible(!modalVisible)
           }}>
           <View style={styles.centeredView}>
@@ -395,18 +401,23 @@ export const FlagReport = ({ navigation, route }) => {
                   </Text>
 
                   <TouchableOpacity
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => {
+                      setothers(!others)
+                      setModalVisible(!modalVisible)
+                    }}
                     activeOpacity={0.7}
                     style={{
-                      left: width/3.6,
-                      bottom: 20
+                      // left: width/3.6,
+                      right: 10,
+                      top: 40,
+                      position: 'absolute'
                     }}>
                     <Image
                       source={Images.Pictures.closeIcon}
                       style={{
                         width: 13,
                         height: 13,
-                        resizeMode: 'contain',
+                        resizeMode: 'contain'
                       }}
                     />
                   </TouchableOpacity>
