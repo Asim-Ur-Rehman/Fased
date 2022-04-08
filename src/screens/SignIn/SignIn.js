@@ -367,12 +367,12 @@ export const SignIn = ({ navigation }) => {
         </View>
 
         <View style={styles.socialIconContainer}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={fbLogin}
             activeOpacity={0.7}
             style={styles.fbImg}>
             <MaterialIcon name="facebook" size={32} color="#fff" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity
             onPress={() => onAppleButtonPress()}
