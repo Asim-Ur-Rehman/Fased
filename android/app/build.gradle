@@ -129,7 +129,7 @@ android {
     defaultConfig {
         applicationId "com.appstirr.fased"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersions
         versionCode 2
         versionName "1.0.1"
         configurations.all {

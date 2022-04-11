@@ -42,56 +42,6 @@ export const ReportIncidentB = ({ navigation, route }) => {
   }, [isFocused])
   // console.log('data', data.getCategories.data)
 
-  const Data = [
-    {
-      key: 1,
-      title: 'Killing',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel',
-      Image: Images.Pictures.category,
-      backgroundColor: '#DF0707'
-    },
-    {
-      key: 2,
-      title: 'Harrasment',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
-      Image: Images.Pictures.harasment,
-      backgroundColor: '#FFA724'
-    },
-    {
-      key: 3,
-      title: 'Kidnapping',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
-      Image: Images.Pictures.kidnap,
-      backgroundColor: '#CF00BA'
-    },
-    {
-      key: 4,
-      title: 'Robery',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
-      Image: Images.Pictures.robery,
-      backgroundColor: '#5819C1'
-    },
-    {
-      key: 5,
-      title: 'Snatching',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
-      Image: Images.Pictures.snatch,
-      backgroundColor: '#211DE8'
-    },
-    {
-      key: 6,
-      title: 'Assault',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam.',
-      Image: Images.Pictures.assault,
-      backgroundColor: '#0CB9A2'
-    }
-  ]
 
   // console.log('select', select)
   const selectedCard = title => {

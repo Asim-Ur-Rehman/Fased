@@ -13,44 +13,7 @@ import BackButtonHandler from '../../components/BackHandler'
 export const Categories = ({ navigation }) => {
     const [select, setSelect] = useState([])
 
-    const CardsData = [
-        {
-            img: Images.Pictures.category,
-            title: 'Killing',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        },
-        {
-            img: Images.Pictures.harasment,
-            title: 'Harrasment',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        },
-        {
-            img: Images.Pictures.kidnap,
-            title: 'Kidnapping',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        },
-        {
-            img: Images.Pictures.robery,
-            title: 'Robery',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        },
-        {
-            img: Images.Pictures.snatch,
-            title: 'Snatching',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        },
-        {
-            img: Images.Pictures.assault,
-            title: 'Assault',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit justo vel in sapien ultrices id quam nam. ',
-
-        }
-    ]
+   
 
     // console.log('select', select)
     const selectedCard = (i) => {

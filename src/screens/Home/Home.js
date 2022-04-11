@@ -503,8 +503,9 @@ export const Home = props => {
                   })
                 }
                 data={item}
-                title={item.SuspectName}
-                description={item.Description}>
+                // title={item.SuspectName}
+                // description={item.Description}
+                >
                <CustomPie
                     data={[...new Set([item.Category.BackgroundColor])]}
                   />

@@ -418,8 +418,8 @@ PODS:
     - React-Core
   - react-native-splash-screen (3.2.0):
     - React
-  - react-native-webview (11.17.2):
-    - React-Core
+  - react-native-webview (7.0.5):
+    - React
   - React-perflogger (0.65.1)
   - React-RCTActionSheet (0.65.1):
     - React-Core/RCTActionSheetHeaders (= 0.65.1)
@@ -839,7 +839,7 @@ SPEC CHECKSUMS:
   react-native-maps: a421fe6aeb74279597c4ea9598f25796108e2d89
   react-native-safe-area-context: 61c8c484a3a9e7d1fda19f7b1794b35bbfd2262a
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
-  react-native-webview: 380c1a03ec94b7ed764dac8db1e7c9952d08c93a
+  react-native-webview: 174e0f8f1bf547224a134215607c75c4bb0312b7
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339
   React-RCTActionSheet: 7f3fa0855c346aa5d7c60f9ced16e067db6d29fa
   React-RCTAnimation: 2119a18ee26159004b001bc56404ca5dbaae6077
@@ -872,6 +872,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1916971c639bd700c2550ceb43113b1a0b2a417f
+PODFILE CHECKSUM: a9800dbf3230278f64acf55785449545b441c7a2
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

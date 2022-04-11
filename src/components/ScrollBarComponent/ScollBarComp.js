@@ -61,45 +61,7 @@ export const CustomScrollBarComponent = ({ navigation }) => {
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         style={styles.petItemListContainer}>
-        <Text style={styles.ContentTextStyle}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Neque, sit
-          justo vel in sapien ultrices id quam nam. Fames urna, tellus aliquam
-          sed mi.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Augue tristique eu vulputate massa sed. Enim, montes, sit semper
-          venenatis. Adipiscing venenatis arcu a quis sit id euismod nisl,
-          purus. Augue tristique eu vulputate massa sed. Enim, montes, sit
-          semper venenatis. Adipiscing venenatis arcu a quis sit id euismod
-          nisl, purus.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-        </Text>
-
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-        </Text>
-        <Text style={styles.ContentTextStyle}>
-          Adipiscing venenatis arcu a quis sit id euismod nisl, purus. Augue
-          tristique eu vulputate massa sed. Enim, montes, sit semper venenatis.
-        </Text>
+        
       </ScrollView>
       <View style={styles.customScrollBarBackground}>
         <Animated.View
