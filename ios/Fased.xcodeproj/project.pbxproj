@@ -603,7 +603,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fased/Fased.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BD4WP2UW9P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Fased/Info.plist;
@@ -622,6 +622,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -636,7 +637,7 @@
 				CODE_SIGN_ENTITLEMENTS = Fased/Fased.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BD4WP2UW9P;
 				INFOPLIST_FILE = Fased/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -653,6 +654,7 @@
 				PRODUCT_NAME = Fased;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
