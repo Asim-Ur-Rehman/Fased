@@ -96,8 +96,14 @@ export const ReportIncidentA = ({ navigation, route }) => {
     // const currentDate = selectedDate || date;
     let time = date.toString().substring(16, 21)
     // setDate(time);
+    // console.log("date > new Date()", date > new Date())
     if (mode == 'time') {
-      setCurrentTime(time)
+      if(date > new Date()) {
+        setCurrentTime(new Date().toString().substring(16, 21))
+      }else {
+        setCurrentTime(time)
+      }
+      
     } else {
       setDate(date.toDateString())
       // setDate(date)
@@ -555,7 +561,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
               onCancel={() => {
                 setShow(!show)
               }}
-              maximumDate={new Date()}
+              maximumDate={(mode == 'time' && date != new Date().toDateString()) ? null : new Date()}
               display={
                 mode == 'time' || Platform.OS == 'android'
                   ? Platform.OS == 'android'
