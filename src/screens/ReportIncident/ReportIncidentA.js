@@ -92,20 +92,24 @@ export const ReportIncidentA = ({ navigation, route }) => {
     }
   }, [route.params?.category])
 
-  const onChange = date => {
+  const onChange = selectdate => {
     // const currentDate = selectedDate || date;
-    let time = date.toString().substring(16, 21)
+    let time = selectdate.toString().substring(16, 21)
     // setDate(time);
-    // console.log("date > new Date()", date > new Date())
+    var a = time?.split(':')
+    var future = new Date(date.split('T')[0]).setHours(a[0], a[1])
+    var today = moment().utc(true)
+    // console.log(today,'today')
+    // console.log("date > new Date()", selectdate, time, )
     if (mode == 'time') {
-      if(date > new Date()) {
+      if(Number(today.diff(moment(future).utc(true)) < 0) == 1) {
         setCurrentTime(new Date().toString().substring(16, 21))
       }else {
         setCurrentTime(time)
       }
-      
+      // setCurrentTime(time)
     } else {
-      setDate(date.toDateString())
+      setDate(selectdate.toDateString())
       // setDate(date)
 
       // console.log("date", date.toDateString(), "time", time)
