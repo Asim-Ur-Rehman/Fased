@@ -219,7 +219,7 @@ export const FlagReport = ({ navigation, route }) => {
                   fontFamily: 'Rubik-Regular',
                   color: '#fff'
                 }}>
-                {data.createdAt}
+                {data.IncidentDate}
               </Text>
             </View>
           </View>
