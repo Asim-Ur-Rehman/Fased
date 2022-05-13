@@ -129,9 +129,9 @@ android {
     defaultConfig {
         applicationId "com.appstirr.fased"
         minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersions
-        versionCode 2
-        versionName "1.0.1"
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 5
+        versionName "1.0.4"
         configurations.all {
             resolutionStrategy { force 'androidx.work:work-runtime:2.6.0' }
         }

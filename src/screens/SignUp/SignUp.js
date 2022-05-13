@@ -114,7 +114,7 @@ export const SignUp = ({ navigation }) => {
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            paddingBottom: Platform.OS == 'ios' ? 0 : 40
+            paddingBottom: Platform.OS == 'ios' ?50 : 40
           }}
           bounces={false}
           showsVerticalScrollIndicator={false}>
