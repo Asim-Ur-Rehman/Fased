@@ -375,7 +375,7 @@ export const ReportIncidentA = ({ navigation, route }) => {
                         {data?.getSubCategoryByCatId?.data?.map(value => {
                           return (
                             <Picker.Item
-                              style={{color: '#33333370'}}
+                              style={{color: '#33333370', backgroundColor: '#fff'}}
                               label={
                                 value?.Title
                                   ? JSON.parse(value?.Title)[
